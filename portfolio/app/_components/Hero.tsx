@@ -38,7 +38,7 @@ export const Hero = () => {
           .
         </p>
       </div>
-      <div className="flex-[2] max-md:m-auto ml-auto">
+      <div className="flex flex-[2] max-md:m-auto justify-center ml-auto">
         <img src="/pictures/profile-picture.jpeg" className="w-60 h-60 max-w-xs rounded-full object-cover max-md:w-56 max-md:h-56" alt="Thibaut's picture" />
       </div>
     </Section>
