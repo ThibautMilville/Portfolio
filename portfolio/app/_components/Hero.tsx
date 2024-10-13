@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Code } from "./Code";
 import { Section } from "./Section";
 import { GithubIcon } from "./icons/GithubIcon";
@@ -23,7 +24,7 @@ export const Hero = () => {
           <br />
           Living in{" "}
           <Code className="inline-flex items-center gap-1">
-            <img
+            <Image
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_France_%281794%E2%80%931815%2C_1830%E2%80%931974%2C_2020%E2%80%93present%29.svg/langfr-225px-Flag_of_France_%281794%E2%80%931815%2C_1830%E2%80%931974%2C_2020%E2%80%93present%29.svg.png"
               style={{ width: 16, height: "auto" }}
               alt="French flag"
@@ -34,7 +35,7 @@ export const Hero = () => {
         </p>
       </div>
       <div className="flex flex-[2] max-md:m-auto justify-center ml-auto">
-        <img src="/pictures/profile-picture.jpeg" className="w-60 h-60 max-w-xs rounded-full object-cover max-md:w-56 max-md:h-56" alt="Thibaut's picture" />
+        <Image src="/pictures/profile-picture.jpeg" className="w-60 h-60 max-w-xs rounded-full object-cover max-md:w-56 max-md:h-56" alt="Thibaut's picture" />
       </div>
     </Section>
   );
