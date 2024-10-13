@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export const WORKS: WorkProps[] = [
@@ -36,7 +35,7 @@ type WorkProps = {
 export const Work = (props: WorkProps) => {
   return (
     <Link href={props.url} className="inline-flex items-center gap-4 hover:bg-accent/50 transition-colors p-1 rounded">
-      <Image src={props.image} alt={props.title} className="w-10 h-10 object-contain rounded-md" />
+      <img src={props.image} alt={props.title} className="w-10 h-10 object-contain rounded-md" />
       <div className="mr-auto">
         <div className="flex items-center gap-2">
           <p className="text-lg font-semibold">{props.title}</p>
