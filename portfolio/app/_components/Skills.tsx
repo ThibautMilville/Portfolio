@@ -29,7 +29,7 @@ export const Skills = () => {
           <OpenAILogo size={42} />
           <h3 className="text-2xl font-semibold tracking-tight mb-2">OpenAI</h3>
           <p className="text-sm text-muted-foreground">
-          I leverage <Code>OpenAI's</Code> advanced AI models to create applications faster and more efficiently.
+          I leverage <Code>OpenAI&apos;s</Code> advanced AI models to create applications faster and more efficiently.
           </p>
         </div>
       </div>
