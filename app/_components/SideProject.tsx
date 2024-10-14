@@ -1,27 +1,27 @@
-import { Code, LucideIcon } from "lucide-react";
+import { CandyCane, Cat, Code, ListTodo, LucideIcon, Swords, ThermometerSun } from "lucide-react";
 import Link from "next/link";
 
 export const SIDE_PROJECTS: SideProjectProps[] = [
   {
-    logo: Code,
+    logo: ListTodo,
     title: "Advanced Todo List App",
     description: "Advanced todo list app made with React Native.",
     url: "https://github.com/ThibautMilville/React-Native-Todolist",
   },
   {
-    logo: Code,
+    logo: ThermometerSun,
     title: "Temperature Converter",
     description: "Temperature converter made with React Native.",
     url: "https://github.com/ThibautMilville/Temperature-Converter-React-Native",
   },
   {
-    logo: Code,
+    logo: Swords,
     title: "Connect 4 Game",
     description: "Connect 4 game made with Python.",
     url: "https://github.com/ThibautMilville/Connect4_Game",
   },
   {
-    logo: Code,
+    logo: CandyCane,
     title: "Modern Secret Santa App",
     description: "Modern Secret Santa app made with Python.",
     url: "https://github.com/ThibautMilville/Secret_Santa",
@@ -33,7 +33,7 @@ export const SIDE_PROJECTS: SideProjectProps[] = [
     url: "https://github.com/ThibautMilville/Modern_Responsive_UI_UX_Website",
   },
   {
-    logo: Code,
+    logo: Cat,
     title: "Gacha Game",
     description: "Gacha game made with Vue.js (in a teamwork).",
     url: "https://github.com/Nizi7582/gacha-game",
