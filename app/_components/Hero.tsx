@@ -24,7 +24,7 @@ export const Hero = () => {
           Living in{" "}
           <Code className="inline-flex items-center gap-1">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_France_%281794%E2%80%931815%2C_1830%E2%80%931974%2C_2020%E2%80%93present%29.svg/langfr-225px-Flag_of_France_%281794%E2%80%931815%2C_1830%E2%80%931974%2C_2020%E2%80%93present%29.svg.png"
+              src="/emojis/flag-france.png"
               style={{ width: 16, height: "auto" }}
               alt="French flag"
             />
