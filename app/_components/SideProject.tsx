@@ -1,42 +1,42 @@
-import { CandyCane, Cat, Code, ListTodo, LucideIcon, Swords, ThermometerSun } from "lucide-react";
+import { CandyCane, Table, Code, ListTodo, LucideIcon, Wallet, Webhook } from "lucide-react";
 import Link from "next/link";
 
 export const SIDE_PROJECTS: SideProjectProps[] = [
   {
+    logo: Code,
+    title: "Ultra Dashboard",
+    description: "Advanced dashboard about Ultra and made with React.",
+    url: "https://github.com/ThibautMilville/Ultra-Dashboard",
+  },
+  {
+    logo: Wallet,
+    title: "Ultra Wallet Tracker",
+    description: "Wallet Tracker using the Ultra API and made with React.",
+    url: "https://github.com/ThibautMilville/Ultra-Wallet-Tracker",
+  },
+  {
+    logo: Table,
+    title: "Tracking Table Tennis Matches App",
+    description: "Score tracking application with voice recognition.",
+    url: "https://github.com/ThibautMilville/Tracking-Table-Tennis-Matches-App",
+  },
+  {
     logo: ListTodo,
     title: "Advanced Todo List App",
-    description: "Advanced todo list app made with React Native.",
+    description: "Advanced todo list app made with React Native and Expo.",
     url: "https://github.com/ThibautMilville/React-Native-Todolist",
   },
   {
-    logo: ThermometerSun,
-    title: "Temperature Converter",
-    description: "Temperature converter made with React Native.",
-    url: "https://github.com/ThibautMilville/Temperature-Converter-React-Native",
-  },
-  {
-    logo: Swords,
-    title: "Connect 4 Game",
-    description: "Connect 4 game made with Python.",
-    url: "https://github.com/ThibautMilville/Connect4_Game",
+    logo: Webhook,
+    title: "La Bataille des Expressions",
+    description: "Expression game made with React.",
+    url: "https://github.com/ThibautMilville/La-Bataille-Des-Expressions",
   },
   {
     logo: CandyCane,
     title: "Modern Secret Santa App",
     description: "Modern Secret Santa app made with Python.",
     url: "https://github.com/ThibautMilville/Secret_Santa",
-  },
-  {
-    logo: Code,
-    title: "Modern Responsive UI/UX Website",
-    description: "Modern responsive UI/UX website made with React.",
-    url: "https://github.com/ThibautMilville/Modern_Responsive_UI_UX_Website",
-  },
-  {
-    logo: Cat,
-    title: "Gacha Game",
-    description: "Gacha game made with Vue.js (in a teamwork).",
-    url: "https://github.com/Nizi7582/gacha-game",
   },
 ];
 
