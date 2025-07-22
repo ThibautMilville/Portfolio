@@ -4,7 +4,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google';
 import Navigation from '@/components/Navigation';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import Link from 'next/link';
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail, MessageCircle } from 'lucide-react';
 import { TooltipProvider } from '@/components/ui/tooltip';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -60,9 +60,10 @@ export default function RootLayout({
                   <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center text-4xl font-bold text-primary select-none">TM</div>
                   <Link href="/" className="font-bold text-lg hover:text-primary transition-colors">Thibaut MILVILLE</Link>
                   <div className="flex gap-4 mt-2">
-                    <a href="https://github.com/thibaut-milville" target="_blank" rel="noopener noreferrer" className="hover:text-primary"><Github className="h-5 w-5" /></a>
-                    <a href="https://linkedin.com/in/thibaut-milville" target="_blank" rel="noopener noreferrer" className="hover:text-primary"><Linkedin className="h-5 w-5" /></a>
-                    <Link href="/contact" className="hover:text-primary"><Mail className="h-5 w-5" /></Link>
+                    <a href="https://github.com/ThibautMilville" target="_blank" rel="noopener noreferrer" className="hover:text-primary"><Github className="h-5 w-5" /></a>
+                    <a href="https://fr.linkedin.com/in/thibaut-milville" target="_blank" rel="noopener noreferrer" className="hover:text-primary"><Linkedin className="h-5 w-5" /></a>
+                    <a href="mailto:tmilville.pro@gmail.com" className="hover:text-primary"><Mail className="h-5 w-5" /></a>
+                    <a href="https://t.me/Thybow" target="_blank" rel="noopener noreferrer" className="hover:text-primary"><MessageCircle className="h-5 w-5" /></a>
                   </div>
                 </div>
                 {/* Colonne 2 : Diplômes & Certifications */}

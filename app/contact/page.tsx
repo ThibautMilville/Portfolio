@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, MessageCircle, MapPin, Send, Github, Linkedin } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -138,17 +138,19 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Email</h4>
-                    <p className="text-muted-foreground">thibaut.milville@example.com</p>
+                    <p className="text-muted-foreground">tmilville.pro@gmail.com</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start gap-4">
                   <div className="p-3 rounded-lg bg-primary/10">
-                    <Phone className="h-6 w-6 text-primary" />
+                    <MessageCircle className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-1">Téléphone</h4>
-                    <p className="text-muted-foreground">+33 6 12 34 56 78</p>
+                    <h4 className="font-semibold mb-1">Telegram</h4>
+                    <a href="https://t.me/Thybow" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                      @Thybow
+                    </a>
                   </div>
                 </div>
                 
@@ -168,18 +170,18 @@ export default function Contact() {
               <h3 className="text-xl font-semibold mb-4">Réseaux sociaux</h3>
               <div className="flex gap-4">
                 <Button variant="outline" size="icon" asChild>
-                  <a href="https://github.com/thibaut-milville" target="_blank" rel="noopener noreferrer">
+                  <a href="https://github.com/ThibautMilville" target="_blank" rel="noopener noreferrer">
                     <Github className="h-5 w-5" />
                   </a>
                 </Button>
                 <Button variant="outline" size="icon" asChild>
-                  <a href="https://linkedin.com/in/thibaut-milville" target="_blank" rel="noopener noreferrer">
+                  <a href="https://fr.linkedin.com/in/thibaut-milville" target="_blank" rel="noopener noreferrer">
                     <Linkedin className="h-5 w-5" />
                   </a>
                 </Button>
                 <Button variant="outline" size="icon" asChild>
-                  <a href="https://twitter.com/thibaut_milville" target="_blank" rel="noopener noreferrer">
-                    <Twitter className="h-5 w-5" />
+                  <a href="https://t.me/Thybow" target="_blank" rel="noopener noreferrer">
+                    <MessageCircle className="h-5 w-5" />
                   </a>
                 </Button>
               </div>
