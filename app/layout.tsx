@@ -1,34 +1,100 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import { Anek_Telugu } from "next/font/google";
-import { cn } from "@/lib/utils";
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter, JetBrains_Mono } from 'next/font/google';
+import Navigation from '@/components/Navigation';
+import { ThemeProvider } from '@/components/ThemeProvider';
+import Link from 'next/link';
+import { Github, Linkedin, Mail } from 'lucide-react';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
-const AnekTelugu = Anek_Telugu({ subsets: ["latin"], variable: "--font-caption" });
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const jetbrainsMono = JetBrains_Mono({ 
+  subsets: ['latin'], 
+  variable: '--font-mono' 
 });
 
 export const metadata: Metadata = {
-  title: "Thibaut MILVILLE",
-  description: "Portfolio of Thibaut MILVILLE",
+  title: 'Thibaut MILVILLE - Développeur Fullstack',
+  description: 'Portfolio de Thibaut MILVILLE, développeur fullstack spécialisé en React, Next.js et NestJS',
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  // Données pour le footer
+  const footerProjets = [
+    { title: "E-Commerce Platform", href: "/projets#e-commerce-platform" },
+    { title: "Task Management SaaS", href: "/projets#task-management-saas" },
+    { title: "API GraphQL Microservices", href: "/projets#api-graphql-microservices" },
+  ];
+  const footerSkills = [
+    "React", "Next.js", "NestJS", "Node.js", "TypeScript", "PostgreSQL"
+  ];
+  const footerDiplomes = [
+    { title: "Master Informatique - Développement Web", href: "/formations#master-informatique" },
+    { title: "Certification AWS Solutions Architect", href: "/formations#aws-solutions-architect" },
+    { title: "Formation NestJS Avancée", href: "/formations#nestjs-avancee" },
+  ];
+
   return (
-    <html lang="en" className="h-full">
-      <body className={cn(geistSans.variable, geistMono.variable, AnekTelugu.variable, "font-sans h-full bg-background text-foreground")}>{children}</body>
+    <html lang="fr" suppressHydrationWarning>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+        <TooltipProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange={false}
+          >
+            <Navigation />
+            <main className="min-h-screen">
+              {children}
+            </main>
+            <footer className="mt-16 border-t bg-background/80 pt-12 px-4">
+              <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 pb-6">
+                {/* Colonne 1 : Logo, nom, réseaux */}
+                <div className="flex flex-col items-center gap-4">
+                  {/* Logo agrandi */}
+                  <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center text-4xl font-bold text-primary select-none">TM</div>
+                  <Link href="/" className="font-bold text-lg hover:text-primary transition-colors">Thibaut MILVILLE</Link>
+                  <div className="flex gap-4 mt-2">
+                    <a href="https://github.com/thibaut-milville" target="_blank" rel="noopener noreferrer" className="hover:text-primary"><Github className="h-5 w-5" /></a>
+                    <a href="https://linkedin.com/in/thibaut-milville" target="_blank" rel="noopener noreferrer" className="hover:text-primary"><Linkedin className="h-5 w-5" /></a>
+                    <Link href="/contact" className="hover:text-primary"><Mail className="h-5 w-5" /></Link>
+                  </div>
+                </div>
+                {/* Colonne 2 : Diplômes & Certifications */}
+                <div className="flex flex-col items-center md:items-start">
+                  <h3 className="font-semibold mb-3 text-primary">Diplômes & Certifications</h3>
+                  <ul className="space-y-2">
+                    {footerDiplomes.map((d) => (
+                      <li key={d.title}>
+                        <Link href={d.href} className="hover:underline text-sm text-muted-foreground hover:text-primary transition-colors">{d.title}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {/* Colonne 3 : Projets phares */}
+                <div className="flex flex-col items-center md:items-start">
+                  <h3 className="font-semibold mb-3 text-primary">Projets phares</h3>
+                  <ul className="space-y-2">
+                    {footerProjets.map((p) => (
+                      <li key={p.title}>
+                        <Link href={p.href} className="hover:underline text-sm text-muted-foreground hover:text-primary transition-colors">{p.title}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div className="border-t pt-4 text-center text-xs text-muted-foreground">
+                © {new Date().getFullYear()} <Link href="/" className="hover:text-primary font-semibold transition-colors">Thibaut MILVILLE</Link>. Tous droits réservés.
+              </div>
+            </footer>
+          </ThemeProvider>
+        </TooltipProvider>
+      </body>
     </html>
   );
 }
