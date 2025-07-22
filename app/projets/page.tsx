@@ -23,7 +23,7 @@ const projets = [
       "Analytics en temps réel",
       "API REST documentée"
     ],
-    github: "https://github.com/thibaut-milville",
+    github: "https://github.com/ThibautMilville",
     demo: "https://demo.example.com",
     category: "Fullstack"
   },
@@ -42,7 +42,7 @@ const projets = [
       "Rapports et statistiques",
       "Multi-tenancy"
     ],
-    github: "https://github.com/thibaut-milville",
+    github: "https://github.com/ThibautMilville",
     demo: "https://demo.example.com",
     category: "SaaS"
   },
@@ -61,7 +61,7 @@ const projets = [
       "Monitoring complet",
       "Tests automatisés"
     ],
-    github: "https://github.com/thibaut-milville",
+    github: "https://github.com/ThibautMilville",
     category: "Backend"
   },
   {
@@ -79,7 +79,7 @@ const projets = [
       "Responsive design",
       "Caching intelligent"
     ],
-    github: "https://github.com/thibaut-milville",
+    github: "https://github.com/ThibautMilville",
     demo: "https://demo.example.com",
     category: "Frontend"
   },
@@ -98,7 +98,7 @@ const projets = [
       "Synchronisation cloud",
       "Interface native"
     ],
-    github: "https://github.com/thibaut-milville",
+    github: "https://github.com/ThibautMilville",
     category: "Mobile"
   },
   {
@@ -116,7 +116,7 @@ const projets = [
       "Monitoring métrics",
       "Infrastructure as Code"
     ],
-    github: "https://github.com/thibaut-milville",
+    github: "https://github.com/ThibautMilville",
     category: "DevOps"
   }
 ];
