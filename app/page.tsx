@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Typewriter } from '@/components/ui/typewriter';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
+import LogoCarousel from '@/components/ui/logo-carousel';
 
 // Importer les projets et formations/certifications (copie locale pour la home)
 const projets = [
@@ -250,32 +251,7 @@ export default function Home() {
       <section className="py-10 px-6 bg-background">
         <div className="max-w-5xl mx-auto">
           <h3 className="text-center text-lg font-semibold mb-6 text-muted-foreground">Ils m'ont fait confiance</h3>
-          <TooltipProvider>
-            <div className="relative">
-              <div
-                className="flex gap-12 animate-scroll-logos items-center"
-                style={{ minWidth: '100%', width: 'max-content' }}
-              >
-                {companyLogos.concat(companyLogos).map((logo, idx) => (
-                  <Tooltip key={logo.name + idx}>
-                    <TooltipTrigger asChild>
-                      <span tabIndex={0} className="inline-block">
-                        <img
-                          src={logo.src}
-                          alt={logo.alt}
-                          className="h-12 w-auto grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 cursor-pointer"
-                          style={{ flex: '0 0 auto' }}
-                        />
-                      </span>
-                    </TooltipTrigger>
-                    <TooltipContent side="top" className="text-xs pointer-events-auto">
-                      {logo.name}
-                    </TooltipContent>
-                  </Tooltip>
-                ))}
-              </div>
-            </div>
-          </TooltipProvider>
+          <LogoCarousel logos={companyLogos} />
         </div>
       </section>
 
