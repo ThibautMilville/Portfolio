@@ -99,6 +99,51 @@
   animation: scroll-logos 20s linear infinite;
 }
 
+/* Carrousel logos continu :
+   - Les logos sont dupliqués au moins 2 fois dans le flux.
+   - L'animation translateX va de 0 à -50% pour garantir une boucle parfaite.
+   - Le flux doit avoir width: max-content et le parent overflow-hidden.
+*/
+@keyframes logo-carousel {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-logo-carousel { 
+  animation: logo-carousel 30s linear infinite; 
+}
+
+.logo-fade-in {
+  opacity: 1;
+  animation: logo-fade-in 0.5s ease-in-out;
+}
+.logo-fade-out {
+  opacity: 0.3;
+  animation: logo-fade-out 0.5s ease-in-out;
+}
+
+@keyframes logo-fade-in {
+  0% { opacity: 0.3; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes logo-fade-out {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0.3; transform: scale(0.9); }
+}
+
+.logo-fade-in-0 { opacity: 0.2; }
+.logo-fade-in-1 { opacity: 0.6; }
+.logo-fade-out-0 { opacity: 0.2; }
+.logo-fade-out-1 { opacity: 0.6; }
+
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
