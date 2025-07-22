@@ -13,7 +13,7 @@ interface LogoCarouselProps {
   speed?: number; // duration in seconds
 }
 
-export default function LogoCarousel({ logos, speed = 20 }: LogoCarouselProps) {
+export default function LogoCarousel({ logos, speed = 60 }: LogoCarouselProps) {
   // Générer une liste vraiment infinie en répétant les logos suffisamment
   // pour couvrir plusieurs écrans et créer un flux continu
   const generateInfiniteLogos = (originalLogos: Logo[], repetitions: number = 10): Logo[] => {
@@ -53,13 +53,19 @@ export default function LogoCarousel({ logos, speed = 20 }: LogoCarouselProps) {
           {infiniteLogos.map((logo, index) => (
             <Tooltip key={`${logo.name}-${index}`}>
               <TooltipTrigger asChild>
-                <div className="flex-shrink-0 flex items-center justify-center mx-6 relative z-50">
+                <motion.div 
+                  className="flex-shrink-0 flex items-center justify-center mx-6 relative z-50"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                >
                   <img
                     src={logo.src}
                     alt={logo.alt}
                     className="h-12 w-auto grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-300 cursor-pointer hover:scale-110 relative z-50"
                   />
-                </div>
+                </motion.div>
               </TooltipTrigger>
               <TooltipContent side="top" className="text-xs pointer-events-auto z-50">
                 {logo.name}
