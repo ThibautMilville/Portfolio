@@ -69,7 +69,7 @@ export const experiences: Experience[] = [
     ],
     projectIds: [],
     relatedFormationIds: [3],
-    logoUrl: "https://media.licdn.com/dms/image/v2/C4D0BAQGP50NHXg7Thg/company-logo_100_100/company-logo_100_100/0/1630516714181/ultracorp_logo?e=1756339200&v=beta&t=qRdv_cRy8kAd0fEN07DFOOd0cq23cs5SfNuTP4x6QuQ"
+    logoUrl: "/images/company/logo_ultra.png"
   },
   {
     id: 8,
@@ -86,7 +86,7 @@ export const experiences: Experience[] = [
     ],
     projectIds: [],
     relatedFormationIds: [3],
-    logoUrl: "https://media.licdn.com/dms/image/v2/D560BAQFyi17XbfLefQ/company-logo_100_100/company-logo_100_100/0/1684470709351/ultra_times_logo?e=1756339200&v=beta&t=vmk0ZjEBVqD6Ezdlodf9_S5p2ZfBrXVyW23VtjBBQDw"
+    logoUrl: "/images/company/logo_UT.png"
   },
   {
     id: 9,
@@ -104,7 +104,7 @@ export const experiences: Experience[] = [
     ],
     projectIds: [],
     relatedFormationIds: [3],
-    logoUrl: "https://media.licdn.com/dms/image/v2/D560BAQFyi17XbfLefQ/company-logo_100_100/company-logo_100_100/0/1684470709351/ultra_times_logo?e=1756339200&v=beta&t=vmk0ZjEBVqD6Ezdlodf9_S5p2ZfBrXVyW23VtjBBQDw"
+    logoUrl: "/images/company/logo_UT.png"
   },
   {
     id: 1,
@@ -121,7 +121,7 @@ export const experiences: Experience[] = [
     ],
     projectIds: [],
     relatedFormationIds: [1, 2, 3],
-    logoUrl: "https://media.licdn.com/dms/image/v2/D4E0BAQGRaCemLDfQtA/company-logo_100_100/company-logo_100_100/0/1716277093268/sncf_voyageurs_logo?e=1756339200&v=beta&t=gkDh4MPljVMKwLWNNcDX7HBnSaktqRpIWMvPcWX78tA"
+    logoUrl: "/images/company/Logo-SNCF-Voyageurs.png"
   },
   {
     id: 3,
@@ -156,7 +156,7 @@ export const experiences: Experience[] = [
     ],
     projectIds: [],
     relatedFormationIds: [2, 3],
-    logoUrl: "https://media.licdn.com/dms/image/v2/D4E0BAQGRaCemLDfQtA/company-logo_100_100/company-logo_100_100/0/1716277093268/sncf_voyageurs_logo?e=1756339200&v=beta&t=gkDh4MPljVMKwLWNNcDX7HBnSaktqRpIWMvPcWX78tA"
+    logoUrl: "/images/company/Logo-SNCF-Voyageurs.png"
   },
   {
     id: 4,
@@ -241,7 +241,7 @@ export const formations: Formation[] = [
     type: "Diplôme",
     projectIds: [],
     relatedExperienceIds: [],
-    logoUrl: "https://media.licdn.com/dms/image/v2/D4E0BAQFCtXlYLH5E8w/company-logo_100_100/company-logo_100_100/0/1665571254273/cesi_officiel_logo?e=1756339200&v=beta&t=qnVli6k8CI7iOmDBpNod0E6SVnabKUrcjjST4MgEpPw"
+    logoUrl: "/images/education/cesi.webp"
   },
   {
     id: 2,
@@ -255,7 +255,7 @@ export const formations: Formation[] = [
     type: "Diplôme",
     projectIds: [],
     relatedExperienceIds: [],
-    logoUrl: "https://media.licdn.com/dms/image/v2/D4E0BAQFCtXlYLH5E8w/company-logo_100_100/company-logo_100_100/0/1665571254273/cesi_officiel_logo?e=1756339200&v=beta&t=qnVli6k8CI7iOmDBpNod0E6SVnabKUrcjjST4MgEpPw"
+    logoUrl: "/images/education/cesi.webp"
   },
   {
     id: 3,

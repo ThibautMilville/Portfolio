@@ -43,9 +43,31 @@ export default function Contact() {
           className="text-center mb-16"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact</h1>
+          
+          {/* Barre horizontale stylisée moderne et dynamique */}
+          <motion.div 
+            className="flex justify-center mb-6"
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <motion.div 
+              className="h-1 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full shadow-lg"
+              style={{ width: 'min(80vw, 250px)' }}
+              animate={{
+                width: ['min(80vw, 250px)', 'min(90vw, 350px)', 'min(80vw, 250px)'],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </motion.div>
+          
           <p className="text-lg text-muted-foreground">
             Discutons de votre prochain projet ensemble
-            </p>
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">

@@ -143,7 +143,7 @@ export default function ExperienceCarousel({ experiences }: ExperienceCarouselPr
                           <img 
                             src={group.logoUrl} 
                             alt={`Logo ${group.company}`}
-                            className="h-12 w-12 rounded object-contain"
+                            className="h-12 w-12 rounded object-contain bg-white p-1"
                           />
                         ) : (
                           <div className="p-2 rounded-lg bg-blue-500/90 text-white">
