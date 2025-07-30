@@ -2,75 +2,77 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, GraduationCap, Award, BookOpen } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Building, Calendar, MapPin, Users } from 'lucide-react';
 import { Card, CardContent } from './card';
+import { getGroupedExperiences } from '@/lib/data';
+import Link from 'next/link';
 
-interface Formation {
+interface Experience {
   id: number;
   title: string;
-  institution: string;
+  company: string;
   location: string;
   date: string;
   description: string;
-  skills: string[];
-  mention: string;
-  type: "Diplôme" | "Certification" | "Formation";
+  technologies: string[];
+  achievements: string[];
   projectIds?: number[];
-  relatedExperienceIds?: number[];
-  credentialUrl?: string;
+  relatedFormationIds?: number[];
   logoUrl?: string;
 }
 
-interface FormationCarouselProps {
-  formations: Formation[];
+interface GroupedExperience {
+  company: string;
+  experiences: Experience[];
+  totalDuration: string;
+  logoUrl?: string;
 }
 
-const getCardsToShow = (totalFormations: number) => {
+interface ExperienceCarouselProps {
+  experiences?: Experience[]; // Gardé pour compatibilité
+}
+
+const getCardsToShow = (totalGroups: number) => {
   if (typeof window === 'undefined') return 1;
   const width = window.innerWidth;
   let cards = 1;
   if (width >= 1024) cards = 3;
   else if (width >= 640) cards = 2;
-  // Ne jamais afficher plus de cards qu'on en a
-  return Math.min(cards, totalFormations);
+  return Math.min(cards, totalGroups);
 };
 
-const typeColors: Record<string, string> = {
-  'diplôme': 'bg-blue-500/90 text-white',
-  'certification': 'bg-green-500/90 text-white',
-  'formation': 'bg-purple-500/90 text-white',
-};
-
-export default function FormationCarousel({ formations }: FormationCarouselProps) {
+export default function ExperienceCarousel({ experiences }: ExperienceCarouselProps) {
   const [startIndex, setStartIndex] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(1);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
+  // Utiliser les expériences groupées
+  const groupedExperiences = getGroupedExperiences();
+
   React.useEffect(() => {
     setIsClient(true);
-    setCardsToShow(getCardsToShow(formations.length));
-  }, [formations.length]);
+    setCardsToShow(getCardsToShow(groupedExperiences.length));
+  }, [groupedExperiences.length]);
 
   React.useEffect(() => {
     const handleResize = () => {
-      setCardsToShow(getCardsToShow(formations.length));
+      setCardsToShow(getCardsToShow(groupedExperiences.length));
     };
     window.addEventListener('resize', handleResize);
-    setCardsToShow(getCardsToShow(formations.length));
+    setCardsToShow(getCardsToShow(groupedExperiences.length));
     return () => window.removeEventListener('resize', handleResize);
-  }, [formations.length]);
+  }, [groupedExperiences.length]);
 
-  // Pour peu de formations, on ne fait pas d'infini
-  const shouldUseInfinite = formations.length > cardsToShow;
+  const shouldUseInfinite = groupedExperiences.length > cardsToShow;
   
   const next = () => {
     if (isAnimating) return;
     setIsAnimating(true);
     if (shouldUseInfinite) {
-      setStartIndex((prev) => (prev + 1) % formations.length);
+      setStartIndex((prev) => (prev + 1) % groupedExperiences.length);
     } else {
-      setStartIndex((prev) => Math.min(prev + 1, formations.length - cardsToShow));
+      setStartIndex((prev) => Math.min(prev + 1, groupedExperiences.length - cardsToShow));
     }
     setTimeout(() => setIsAnimating(false), 300);
   };
@@ -79,7 +81,7 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
     if (isAnimating) return;
     setIsAnimating(true);
     if (shouldUseInfinite) {
-      setStartIndex((prev) => (prev - 1 + formations.length) % formations.length);
+      setStartIndex((prev) => (prev - 1 + groupedExperiences.length) % groupedExperiences.length);
     } else {
       setStartIndex((prev) => Math.max(prev - 1, 0));
     }
@@ -88,17 +90,6 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
 
   // Simplification du carrousel
   const translateX = `-${startIndex * (100 / cardsToShow)}%`;
-
-  const getIcon = (type: string) => {
-    switch (type.toLowerCase()) {
-      case 'diplôme':
-        return <GraduationCap className="h-8 w-8" />;
-      case 'certification':
-        return <Award className="h-8 w-8" />;
-      default:
-        return <BookOpen className="h-8 w-8" />;
-    }
-  };
 
   if (!isClient) {
     return (
@@ -110,7 +101,6 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
 
   return (
     <div className="relative max-w-4xl mx-auto flex items-center">
-      {/* Flèches à l'extérieur */}
       <button
         onClick={prev}
         className="hidden sm:flex items-center justify-center absolute left-[-2.5rem] md:left-[-3.5rem] top-1/2 -translate-y-1/2 z-20 p-2 md:p-3 rounded-full bg-background/90 border shadow-lg hover:bg-primary/10 transition-all duration-200"
@@ -134,61 +124,65 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
               duration: 0.3
             }}
           >
-            {formations.map((formation, idx) => (
-                <motion.div
-                  key={formation.id}
-                  className="flex-shrink-0 w-full group"
-                  style={{ width: `calc(100% / ${cardsToShow})` }}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -30 }}
-                  transition={{ duration: 0.3 }}
-                >
-                <Card className="relative h-full border border-border/50 rounded-2xl shadow-lg bg-gradient-to-br from-background to-muted/20 backdrop-blur-sm transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-2 group-hover:border-primary/30 overflow-hidden">
-                  {/* Header avec badge unique */}
+            {groupedExperiences.map((group, idx) => (
+              <motion.div
+                key={group.company}
+                className="flex-shrink-0 w-full group"
+                style={{ width: `calc(100% / ${cardsToShow})` }}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -30 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Link href={`/experiences#${group.company.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}>
+                  <Card className="relative h-full border border-border/50 rounded-2xl shadow-lg bg-gradient-to-br from-background to-muted/20 backdrop-blur-sm transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-2 group-hover:border-primary/30 overflow-hidden cursor-pointer">
                   <div className="p-6 pb-4">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-2">
-                        {formation.logoUrl ? (
+                        {group.logoUrl ? (
                           <img 
-                            src={formation.logoUrl} 
-                            alt={`Logo ${formation.institution}`}
-                            className="h-12 w-12 rounded object-contain bg-white p-1"
+                            src={group.logoUrl} 
+                            alt={`Logo ${group.company}`}
+                            className="h-12 w-12 rounded object-contain"
                           />
                         ) : (
-                          <div className={`p-2 rounded-lg ${typeColors[formation.type.toLowerCase()] || 'bg-muted text-foreground'}`}>
-                            {getIcon(formation.type)}
+                          <div className="p-2 rounded-lg bg-blue-500/90 text-white">
+                            <Building className="h-8 w-8" />
                           </div>
                         )}
                       </div>
                       <span className="text-xs font-semibold px-2 py-1 rounded-full bg-primary/10 text-primary">
-                        {formation.type}
+                        {group.experiences.length > 1 ? 'Multiples postes' : 'Expérience'}
                       </span>
                     </div>
                     
-                    {/* Titre et institution */}
                     <h3 className="text-lg font-bold mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                      {formation.title}
+                      {group.company}
                     </h3>
                     <p className="text-sm text-muted-foreground font-medium mb-3">
-                      {formation.institution}
+                      {group.experiences.length > 1 ? group.experiences[0].title : group.experiences[0].title}
                     </p>
                     
-                    {/* Date */}
-                    <div className="inline-flex items-center gap-2 text-xs text-muted-foreground">
-                      <div className="w-1 h-1 rounded-full bg-primary"></div>
-                      {formation.date}
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <Calendar className="h-3 w-3" />
+                        {group.totalDuration}
+                      </div>
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <MapPin className="h-3 w-3" />
+                        {group.experiences[0].location}
+                      </div>
                     </div>
                   </div>
-                </Card>
+                  </Card>
+                </Link>
               </motion.div>
             ))}
           </motion.div>
         </div>
-        {/* Dots indicator */}
-        {formations.length > cardsToShow && (
+        {groupedExperiences.length > cardsToShow && (
           <div className="flex justify-center mt-8 gap-2">
-            {Array.from({ length: Math.ceil(formations.length / cardsToShow) }).map((_, index) => (
+            {Array.from({ length: Math.ceil(groupedExperiences.length / cardsToShow) }).map((_, index) => (
               <button
                 key={index}
                 onClick={() => setStartIndex(index * cardsToShow)}
@@ -202,9 +196,8 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
             ))}
           </div>
         )}
-        {/* Slide counter */}
         <div className="text-center mt-4 text-sm text-muted-foreground">
-          {Math.floor(startIndex / cardsToShow) + 1} / {Math.ceil(formations.length / cardsToShow)}
+          {Math.floor(startIndex / cardsToShow) + 1} / {Math.ceil(groupedExperiences.length / cardsToShow)}
         </div>
       </div>
       <button

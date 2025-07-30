@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Github, ExternalLink } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Github, ExternalLink, ArrowRight } from 'lucide-react';
 import { Button } from './button';
+import Link from 'next/link';
 
 interface Project {
   id: number;
@@ -16,6 +17,9 @@ interface Project {
   github: string;
   demo?: string;
   category: string;
+  role?: string;
+  duration?: string;
+  teamSize?: number;
 }
 
 interface ProjectCarouselProps {
@@ -118,15 +122,15 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
             }}
           >
             {displayProjects.map((project, idx) => (
-              <motion.div
-                key={project.id + '-' + idx}
-                className="flex-1 min-w-0 max-w-xs rounded-3xl border border-border bg-gradient-to-br from-card/80 to-background/60 shadow-xl overflow-hidden flex flex-col group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/60"
-                style={{ flexBasis: `calc(100%/${cardsToShow} - 1.5rem)` }}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -30 }}
-                transition={{ duration: 0.3 }}
-              >
+              <Link href={`/projets/${project.id}`} key={project.id + '-' + idx}>
+                <motion.div
+                  className="min-w-0 max-w-xs rounded-3xl border border-border bg-gradient-to-br from-card/80 to-background/60 shadow-xl overflow-hidden flex flex-col group transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:border-primary/60 cursor-pointer h-[500px]"
+                  style={{ flexBasis: `calc(100%/${cardsToShow} - 1.5rem)` }}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -30 }}
+                  transition={{ duration: 0.3 }}
+                >
                 {/* Image + overlay + badges */}
                 <div className="relative h-44 w-full overflow-hidden">
                   <img
@@ -144,32 +148,69 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
                   </div>
                 </div>
                 {/* Content glassmorphism */}
-                <div className="flex-1 flex flex-col p-5 bg-white/60 dark:bg-black/40 backdrop-blur-md rounded-b-3xl">
-                  <h3 className="text-xl font-bold mb-2 text-primary group-hover:underline transition-all">{project.title}</h3>
-                  <p className="text-sm text-muted-foreground mb-3 flex-1 line-clamp-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex-1 flex flex-col p-4 bg-white/60 dark:bg-black/40 backdrop-blur-md rounded-b-3xl">
+                  <h3 className="text-lg font-bold mb-1 text-primary group-hover:underline transition-all line-clamp-1">{project.title}</h3>
+                  
+                  {/* Rôle et durée */}
+                  <div className="flex items-center gap-3 mb-2 text-xs text-muted-foreground">
+                    {project.role && (
+                      <span className="font-medium text-primary">{project.role}</span>
+                    )}
+                    {project.duration && (
+                      <span>• {project.duration}</span>
+                    )}
+                    {project.teamSize && (
+                      <span>• Équipe {project.teamSize}</span>
+                    )}
+                  </div>
+                  
+                  <p className="text-xs text-muted-foreground mb-3 flex-1 line-clamp-2">{project.description}</p>
+                  
+                  {/* Technologies clés */}
+                  <div className="flex flex-wrap gap-1 mb-3">
                     {project.technologies.slice(0, 4).map((tech, i) => (
                       <span key={tech + i} className="text-xs px-2 py-1 rounded-full font-medium bg-gradient-to-r from-primary/10 to-secondary/10 text-primary border border-primary/20 shadow-sm">
                         {tech}
                       </span>
                     ))}
+                    {project.technologies.length > 4 && (
+                      <span className="text-xs px-2 py-1 rounded-full font-medium bg-gradient-to-r from-primary/10 to-secondary/10 text-primary border border-primary/20 shadow-sm">
+                        +{project.technologies.length - 4}
+                      </span>
+                    )}
                   </div>
+                  
+                  {/* Actions */}
                   <div className="flex gap-2 mt-auto">
-                    <Button variant="secondary" size="sm" asChild className="flex-1 flex items-center gap-2 font-semibold shadow hover:shadow-lg">
-                      <a href={project.github} target="_blank" rel="noopener noreferrer">
-                        <Github className="h-4 w-4" /> Code
-                      </a>
+                    <Button 
+                      variant="secondary" 
+                      size="sm" 
+                      className="flex-1 flex items-center gap-1 text-xs font-semibold shadow hover:shadow-lg"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        window.open(project.github, '_blank');
+                      }}
+                    >
+                      <Github className="h-3 w-3" /> Code
                     </Button>
                     {project.demo && (
-                      <Button size="sm" asChild className="flex-1 flex items-center gap-2 font-semibold shadow hover:shadow-lg">
-                        <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="h-4 w-4" /> Demo
-                        </a>
+                      <Button 
+                        size="sm" 
+                        className="flex-1 flex items-center gap-1 text-xs font-semibold shadow hover:shadow-lg"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          window.open(project.demo, '_blank');
+                        }}
+                      >
+                        <ExternalLink className="h-3 w-3" /> Demo
                       </Button>
                     )}
                   </div>
                 </div>
               </motion.div>
+              </Link>
             ))}
           </motion.div>
         </div>

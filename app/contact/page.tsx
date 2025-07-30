@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useState } from 'react';
+import LightParticles from '@/components/ui/light-particles';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -32,8 +33,9 @@ export default function Contact() {
   };
 
   return (
-    <div className="py-20 px-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="py-20 px-6 relative">
+      <LightParticles />
+      <div className="max-w-4xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -43,7 +45,7 @@ export default function Contact() {
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact</h1>
           <p className="text-lg text-muted-foreground">
             Discutons de votre prochain projet ensemble
-          </p>
+            </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">

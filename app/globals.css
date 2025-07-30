@@ -44,6 +44,7 @@
     --chart-5: 27 87% 67%;
     --radius: 0.75rem;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -83,8 +84,13 @@
 
 /* Custom animations */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 .animate-float {
@@ -92,54 +98,81 @@
 }
 
 @keyframes scroll-logos {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
+
 .animate-scroll-logos {
   animation: scroll-logos 20s linear infinite;
 }
 
-/* Carrousel logos continu :
-   - Les logos sont dupliqués au moins 2 fois dans le flux.
-   - L'animation translateX va de 0 à -50% pour garantir une boucle parfaite.
-   - Le flux doit avoir width: max-content et le parent overflow-hidden.
-*/
 @keyframes logo-carousel {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
-.animate-logo-carousel { 
-  animation: logo-carousel 30s linear infinite; 
+
+.animate-logo-carousel {
+  animation: logo-carousel 30s linear infinite;
 }
 
 .logo-fade-in {
   opacity: 1;
   animation: logo-fade-in 0.5s ease-in-out;
 }
+
 .logo-fade-out {
   opacity: 0.3;
   animation: logo-fade-out 0.5s ease-in-out;
 }
 
 @keyframes logo-fade-in {
-  0% { opacity: 0.3; transform: scale(0.9); }
-  100% { opacity: 1; transform: scale(1); }
+  0% {
+    opacity: 0.3;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @keyframes logo-fade-out {
-  0% { opacity: 1; transform: scale(1); }
-  100% { opacity: 0.3; transform: scale(0.9); }
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.3;
+    transform: scale(0.9);
+  }
 }
 
-.logo-fade-in-0 { opacity: 0.2; }
-.logo-fade-in-1 { opacity: 0.6; }
-.logo-fade-out-0 { opacity: 0.2; }
-.logo-fade-out-1 { opacity: 0.6; }
+.logo-fade-in-0 {
+  opacity: 0.2;
+}
+.logo-fade-in-1 {
+  opacity: 0.6;
+}
+.logo-fade-out-0 {
+  opacity: 0.2;
+}
+.logo-fade-out-1 {
+  opacity: 0.6;
+}
 
 .scrollbar-hide {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
@@ -177,4 +210,134 @@ html {
 .dark .glass {
   background: rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced shadow for profile image */
+.shadow-3xl {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 40px
+    rgba(59, 130, 246, 0.4), 0 0 80px rgba(147, 51, 234, 0.3);
+}
+
+/* Animation de déformation complexe et imprévisible pour l'image de profil */
+@keyframes smooth-morph {
+  0% {
+    border-radius: 50%;
+    transform: scale(1);
+  }
+  7% {
+    border-radius: 54% 46% 48% 52%;
+    transform: scale(1.015);
+  }
+  14% {
+    border-radius: 46% 54% 52% 48%;
+    transform: scale(0.985);
+  }
+  21% {
+    border-radius: 52% 48% 46% 54%;
+    transform: scale(1.02);
+  }
+  28% {
+    border-radius: 48% 52% 54% 46%;
+    transform: scale(0.98);
+  }
+  35% {
+    border-radius: 54% 46% 50% 50%;
+    transform: scale(1.01);
+  }
+  42% {
+    border-radius: 46% 54% 48% 52%;
+    transform: scale(0.99);
+  }
+  49% {
+    border-radius: 50% 50% 54% 46%;
+    transform: scale(1.025);
+  }
+  56% {
+    border-radius: 52% 48% 46% 54%;
+    transform: scale(0.975);
+  }
+  63% {
+    border-radius: 48% 52% 50% 50%;
+    transform: scale(1.018);
+  }
+  70% {
+    border-radius: 50% 50% 52% 48%;
+    transform: scale(0.982);
+  }
+  77% {
+    border-radius: 54% 46% 48% 52%;
+    transform: scale(1.012);
+  }
+  84% {
+    border-radius: 46% 54% 54% 46%;
+    transform: scale(0.988);
+  }
+  91% {
+    border-radius: 52% 48% 50% 50%;
+    transform: scale(1.008);
+  }
+  98% {
+    border-radius: 50% 50% 48% 52%;
+    transform: scale(0.995);
+  }
+  100% {
+    border-radius: 50%;
+    transform: scale(1);
+  }
+}
+
+.animate-smooth-morph {
+  animation: smooth-morph 28s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+/* Floating particles animation */
+@keyframes float-particle {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translateY(-4px) translateX(2px) scale(1.1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-8px) translateX(-2px) scale(0.9);
+    opacity: 0.8;
+  }
+  75% {
+    transform: translateY(-4px) translateX(1px) scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+.animate-float-particle {
+  animation: float-particle 3s ease-in-out infinite;
+}
+
+/* Animations pour les anneaux */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 12s linear infinite;
 }
