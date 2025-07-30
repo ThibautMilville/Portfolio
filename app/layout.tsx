@@ -15,7 +15,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: 'Thibaut MILVILLE - Développeur Fullstack',
-  description: 'Portfolio de Thibaut MILVILLE, développeur fullstack spécialisé en React, Next.js et NestJS',
+  description: 'Portfolio de Thibaut MILVILLE, Software Engineer spécialisé en React, Next.js et NestJS',
 };
 
 export default function RootLayout({
@@ -89,8 +89,12 @@ export default function RootLayout({
                   </ul>
                 </div>
               </div>
-              <div className="border-t pt-4 text-center text-xs text-muted-foreground">
-                © {new Date().getFullYear()} <Link href="/" className="hover:text-primary font-semibold transition-colors">Thibaut MILVILLE</Link>. Tous droits réservés.
+              <div className="border-t pt-4 pb-2">
+                <div className="flex items-center justify-center">
+                  <p className="text-sm text-muted-foreground">
+                    © {new Date().getFullYear()} <Link href="/" className="hover:text-primary font-semibold transition-colors">Thibaut MILVILLE</Link>. Tous droits réservés.
+                  </p>
+                </div>
               </div>
             </footer>
           </ThemeProvider>

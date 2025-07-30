@@ -1,95 +1,165 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Building, Calendar, MapPin, Users, Briefcase } from 'lucide-react';
+import { Building, Calendar, MapPin, Users, Briefcase, ExternalLink, GraduationCap, ChevronDown, ChevronUp } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { getAllExperiences, getProjectsByExperience, getFormationsByExperience, getGroupedExperiences } from '@/lib/data';
+import Link from 'next/link';
+import ProjectCarouselMini from '@/components/ui/project-carousel-mini';
+import FormationCarouselMini from '@/components/ui/formation-carousel-mini';
+import LightParticles from '@/components/ui/light-particles';
+import { useState, useEffect } from 'react';
 
-const experiences = [
-  {
-    id: 1,
-    title: "Développeur Fullstack Senior",
-    company: "TechFlow Solutions",
-    location: "Paris, France",
-    date: "2022 - Présent",
-    duration: "2+ ans",
-    description: "Lead technique sur plusieurs projets web complexes utilisant React/Next.js et NestJS. Encadrement d'une équipe de 4 développeurs junior.",
-    achievements: [
-      "Réduction de 40% des temps de chargement sur l'application principale",
-      "Migration réussie vers Next.js 13 avec App Router",
-      "Implémentation d'une architecture microservices avec NestJS",
-      "Formation de 6 développeurs juniors aux bonnes pratiques"
-    ],
-    technologies: ["React", "Next.js", "NestJS", "PostgreSQL", "Docker", "AWS", "GraphQL"],
-    type: "CDI"
-  },
-  {
-    id: 2,
-    title: "Développeur Fullstack",
-    company: "Digital Innovations",
-    location: "Lyon, France",
-    date: "2020 - 2022",
-    duration: "2 ans",
-    description: "Développement d'applications web modernes en équipe agile. Participation active à l'architecture et aux décisions techniques.",
-    achievements: [
-      "Développement de 5 applications web from scratch",
-      "Implémentation d'un système de SSO pour 10,000+ utilisateurs",
-      "Optimisation des performances backend (+60% de vitesse)",
-      "Mise en place des tests automatisés (couverture 95%)"
-    ],
-    technologies: ["React", "Node.js", "Express", "MongoDB", "Redis", "Jest", "Cypress"],
-    type: "CDI"
-  },
-  {
-    id: 3,
-    title: "Développeur Frontend",
-    company: "StartupLab",
-    location: "Paris, France",
-    date: "2019 - 2020",
-    duration: "1 an",
-    description: "Premier poste en startup, développement d'interfaces utilisateur innovantes et responsive design.",
-    achievements: [
-      "Refonte complète de l'interface utilisateur",
-      "Implémentation du responsive design sur mobile",
-      "Intégration de 15+ APIs RESTful",
-      "Amélioration du taux de conversion (+25%)"
-    ],
-    technologies: ["React", "JavaScript", "Sass", "REST API", "Git", "Figma"],
-    type: "CDI"
-  },
-  {
-    id: 4,
-    title: "Développeur Web Junior",
-    company: "WebAgency Pro",
-    location: "Paris, France",
-    date: "2018 - 2019",
-    duration: "1 an",
-    description: "Stage puis premier emploi, développement de sites vitrine et e-commerce pour des PME.",
-    achievements: [
-      "Livraison de 20+ sites web clients",
-      "Maîtrise des CMS WordPress et Shopify",
-      "Optimisation SEO et performances web",
-      "Support technique et maintenance"
-    ],
-    technologies: ["HTML/CSS", "JavaScript", "PHP", "WordPress", "MySQL", "SEO"],
-    type: "Stage puis CDI"
-  }
-];
+const groupedExperiences = getGroupedExperiences();
 
 export default function Experiences() {
+  // Initialiser avec toutes les entreprises qui ont plusieurs expériences
+  const [expandedCompanies, setExpandedCompanies] = useState<Set<string>>(
+    new Set(groupedExperiences.filter(group => group.experiences.length > 1).map(group => group.company))
+  );
+
+  // Gestion du scroll automatique avec offset pour la navigation
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash;
+      if (hash) {
+        const element = document.querySelector(hash);
+        if (element) {
+          // Attendre que le DOM soit complètement chargé et que les animations soient terminées
+          const scrollToElement = () => {
+            const offset = 120; // Décalage pour la navigation fixe
+            const elementTop = element.offsetTop;
+            const scrollPosition = elementTop - offset;
+            
+            window.scrollTo({
+              top: scrollPosition,
+              behavior: 'smooth'
+            });
+          };
+
+          // Essayer plusieurs fois avec des délais différents
+          setTimeout(scrollToElement, 100);
+          setTimeout(scrollToElement, 300);
+          setTimeout(scrollToElement, 500);
+        }
+      }
+    }
+  }, []);
+
+  const toggleCompany = (company: string) => {
+    const newExpanded = new Set(expandedCompanies);
+    if (newExpanded.has(company)) {
+      newExpanded.delete(company);
+    } else {
+      newExpanded.add(company);
+    }
+    setExpandedCompanies(newExpanded);
+  };
+
   return (
-    <div className="py-20 px-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="py-20 px-6 relative">
+      <LightParticles />
+      <div className="max-w-4xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-16 relative"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Expériences</h1>
-          <p className="text-lg text-muted-foreground">
-            Mon parcours professionnel et mes réalisations principales
-          </p>
+          {/* Particules supplémentaires pour le header */}
+          <motion.div
+            className="absolute w-3 h-3 rounded-full bg-gradient-to-r from-blue-400/50 to-purple-400/50"
+            style={{ left: '10%', top: '20%' }}
+            animate={{
+              scale: [1, 1.6, 1],
+              opacity: [0.5, 0.9, 0.5],
+            }}
+            transition={{
+              duration: 5.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.3
+            }}
+          />
+          <motion.div
+            className="absolute w-3 h-3 rounded-full bg-gradient-to-r from-purple-400/45 to-pink-400/45"
+            style={{ left: '90%', top: '15%' }}
+            animate={{
+              scale: [1, 1.7, 1],
+              opacity: [0.45, 0.85, 0.45],
+            }}
+            transition={{
+              duration: 6.2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1.1
+            }}
+          />
+          <motion.div
+            className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-teal-400/55 to-cyan-400/55"
+            style={{ left: '20%', top: '10%' }}
+            animate={{
+              scale: [1, 1.8, 1],
+              opacity: [0.55, 1, 0.55],
+            }}
+            transition={{
+              duration: 4.8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.7
+            }}
+          />
+          <motion.div
+            className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-emerald-400/50 to-green-400/50"
+            style={{ left: '80%', top: '25%' }}
+            animate={{
+              scale: [1, 1.5, 1],
+              opacity: [0.5, 0.9, 0.5],
+            }}
+            transition={{
+              duration: 5.9,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1.4
+            }}
+          />
+          <motion.div
+            className="absolute w-1 h-1 rounded-full bg-gradient-to-r from-indigo-400/65 to-blue-400/65"
+            style={{ left: '35%', top: '18%' }}
+            animate={{
+              scale: [1, 1.9, 1],
+              opacity: [0.65, 1, 0.65],
+            }}
+            transition={{
+              duration: 3.7,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.9
+            }}
+          />
+          <motion.div
+            className="absolute w-1 h-1 rounded-full bg-gradient-to-r from-rose-400/60 to-pink-400/60"
+            style={{ left: '75%', top: '8%' }}
+            animate={{
+              scale: [1, 2, 1],
+              opacity: [0.6, 1, 0.6],
+            }}
+            transition={{
+              duration: 3.2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1.6
+            }}
+          />
+          
+          <div className="relative z-10">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Expériences</h1>
+            <p className="text-lg text-muted-foreground">
+              Mon parcours professionnel et mes réalisations principales
+            </p>
+          </div>
         </motion.div>
 
         <div className="relative">
@@ -97,9 +167,10 @@ export default function Experiences() {
           <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
 
           <div className="space-y-8">
-            {experiences.map((exp, index) => (
+            {groupedExperiences.map((group, index) => (
               <motion.div
-                key={exp.id}
+                key={group.company}
+                id={group.company.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
@@ -112,62 +183,185 @@ export default function Experiences() {
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div className="flex items-start gap-4">
-                        <div className="p-2 rounded-lg bg-primary/10">
-                          <Briefcase className="h-6 w-6 text-primary" />
-                        </div>
-                        <div>
-                          <CardTitle className="text-xl mb-2">{exp.title}</CardTitle>
+                        {group.logoUrl ? (
+                          <img 
+                            src={group.logoUrl} 
+                            alt={`Logo ${group.company}`}
+                            className="h-10 w-10 rounded object-contain flex-shrink-0"
+                          />
+                        ) : (
+                          <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
+                            <Building className="h-6 w-6 text-primary" />
+                          </div>
+                        )}
+                        <div className="flex-1">
+                          <CardTitle className="text-xl mb-2">{group.company}</CardTitle>
                           <CardDescription className="text-base font-medium text-foreground">
-                            {exp.company}
+                            {group.experiences.length > 1 ? `${group.experiences.length} postes` : group.experiences[0].title}
                           </CardDescription>
                         </div>
                       </div>
-                      <Badge variant="outline">{exp.type}</Badge>
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        {group.experiences.length > 1 && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => toggleCompany(group.company)}
+                            className="p-1"
+                          >
+                            {expandedCompanies.has(group.company) ? (
+                              <ChevronUp className="h-4 w-4" />
+                            ) : (
+                              <ChevronDown className="h-4 w-4" />
+                            )}
+                          </Button>
+                        )}
+                        <Badge variant="outline">
+                          {group.experiences.length > 1 ? 'Multiples postes' : 
+                           group.experiences[0].title.includes('Freelance') ? 'Freelance' : 
+                           group.experiences[0].title.includes('Founder') ? 'Entrepreneur' : 
+                           group.experiences[0].title.includes('Apprenticeship') ? 'Alternance' : 'CDI'}
+                        </Badge>
+                      </div>
                     </div>
                     
                     <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mt-4">
                       <div className="flex items-center gap-1">
                         <Calendar className="h-4 w-4" />
-                        {exp.date}
+                        {group.totalDuration}
                       </div>
                       <div className="flex items-center gap-1">
                         <MapPin className="h-4 w-4" />
-                        {exp.location}
+                        {group.experiences[0].location}
                       </div>
                       <div className="flex items-center gap-1">
                         <Users className="h-4 w-4" />
-                        {exp.duration}
+                        {group.experiences.length} poste{group.experiences.length > 1 ? 's' : ''}
                       </div>
                     </div>
                   </CardHeader>
 
                   <CardContent className="space-y-6">
-                    <p className="text-muted-foreground">
-                      {exp.description}
-                    </p>
-                    
-                    <div>
-                      <h4 className="font-semibold mb-3">Réalisations clés :</h4>
-                      <ul className="space-y-2">
-                        {exp.achievements.map((achievement, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
-                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-                            {achievement}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    
-                    <div>
-                      <h4 className="font-semibold mb-3">Technologies utilisées :</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {exp.technologies.map((tech) => (
-                          <Badge key={tech} variant="secondary" className="text-xs">
-                            {tech}
-                          </Badge>
+                    {/* Affichage des postes individuels si plusieurs expériences */}
+                    {group.experiences.length > 1 && (
+                      <div className="space-y-4">
+                        {group.experiences.map((exp, expIndex) => (
+                          <motion.div
+                            key={exp.id}
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ 
+                              opacity: expandedCompanies.has(group.company) ? 1 : 0,
+                              height: expandedCompanies.has(group.company) ? 'auto' : 0
+                            }}
+                            transition={{ duration: 0.3 }}
+                            className={`overflow-hidden border-l-2 border-primary/20 pl-4 ${expIndex > 0 ? 'pt-4' : ''}`}
+                          >
+                            <div className="flex items-center justify-between mb-2">
+                              <h4 className="font-semibold text-foreground">{exp.title}</h4>
+                              <span className="text-sm text-muted-foreground">{exp.date}</span>
+                            </div>
+                            <p className="text-sm text-muted-foreground mb-3">{exp.description}</p>
+                            
+                            <div className="mb-3">
+                              <h5 className="font-medium text-sm mb-2">Réalisations :</h5>
+                              <ul className="space-y-1">
+                                {exp.achievements.slice(0, 3).map((achievement, idx) => (
+                                  <li key={idx} className="flex items-start gap-2 text-xs text-muted-foreground">
+                                    <div className="w-1 h-1 rounded-full bg-primary mt-1.5 flex-shrink-0"></div>
+                                    {achievement}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                            
+                            <div className="flex flex-wrap gap-1">
+                              {exp.technologies.slice(0, 6).map((tech) => (
+                                <Badge key={tech} variant="secondary" className="text-xs">
+                                  {tech}
+                                </Badge>
+                              ))}
+                              {exp.technologies.length > 6 && (
+                                <Badge variant="secondary" className="text-xs">
+                                  +{exp.technologies.length - 6}
+                                </Badge>
+                              )}
+                            </div>
+                          </motion.div>
                         ))}
                       </div>
-                    </div>
+                    )}
+
+                    {/* Affichage pour une seule expérience */}
+                    {group.experiences.length === 1 && (
+                      <>
+                        <p className="text-muted-foreground">
+                          {group.experiences[0].description}
+                        </p>
+                        
+                        <div>
+                          <h4 className="font-semibold mb-3">Réalisations clés :</h4>
+                          <ul className="space-y-2">
+                            {group.experiences[0].achievements.map((achievement, idx) => (
+                              <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
+                                <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+                                {achievement}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        
+                        <div>
+                          <h4 className="font-semibold mb-3">Technologies utilisées :</h4>
+                          <div className="flex flex-wrap gap-2">
+                            {group.experiences[0].technologies.map((tech) => (
+                              <Badge key={tech} variant="secondary" className="text-xs">
+                                {tech}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                      </>
+                    )}
+
+                    {/* Projets associés (tous les projets de toutes les expériences du groupe) */}
+                    {(() => {
+                      const allRelatedProjects = group.experiences.flatMap(exp => 
+                        getProjectsByExperience(exp.id)
+                      );
+                      const uniqueProjects = allRelatedProjects.filter((project, index, self) => 
+                        index === self.findIndex(p => p.id === project.id)
+                      );
+                      
+                      return uniqueProjects.length > 0 ? (
+                        <div>
+                          <h4 className="font-semibold mb-3 flex items-center gap-2">
+                            <ExternalLink className="h-4 w-4" />
+                            Projets associés
+                          </h4>
+                          <ProjectCarouselMini projects={uniqueProjects} itemsPerView={2} />
+                        </div>
+                      ) : null;
+                    })()}
+
+                    {/* Formations associées (toutes les formations de toutes les expériences du groupe) */}
+                    {(() => {
+                      const allRelatedFormations = group.experiences.flatMap(exp => 
+                        getFormationsByExperience(exp)
+                      );
+                      const uniqueFormations = allRelatedFormations.filter((formation, index, self) => 
+                        index === self.findIndex(f => f.id === formation.id)
+                      );
+                      
+                      return uniqueFormations.length > 0 ? (
+                        <div>
+                          <h4 className="font-semibold mb-3 flex items-center gap-2">
+                            <GraduationCap className="h-4 w-4" />
+                            Formations associées
+                          </h4>
+                          <FormationCarouselMini formations={uniqueFormations} itemsPerView={2} />
+                        </div>
+                      ) : null;
+                    })()}
                   </CardContent>
                 </Card>
               </motion.div>
@@ -188,16 +382,16 @@ export default function Experiences() {
               <div className="text-sm text-muted-foreground">Années d'expérience</div>
             </div>
             <div className="text-center p-6 rounded-2xl border bg-card">
-              <div className="text-2xl font-bold text-primary mb-1">50+</div>
-              <div className="text-sm text-muted-foreground">Projets réalisés</div>
+              <div className="text-2xl font-bold text-primary mb-1">{getAllExperiences().length}</div>
+              <div className="text-sm text-muted-foreground">Expériences</div>
             </div>
             <div className="text-center p-6 rounded-2xl border bg-card">
-              <div className="text-2xl font-bold text-primary mb-1">4</div>
+              <div className="text-2xl font-bold text-primary mb-1">{groupedExperiences.length}</div>
               <div className="text-sm text-muted-foreground">Entreprises</div>
             </div>
             <div className="text-center p-6 rounded-2xl border bg-card">
-              <div className="text-2xl font-bold text-primary mb-1">10+</div>
-              <div className="text-sm text-muted-foreground">Développeurs formés</div>
+              <div className="text-2xl font-bold text-primary mb-1">{getAllExperiences().reduce((acc, exp) => acc + exp.technologies.length, 0)}+</div>
+              <div className="text-sm text-muted-foreground">Technologies</div>
             </div>
           </div>
         </motion.div>
