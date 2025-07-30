@@ -156,6 +156,28 @@ export default function Experiences() {
           
           <div className="relative z-10">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Expériences</h1>
+            
+                         {/* Barre horizontale stylisée moderne et dynamique */}
+             <motion.div 
+               className="flex justify-center mb-6"
+               initial={{ opacity: 0, scaleX: 0 }}
+               animate={{ opacity: 1, scaleX: 1 }}
+               transition={{ duration: 0.8, delay: 0.3 }}
+             >
+               <motion.div 
+                 className="h-1 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full shadow-lg"
+                 style={{ width: 'min(80vw, 400px)' }}
+                 animate={{
+                   width: ['min(80vw, 400px)', 'min(90vw, 500px)', 'min(80vw, 400px)'],
+                 }}
+                 transition={{
+                   duration: 4,
+                   repeat: Infinity,
+                   ease: "easeInOut",
+                 }}
+               />
+             </motion.div>
+            
             <p className="text-lg text-muted-foreground">
               Mon parcours professionnel et mes réalisations principales
             </p>
@@ -187,7 +209,7 @@ export default function Experiences() {
                           <img 
                             src={group.logoUrl} 
                             alt={`Logo ${group.company}`}
-                            className="h-10 w-10 rounded object-contain flex-shrink-0"
+                            className="h-10 w-10 rounded object-contain bg-white p-1 flex-shrink-0"
                           />
                         ) : (
                           <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">

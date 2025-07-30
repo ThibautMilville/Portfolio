@@ -25,6 +25,28 @@ export default function Projets() {
           className="text-center mb-16"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Mes Projets</h1>
+          
+                     {/* Barre horizontale stylisée moderne et dynamique */}
+           <motion.div 
+             className="flex justify-center mb-6"
+             initial={{ opacity: 0, scaleX: 0 }}
+             animate={{ opacity: 1, scaleX: 1 }}
+             transition={{ duration: 0.8, delay: 0.3 }}
+           >
+             <motion.div 
+               className="h-1 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full shadow-lg"
+               style={{ width: 'min(80vw, 300px)' }}
+               animate={{
+                 width: ['min(80vw, 300px)', 'min(90vw, 400px)', 'min(80vw, 300px)'],
+               }}
+               transition={{
+                 duration: 4,
+                 repeat: Infinity,
+                 ease: "easeInOut",
+               }}
+             />
+           </motion.div>
+          
           <p className="text-lg text-muted-foreground">
             Une sélection de mes réalisations techniques les plus significatives
           </p>
