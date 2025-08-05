@@ -8,6 +8,7 @@ interface Logo {
   name: string;
   src: string;
   alt: string;
+  linkedinUrl?: string;
 }
 
 interface LogoCarouselProps {
@@ -35,16 +36,16 @@ export default function LogoCarousel({ logos, speed = 30 }: LogoCarouselProps) {
   const infiniteLogos = generateInfiniteLogos(logos);
 
   return (
-    <div className="relative h-36 overflow-visible w-full max-w-6xl mx-auto">
+    <div className="relative h-44 overflow-visible w-full max-w-6xl mx-auto">
       <TooltipProvider>
-        {/* Fade gauche - plus prononcé */}
-        <div className="pointer-events-none absolute left-0 top-0 w-32 h-28 bg-gradient-to-r from-background via-background/80 to-transparent z-10"></div>
+        {/* Fade gauche - plus prononcé avec couleur primaire */}
+        <div className="pointer-events-none absolute left-0 top-0 w-32 h-36 bg-gradient-to-r from-background via-background/90 to-transparent z-10"></div>
         
-        {/* Fade droite - plus prononcé */}
-        <div className="pointer-events-none absolute right-0 top-0 w-32 h-28 bg-gradient-to-l from-background via-background/80 to-transparent z-10"></div>
+        {/* Fade droite - plus prononcé avec couleur primaire */}
+        <div className="pointer-events-none absolute right-0 top-0 w-32 h-36 bg-gradient-to-l from-background via-background/90 to-transparent z-10"></div>
         
         {/* Slider infini */}
-        <div className="relative w-full h-36 overflow-hidden">
+        <div className="relative w-full h-44 overflow-hidden">
           <motion.div
             className="flex items-center h-full w-max"
             animate={{ 
@@ -71,29 +72,47 @@ export default function LogoCarousel({ logos, speed = 30 }: LogoCarouselProps) {
                       ease: 'easeOut'
                     }}
                     whileHover={{
-                      scale: 1.3,
-                      y: -5,
+                      scale: 1.4,
+                      y: -8,
                       zIndex: 40,
                       transition: { 
-                        duration: 0.2,
+                        duration: 0.3,
                         type: "spring",
                         stiffness: 300
                       }
                     }}
                   >
-                                         <motion.img
-                       src={logo.src}
-                       alt={logo.alt}
-                       className="h-12 w-auto grayscale opacity-70 hover:opacity-100 transition-all duration-500 cursor-pointer filter drop-shadow-sm"
-                       whileHover={{
-                         filter: "drop-shadow(0 8px 16px rgba(0,0,0,0.15))"
-                       }}
-                     />
+                    {logo.linkedinUrl ? (
+                      <a
+                        href={logo.linkedinUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block"
+                      >
+                        <motion.img
+                          src={logo.src}
+                          alt={logo.alt}
+                          className="h-20 w-auto grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-500 cursor-pointer filter drop-shadow-lg hover:drop-shadow-2xl"
+                          whileHover={{
+                            filter: "drop-shadow(0 12px 24px rgba(0,0,0,0.25))"
+                          }}
+                        />
+                      </a>
+                    ) : (
+                      <motion.img
+                        src={logo.src}
+                        alt={logo.alt}
+                        className="h-20 w-auto grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-500 cursor-pointer filter drop-shadow-lg hover:drop-shadow-2xl"
+                        whileHover={{
+                          filter: "drop-shadow(0 12px 24px rgba(0,0,0,0.25))"
+                        }}
+                      />
+                    )}
                   </motion.div>
                 </TooltipTrigger>
-                                 <TooltipContent side="top" className="text-xs bg-background/95 backdrop-blur-sm border shadow-lg z-[9999]">
-                   {logo.name}
-                 </TooltipContent>
+                                                 <TooltipContent side="top" className="text-xs bg-background/95 backdrop-blur-sm border-2 border-primary/20 shadow-xl z-[9999]">
+                  {logo.name}
+                </TooltipContent>
               </Tooltip>
             ))}
           </motion.div>
