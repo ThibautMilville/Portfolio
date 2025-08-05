@@ -9,7 +9,7 @@ export const IMAGES = {
   favicon: getImagePath('favicon-32x32.png'),
   ultra: getImagePath('company/logo_ultra.png'),
   ultraTimes: getImagePath('company/logo_UT.png'),
-  sncf: getImagePath('company/Logo-SNCF-Voyageurs.png'),
+  sncf: getImagePath('company/Logo-SNCF-Voyageurs.webp'),
   cesi: getImagePath('education/cesi.webp'),
 } as const;
 
@@ -17,7 +17,7 @@ export const IMAGES = {
 export const PUBLIC_IMAGES = {
   ultra: '@public/images/company/logo_ultra.png',
   ultraTimes: '@public/images/company/logo_UT.png',
-  sncf: '@public/images/company/Logo-SNCF-Voyageurs.png',
+  sncf: '@public/images/company/Logo-SNCF-Voyageurs.webp',
   cesi: '@public/images/education/cesi.webp',
 } as const;
 

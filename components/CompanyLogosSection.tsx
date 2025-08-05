@@ -17,11 +17,19 @@ interface CompanyLogosSectionProps {
 
 export default function CompanyLogosSection({ logos }: CompanyLogosSectionProps) {
   return (
-    <section className="py-10 px-6 bg-background relative">
+    <section className="py-16 px-6 bg-gradient-to-b from-background via-background/95 to-background relative">
       <LightParticles />
       <div className="max-w-5xl mx-auto relative z-10">
-        <h3 className="text-center text-lg font-semibold mb-6 text-muted-foreground">Ils m'ont fait confiance</h3>
-        <LogoCarousel logos={logos} />
+        <h3 className="text-center text-xl font-bold mb-8 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+          Ils m'ont fait confiance
+        </h3>
+        <div className="relative">
+          {/* Background glow effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 rounded-3xl blur-3xl"></div>
+          <div className="relative bg-gradient-to-br from-card/50 via-card/30 to-card/50 rounded-3xl p-8 backdrop-blur-sm">
+            <LogoCarousel logos={logos} />
+          </div>
+        </div>
       </div>
     </section>
   );

@@ -121,7 +121,7 @@ export const experiences: Experience[] = [
     ],
     projectIds: [],
     relatedFormationIds: [1, 2, 3],
-    logoUrl: "/images/company/Logo-SNCF-Voyageurs.png"
+    logoUrl: "/images/company/Logo-SNCF-Voyageurs.webp"
   },
   {
     id: 3,
@@ -156,7 +156,7 @@ export const experiences: Experience[] = [
     ],
     projectIds: [],
     relatedFormationIds: [2, 3],
-    logoUrl: "/images/company/Logo-SNCF-Voyageurs.png"
+    logoUrl: "/images/company/Logo-SNCF-Voyageurs.webp"
   },
   {
     id: 4,

@@ -15,24 +15,40 @@ const formations = getAllFormations();
 
 const companyLogos = [
   {
-    name: 'SNCF',
-    src: 'https://upload.wikimedia.org/wikipedia/commons/2/2e/Logo_SNCF_2011.svg',
-    alt: 'SNCF',
+    name: 'Ultra',
+    src: '/images/company/logo_ultra.png',
+    alt: 'Ultra',
+    linkedinUrl: 'https://www.linkedin.com/company/ultracorp',
   },
   {
-    name: 'Slack',
-    src: 'https://upload.wikimedia.org/wikipedia/commons/7/76/Slack_Icon.png',
-    alt: 'Slack',
+    name: 'Ultra Times',
+    src: '/images/company/logo_UT.png',
+    alt: 'Ultra Times',
+    linkedinUrl: 'https://www.linkedin.com/company/ultra-times',
   },
   {
-    name: 'Spotify',
-    src: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg',
-    alt: 'Spotify',
+    name: 'SNCF Voyageurs',
+    src: '/images/company/Logo-SNCF-Voyageurs.webp',
+    alt: 'SNCF Voyageurs',
+    linkedinUrl: 'https://www.linkedin.com/company/sncf-voyageurs/',
   },
   {
-    name: 'Airbnb',
-    src: 'https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg',
-    alt: 'Airbnb',
+    name: 'DigitalLabs TM',
+    src: 'https://media.licdn.com/dms/image/v2/D4E0BAQEnrMai8iubKQ/company-logo_100_100/company-logo_100_100/0/1702751652849/digitallabs_tm_logo?e=1756339200&v=beta&t=aeMk2PmSBhlBUrvH_vRoFRv1QH5slDxRreVXcdBCc-8',
+    alt: 'DigitalLabs TM',
+    linkedinUrl: 'https://www.linkedin.com/company/digitallabs-tm',
+  },
+  {
+    name: 'Osmoz Communication',
+    src: 'https://media.licdn.com/dms/image/v2/D4E0BAQEwHImsKekvXg/company-logo_100_100/company-logo_100_100/0/1688559799403/osmoz_com_logo?e=1756339200&v=beta&t=lsxLljsjhbMXOfA9ju5owGZg_XaSbxOUsPdOI_fcX3Q',
+    alt: 'Osmoz Communication',
+    linkedinUrl: 'https://www.linkedin.com/company/osmoz-com',
+  },
+  {
+    name: 'ComeUp',
+    src: 'https://media.licdn.com/dms/image/v2/D4E0BAQHyLoDZ2hcMew/company-logo_100_100/company-logo_100_100/0/1666615300523/5euros_com_logo?e=1756339200&v=beta&t=Z3hs9K1GME9bOIWB8bDNKQSgqW5gzp-1-P1hHfqEgdo',
+    alt: 'ComeUp',
+    linkedinUrl: 'https://www.linkedin.com/company/bycomeup/',
   },
 ];
 
