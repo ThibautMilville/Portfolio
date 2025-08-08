@@ -11,12 +11,8 @@ import { getProjectById, getRelatedExperience, getRelatedFormations } from '@/li
 import { notFound } from 'next/navigation';
 import ProjectGallery from '@/components/ui/project-gallery';
 import LightParticles from '@/components/ui/light-particles';
-
-interface ProjectPageProps {
-  params: {
-    id: string;
-  };
-}
+import ProjectTimeline from '@/components/ProjectTimeline';
+import { useParams } from 'next/navigation';
 
 const getStatusIcon = (status: string) => {
   switch (status) {
@@ -44,9 +40,10 @@ const getStatusColor = (status: string) => {
   }
 };
 
-export default function ProjectPage({ params }: ProjectPageProps) {
-  const unwrappedParams = React.use(params);
-  const project = getProjectById(parseInt(unwrappedParams.id));
+export default function ProjectPage() {
+  const params = useParams<{ id: string }>();
+  const projectId = params?.id ? parseInt(params.id) : NaN;
+  const project = getProjectById(projectId);
   
   if (!project) {
     notFound();
@@ -111,7 +108,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                     <Button variant="outline" asChild className="flex-1">
                       <a href={project.demo} target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="mr-2 h-4 w-4" />
-                        Voir la demo
+                        {['Showcase','E-commerce','Corporate'].includes(project.category) ? 'Voir le site' : 'Voir la démo'}
                       </a>
                     </Button>
                   )}
@@ -129,6 +126,14 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                     {project.longDescription}
                   </p>
                 </div>
+
+                {/* Périodes de travail (timeline) */}
+                {project.periods && project.periods.length > 1 && (
+                  <div>
+                    <h3 className="text-lg font-semibold mb-3">Périodes de travail</h3>
+                    <ProjectTimeline periods={project.periods} />
+                  </div>
+                )}
 
                 {/* Métadonnées */}
                 <div className="grid grid-cols-2 gap-4">

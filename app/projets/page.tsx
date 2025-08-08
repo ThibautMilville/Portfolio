@@ -8,12 +8,142 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getAllProjects } from '@/lib/data';
+import ProjectFilters, { ProjectFilterState } from '@/components/ProjectFilters';
+import { useMemo, useState, useEffect } from 'react';
 import LightParticles from '@/components/ui/light-particles';
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
 
 // Récupérer les projets depuis le fichier de données partagé
 const projets = getAllProjects();
 
 export default function Projets() {
+  const [filters, setFilters] = useState<ProjectFilterState>({
+    search: '',
+    organization: 'all',
+    techs: [],
+    years: [],
+    status: 'all',
+    category: 'all',
+  });
+
+  const organizations = useMemo(() => {
+    // Dérive depuis experiences liées + mots-clés dans category
+    const orgs = new Set<string>();
+    projets.forEach((p) => {
+      // Heuristique simple: mappe quelques IDs connus
+      if (p.relatedExperienceId) {
+        if ([1,2].includes(p.relatedExperienceId)) orgs.add('SNCF Voyageurs');
+        if ([8].includes(p.relatedExperienceId)) orgs.add('Ultra Times');
+      }
+    });
+    return Array.from(orgs);
+  }, []);
+
+  const technologies = useMemo(() => {
+    const set = new Set<string>();
+    projets.forEach((p) => p.technologies.forEach((t) => set.add(t)));
+    return Array.from(set).sort();
+  }, []);
+
+  const years = useMemo(() => {
+    const set = new Set<string>();
+    projets.forEach((p) => {
+      const match = p.date.match(/\d{4}/g);
+      if (match) match.forEach((y) => set.add(y));
+    });
+    return Array.from(set).sort().reverse();
+  }, []);
+
+  const categories = useMemo(() => {
+    const set = new Set<string>();
+    projets.forEach((p) => set.add(p.category));
+    return Array.from(set).sort();
+  }, []);
+
+  const filtered = useMemo(() => {
+    return projets.filter((p) => {
+      if (filters.search && !p.title.toLowerCase().includes(filters.search.toLowerCase())) return false;
+      if (filters.category !== 'all' && p.category !== filters.category) return false;
+      if (filters.status !== 'all' && p.status !== filters.status) return false;
+      if (filters.organization !== 'all') {
+        const orgByExp = p.relatedExperienceId && ([1,2].includes(p.relatedExperienceId) ? 'SNCF Voyageurs' : [8].includes(p.relatedExperienceId) ? 'Ultra Times' : undefined);
+        if (orgByExp !== filters.organization) return false;
+      }
+      if (filters.techs.length && !filters.techs.every((t) => p.technologies.includes(t))) return false;
+      if (filters.years.length) {
+        const inYears = filters.years.some((y) => p.date.includes(y));
+        if (!inYears) return false;
+      }
+      return true;
+    });
+  }, [filters]);
+
+  // Parse une date de début (commencement) à partir d'une chaîne libre en FR
+  const getProjectStartTs = (dateStr: string): number => {
+    const normalize = (s: string) =>
+      s
+        .toLowerCase()
+        .normalize('NFD')
+        // Retire les diacritiques sans utiliser les classes Unicode (compat ES5)
+        .replace(/[\u0300-\u036f]/g, '');
+
+    const monthMap: Record<string, number> = {
+      jan: 1, janvier: 1,
+      fev: 2, fevr: 2, fevrier: 2,
+      mar: 3, mars: 3,
+      avr: 4, avril: 4,
+      mai: 5,
+      jun: 6, juin: 6,
+      jul: 7, juil: 7, juillet: 7,
+      aou: 8, aout: 8,
+      sep: 9, sept: 9, septembre: 9,
+      oct: 10, octobre: 10,
+      nov: 11, novembre: 11,
+      dec: 12, decembre: 12,
+    };
+
+    const parts = dateStr.split(';').map((s) => s.trim());
+    const startCandidates: number[] = [];
+
+    for (const part of parts) {
+      const normalized = normalize(part);
+      // Cherche forme "mois année"
+      const monthYearMatch = normalized.match(/(janvier|fevrier|fevr|fev|jan|fev|mar|mars|avr|avril|mai|jun|juin|jul|juil|juillet|aou|aout|sep|sept|septembre|oct|octobre|nov|novembre|dec|decembre)\s+(\d{4})/);
+      if (monthYearMatch) {
+        const mKey = monthYearMatch[1];
+        const y = parseInt(monthYearMatch[2], 10);
+        const m = monthMap[mKey] || 1;
+        startCandidates.push(new Date(y, m - 1, 1).getTime());
+        continue;
+      }
+      // Sinon, prend juste l'année
+      const yearMatch = normalized.match(/(\d{4})/);
+      if (yearMatch) {
+        const y = parseInt(yearMatch[1], 10);
+        startCandidates.push(new Date(y, 0, 1).getTime());
+      }
+    }
+
+    if (!startCandidates.length) return 0;
+    // Positionnement basé sur la PREMIÈRE période (la plus ancienne)
+    return Math.min(...startCandidates);
+  };
+
+  const sorted = useMemo(() => {
+    return [...filtered].sort((a, b) => getProjectStartTs(b.date) - getProjectStartTs(a.date));
+  }, [filtered]);
+
+  const PER_PAGE = 18;
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filters]);
+
+  const totalPages = Math.max(1, Math.ceil(sorted.length / PER_PAGE));
+  const startIndex = (currentPage - 1) * PER_PAGE;
+  const pageItems = sorted.slice(startIndex, startIndex + PER_PAGE);
+
   return (
     <div className="py-20 px-6 relative">
       <LightParticles />
@@ -52,13 +182,33 @@ export default function Projets() {
           </p>
         </motion.div>
 
+        <ProjectFilters
+          value={filters}
+          onChange={setFilters}
+          organizations={organizations}
+          technologies={technologies}
+          years={years}
+          categories={categories}
+        />
+
+        <div className="text-sm text-muted-foreground mb-4">
+          {sorted.length > 0 ? (
+            <span>
+              Affichage {startIndex + 1}
+              –{Math.min(startIndex + PER_PAGE, sorted.length)} sur {sorted.length} projets
+            </span>
+          ) : (
+            <span>Aucun projet ne correspond à ces filtres.</span>
+          )}
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projets.map((projet, index) => (
+          {pageItems.map((projet, index) => (
             <motion.div
               key={projet.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
+              transition={{ duration: 0.8, delay: index * 0.06 }}
               id={projet.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
             >
               <Link href={`/projets/${projet.id}`}>
@@ -145,11 +295,12 @@ export default function Projets() {
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
+                            if (!projet.demo) return;
                             window.open(projet.demo, '_blank');
                           }}
                         >
                           <ExternalLink className="mr-2 h-4 w-4" />
-                          Demo
+                          {['Showcase','E-commerce','Corporate'].includes(projet.category) ? 'Voir le site' : 'Demo'}
                         </Button>
                       )}
                     </div>
@@ -159,6 +310,51 @@ export default function Projets() {
             </motion.div>
           ))}
         </div>
+
+        {totalPages > 1 && (
+          <div className="mt-10">
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setCurrentPage((p) => Math.max(1, p - 1));
+                    }}
+                    className={currentPage === 1 ? 'pointer-events-none opacity-50' : ''}
+                  />
+                </PaginationItem>
+
+                {Array.from({ length: totalPages }).map((_, i) => (
+                  <PaginationItem key={i}>
+                    <PaginationLink
+                      href="#"
+                      isActive={currentPage === i + 1}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setCurrentPage(i + 1);
+                      }}
+                    >
+                      {i + 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+
+                <PaginationItem>
+                  <PaginationNext
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setCurrentPage((p) => Math.min(totalPages, p + 1));
+                    }}
+                    className={currentPage === totalPages ? 'pointer-events-none opacity-50' : ''}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
+        )}
 
         {/* Project Stats */}
         <motion.div

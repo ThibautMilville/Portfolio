@@ -15,7 +15,7 @@ interface Project {
   date: string;
   status: string;
   github: string;
-  demo?: string;
+  demo: string | null;
   category: string;
   role?: string;
   duration?: string;
@@ -201,6 +201,7 @@ export default function ProjectCarousel({ projects }: ProjectCarouselProps) {
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
+                          if (!project.demo) return;
                           window.open(project.demo, '_blank');
                         }}
                       >

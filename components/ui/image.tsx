@@ -29,7 +29,7 @@ export const Image: React.FC<ImageProps> = ({
 };
 
 // Composant spécialisé pour les images du dossier @images/
-export const LocalImage: React.FC<Omit<ImageProps, 'useAlias'> & { imageName: string }> = ({ 
+export const LocalImage: React.FC<Omit<ImageProps, 'useAlias' | 'src'> & { imageName: string }> = ({ 
   imageName, 
   alt, 
   className,

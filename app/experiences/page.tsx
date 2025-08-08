@@ -30,7 +30,8 @@ export default function Experiences() {
           // Attendre que le DOM soit complètement chargé et que les animations soient terminées
           const scrollToElement = () => {
             const offset = 120; // Décalage pour la navigation fixe
-            const elementTop = element.offsetTop;
+            const rect = element.getBoundingClientRect();
+            const elementTop = rect.top + window.scrollY;
             const scrollPosition = elementTop - offset;
             
             window.scrollTo({
