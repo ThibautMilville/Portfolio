@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Code2, Star, Palette, Server, Database, Tools } from 'lucide-react';
+import { Code2, Star, Palette, Server, Database, Wrench } from 'lucide-react';
 import LightParticles from '@/components/ui/light-particles';
 
 const skills = [

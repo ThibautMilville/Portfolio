@@ -6,18 +6,9 @@ import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import LightParticles from '@/components/ui/light-particles';
 import { ArrowRight } from 'lucide-react';
+import type { Project } from '@/lib/data';
 
 const ProjectCarousel = dynamic(() => import('@/components/ui/project-carousel'), { ssr: false });
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  technologies: string[];
-  demo: string | null;
-  github: string;
-}
 
 interface ProjectsSectionProps {
   projects: Project[];
