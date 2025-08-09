@@ -34,6 +34,7 @@ export default function Projets() {
       if (p.relatedExperienceId) {
         if ([1,2].includes(p.relatedExperienceId)) orgs.add('SNCF Voyageurs');
         if ([8].includes(p.relatedExperienceId)) orgs.add('Ultra Times');
+        if ([3].includes(p.relatedExperienceId)) orgs.add('DigitalLabs TM');
       }
     });
     return Array.from(orgs);
@@ -66,7 +67,12 @@ export default function Projets() {
       if (filters.category !== 'all' && p.category !== filters.category) return false;
       if (filters.status !== 'all' && p.status !== filters.status) return false;
       if (filters.organization !== 'all') {
-        const orgByExp = p.relatedExperienceId && ([1,2].includes(p.relatedExperienceId) ? 'SNCF Voyageurs' : [8].includes(p.relatedExperienceId) ? 'Ultra Times' : undefined);
+        const orgByExp = p.relatedExperienceId && (
+          [1,2].includes(p.relatedExperienceId) ? 'SNCF Voyageurs' :
+          [8].includes(p.relatedExperienceId) ? 'Ultra Times' :
+          [3].includes(p.relatedExperienceId) ? 'DigitalLabs TM' :
+          undefined
+        );
         if (orgByExp !== filters.organization) return false;
       }
       if (filters.techs.length && !filters.techs.every((t) => p.technologies.includes(t))) return false;
@@ -136,8 +142,42 @@ export default function Projets() {
   const PER_PAGE = 18;
   const [currentPage, setCurrentPage] = useState(1);
 
+  const scrollToTop = () => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    scrollToTop();
+  };
+
+  // Restaurer/sauvegarder la page via sessionStorage (pas d'URL)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const stored = sessionStorage.getItem('projetsPage');
+        const pageFromStorage = stored ? parseInt(stored, 10) : 1;
+        if (!Number.isNaN(pageFromStorage) && pageFromStorage > 0) {
+          setCurrentPage(pageFromStorage);
+        }
+      } catch {}
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try { sessionStorage.setItem('projetsPage', String(currentPage)); } catch {}
+    }
+  }, [currentPage]);
+
   useEffect(() => {
     setCurrentPage(1);
+    if (typeof window !== 'undefined') {
+      try { sessionStorage.setItem('projetsPage', '1'); } catch {}
+    }
+    scrollToTop();
   }, [filters]);
 
   const totalPages = Math.max(1, Math.ceil(sorted.length / PER_PAGE));
@@ -211,8 +251,15 @@ export default function Projets() {
               transition={{ duration: 0.8, delay: index * 0.06 }}
               id={projet.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
             >
-              <Link href={`/projets/${projet.id}`}>
-                <Card className="h-full hover:shadow-xl transition-all duration-300 group cursor-pointer">
+              <Link
+                href={`/projets/${projet.id}`}
+                onClick={() => {
+                  if (typeof window !== 'undefined') {
+                    try { sessionStorage.setItem('projetsPage', String(currentPage)); } catch {}
+                  }
+                }}
+              >
+                <Card className="h-full min-h-[560px] hover:shadow-xl transition-all duration-300 group cursor-pointer flex flex-col">
                   <div className="relative overflow-hidden rounded-t-lg">
                     <Image
                       src={projet.image}
@@ -227,7 +274,12 @@ export default function Projets() {
                       </Badge>
                     </div>
                     <div className="absolute top-4 right-4">
-                      <Badge variant="outline">{projet.category}</Badge>
+                      <Badge
+                        variant="secondary"
+                        className="bg-background/80 text-foreground border border-border/50 backdrop-blur px-2 py-1"
+                      >
+                        {projet.category}
+                      </Badge>
                     </div>
                     {/* Overlay avec icône */}
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
@@ -235,27 +287,27 @@ export default function Projets() {
                     </div>
                   </div>
 
-                  <CardHeader>
+                  <CardHeader className="flex-0 min-h-[132px]">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <CardTitle className="text-lg mb-2 group-hover:text-primary transition-colors">{projet.title}</CardTitle>
+                        <CardTitle className="text-lg mb-2 group-hover:text-primary transition-colors line-clamp-1 min-h-[28px]">{projet.title}</CardTitle>
                         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                           <Calendar className="h-4 w-4" />
                           {projet.date}
                         </div>
                       </div>
                     </div>
-                    <CardDescription className="text-sm leading-relaxed">
+                    <CardDescription className="text-sm leading-relaxed line-clamp-3 min-h-[66px] max-h-[66px] overflow-hidden">
                       {projet.description}
                     </CardDescription>
                   </CardHeader>
 
-                  <CardContent className="space-y-4">
-                    <div>
+                  <CardContent className="space-y-4 flex flex-col flex-1">
+                    <div className="min-h-[66px] max-h-[66px] overflow-hidden">
                       <h4 className="font-semibold text-sm mb-2">Fonctionnalités clés :</h4>
                       <ul className="space-y-1">
                         {projet.features.slice(0, 3).map((feature, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-xs text-muted-foreground">
+                          <li key={idx} className="flex items-start gap-2 text-xs text-muted-foreground truncate">
                             <Star className="h-3 w-3 mt-0.5 flex-shrink-0 text-primary" />
                             {feature}
                           </li>
@@ -263,18 +315,21 @@ export default function Projets() {
                       </ul>
                     </div>
                     
-                    <div>
+                    <div className="min-h-[56px] max-h-[56px] overflow-hidden">
                       <h4 className="font-semibold text-sm mb-2">Technologies :</h4>
-                      <div className="flex flex-wrap gap-1">
-                        {projet.technologies.map((tech) => (
-                          <Badge key={tech} variant="outline" className="text-xs">
+                      <div className="flex flex-nowrap items-center gap-1 overflow-hidden min-w-0">
+                        {projet.technologies.slice(0, 4).map((tech) => (
+                          <Badge key={tech} variant="outline" className="text-xs whitespace-nowrap">
                             {tech}
                           </Badge>
                         ))}
+                        {projet.technologies.length > 4 && (
+                          <Badge variant="outline" className="text-xs whitespace-nowrap">+{projet.technologies.length - 4}</Badge>
+                        )}
                       </div>
                     </div>
 
-                    <div className="flex gap-2 pt-2">
+                    <div className="mt-auto pt-4 flex gap-2">
                       <Button 
                         variant="outline" 
                         size="sm" 
@@ -320,7 +375,11 @@ export default function Projets() {
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
-                      setCurrentPage((p) => Math.max(1, p - 1));
+                      setCurrentPage((p) => {
+                        const next = Math.max(1, p - 1);
+                        if (next !== p) scrollToTop();
+                        return next;
+                      });
                     }}
                     className={currentPage === 1 ? 'pointer-events-none opacity-50' : ''}
                   />
@@ -333,7 +392,7 @@ export default function Projets() {
                       isActive={currentPage === i + 1}
                       onClick={(e) => {
                         e.preventDefault();
-                        setCurrentPage(i + 1);
+                        handlePageChange(i + 1);
                       }}
                     >
                       {i + 1}
@@ -346,7 +405,11 @@ export default function Projets() {
                     href="#"
                     onClick={(e) => {
                       e.preventDefault();
-                      setCurrentPage((p) => Math.min(totalPages, p + 1));
+                      setCurrentPage((p) => {
+                        const next = Math.min(totalPages, p + 1);
+                        if (next !== p) scrollToTop();
+                        return next;
+                      });
                     }}
                     className={currentPage === totalPages ? 'pointer-events-none opacity-50' : ''}
                   />
