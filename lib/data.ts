@@ -330,8 +330,8 @@ export const projects: Project[] = [
     longDescription: "Refonte complète de l'application RH pour simplifier et automatiser les tâches liées à l'arrivée d'un collaborateur (quel que soit son statut). Gains significatifs en productivité et efficacité pour l'équipe RH.",
     image: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800",
     technologies: ["React", "NestJS", "Git", "GitLab", "Agile"],
-    date: "Nov 2024 - Présent",
-    status: "En cours",
+    date: "Nov 2024 - Août 2025",
+    status: "Terminé",
     github: "https://github.com/ThibautMilville",
     demo: null,
     category: "Business",
@@ -356,7 +356,7 @@ export const projects: Project[] = [
       "Connecteurs GLPI et validations",
       "RBAC granulaire côté API et UI"
     ],
-    duration: "En cours",
+    duration: "10 mois",
     role: "Full Stack Developer"
   },
   {

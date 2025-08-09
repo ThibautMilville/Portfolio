@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Github, ExternalLink, Calendar, Star, ArrowRight } from 'lucide-react';
+import { Github, ExternalLink, Calendar, Star, ArrowRight, FolderClosed, Rocket, Layers, Hourglass } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -61,9 +61,24 @@ export default function Projets() {
     return Array.from(set).sort();
   }, []);
 
+  const totalProjects = projets.length;
+  const web3Count = useMemo(() => projets.filter((p) => p.category === 'Web3').length, []);
+
   const filtered = useMemo(() => {
     return projets.filter((p) => {
-      if (filters.search && !p.title.toLowerCase().includes(filters.search.toLowerCase())) return false;
+      if (filters.search) {
+        const q = filters.search.toLowerCase();
+        const hay = [
+          p.title,
+          p.description,
+          p.category,
+          ...(p.technologies || []),
+        ]
+          .filter(Boolean)
+          .join(' ')
+          .toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
       if (filters.category !== 'all' && p.category !== filters.category) return false;
       if (filters.status !== 'all' && p.status !== filters.status) return false;
       if (filters.organization !== 'all') {
@@ -75,7 +90,8 @@ export default function Projets() {
         );
         if (orgByExp !== filters.organization) return false;
       }
-      if (filters.techs.length && !filters.techs.every((t) => p.technologies.includes(t))) return false;
+      // OR logic: projet retenu si AU MOINS une techno sélectionnée est présente
+      if (filters.techs.length && !filters.techs.some((t) => p.technologies.includes(t))) return false;
       if (filters.years.length) {
         const inYears = filters.years.some((y) => p.date.includes(y));
         if (!inYears) return false;
@@ -426,22 +442,42 @@ export default function Projets() {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="mt-16"
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center p-6 rounded-2xl border bg-card">
-              <div className="text-2xl font-bold text-primary mb-1">50+</div>
-              <div className="text-sm text-muted-foreground">Projets réalisés</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="p-8 md:p-10 rounded-3xl border bg-gradient-to-br from-card to-background/60 shadow-md min-h-[160px] flex flex-col justify-center">
+              <div className="flex items-center gap-4 mb-3">
+                <div className="p-2 rounded-lg bg-primary/10 text-primary">
+                  <FolderClosed className="h-6 w-6" />
+                </div>
+                <div className="text-3xl md:text-4xl font-extrabold text-primary">+25</div>
+              </div>
+              <div className="text-sm text-muted-foreground">Projets</div>
             </div>
-            <div className="text-center p-6 rounded-2xl border bg-card">
-              <div className="text-2xl font-bold text-primary mb-1">20+</div>
+            <div className="p-8 md:p-10 rounded-3xl border bg-gradient-to-br from-card to-background/60 shadow-md min-h-[160px] flex flex-col justify-center">
+              <div className="flex items-center gap-4 mb-3">
+                <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500">
+                  <Rocket className="h-6 w-6" />
+                </div>
+                <div className="text-3xl md:text-4xl font-extrabold text-blue-500">{web3Count}</div>
+              </div>
+              <div className="text-sm text-muted-foreground">Projets Web3</div>
+            </div>
+            <div className="p-8 md:p-10 rounded-3xl border bg-gradient-to-br from-card to-background/60 shadow-md min-h-[160px] flex flex-col justify-center">
+              <div className="flex items-center gap-4 mb-3">
+                <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-600">
+                  <Layers className="h-6 w-6" />
+                </div>
+                <div className="text-3xl md:text-4xl font-extrabold text-emerald-600">+30</div>
+              </div>
               <div className="text-sm text-muted-foreground">Technologies maîtrisées</div>
             </div>
-            <div className="text-center p-6 rounded-2xl border bg-card">
-              <div className="text-2xl font-bold text-primary mb-1">15+</div>
-              <div className="text-sm text-muted-foreground">APIs développées</div>
-            </div>
-            <div className="text-center p-6 rounded-2xl border bg-card">
-              <div className="text-2xl font-bold text-primary mb-1">100%</div>
-              <div className="text-sm text-muted-foreground">Projets livrés</div>
+            <div className="p-8 md:p-10 rounded-3xl border bg-gradient-to-br from-card to-background/60 shadow-md min-h-[160px] flex flex-col justify-center">
+              <div className="flex items-center gap-4 mb-3">
+                <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600">
+                  <Hourglass className="h-6 w-6" />
+                </div>
+                <div className="text-3xl md:text-4xl font-extrabold text-orange-600">6+</div>
+              </div>
+              <div className="text-sm text-muted-foreground">Années d'expérience</div>
             </div>
           </div>
         </motion.div>
