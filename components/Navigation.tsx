@@ -6,21 +6,20 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Home, GraduationCap, Briefcase, Code2, Mail, Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
 import { LocalImage } from '@/components/ui/image';
 
-const navigationItems = [
-  { href: '/', label: 'Accueil', icon: Home },
-  { href: '/formations', label: 'Formations', icon: GraduationCap },
-  { href: '/experiences', label: 'Expériences', icon: Briefcase },
-  { href: '/projets', label: 'Projets', icon: Code2 },
-  { href: '/contact', label: 'Contact', icon: Mail },
-];
+const messages = {
+  fr: { home: 'Accueil', formations: 'Formations', experiences: 'Expériences', projects: 'Projets', contact: 'Contact' },
+  en: { home: 'Home', formations: 'Education', experiences: 'Experience', projects: 'Projects', contact: 'Contact' },
+} as const;
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [locale, setLocale] = useState<'fr' | 'en'>('en');
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
 
@@ -31,6 +30,14 @@ export default function Navigation() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('locale');
+      if (stored === 'fr' || stored === 'en') setLocale(stored);
+      else setLocale((navigator.language || 'en').toLowerCase().startsWith('fr') ? 'fr' : 'en');
+    } catch {}
   }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -49,12 +56,13 @@ export default function Navigation() {
         )}
       >
         <nav className="max-w-6xl mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
+          <div className="grid grid-cols-[auto,1fr,auto] items-center">
             {/* Logo */}
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+              className="justify-self-start"
             >
               <Link href="/" className="flex items-center">
                 <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105">
@@ -67,14 +75,20 @@ export default function Navigation() {
               </Link>
             </motion.div>
 
-            {/* Desktop Navigation */}
+            {/* Desktop Navigation (grid centered) */}
             <motion.div 
-              className="hidden md:flex items-center space-x-8"
+              className="hidden md:flex items-center space-x-8 justify-self-center"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
             >
-              {navigationItems.map((item, index) => {
+              {[
+                { href: '/', label: messages[locale].home, icon: Home },
+                { href: '/formations', label: messages[locale].formations, icon: GraduationCap },
+                { href: '/experiences', label: messages[locale].experiences, icon: Briefcase },
+                { href: '/projets', label: messages[locale].projects, icon: Code2 },
+                { href: '/contact', label: messages[locale].contact, icon: Mail },
+              ].map((item, index) => {
                 const Icon = item.icon;
                 const isActive = pathname === item.href;
                 return (
@@ -107,13 +121,33 @@ export default function Navigation() {
               })}
             </motion.div>
 
-            {/* Theme Toggle & Mobile Menu */}
+            {/* Language & Theme & Mobile Menu */}
             <motion.div 
-              className="flex items-center gap-4"
+              className="flex items-center gap-4 justify-self-end"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
             >
+              {/* Language Switcher (desktop) */}
+              <div className="hidden md:block">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" className="h-9 w-[72px] rounded-full px-3 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none">
+                      <span className="mr-2">{locale === 'fr' ? '🇫🇷' : '🇬🇧'}</span>
+                      <span className="text-xs font-medium">{locale.toUpperCase()}</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="center" sideOffset={6} className="w-fit min-w-[96px] text-center">
+                    <DropdownMenuItem className="justify-center" onClick={() => { setLocale('fr'); try { localStorage.setItem('locale','fr'); } catch {}; try { (document.activeElement as HTMLElement)?.blur?.(); } catch {} }}>
+                      <span className="mr-2">🇫🇷</span> <span>Français</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="justify-center" onClick={() => { setLocale('en'); try { localStorage.setItem('locale','en'); } catch {}; try { (document.activeElement as HTMLElement)?.blur?.(); } catch {} }}>
+                      <span className="mr-2">🇬🇧</span> <span>English</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+
               <Button
                 variant="ghost"
                 size="icon"
@@ -148,7 +182,13 @@ export default function Navigation() {
               className="md:hidden bg-background border-t"
             >
               <div className="px-6 py-4 space-y-2">
-                {navigationItems.map((item) => {
+                {[
+                  { href: '/', label: messages[locale].home, icon: Home },
+                  { href: '/formations', label: messages[locale].formations, icon: GraduationCap },
+                  { href: '/experiences', label: messages[locale].experiences, icon: Briefcase },
+                  { href: '/projets', label: messages[locale].projects, icon: Code2 },
+                  { href: '/contact', label: messages[locale].contact, icon: Mail },
+                ].map((item) => {
                   const Icon = item.icon;
                   const isActive = pathname === item.href;
                   return (
