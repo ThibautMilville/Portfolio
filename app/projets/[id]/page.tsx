@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Github, ExternalLink, Calendar, Users, Clock, CheckCircle, AlertCircle, Pause, ChevronLeft, ChevronRight, GraduationCap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -59,7 +59,7 @@ export default function ProjectPage() {
       <div className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 relative z-10">
         <div className="container mx-auto px-6 py-4">
           <Button variant="ghost" asChild className="mb-4">
-            <Link href="/projets">
+            <Link href={`/projets${(typeof window !== 'undefined' && window.sessionStorage.getItem('projetsPage')) ? `?page=${window.sessionStorage.getItem('projetsPage')}` : ''}`}>
               <ArrowLeft className="mr-2 h-4 w-4" />
               Retour aux projets
             </Link>
