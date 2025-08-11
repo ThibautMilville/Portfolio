@@ -143,7 +143,7 @@ export const experiences: Experience[] = [
     ],
     projectIds: [],
     relatedFormationIds: [1, 2, 3],
-    logoUrl: "https://media.licdn.com/dms/image/v2/D4E0BAQEnrMai8iubKQ/company-logo_100_100/company-logo_100_100/0/1702751652849/digitallabs_tm_logo?e=1756339200&v=beta&t=aeMk2PmSBhlBUrvH_vRoFRv1QH5slDxRreVXcdBCc-8"
+    logoUrl: "/images/company/digitallabs_tm_logo.jpeg"
   },
   {
     id: 2,
@@ -179,7 +179,7 @@ export const experiences: Experience[] = [
     ],
     projectIds: [],
     relatedFormationIds: [3],
-    logoUrl: "https://media.licdn.com/dms/image/v2/D4E0BAQEwHImsKekvXg/company-logo_100_100/company-logo_100_100/0/1688559799403/osmoz_com_logo?e=1756339200&v=beta&t=lsxLljsjhbMXOfA9ju5owGZg_XaSbxOUsPdOI_fcX3Q"
+    logoUrl: "/images/company/osmoz_com_logo.jpeg"
   },
   {
     id: 5,
@@ -200,7 +200,7 @@ export const experiences: Experience[] = [
     ],
     projectIds: [],
     relatedFormationIds: [3],
-    logoUrl: "https://media.licdn.com/dms/image/v2/D4E0BAQHyLoDZ2hcMew/company-logo_100_100/company-logo_100_100/0/1666615300523/5euros_com_logo?e=1756339200&v=beta&t=Z3hs9K1GME9bOIWB8bDNKQSgqW5gzp-1-P1hHfqEgdo"
+    logoUrl: "/images/company/comeup_logo.jpeg"
   }
 ];
 
@@ -320,7 +320,7 @@ export const projects: Project[] = [
       "Pipelines d'agrégation et vues statistiques"
     ],
     duration: "2 mois",
-    teamSize: 3,
+    teamSize: 1,
     role: "Full Stack Web3 Developer"
   },
   {
@@ -401,7 +401,7 @@ export const projects: Project[] = [
     date: "Fév 2025",
     status: "Terminé",
     github: "https://github.com/ThibautMilville",
-    demo: null,
+    demo: "https://ultra-meetup.vercel.app/",
     category: "Frontend",
     relatedExperienceId: 8,
     features: ["Liste d'évènements", "Pages dédiées", "Design responsive"],
@@ -773,7 +773,7 @@ export const projects: Project[] = [
     date: "Mai 2025 - Juin 2025",
     status: "Terminé",
     github: "https://github.com/ThibautMilville",
-    demo: null,
+    demo: "https://ultra-quest.vercel.app/fr/",
     category: "Web3",
     relatedExperienceId: 8,
     screenshots: [
@@ -814,7 +814,7 @@ export const projects: Project[] = [
     date: "Juil 2025 - Juil 2025",
     status: "Terminé",
     github: "https://github.com/ThibautMilville",
-    demo: null,
+    demo: "https://ozc-web.fr/",
     category: "Showcase",
     relatedExperienceId: 3,
     features: [
@@ -851,7 +851,7 @@ export const projects: Project[] = [
     date: "Avr 2025 - Juin 2025",
     status: "Terminé",
     github: "https://github.com/ThibautMilville",
-    demo: null,
+    demo: "https://launchpad-2ycml.ondigitalocean.app/",
     category: "Web3",
     relatedExperienceId: 8,
     relatedFormationIds: [3],
@@ -895,7 +895,7 @@ export const projects: Project[] = [
     date: "Mai 2025 - Juin 2025",
     status: "Terminé",
     github: "https://github.com/ThibautMilville",
-    demo: null,
+    demo: "https://ut-snapshot.vercel.app/",
     category: "Web3",
     relatedExperienceId: 8,
     relatedFormationIds: [3],
@@ -938,7 +938,7 @@ export const projects: Project[] = [
     date: "Mai 2025 - Juin 2025",
     status: "Terminé",
     github: "https://github.com/ThibautMilville",
-    demo: null,
+    demo: "https://we-need-u.vercel.app/",
     category: "Web3",
     relatedExperienceId: 8,
     relatedFormationIds: [3],
