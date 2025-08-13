@@ -9,6 +9,7 @@ import CompanyLogosSection from '@/components/CompanyLogosSection';
 import ObjectivesSection from '@/components/ObjectivesSection';
 import SkillsSection from '@/components/SkillsSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
+import ContactSection from '@/components/ContactSection';
 
 // Récupérer tous les projets
 const allProjects = getAllProjects();
@@ -68,6 +69,7 @@ export default function Home() {
       <ObjectivesSection />
       <CompanyLogosSection logos={companyLogos} />
       <TestimonialsSection />
+      <ContactSection />
     </div>
   );
 }

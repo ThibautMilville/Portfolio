@@ -6,31 +6,17 @@ import LightParticles from '@/components/ui/light-particles';
 
 const testimonials = [
   {
-    name: "Jean Dupont",
-    role: "Directeur Technique",
-    company: "TechCorp",
-    content: "Thibaut a une excellente maîtrise des technologies modernes et une capacité d'apprentissage remarquable. Ses solutions sont toujours innovantes et bien structurées.",
+    name: "Cédric Lemaire",
+    role: "Responsable de production",
+    company: "OSMOZ COMMUNICATION",
+    content: "Je me permets d'écrire ces quelques lignes pour recommander chaleureusement Thibaut, qui a travaillé en alternance dans notre société pendant 2 ans. Durant son contrat, Thibaut a démontré une grande capacité d'adaptation et un engagement sans faille. Il a su faire preuve d'une grande autonomie tout en étant un membre actif de notre équipe. Son sens de l'initiative et sa capacité à résoudre les problèmes ont été particulièrement appréciés. Sa sociabilité et son empathie, fait de Thibaut un atout pour une équipe.",
     rating: 5
   },
   {
-    name: "Marie Martin",
-    role: "Product Manager",
-    company: "InnovSoft",
-    content: "Travailler avec Thibaut a été un plaisir. Il comprend rapidement les besoins et propose des solutions techniques de qualité. Très professionnel et fiable.",
-    rating: 5
-  },
-  {
-    name: "Pierre Durand",
-    role: "Lead Developer",
-    company: "WebSolutions",
-    content: "Thibaut excelle dans le développement React et Next.js. Son code est propre, maintenable et ses performances sont excellentes. Un développeur de talent.",
-    rating: 5
-  },
-  {
-    name: "Sophie Bernard",
-    role: "CEO",
-    company: "StartupXYZ",
-    content: "Thibaut a transformé notre vision en réalité. Son expertise technique et sa créativité ont été essentielles pour le succès de notre projet.",
+    name: "Jean-Claude Ravineau",
+    role: "Fondateur et dirigeant",
+    company: "Manage Transport",
+    content: "Thibaut a parfaitement compris mes attentes dans la création de mon site internet professionnel. Il fait preuve d'écoute et d'adaptabilité à un métier qu'il ne connaissait pas. Un plaisir d'avoir collaboré avec lui, je vous le recommande sans hésitation.",
     rating: 5
   }
 ];
@@ -98,31 +84,7 @@ export default function TestimonialsSection() {
           ))}
         </div>
 
-        {/* Stats with enhanced styling */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6"
-        >
-          <div className="text-center p-8 rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-card via-card to-primary/5 hover:border-primary/40 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-primary/10">
-            <div className="text-3xl font-bold text-primary mb-2">{testimonials.length}</div>
-            <div className="text-sm text-muted-foreground font-medium">Témoignages</div>
-          </div>
-          <div className="text-center p-8 rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-card via-card to-primary/5 hover:border-primary/40 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-primary/10">
-            <div className="text-3xl font-bold text-primary mb-2">100%</div>
-            <div className="text-sm text-muted-foreground font-medium">Satisfaction</div>
-          </div>
-          <div className="text-center p-8 rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-card via-card to-primary/5 hover:border-primary/40 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-primary/10">
-            <div className="text-3xl font-bold text-primary mb-2">5★</div>
-            <div className="text-sm text-muted-foreground font-medium">Note moyenne</div>
-          </div>
-          <div className="text-center p-8 rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-card via-card to-primary/5 hover:border-primary/40 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-primary/10">
-            <div className="text-3xl font-bold text-primary mb-2">50+</div>
-            <div className="text-sm text-muted-foreground font-medium">Projets réalisés</div>
-          </div>
-        </motion.div>
+
       </div>
     </section>
   );
