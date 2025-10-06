@@ -1,29 +1,54 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { Github, ExternalLink, Calendar, Star, ArrowRight, FolderClosed, Rocket, Layers, Hourglass } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import Image from 'next/image';
-import Link from 'next/link';
-import { getAllProjects } from '@/lib/data';
-import ProjectFilters, { ProjectFilterState } from '@/components/ProjectFilters';
-import { useMemo, useState, useEffect } from 'react';
-import LightParticles from '@/components/ui/light-particles';
-import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/components/ui/pagination';
+import { motion } from "framer-motion";
+import {
+  Github,
+  ExternalLink,
+  Calendar,
+  Star,
+  ArrowRight,
+  FolderClosed,
+  Rocket,
+  Layers,
+  Hourglass,
+} from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
+import { getAllProjects } from "@/lib/data";
+import ProjectFilters, {
+  ProjectFilterState,
+} from "@/components/ProjectFilters";
+import { useMemo, useState, useEffect } from "react";
+import LightParticles from "@/components/ui/light-particles";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 // Récupérer les projets depuis le fichier de données partagé
 const projets = getAllProjects();
 
 export default function Projets() {
   const [filters, setFilters] = useState<ProjectFilterState>({
-    search: '',
-    organization: 'all',
+    search: "",
+    organization: "all",
     techs: [],
     years: [],
-    status: 'all',
-    category: 'all',
+    status: "all",
+    category: "all",
   });
 
   const organizations = useMemo(() => {
@@ -32,9 +57,9 @@ export default function Projets() {
     projets.forEach((p) => {
       // Heuristique simple: mappe quelques IDs connus
       if (p.relatedExperienceId) {
-        if ([1,2].includes(p.relatedExperienceId)) orgs.add('SNCF Voyageurs');
-        if ([8].includes(p.relatedExperienceId)) orgs.add('Ultra Times');
-        if ([3].includes(p.relatedExperienceId)) orgs.add('DigitalLabs TM');
+        if ([1, 2].includes(p.relatedExperienceId)) orgs.add("SNCF Voyageurs");
+        if ([8].includes(p.relatedExperienceId)) orgs.add("Ultra Times");
+        if ([3].includes(p.relatedExperienceId)) orgs.add("DigitalLabs TM");
       }
     });
     return Array.from(orgs);
@@ -62,7 +87,10 @@ export default function Projets() {
   }, []);
 
   const totalProjects = projets.length;
-  const web3Count = useMemo(() => projets.filter((p) => p.category === 'Web3').length, []);
+  const web3Count = useMemo(
+    () => projets.filter((p) => p.category === "Web3").length,
+    []
+  );
 
   const filtered = useMemo(() => {
     return projets.filter((p) => {
@@ -75,23 +103,31 @@ export default function Projets() {
           ...(p.technologies || []),
         ]
           .filter(Boolean)
-          .join(' ')
+          .join(" ")
           .toLowerCase();
         if (!hay.includes(q)) return false;
       }
-      if (filters.category !== 'all' && p.category !== filters.category) return false;
-      if (filters.status !== 'all' && p.status !== filters.status) return false;
-      if (filters.organization !== 'all') {
-        const orgByExp = p.relatedExperienceId && (
-          [1,2].includes(p.relatedExperienceId) ? 'SNCF Voyageurs' :
-          [8].includes(p.relatedExperienceId) ? 'Ultra Times' :
-          [3].includes(p.relatedExperienceId) ? 'DigitalLabs TM' :
-          undefined
-        );
+      if (filters.category !== "all" && p.category !== filters.category)
+        return false;
+      if (filters.status !== "all" && p.status !== filters.status) return false;
+      if (filters.organization !== "all") {
+        const orgByExp =
+          p.relatedExperienceId &&
+          ([1, 2].includes(p.relatedExperienceId)
+            ? "SNCF Voyageurs"
+            : [8].includes(p.relatedExperienceId)
+            ? "Ultra Times"
+            : [3].includes(p.relatedExperienceId)
+            ? "DigitalLabs TM"
+            : undefined);
         if (orgByExp !== filters.organization) return false;
       }
       // OR logic: projet retenu si AU MOINS une techno sélectionnée est présente
-      if (filters.techs.length && !filters.techs.some((t) => p.technologies.includes(t))) return false;
+      if (
+        filters.techs.length &&
+        !filters.techs.some((t) => p.technologies.includes(t))
+      )
+        return false;
       if (filters.years.length) {
         const inYears = filters.years.some((y) => p.date.includes(y));
         if (!inYears) return false;
@@ -105,32 +141,48 @@ export default function Projets() {
     const normalize = (s: string) =>
       s
         .toLowerCase()
-        .normalize('NFD')
+        .normalize("NFD")
         // Retire les diacritiques sans utiliser les classes Unicode (compat ES5)
-        .replace(/[\u0300-\u036f]/g, '');
+        .replace(/[\u0300-\u036f]/g, "");
 
     const monthMap: Record<string, number> = {
-      jan: 1, janvier: 1,
-      fev: 2, fevr: 2, fevrier: 2,
-      mar: 3, mars: 3,
-      avr: 4, avril: 4,
+      jan: 1,
+      janvier: 1,
+      fev: 2,
+      fevr: 2,
+      fevrier: 2,
+      mar: 3,
+      mars: 3,
+      avr: 4,
+      avril: 4,
       mai: 5,
-      jun: 6, juin: 6,
-      jul: 7, juil: 7, juillet: 7,
-      aou: 8, aout: 8,
-      sep: 9, sept: 9, septembre: 9,
-      oct: 10, octobre: 10,
-      nov: 11, novembre: 11,
-      dec: 12, decembre: 12,
+      jun: 6,
+      juin: 6,
+      jul: 7,
+      juil: 7,
+      juillet: 7,
+      aou: 8,
+      aout: 8,
+      sep: 9,
+      sept: 9,
+      septembre: 9,
+      oct: 10,
+      octobre: 10,
+      nov: 11,
+      novembre: 11,
+      dec: 12,
+      decembre: 12,
     };
 
-    const parts = dateStr.split(';').map((s) => s.trim());
+    const parts = dateStr.split(";").map((s) => s.trim());
     const startCandidates: number[] = [];
 
     for (const part of parts) {
       const normalized = normalize(part);
       // Cherche forme "mois année"
-      const monthYearMatch = normalized.match(/(janvier|fevrier|fevr|fev|jan|fev|mar|mars|avr|avril|mai|jun|juin|jul|juil|juillet|aou|aout|sep|sept|septembre|oct|octobre|nov|novembre|dec|decembre)\s+(\d{4})/);
+      const monthYearMatch = normalized.match(
+        /(janvier|fevrier|fevr|fev|jan|fev|mar|mars|avr|avril|mai|jun|juin|jul|juil|juillet|aou|aout|sep|sept|septembre|oct|octobre|nov|novembre|dec|decembre)\s+(\d{4})/
+      );
       if (monthYearMatch) {
         const mKey = monthYearMatch[1];
         const y = parseInt(monthYearMatch[2], 10);
@@ -152,15 +204,17 @@ export default function Projets() {
   };
 
   const sorted = useMemo(() => {
-    return [...filtered].sort((a, b) => getProjectStartTs(b.date) - getProjectStartTs(a.date));
+    return [...filtered].sort(
+      (a, b) => getProjectStartTs(b.date) - getProjectStartTs(a.date)
+    );
   }, [filtered]);
 
   const PER_PAGE = 18;
   const [currentPage, setCurrentPage] = useState(1);
 
   const scrollToTop = () => {
-    if (typeof window !== 'undefined') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -171,9 +225,9 @@ export default function Projets() {
 
   // Restaurer/sauvegarder la page via sessionStorage (pas d'URL)
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       try {
-        const stored = sessionStorage.getItem('projetsPage');
+        const stored = sessionStorage.getItem("projetsPage");
         const pageFromStorage = stored ? parseInt(stored, 10) : 1;
         if (!Number.isNaN(pageFromStorage) && pageFromStorage > 0) {
           setCurrentPage(pageFromStorage);
@@ -183,15 +237,19 @@ export default function Projets() {
   }, []);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      try { sessionStorage.setItem('projetsPage', String(currentPage)); } catch {}
+    if (typeof window !== "undefined") {
+      try {
+        sessionStorage.setItem("projetsPage", String(currentPage));
+      } catch {}
     }
   }, [currentPage]);
 
   useEffect(() => {
     setCurrentPage(1);
-    if (typeof window !== 'undefined') {
-      try { sessionStorage.setItem('projetsPage', '1'); } catch {}
+    if (typeof window !== "undefined") {
+      try {
+        sessionStorage.setItem("projetsPage", "1");
+      } catch {}
     }
     scrollToTop();
   }, [filters]);
@@ -201,7 +259,7 @@ export default function Projets() {
   const pageItems = sorted.slice(startIndex, startIndex + PER_PAGE);
 
   return (
-    <div className="py-20 px-6 relative">
+    <div className="py-6 md:py-8 px-6 relative">
       <LightParticles />
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
@@ -211,28 +269,32 @@ export default function Projets() {
           className="text-center mb-16"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Mes Projets</h1>
-          
-                     {/* Barre horizontale stylisée moderne et dynamique */}
-           <motion.div 
-             className="flex justify-center mb-6"
-             initial={{ opacity: 0, scaleX: 0 }}
-             animate={{ opacity: 1, scaleX: 1 }}
-             transition={{ duration: 0.8, delay: 0.3 }}
-           >
-             <motion.div 
-               className="h-1 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full shadow-lg"
-               style={{ width: 'min(80vw, 300px)' }}
-               animate={{
-                 width: ['min(80vw, 300px)', 'min(90vw, 400px)', 'min(80vw, 300px)'],
-               }}
-               transition={{
-                 duration: 4,
-                 repeat: Infinity,
-                 ease: "easeInOut",
-               }}
-             />
-           </motion.div>
-          
+
+          {/* Barre horizontale stylisée moderne et dynamique */}
+          <motion.div
+            className="flex justify-center mb-6"
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <motion.div
+              className="h-1 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full shadow-lg"
+              style={{ width: "min(80vw, 300px)" }}
+              animate={{
+                width: [
+                  "min(80vw, 300px)",
+                  "min(90vw, 400px)",
+                  "min(80vw, 300px)",
+                ],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </motion.div>
+
           <p className="text-lg text-muted-foreground">
             Une sélection de mes réalisations techniques les plus significatives
           </p>
@@ -250,8 +312,9 @@ export default function Projets() {
         <div className="text-sm text-muted-foreground mb-4">
           {sorted.length > 0 ? (
             <span>
-              Affichage {startIndex + 1}
-              –{Math.min(startIndex + PER_PAGE, sorted.length)} sur {sorted.length} projets
+              Affichage {startIndex + 1}–
+              {Math.min(startIndex + PER_PAGE, sorted.length)} sur{" "}
+              {sorted.length} projets
             </span>
           ) : (
             <span>Aucun projet ne correspond à ces filtres.</span>
@@ -265,13 +328,18 @@ export default function Projets() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.06 }}
-              id={projet.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
+              id={projet.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
             >
               <Link
                 href={`/projets/${projet.id}`}
                 onClick={() => {
-                  if (typeof window !== 'undefined') {
-                    try { sessionStorage.setItem('projetsPage', String(currentPage)); } catch {}
+                  if (typeof window !== "undefined") {
+                    try {
+                      sessionStorage.setItem(
+                        "projetsPage",
+                        String(currentPage)
+                      );
+                    } catch {}
                   }
                 }}
               >
@@ -285,7 +353,11 @@ export default function Projets() {
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute top-4 left-4">
-                      <Badge variant={projet.status === 'Terminé' ? 'default' : 'secondary'}>
+                      <Badge
+                        variant={
+                          projet.status === "Terminé" ? "default" : "secondary"
+                        }
+                      >
                         {projet.status}
                       </Badge>
                     </div>
@@ -306,7 +378,9 @@ export default function Projets() {
                   <CardHeader className="flex-0 min-h-[132px]">
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
-                        <CardTitle className="text-lg mb-2 group-hover:text-primary transition-colors line-clamp-1 min-h-[28px]">{projet.title}</CardTitle>
+                        <CardTitle className="text-lg mb-2 group-hover:text-primary transition-colors line-clamp-1 min-h-[28px]">
+                          {projet.title}
+                        </CardTitle>
                         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                           <Calendar className="h-4 w-4" />
                           {projet.date}
@@ -320,58 +394,78 @@ export default function Projets() {
 
                   <CardContent className="space-y-4 flex flex-col flex-1">
                     <div className="min-h-[66px] max-h-[66px] overflow-hidden">
-                      <h4 className="font-semibold text-sm mb-2">Fonctionnalités clés :</h4>
+                      <h4 className="font-semibold text-sm mb-2">
+                        Fonctionnalités clés :
+                      </h4>
                       <ul className="space-y-1">
                         {projet.features.slice(0, 3).map((feature, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-xs text-muted-foreground truncate">
+                          <li
+                            key={idx}
+                            className="flex items-start gap-2 text-xs text-muted-foreground truncate"
+                          >
                             <Star className="h-3 w-3 mt-0.5 flex-shrink-0 text-primary" />
                             {feature}
                           </li>
                         ))}
                       </ul>
                     </div>
-                    
+
                     <div className="min-h-[56px] max-h-[56px] overflow-hidden">
-                      <h4 className="font-semibold text-sm mb-2">Technologies :</h4>
+                      <h4 className="font-semibold text-sm mb-2">
+                        Technologies :
+                      </h4>
                       <div className="flex flex-nowrap items-center gap-1 overflow-hidden min-w-0">
                         {projet.technologies.slice(0, 4).map((tech) => (
-                          <Badge key={tech} variant="outline" className="text-xs whitespace-nowrap">
+                          <Badge
+                            key={tech}
+                            variant="outline"
+                            className="text-xs whitespace-nowrap"
+                          >
                             {tech}
                           </Badge>
                         ))}
                         {projet.technologies.length > 4 && (
-                          <Badge variant="outline" className="text-xs whitespace-nowrap">+{projet.technologies.length - 4}</Badge>
+                          <Badge
+                            variant="outline"
+                            className="text-xs whitespace-nowrap"
+                          >
+                            +{projet.technologies.length - 4}
+                          </Badge>
                         )}
                       </div>
                     </div>
 
                     <div className="mt-auto pt-4 flex gap-2">
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="flex-1"
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="flex-1 sweep-light"
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          window.open(projet.github, '_blank');
+                          window.open(projet.github, "_blank");
                         }}
                       >
                         <Github className="mr-2 h-4 w-4" />
                         Code
                       </Button>
                       {projet.demo && (
-                        <Button 
-                          size="sm" 
-                          className="flex-1"
+                        <Button
+                          size="sm"
+                          className="flex-1 sweep-light"
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
                             if (!projet.demo) return;
-                            window.open(projet.demo, '_blank');
+                            window.open(projet.demo, "_blank");
                           }}
                         >
                           <ExternalLink className="mr-2 h-4 w-4" />
-                          {['Showcase','E-commerce','Corporate'].includes(projet.category) ? 'Voir le site' : 'Demo'}
+                          {["Showcase", "E-commerce", "Corporate"].includes(
+                            projet.category
+                          )
+                            ? "Voir le site"
+                            : "Demo"}
                         </Button>
                       )}
                     </div>
@@ -397,7 +491,9 @@ export default function Projets() {
                         return next;
                       });
                     }}
-                    className={currentPage === 1 ? 'pointer-events-none opacity-50' : ''}
+                    className={
+                      currentPage === 1 ? "pointer-events-none opacity-50" : ""
+                    }
                   />
                 </PaginationItem>
 
@@ -427,7 +523,11 @@ export default function Projets() {
                         return next;
                       });
                     }}
-                    className={currentPage === totalPages ? 'pointer-events-none opacity-50' : ''}
+                    className={
+                      currentPage === totalPages
+                        ? "pointer-events-none opacity-50"
+                        : ""
+                    }
                   />
                 </PaginationItem>
               </PaginationContent>
@@ -448,7 +548,9 @@ export default function Projets() {
                 <div className="p-2 rounded-lg bg-primary/10 text-primary">
                   <FolderClosed className="h-6 w-6" />
                 </div>
-                <div className="text-3xl md:text-4xl font-extrabold text-primary">+25</div>
+                <div className="text-3xl md:text-4xl font-extrabold text-primary">
+                  +25
+                </div>
               </div>
               <div className="text-sm text-muted-foreground">Projets</div>
             </div>
@@ -457,7 +559,9 @@ export default function Projets() {
                 <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500">
                   <Rocket className="h-6 w-6" />
                 </div>
-                <div className="text-3xl md:text-4xl font-extrabold text-blue-500">{web3Count}</div>
+                <div className="text-3xl md:text-4xl font-extrabold text-blue-500">
+                  {web3Count}
+                </div>
               </div>
               <div className="text-sm text-muted-foreground">Projets Web3</div>
             </div>
@@ -466,18 +570,26 @@ export default function Projets() {
                 <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-600">
                   <Layers className="h-6 w-6" />
                 </div>
-                <div className="text-3xl md:text-4xl font-extrabold text-emerald-600">+30</div>
+                <div className="text-3xl md:text-4xl font-extrabold text-emerald-600">
+                  +30
+                </div>
               </div>
-              <div className="text-sm text-muted-foreground">Technologies maîtrisées</div>
+              <div className="text-sm text-muted-foreground">
+                Technologies maîtrisées
+              </div>
             </div>
             <div className="p-8 md:p-10 rounded-3xl border bg-gradient-to-br from-card to-background/60 shadow-md min-h-[160px] flex flex-col justify-center">
               <div className="flex items-center gap-4 mb-3">
                 <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600">
                   <Hourglass className="h-6 w-6" />
                 </div>
-                <div className="text-3xl md:text-4xl font-extrabold text-orange-600">6+</div>
+                <div className="text-3xl md:text-4xl font-extrabold text-orange-600">
+                  6+
+                </div>
               </div>
-              <div className="text-sm text-muted-foreground">Années d'expérience</div>
+              <div className="text-sm text-muted-foreground">
+                Années d'expérience
+              </div>
             </div>
           </div>
         </motion.div>

@@ -212,10 +212,268 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Animation sweep-light moderne pour les boutons */
+@keyframes sweep-light {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.sweep-light {
+  position: relative;
+  overflow: hidden;
+}
+
+.sweep-light::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.6s ease;
+  z-index: 1;
+}
+
+.sweep-light:hover::before {
+  left: 100%;
+}
+
+/* Navigation glass effect - Style centré */
+.nav-glass {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: calc(100% - 40px);
+  max-width: 1000px;
+  backdrop-filter: blur(16px);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    rgba(255, 255, 255, 0.4)
+  );
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 12px 20px;
+  overflow: hidden;
+}
+
+.dark .nav-glass {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.nav-glass-scrolled {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: calc(100% - 40px);
+  max-width: 1000px;
+  backdrop-filter: blur(20px);
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.6)
+  );
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  padding: 12px 20px;
+  overflow: hidden;
+}
+
+.dark .nav-glass-scrolled {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Navigation links glass effect */
+.nav-link-glass {
+  color: hsl(var(--foreground));
+  text-decoration: none;
+  padding: 8px 10px;
+  border-radius: 10px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-link-glass:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: hsl(var(--foreground));
+}
+
+.dark .nav-link-glass:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Mobile menu glass effect */
+.mobile-menu-glass {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 99999;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px 0;
+  overflow-y: auto;
+  cursor: pointer;
+}
+
+.mobile-nav-glass {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 18px 18px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100vw;
+  max-width: 100vw;
+  backdrop-filter: blur(16px);
+  position: relative;
+  align-items: center;
+  text-align: center;
+  cursor: default;
+  height: fit-content;
+  max-height: none;
+}
+
+.mobile-nav-glass .nav-link-glass {
+  width: auto;
+  min-width: 200px;
+  max-width: 300px;
+  justify-content: center;
+  text-align: center;
+}
+
+.mobile-nav-glass .mobile-close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+.dark .mobile-nav-glass {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .nav-glass,
+  .nav-glass-scrolled {
+    top: 12px;
+    width: calc(100% - 24px);
+    padding: 8px 16px;
+  }
+
+  .nav-glass__inner {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-glass__nav {
+    display: none;
+  }
+
+  .nav-glass__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-glass,
+  .nav-glass-scrolled {
+    top: 8px;
+    width: calc(100% - 16px);
+    padding: 6px 12px;
+  }
+
+  .nav-glass__logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .nav-glass__actions {
+    gap: 4px;
+  }
+}
+
+/* Mobile menu improvements */
+.mobile-menu-glass {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.mobile-nav-glass {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 280px;
+  max-width: 90vw;
+  width: 100%;
+  backdrop-filter: blur(16px);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.dark .mobile-nav-glass {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 480px) {
+  .mobile-menu-glass {
+    padding: 0;
+  }
+
+  .mobile-nav-glass {
+    padding: 20px;
+    width: 100%;
+    max-width: 100vw;
+    min-height: 100vh;
+  }
+}
+
 /* Enhanced shadow for profile image */
 .shadow-3xl {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 40px
-    hsl(var(--primary) / 0.4), 0 0 80px hsl(var(--secondary) / 0.3);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.2), 0 0 40px hsl(var(--primary) / 0.4),
+    0 0 80px hsl(var(--secondary) / 0.3);
 }
 
 /* Animation de déformation complexe et imprévisible pour l'image de profil */

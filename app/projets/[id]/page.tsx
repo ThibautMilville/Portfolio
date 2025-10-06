@@ -1,26 +1,43 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowLeft, Github, ExternalLink, Calendar, Users, Clock, CheckCircle, AlertCircle, Pause, ChevronLeft, ChevronRight, GraduationCap } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Link from 'next/link';
-import { getProjectById, getRelatedExperience, getRelatedFormations } from '@/lib/data';
-import { notFound } from 'next/navigation';
-import ProjectGallery from '@/components/ui/project-gallery';
-import LightParticles from '@/components/ui/light-particles';
-import ProjectTimeline from '@/components/ProjectTimeline';
-import { useParams } from 'next/navigation';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  Github,
+  ExternalLink,
+  Calendar,
+  Users,
+  Clock,
+  CheckCircle,
+  AlertCircle,
+  Pause,
+  ChevronLeft,
+  ChevronRight,
+  GraduationCap,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Link from "next/link";
+import {
+  getProjectById,
+  getRelatedExperience,
+  getRelatedFormations,
+} from "@/lib/data";
+import { notFound } from "next/navigation";
+import ProjectGallery from "@/components/ui/project-gallery";
+import LightParticles from "@/components/ui/light-particles";
+import ProjectTimeline from "@/components/ProjectTimeline";
+import { useParams } from "next/navigation";
 
 const getStatusIcon = (status: string) => {
   switch (status) {
-    case 'Terminé':
+    case "Terminé":
       return <CheckCircle className="h-4 w-4 text-green-500" />;
-    case 'En cours':
+    case "En cours":
       return <AlertCircle className="h-4 w-4 text-blue-500" />;
-    case 'En pause':
+    case "En pause":
       return <Pause className="h-4 w-4 text-yellow-500" />;
     default:
       return <AlertCircle className="h-4 w-4" />;
@@ -29,14 +46,14 @@ const getStatusIcon = (status: string) => {
 
 const getStatusColor = (status: string) => {
   switch (status) {
-    case 'Terminé':
-      return 'bg-green-500/10 text-green-700 border-green-500/20';
-    case 'En cours':
-      return 'bg-blue-500/10 text-blue-700 border-blue-500/20';
-    case 'En pause':
-      return 'bg-yellow-500/10 text-yellow-700 border-yellow-500/20';
+    case "Terminé":
+      return "bg-green-500/10 text-green-700 border-green-500/20";
+    case "En cours":
+      return "bg-blue-500/10 text-blue-700 border-blue-500/20";
+    case "En pause":
+      return "bg-yellow-500/10 text-yellow-700 border-yellow-500/20";
     default:
-      return 'bg-gray-500/10 text-gray-700 border-gray-500/20';
+      return "bg-gray-500/10 text-gray-700 border-gray-500/20";
   }
 };
 
@@ -44,7 +61,7 @@ export default function ProjectPage() {
   const params = useParams<{ id: string }>();
   const projectId = params?.id ? parseInt(params.id) : NaN;
   const project = getProjectById(projectId);
-  
+
   if (!project) {
     notFound();
   }
@@ -59,7 +76,14 @@ export default function ProjectPage() {
       <div className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 relative z-10">
         <div className="container mx-auto px-6 py-4">
           <Button variant="ghost" asChild className="mb-4">
-            <Link href={`/projets${(typeof window !== 'undefined' && window.sessionStorage.getItem('projetsPage')) ? `?page=${window.sessionStorage.getItem('projetsPage')}` : ''}`}>
+            <Link
+              href={`/projets${
+                typeof window !== "undefined" &&
+                window.sessionStorage.getItem("projetsPage")
+                  ? `?page=${window.sessionStorage.getItem("projetsPage")}`
+                  : ""
+              }`}
+            >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Retour aux projets
             </Link>
@@ -79,7 +103,10 @@ export default function ProjectPage() {
               {/* Galerie et actions */}
               <div>
                 {project.screenshots && project.screenshots.length > 0 ? (
-                  <ProjectGallery images={project.screenshots} title={project.title} />
+                  <ProjectGallery
+                    images={project.screenshots}
+                    title={project.title}
+                  />
                 ) : (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
@@ -99,16 +126,32 @@ export default function ProjectPage() {
                 {/* Actions */}
                 <div className="flex gap-4 mt-6">
                   <Button asChild className="flex-1">
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <Github className="mr-2 h-4 w-4" />
                       Voir le code
                     </a>
                   </Button>
                   {project.demo && (
-                    <Button variant="outline" asChild className="flex-1">
-                      <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                    <Button
+                      variant="outline"
+                      asChild
+                      className="flex-1 sweep-light"
+                    >
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <ExternalLink className="mr-2 h-4 w-4" />
-                        {['Showcase','E-commerce','Corporate'].includes(project.category) ? 'Voir le site' : 'Voir la démo'}
+                        {["Showcase", "E-commerce", "Corporate"].includes(
+                          project.category
+                        )
+                          ? "Voir le site"
+                          : "Voir la démo"}
                       </a>
                     </Button>
                   )}
@@ -130,7 +173,9 @@ export default function ProjectPage() {
                 {/* Périodes de travail (timeline) */}
                 {project.periods && project.periods.length > 1 && (
                   <div>
-                    <h3 className="text-lg font-semibold mb-3">Périodes de travail</h3>
+                    <h3 className="text-lg font-semibold mb-3">
+                      Périodes de travail
+                    </h3>
                     <ProjectTimeline periods={project.periods} />
                   </div>
                 )}
@@ -148,12 +193,16 @@ export default function ProjectPage() {
                   {project.teamSize && (
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Users className="h-4 w-4" />
-                      {project.teamSize} personne{project.teamSize > 1 ? 's' : ''}
+                      {project.teamSize} personne
+                      {project.teamSize > 1 ? "s" : ""}
                     </div>
                   )}
                   <div className="flex items-center gap-2">
                     {getStatusIcon(project.status)}
-                    <Badge variant="outline" className={getStatusColor(project.status)}>
+                    <Badge
+                      variant="outline"
+                      className={getStatusColor(project.status)}
+                    >
                       {project.status}
                     </Badge>
                   </div>
@@ -161,7 +210,9 @@ export default function ProjectPage() {
 
                 {/* Technologies */}
                 <div>
-                  <h3 className="text-lg font-semibold mb-3">Technologies utilisées</h3>
+                  <h3 className="text-lg font-semibold mb-3">
+                    Technologies utilisées
+                  </h3>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech) => (
                       <Badge key={tech} variant="secondary">
@@ -192,7 +243,10 @@ export default function ProjectPage() {
                 <CardContent>
                   <ul className="space-y-2">
                     {project.features.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-2 text-sm">
+                      <li
+                        key={index}
+                        className="flex items-start gap-2 text-sm"
+                      >
                         <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-2 flex-shrink-0" />
                         {feature}
                       </li>
@@ -218,7 +272,10 @@ export default function ProjectPage() {
                 <CardContent>
                   <ul className="space-y-2">
                     {project.challenges.map((challenge, index) => (
-                      <li key={index} className="flex items-start gap-2 text-sm">
+                      <li
+                        key={index}
+                        className="flex items-start gap-2 text-sm"
+                      >
                         <div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-2 flex-shrink-0" />
                         {challenge}
                       </li>
@@ -244,7 +301,10 @@ export default function ProjectPage() {
                 <CardContent>
                   <ul className="space-y-2">
                     {project.solutions.map((solution, index) => (
-                      <li key={index} className="flex items-start gap-2 text-sm">
+                      <li
+                        key={index}
+                        className="flex items-start gap-2 text-sm"
+                      >
                         <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
                         {solution}
                       </li>
@@ -274,7 +334,8 @@ export default function ProjectPage() {
                   <div>
                     <h4 className="font-semibold">{project.role}</h4>
                     <p className="text-muted-foreground text-sm">
-                      Contribution principale au développement et à l'architecture du projet
+                      Contribution principale au développement et à
+                      l'architecture du projet
                     </p>
                   </div>
                 </div>
@@ -305,16 +366,30 @@ export default function ProjectPage() {
                     <CardContent>
                       <div className="space-y-3">
                         <div>
-                          <h4 className="font-semibold text-lg">{relatedExperience.title}</h4>
-                          <p className="text-primary font-medium">{relatedExperience.company}</p>
-                          <p className="text-sm text-muted-foreground">{relatedExperience.date}</p>
+                          <h4 className="font-semibold text-lg">
+                            {relatedExperience.title}
+                          </h4>
+                          <p className="text-primary font-medium">
+                            {relatedExperience.company}
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            {relatedExperience.date}
+                          </p>
                         </div>
-                        <p className="text-sm text-muted-foreground">{relatedExperience.description}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {relatedExperience.description}
+                        </p>
                         <div>
-                          <h5 className="font-medium text-sm mb-2">Technologies utilisées :</h5>
+                          <h5 className="font-medium text-sm mb-2">
+                            Technologies utilisées :
+                          </h5>
                           <div className="flex flex-wrap gap-1">
                             {relatedExperience.technologies.map((tech) => (
-                              <Badge key={tech} variant="outline" className="text-xs">
+                              <Badge
+                                key={tech}
+                                variant="outline"
+                                className="text-xs"
+                              >
                                 {tech}
                               </Badge>
                             ))}
@@ -339,14 +414,27 @@ export default function ProjectPage() {
                     <CardContent>
                       <div className="space-y-4">
                         {relatedFormations.map((formation) => (
-                          <div key={formation.id} className="border-l-2 border-primary/20 pl-4">
-                            <h4 className="font-semibold text-sm">{formation.title}</h4>
-                            <p className="text-primary font-medium text-xs">{formation.institution}</p>
-                            <p className="text-xs text-muted-foreground">{formation.date}</p>
+                          <div
+                            key={formation.id}
+                            className="border-l-2 border-primary/20 pl-4"
+                          >
+                            <h4 className="font-semibold text-sm">
+                              {formation.title}
+                            </h4>
+                            <p className="text-primary font-medium text-xs">
+                              {formation.institution}
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                              {formation.date}
+                            </p>
                             <div className="mt-2">
                               <div className="flex flex-wrap gap-1">
                                 {formation.skills.slice(0, 3).map((skill) => (
-                                  <Badge key={skill} variant="secondary" className="text-xs">
+                                  <Badge
+                                    key={skill}
+                                    variant="secondary"
+                                    className="text-xs"
+                                  >
                                     {skill}
                                   </Badge>
                                 ))}
@@ -365,4 +453,4 @@ export default function ProjectPage() {
       </div>
     </div>
   );
-} 
+}

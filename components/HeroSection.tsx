@@ -1,12 +1,20 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { ArrowDown, Download, Github, Linkedin, Mail, Code2, ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { Typewriter } from "@/components/ui/typewriter"
-import { AnimatedParticles } from "./AnimatedParticles"
-import { LocalImage } from "@/components/ui/image"
+import { motion } from "framer-motion";
+import {
+  ArrowDown,
+  Download,
+  Github,
+  Linkedin,
+  Mail,
+  Code2,
+  ArrowRight,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Typewriter } from "@/components/ui/typewriter";
+import { AnimatedParticles } from "./AnimatedParticles";
+import { LocalImage } from "@/components/ui/image";
 
 export default function HeroSection() {
   return (
@@ -156,13 +164,21 @@ export default function HeroSection() {
           </motion.div>
 
           <div className="text-center lg:text-left flex-1">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
               <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
                 Thibaut MILVILLE
               </h1>
               <div className="text-xl md:text-2xl text-muted-foreground mb-8 font-mono flex flex-col items-center lg:items-start gap-2">
                 <Typewriter
-                  words={["<Software Engineer />", "<Expert React & Next.js />", "<Passionné par l'innovation />"]}
+                  words={[
+                    "<Software Engineer />",
+                    "<Expert React & Next.js />",
+                    "<Passionné par l'innovation />",
+                  ]}
                   typingSpeed={70}
                   deletingSpeed={40}
                   pause={1200}
@@ -174,10 +190,15 @@ export default function HeroSection() {
         </div>
 
         <div className="text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
-              Passionné par la création d'expériences web modernes avec React, Next.js et NestJS. Je transforme vos
-              idées en applications performantes et scalables.
+              Passionné par la création d'expériences web modernes avec React,
+              Next.js et NestJS. Je transforme vos idées en applications
+              performantes et scalables.
             </p>
           </motion.div>
 
@@ -187,13 +208,13 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="flex flex-wrap gap-4 justify-center mb-16"
           >
-            <Button size="lg" asChild>
+            <Button size="lg" asChild className="sweep-light">
               <Link href="/projets">
                 Voir mes projets
                 <ArrowRight className="ml-2 h-4 w-4 text-white" />
               </Link>
             </Button>
-            <Button variant="outline" size="lg">
+            <Button variant="outline" size="lg" className="sweep-light">
               <Download className="mr-2 h-4 w-4" />
               Télécharger CV
             </Button>
@@ -205,17 +226,40 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex gap-6 justify-center"
           >
-            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform">
-              <a href="https://github.com/ThibautMilville" target="_blank" rel="noopener noreferrer">
+            <Button
+              variant="ghost"
+              size="icon"
+              asChild
+              className="hover:scale-110 transition-transform"
+            >
+              <a
+                href="https://github.com/ThibautMilville"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Github className="h-5 w-5" />
               </a>
             </Button>
-            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform">
-              <a href="https://fr.linkedin.com/in/thibaut-milville" target="_blank" rel="noopener noreferrer">
+            <Button
+              variant="ghost"
+              size="icon"
+              asChild
+              className="hover:scale-110 transition-transform"
+            >
+              <a
+                href="https://fr.linkedin.com/in/thibaut-milville"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Linkedin className="h-5 w-5" />
               </a>
             </Button>
-            <Button variant="ghost" size="icon" asChild className="hover:scale-110 transition-transform">
+            <Button
+              variant="ghost"
+              size="icon"
+              asChild
+              className="hover:scale-110 transition-transform"
+            >
               <Link href="/contact">
                 <Mail className="h-5 w-5" />
               </Link>
@@ -233,5 +277,5 @@ export default function HeroSection() {
         <ArrowDown className="h-6 w-6 text-muted-foreground animate-bounce" />
       </motion.div>
     </section>
-  )
+  );
 }

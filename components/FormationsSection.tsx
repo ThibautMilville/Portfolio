@@ -1,16 +1,21 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import dynamic from 'next/dynamic';
-import LightParticles from '@/components/ui/light-particles';
-import { ArrowRight } from 'lucide-react';
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import dynamic from "next/dynamic";
+import LightParticles from "@/components/ui/light-particles";
+import { ArrowRight } from "lucide-react";
 
-const FormationCarousel = dynamic(() => import('@/components/ui/formation-carousel'), { 
-  ssr: false,
-  loading: () => <div className="text-center py-8">Chargement des formations...</div>
-});
+const FormationCarousel = dynamic(
+  () => import("@/components/ui/formation-carousel"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="text-center py-8">Chargement des formations...</div>
+    ),
+  }
+);
 
 interface Formation {
   id: number;
@@ -32,9 +37,11 @@ interface FormationsSectionProps {
   formations: Formation[];
 }
 
-export default function FormationsSection({ formations }: FormationsSectionProps) {
+export default function FormationsSection({
+  formations,
+}: FormationsSectionProps) {
   return (
-    <section className="py-20 px-6 relative">
+    <section className="py-6 md:py-8 px-6 relative">
       <LightParticles />
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
@@ -44,10 +51,14 @@ export default function FormationsSection({ formations }: FormationsSectionProps
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Formations & Certifications</h2>
-          <p className="text-lg text-muted-foreground">Un parcours académique et professionnel solide</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Formations & Certifications
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            Un parcours académique et professionnel solide
+          </p>
         </motion.div>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -62,9 +73,9 @@ export default function FormationsSection({ formations }: FormationsSectionProps
             </div>
           )}
         </motion.div>
-        
+
         <div className="flex justify-center mt-12">
-          <Button size="lg" asChild>
+          <Button size="lg" asChild className="sweep-light">
             <Link href="/formations">
               Voir toutes les formations
               <ArrowRight className="ml-2 h-4 w-4 text-white" />
@@ -74,4 +85,4 @@ export default function FormationsSection({ formations }: FormationsSectionProps
       </div>
     </section>
   );
-} 
+}
