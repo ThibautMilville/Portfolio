@@ -1,0 +1,51 @@
+'use client';
+
+import { motion } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import dynamic from 'next/dynamic';
+import LightParticles from '@/components/ui/light-particles';
+import { ArrowRight } from 'lucide-react';
+
+const ExperienceCarousel = dynamic(() => import('@/components/ui/experience-carousel'), { 
+  ssr: false,
+  loading: () => <div className="text-center py-8">Chargement des expériences...</div>
+});
+
+export default function ExperiencesSection() {
+  return (
+    <section className="py-20 px-6 relative">
+      <LightParticles />
+      <div className="max-w-6xl mx-auto relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Expériences Professionnelles</h2>
+          <p className="text-lg text-muted-foreground">Mon parcours professionnel et mes réalisations</p>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          <ExperienceCarousel />
+        </motion.div>
+        
+        <div className="flex justify-center mt-12">
+          <Button size="lg" asChild>
+            <Link href="/experiences">
+              Voir toutes les expériences
+              <ArrowRight className="ml-2 h-4 w-4 text-white" />
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+} 
