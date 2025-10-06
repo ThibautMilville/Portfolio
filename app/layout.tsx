@@ -1,34 +1,49 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import { Anek_Telugu } from "next/font/google";
-import { cn } from "@/lib/utils";
+import './globals.css';
+import type { Metadata } from 'next';
+import { Inter, JetBrains_Mono } from 'next/font/google';
+import Navigation from '@/components/Navigation';
+import { ThemeProvider } from '@/components/ThemeProvider';
+import { TooltipProvider } from '@/components/ui/tooltip';
+import { IMAGES } from '@/lib/images';
+import Footer from '@/components/Footer';
 
-const AnekTelugu = Anek_Telugu({ subsets: ["latin"], variable: "--font-caption" });
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const jetbrainsMono = JetBrains_Mono({ 
+  subsets: ['latin'], 
+  variable: '--font-mono' 
 });
 
 export const metadata: Metadata = {
-  title: "Thibaut MILVILLE",
-  description: "Portfolio of Thibaut MILVILLE",
+  title: 'Thibaut MILVILLE - Développeur Fullstack',
+  description: 'Portfolio de Thibaut MILVILLE, Software Engineer spécialisé en React, Next.js et NestJS',
+  icons: {
+    icon: IMAGES.favicon,
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className="h-full">
-      <body className={cn(geistSans.variable, geistMono.variable, AnekTelugu.variable, "font-sans h-full bg-background text-foreground")}>{children}</body>
+    <html lang="fr" suppressHydrationWarning>
+      <body id="top" className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+        <TooltipProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange={false}
+          >
+            <Navigation />
+            <main className="min-h-screen">
+              {children}
+            </main>
+            <Footer />
+          </ThemeProvider>
+        </TooltipProvider>
+      </body>
     </html>
   );
 }
