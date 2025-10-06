@@ -1,21 +1,31 @@
-'use client';
+"use client";
 
-import { useMemo, useState } from 'react';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Badge } from '@/components/ui/badge';
-import { SlidersHorizontal, Search, X } from 'lucide-react';
+import { useMemo, useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from "@/components/ui/badge";
+import { SlidersHorizontal, Search, X } from "lucide-react";
 
 export interface ProjectFilterState {
   search: string;
-  organization: string | 'all';
+  organization: string | "all";
   techs: string[];
   years: string[];
-  status: 'all' | 'Terminé' | 'En cours' | 'En pause';
-  category: string | 'all';
+  status: "all" | "Terminé" | "En cours" | "En pause";
+  category: string | "all";
 }
 
 interface ProjectFiltersProps {
@@ -27,30 +37,45 @@ interface ProjectFiltersProps {
   categories: string[];
 }
 
-export default function ProjectFilters({ value, onChange, organizations, technologies, years, categories }: ProjectFiltersProps) {
+export default function ProjectFilters({
+  value,
+  onChange,
+  organizations,
+  technologies,
+  years,
+  categories,
+}: ProjectFiltersProps) {
   const techCount = value.techs.length;
   const yearCount = value.years.length;
 
   // Recherches locales dans les popovers
-  const [techQuery, setTechQuery] = useState('');
-  const [yearQuery, setYearQuery] = useState('');
-  const [catQuery, setCatQuery] = useState('');
+  const [techQuery, setTechQuery] = useState("");
+  const [yearQuery, setYearQuery] = useState("");
+  const [catQuery, setCatQuery] = useState("");
 
   const clearAll = () =>
-    onChange({ search: '', organization: 'all', techs: [], years: [], status: 'all', category: 'all' });
+    onChange({
+      search: "",
+      organization: "all",
+      techs: [],
+      years: [],
+      status: "all",
+      category: "all",
+    });
 
   const selectedSummary = useMemo(() => {
     const parts: string[] = [];
-    if (value.organization !== 'all') parts.push(`Org: ${value.organization}`);
-    if (value.category !== 'all') parts.push(`Cat: ${value.category}`);
-    if (value.status !== 'all') parts.push(`Statut: ${value.status}`);
-    if (techCount) parts.push(`${techCount} tech` + (techCount > 1 ? 's' : ''));
-    if (yearCount) parts.push(`${yearCount} année` + (yearCount > 1 ? 's' : ''));
-    return parts.join(' • ');
+    if (value.organization !== "all") parts.push(`Org: ${value.organization}`);
+    if (value.category !== "all") parts.push(`Cat: ${value.category}`);
+    if (value.status !== "all") parts.push(`Statut: ${value.status}`);
+    if (techCount) parts.push(`${techCount} tech` + (techCount > 1 ? "s" : ""));
+    if (yearCount)
+      parts.push(`${yearCount} année` + (yearCount > 1 ? "s" : ""));
+    return parts.join(" • ");
   }, [value, techCount, yearCount]);
 
   return (
-    <div className="sticky top-16 z-20 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 border rounded-2xl p-4 mb-8">
+    <div className="bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 border rounded-2xl p-4 mb-8">
       {/* Ligne 1 : barre de recherche pleine largeur */}
       <div className="mb-4">
         <div className="relative w-full">
@@ -65,7 +90,7 @@ export default function ProjectFilters({ value, onChange, organizations, technol
             <button
               className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
               aria-label="Effacer la recherche"
-              onClick={() => onChange({ ...value, search: '' })}
+              onClick={() => onChange({ ...value, search: "" })}
             >
               <X className="h-5 w-5" />
             </button>
@@ -76,7 +101,12 @@ export default function ProjectFilters({ value, onChange, organizations, technol
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-3 items-center">
         <Select
           value={value.organization}
-          onValueChange={(v) => onChange({ ...value, organization: v as ProjectFilterState['organization'] })}
+          onValueChange={(v) =>
+            onChange({
+              ...value,
+              organization: v as ProjectFilterState["organization"],
+            })
+          }
         >
           <SelectTrigger className="w-full rounded-full h-11 justify-center text-center focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none">
             <SelectValue placeholder="Organisation" />
@@ -92,12 +122,27 @@ export default function ProjectFilters({ value, onChange, organizations, technol
         </Select>
 
         {/* Catégories avec recherche */}
-        <Popover onOpenChange={(open) => { if (!open) { try { (document.activeElement as HTMLElement)?.blur?.(); } catch {} } }}>
+        <Popover
+          onOpenChange={(open) => {
+            if (!open) {
+              try {
+                (document.activeElement as HTMLElement)?.blur?.();
+              } catch {}
+            }
+          }}
+        >
           <PopoverTrigger asChild>
-            <Button variant="outline" className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none">
+            <Button
+              variant="outline"
+              className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
+            >
               <SlidersHorizontal className="mr-2 h-4 w-4" />
-              {value.category === 'all' ? 'Catégorie' : value.category}
-              {value.category !== 'all' ? <Badge variant="secondary" className="ml-2">1</Badge> : null}
+              {value.category === "all" ? "Catégorie" : value.category}
+              {value.category !== "all" ? (
+                <Badge variant="secondary" className="ml-2">
+                  1
+                </Badge>
+              ) : null}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-80">
@@ -111,8 +156,10 @@ export default function ProjectFilters({ value, onChange, organizations, technol
             </div>
             <div className="flex flex-col gap-2 max-h-60 overflow-auto pr-1">
               <button
-                className={`text-left text-sm px-2 py-1 rounded hover:bg-accent ${value.category === 'all' ? 'bg-accent' : ''}`}
-                onClick={() => onChange({ ...value, category: 'all' })}
+                className={`text-left text-sm px-2 py-1 rounded hover:bg-accent ${
+                  value.category === "all" ? "bg-accent" : ""
+                }`}
+                onClick={() => onChange({ ...value, category: "all" })}
               >
                 Toutes les catégories
               </button>
@@ -121,8 +168,15 @@ export default function ProjectFilters({ value, onChange, organizations, technol
                 .map((cat) => (
                   <button
                     key={cat}
-                    className={`text-left text-sm px-2 py-1 rounded hover:bg-accent ${value.category === cat ? 'bg-accent' : ''}`}
-                    onClick={() => onChange({ ...value, category: cat as ProjectFilterState['category'] })}
+                    className={`text-left text-sm px-2 py-1 rounded hover:bg-accent ${
+                      value.category === cat ? "bg-accent" : ""
+                    }`}
+                    onClick={() =>
+                      onChange({
+                        ...value,
+                        category: cat as ProjectFilterState["category"],
+                      })
+                    }
                   >
                     {cat}
                   </button>
@@ -133,7 +187,9 @@ export default function ProjectFilters({ value, onChange, organizations, technol
 
         <Select
           value={value.status}
-          onValueChange={(v) => onChange({ ...value, status: v as ProjectFilterState['status'] })}
+          onValueChange={(v) =>
+            onChange({ ...value, status: v as ProjectFilterState["status"] })
+          }
         >
           <SelectTrigger className="w-full rounded-full h-11 justify-center text-center focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none">
             <SelectValue placeholder="Statut" />
@@ -147,11 +203,27 @@ export default function ProjectFilters({ value, onChange, organizations, technol
         </Select>
 
         {/* Technologies avec recherche intégrée */}
-        <Popover onOpenChange={(open) => { if (!open) { try { (document.activeElement as HTMLElement)?.blur?.(); } catch {} } }}>
+        <Popover
+          onOpenChange={(open) => {
+            if (!open) {
+              try {
+                (document.activeElement as HTMLElement)?.blur?.();
+              } catch {}
+            }
+          }}
+        >
           <PopoverTrigger asChild>
-            <Button variant="outline" className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none">
+            <Button
+              variant="outline"
+              className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
+            >
               <SlidersHorizontal className="mr-2 h-4 w-4" />
-              Technologies {techCount ? <Badge variant="secondary" className="ml-2">{techCount}</Badge> : null}
+              Technologies{" "}
+              {techCount ? (
+                <Badge variant="secondary" className="ml-2">
+                  {techCount}
+                </Badge>
+              ) : null}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-80">
@@ -165,34 +237,55 @@ export default function ProjectFilters({ value, onChange, organizations, technol
             </div>
             <div className="flex flex-col gap-2 max-h-60 overflow-auto pr-1">
               {technologies
-                .filter((t) => t.toLowerCase().includes(techQuery.toLowerCase()))
+                .filter((t) =>
+                  t.toLowerCase().includes(techQuery.toLowerCase())
+                )
                 .map((tech) => {
-                const checked = value.techs.includes(tech);
-                return (
-                  <label key={tech} className="flex items-center gap-2 text-sm">
-                    <Checkbox
-                      checked={checked}
-                      onCheckedChange={(c) => {
-                        const next = new Set(value.techs);
-                        if (c) next.add(tech);
-                        else next.delete(tech);
-                        onChange({ ...value, techs: Array.from(next) });
-                      }}
-                    />
-                    {tech}
-                  </label>
-                );
-              })}
+                  const checked = value.techs.includes(tech);
+                  return (
+                    <label
+                      key={tech}
+                      className="flex items-center gap-2 text-sm"
+                    >
+                      <Checkbox
+                        checked={checked}
+                        onCheckedChange={(c) => {
+                          const next = new Set(value.techs);
+                          if (c) next.add(tech);
+                          else next.delete(tech);
+                          onChange({ ...value, techs: Array.from(next) });
+                        }}
+                      />
+                      {tech}
+                    </label>
+                  );
+                })}
             </div>
           </PopoverContent>
         </Popover>
 
         {/* Années (optionnel) */}
-        <Popover onOpenChange={(open) => { if (!open) { try { (document.activeElement as HTMLElement)?.blur?.(); } catch {} } }}>
+        <Popover
+          onOpenChange={(open) => {
+            if (!open) {
+              try {
+                (document.activeElement as HTMLElement)?.blur?.();
+              } catch {}
+            }
+          }}
+        >
           <PopoverTrigger asChild>
-            <Button variant="outline" className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none">
+            <Button
+              variant="outline"
+              className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
+            >
               <SlidersHorizontal className="mr-2 h-4 w-4" />
-              Années {yearCount ? <Badge variant="secondary" className="ml-2">{yearCount}</Badge> : null}
+              Années{" "}
+              {yearCount ? (
+                <Badge variant="secondary" className="ml-2">
+                  {yearCount}
+                </Badge>
+              ) : null}
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-80">
@@ -206,53 +299,73 @@ export default function ProjectFilters({ value, onChange, organizations, technol
             </div>
             <div className="flex flex-col gap-2 max-h-60 overflow-auto pr-1">
               {years
-                .filter((y) => y.toLowerCase().includes(yearQuery.toLowerCase()))
+                .filter((y) =>
+                  y.toLowerCase().includes(yearQuery.toLowerCase())
+                )
                 .map((y) => {
-                const checked = value.years.includes(y);
-                return (
-                  <label key={y} className="flex items-center gap-2 text-sm">
-                    <Checkbox
-                      checked={checked}
-                      onCheckedChange={(c) => {
-                        const next = new Set(value.years);
-                        if (c) next.add(y);
-                        else next.delete(y);
-                        onChange({ ...value, years: Array.from(next) });
-                      }}
-                    />
-                    {y}
-                  </label>
-                );
-              })}
+                  const checked = value.years.includes(y);
+                  return (
+                    <label key={y} className="flex items-center gap-2 text-sm">
+                      <Checkbox
+                        checked={checked}
+                        onCheckedChange={(c) => {
+                          const next = new Set(value.years);
+                          if (c) next.add(y);
+                          else next.delete(y);
+                          onChange({ ...value, years: Array.from(next) });
+                        }}
+                      />
+                      {y}
+                    </label>
+                  );
+                })}
             </div>
           </PopoverContent>
         </Popover>
 
-        <Button variant="ghost" onClick={clearAll} className="w-full h-11 rounded-full">Réinitialiser</Button>
+        <Button
+          variant="ghost"
+          onClick={clearAll}
+          className="w-full h-11 rounded-full"
+        >
+          Réinitialiser
+        </Button>
       </div>
 
       {/* Ligne 3 : tags sélectionnés (chips dismissibles) */}
       <div className="mt-2 flex flex-wrap gap-2">
-        {value.organization !== 'all' && (
+        {value.organization !== "all" && (
           <Badge variant="secondary" className="px-3 py-1">
             {value.organization}
-            <button className="ml-2" onClick={() => onChange({ ...value, organization: 'all' })} aria-label="Supprimer">
+            <button
+              className="ml-2"
+              onClick={() => onChange({ ...value, organization: "all" })}
+              aria-label="Supprimer"
+            >
               <X className="h-3 w-3" />
             </button>
           </Badge>
         )}
-        {value.category !== 'all' && (
+        {value.category !== "all" && (
           <Badge variant="secondary" className="px-3 py-1">
             {value.category}
-            <button className="ml-2" onClick={() => onChange({ ...value, category: 'all' })} aria-label="Supprimer">
+            <button
+              className="ml-2"
+              onClick={() => onChange({ ...value, category: "all" })}
+              aria-label="Supprimer"
+            >
               <X className="h-3 w-3" />
             </button>
           </Badge>
         )}
-        {value.status !== 'all' && (
+        {value.status !== "all" && (
           <Badge variant="secondary" className="px-3 py-1">
             {value.status}
-            <button className="ml-2" onClick={() => onChange({ ...value, status: 'all' })} aria-label="Supprimer">
+            <button
+              className="ml-2"
+              onClick={() => onChange({ ...value, status: "all" })}
+              aria-label="Supprimer"
+            >
               <X className="h-3 w-3" />
             </button>
           </Badge>
@@ -262,7 +375,12 @@ export default function ProjectFilters({ value, onChange, organizations, technol
             {t}
             <button
               className="ml-2"
-              onClick={() => onChange({ ...value, techs: value.techs.filter((x) => x !== t) })}
+              onClick={() =>
+                onChange({
+                  ...value,
+                  techs: value.techs.filter((x) => x !== t),
+                })
+              }
               aria-label={`Retirer ${t}`}
             >
               <X className="h-3 w-3" />
@@ -274,7 +392,12 @@ export default function ProjectFilters({ value, onChange, organizations, technol
             {y}
             <button
               className="ml-2"
-              onClick={() => onChange({ ...value, years: value.years.filter((x) => x !== y) })}
+              onClick={() =>
+                onChange({
+                  ...value,
+                  years: value.years.filter((x) => x !== y),
+                })
+              }
               aria-label={`Retirer ${y}`}
             >
               <X className="h-3 w-3" />
@@ -285,5 +408,3 @@ export default function ProjectFilters({ value, onChange, organizations, technol
     </div>
   );
 }
-
-
