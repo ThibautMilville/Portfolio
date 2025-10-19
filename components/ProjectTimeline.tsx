@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip } from '@/components/ui/tooltip';
 
 export interface ProjectPeriodItem {
   title?: string;
@@ -28,35 +28,23 @@ export default function ProjectTimeline({ periods, compact = false, className }:
           <span>•</span>
           <span>{periods.length}</span>
         </div>
-        <TooltipProvider>
-          <div className="relative">
-            <div className="h-0.5 w-full bg-border rounded" />
-            <div className="absolute inset-0 flex justify-between items-center">
-              {periods.map((p, idx) => (
-                <Tooltip key={idx}>
-                  <TooltipTrigger asChild>
-                    <button
-                      type="button"
-                      aria-label={p.title ? `${p.title} – ${p.date}` : p.date}
-                      className="relative -translate-y-1 w-3 h-3 rounded-full bg-primary outline-none focus:ring-2 focus:ring-primary/40"
-                    />
-                  </TooltipTrigger>
-                  <TooltipContent side="top" className="text-xs">
-                    <div className="font-medium">
-                      {p.title || 'Période'}
-                    </div>
-                    <div className="text-muted-foreground">{p.date}</div>
-                    {p.description ? (
-                      <div className="mt-1 max-w-[220px] text-muted-foreground/90">
-                        {p.description}
-                      </div>
-                    ) : null}
-                  </TooltipContent>
-                </Tooltip>
-              ))}
-            </div>
+        <div className="relative">
+          <div className="h-0.5 w-full bg-border rounded" />
+          <div className="absolute inset-0 flex justify-between items-center">
+            {periods.map((p, idx) => (
+              <Tooltip
+                key={idx}
+                content={`${p.title || 'Période'} - ${p.date}${p.description ? '\n\n' + p.description : ''}`}
+              >
+                <button
+                  type="button"
+                  aria-label={p.title ? `${p.title} – ${p.date}` : p.date}
+                  className="relative -translate-y-1 w-3 h-3 rounded-full bg-primary outline-none focus:ring-2 focus:ring-primary/40"
+                />
+              </Tooltip>
+            ))}
           </div>
-        </TooltipProvider>
+        </div>
       </div>
     );
   }

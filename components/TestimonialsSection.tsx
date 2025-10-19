@@ -3,12 +3,14 @@
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 import LightParticles from "@/components/ui/light-particles";
+import { LocalImage } from "@/components/ui/image";
 
 const testimonials = [
   {
     name: "Cédric Lemaire",
     role: "Responsable de production",
     company: "OSMOZ COMMUNICATION",
+    image: "testimonials/cedric-lemaire.jpeg",
     content:
       "Je me permets d'écrire ces quelques lignes pour recommander chaleureusement Thibaut, qui a travaillé en alternance dans notre société pendant 2 ans. Durant son contrat, Thibaut a démontré une grande capacité d'adaptation et un engagement sans faille. Il a su faire preuve d'une grande autonomie tout en étant un membre actif de notre équipe. Son sens de l'initiative et sa capacité à résoudre les problèmes ont été particulièrement appréciés. Sa sociabilité et son empathie, fait de Thibaut un atout pour une équipe.",
     rating: 5,
@@ -17,6 +19,7 @@ const testimonials = [
     name: "Jean-Claude Ravineau",
     role: "Fondateur et dirigeant",
     company: "Manage Transport",
+    image: "testimonials/jc-ravineau.jpeg",
     content:
       "Thibaut a parfaitement compris mes attentes dans la création de mon site internet professionnel. Il fait preuve d'écoute et d'adaptabilité à un métier qu'il ne connaissait pas. Un plaisir d'avoir collaboré avec lui, je vous le recommande sans hésitation.",
     rating: 5,
@@ -62,6 +65,27 @@ export default function TestimonialsSection() {
                   <Quote className="h-10 w-10" />
                 </div>
 
+                {/* Author with enhanced styling */}
+                <div className="flex items-center gap-4 mb-6 relative z-10">
+                  <div className="flex-shrink-0">
+                    <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-primary/20 shadow-md">
+                      <LocalImage
+                        imageName={testimonial.image}
+                        alt={testimonial.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-bold text-foreground text-lg">
+                      {testimonial.name}
+                    </p>
+                    <p className="text-sm text-primary/80 font-medium">
+                      {testimonial.role} chez {testimonial.company}
+                    </p>
+                  </div>
+                </div>
+
                 {/* Rating with enhanced stars */}
                 <div className="flex items-center gap-1 mb-6 relative z-10">
                   {[...Array(testimonial.rating)].map((_, i) => (
@@ -73,21 +97,9 @@ export default function TestimonialsSection() {
                 </div>
 
                 {/* Content with better typography */}
-                <p className="text-foreground/90 mb-8 italic text-base leading-relaxed relative z-10 font-medium">
+                <p className="text-foreground/90 italic text-base leading-relaxed relative z-10 font-medium">
                   "{testimonial.content}"
                 </p>
-
-                {/* Author with enhanced styling */}
-                <div className="flex items-center justify-between relative z-10">
-                  <div>
-                    <p className="font-bold text-foreground text-lg">
-                      {testimonial.name}
-                    </p>
-                    <p className="text-sm text-primary/80 font-medium">
-                      {testimonial.role} chez {testimonial.company}
-                    </p>
-                  </div>
-                </div>
               </div>
             </motion.div>
           ))}

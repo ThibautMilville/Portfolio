@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from './tooltip';
+import { Tooltip } from './tooltip';
 
 interface Logo {
   name: string;
@@ -37,51 +37,49 @@ export default function LogoCarousel({ logos, speed = 30 }: LogoCarouselProps) {
 
   return (
     <div className="relative h-44 overflow-visible w-full max-w-6xl mx-auto">
-      <TooltipProvider>
-        {/* Fade gauche - plus prononcé avec couleur primaire */}
-        <div className="pointer-events-none absolute left-0 top-0 w-32 h-36 bg-gradient-to-r from-background via-background/90 to-transparent z-10"></div>
-        
-        {/* Fade droite - plus prononcé avec couleur primaire */}
-        <div className="pointer-events-none absolute right-0 top-0 w-32 h-36 bg-gradient-to-l from-background via-background/90 to-transparent z-10"></div>
-        
-        {/* Slider infini */}
-        <div className="relative w-full h-44 overflow-hidden">
-          <motion.div
-            className="flex items-center h-full w-max"
-            animate={{ 
-              x: [0, -(infiniteLogos.length * 120) / 2] 
-            }}
-            transition={{
-              ease: 'linear',
-              duration: speed,
-              repeat: Infinity,
-              repeatType: 'loop'
-            }}
-            style={{ willChange: 'transform' }}
-          >
-            {infiniteLogos.map((logo, index) => (
-                             <Tooltip key={`${logo.name}-${index}`} delayDuration={0}>
-                 <TooltipTrigger asChild>
-                  <motion.div
-                    className="flex-shrink-0 flex items-center justify-center mx-8 relative"
-                    initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{ 
-                      duration: 0.6, 
-                      delay: (index % logos.length) * 0.1,
-                      ease: 'easeOut'
-                    }}
-                    whileHover={{
-                      scale: 1.4,
-                      y: -8,
-                      zIndex: 40,
-                      transition: { 
-                        duration: 0.3,
-                        type: "spring",
-                        stiffness: 300
-                      }
-                    }}
-                  >
+      {/* Fade gauche - plus prononcé avec couleur primaire */}
+      <div className="pointer-events-none absolute left-0 top-0 w-32 h-36 bg-gradient-to-r from-background via-background/90 to-transparent z-10"></div>
+
+      {/* Fade droite - plus prononcé avec couleur primaire */}
+      <div className="pointer-events-none absolute right-0 top-0 w-32 h-36 bg-gradient-to-l from-background via-background/90 to-transparent z-10"></div>
+
+      {/* Slider infini */}
+      <div className="relative w-full h-44 overflow-hidden">
+        <motion.div
+          className="flex items-center h-full w-max"
+          animate={{
+            x: [0, -(infiniteLogos.length * 120) / 2]
+          }}
+          transition={{
+            ease: 'linear',
+            duration: speed,
+            repeat: Infinity,
+            repeatType: 'loop'
+          }}
+          style={{ willChange: 'transform' }}
+        >
+          {infiniteLogos.map((logo, index) => (
+            <Tooltip key={`${logo.name}-${index}`} content={logo.name} hasUpwardAnimation={true}>
+              <motion.div
+                className="flex-shrink-0 flex items-center justify-center mx-8 relative"
+                initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                transition={{
+                  duration: 0.6,
+                  delay: (index % logos.length) * 0.1,
+                  ease: 'easeOut'
+                }}
+                whileHover={{
+                  scale: 1.4,
+                  y: -8,
+                  zIndex: 40,
+                  transition: {
+                    duration: 0.3,
+                    type: "spring",
+                    stiffness: 300
+                  }
+                }}
+              >
                     {logo.linkedinUrl ? (
                       <a
                         href={logo.linkedinUrl}
@@ -109,17 +107,10 @@ export default function LogoCarousel({ logos, speed = 30 }: LogoCarouselProps) {
                       />
                     )}
                   </motion.div>
-                </TooltipTrigger>
-                                                 <TooltipContent side="top" className="text-xs bg-background/95 backdrop-blur-sm border-2 border-primary/20 shadow-xl z-[9999]">
-                  {logo.name}
-                </TooltipContent>
-              </Tooltip>
+                </Tooltip>
             ))}
           </motion.div>
         </div>
-
-
-      </TooltipProvider>
     </div>
   );
 } 

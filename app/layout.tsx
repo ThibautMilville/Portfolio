@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
 import Navigation from '@/components/Navigation';
 import { ThemeProvider } from '@/components/ThemeProvider';
-import { TooltipProvider } from '@/components/ui/tooltip';
 import { IMAGES } from '@/lib/images';
 import Footer from '@/components/Footer';
 
@@ -29,20 +28,18 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning>
       <body id="top" className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
-        <TooltipProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            enableSystem
-            disableTransitionOnChange={false}
-          >
-            <Navigation />
-            <main className="min-h-screen">
-              {children}
-            </main>
-            <Footer />
-          </ThemeProvider>
-        </TooltipProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          <Navigation />
+          <main className="min-h-screen">
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
