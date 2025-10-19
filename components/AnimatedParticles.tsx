@@ -131,7 +131,7 @@ export const AnimatedParticles = ({ className = "" }: { className?: string }) =>
       }}
     />
     <motion.div
-      className="absolute w-2.5 h-2.5 rounded-full bg-gradient-to-r from-orange-400/50 to-yellow-400/50"
+      className="absolute w-2.5 h-2.5 rounded-full bg-gradient-to-r from-green-400/50 to-emerald-400/50"
       style={{ left: '25%', top: '85%' }}
       animate={{
         scale: [1, 1.8, 1],
@@ -188,7 +188,7 @@ export const AnimatedParticles = ({ className = "" }: { className?: string }) =>
       }}
     />
     <motion.div
-      className="absolute w-1.5 h-1.5 rounded-full bg-gradient-to-r from-orange-400/50 to-yellow-400/50"
+      className="absolute w-1.5 h-1.5 rounded-full bg-gradient-to-r from-green-400/50 to-emerald-400/50"
       style={{ left: '90%', top: '50%' }}
       animate={{
         scale: [1, 1.6, 1],
@@ -420,7 +420,7 @@ export const AnimatedParticles = ({ className = "" }: { className?: string }) =>
       }}
     />
     <motion.div
-      className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-orange-400/60 to-yellow-400/60"
+      className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-green-400/60 to-emerald-400/60"
       style={{ left: '95%', top: '25%' }}
       animate={{
         scale: [1, 1.5, 1],
@@ -562,7 +562,7 @@ export const AnimatedParticles = ({ className = "" }: { className?: string }) =>
       }}
     />
     <motion.div
-      className="absolute w-0.5 h-0.5 rounded-full bg-gradient-to-r from-yellow-300/82 to-orange-300/82"
+      className="absolute w-0.5 h-0.5 rounded-full bg-gradient-to-r from-emerald-300/82 to-green-300/82"
       style={{ left: '35%', top: '90%' }}
       animate={{
         scale: [1, 2, 1],
@@ -636,7 +636,7 @@ export const AnimatedParticles = ({ className = "" }: { className?: string }) =>
       }}
     />
     <motion.div
-      className="absolute w-0.5 h-0.5 rounded-full bg-gradient-to-r from-orange-300/65 to-yellow-300/65"
+      className="absolute w-0.5 h-0.5 rounded-full bg-gradient-to-r from-green-300/65 to-emerald-300/65"
       style={{ left: '15%', top: '65%' }}
       animate={{
         y: [4, -4, 4],

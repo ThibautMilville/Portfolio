@@ -111,7 +111,7 @@ export default function Navigation() {
             <Link href="/" className="flex items-center">
               <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105">
                 <LocalImage
-                  imageName="photo_profil.jpg"
+                  imageName="photo_profil.png"
                   alt="Thibaut Milville"
                   className="w-full h-full object-cover"
                 />

@@ -580,10 +580,10 @@ export default function Projets() {
             </div>
             <div className="p-8 md:p-10 rounded-3xl border bg-gradient-to-br from-card to-background/60 shadow-md min-h-[160px] flex flex-col justify-center">
               <div className="flex items-center gap-4 mb-3">
-                <div className="p-2 rounded-lg bg-orange-500/10 text-orange-600">
+                <div className="p-2 rounded-lg bg-green-500/10 text-green-600">
                   <Hourglass className="h-6 w-6" />
                 </div>
-                <div className="text-3xl md:text-4xl font-extrabold text-orange-600">
+                <div className="text-3xl md:text-4xl font-extrabold text-green-600">
                   6+
                 </div>
               </div>

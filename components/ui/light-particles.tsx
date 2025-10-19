@@ -63,7 +63,7 @@ const LightParticles = ({ className = "" }: { className?: string }) => (
       }}
     />
     <motion.div
-      className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-orange-400/35 to-yellow-400/35"
+      className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-green-400/35 to-emerald-400/35"
       style={{ left: '95%', top: '80%' }}
       animate={{
         scale: [1, 1.4, 1],
@@ -107,7 +107,7 @@ const LightParticles = ({ className = "" }: { className?: string }) => (
       }}
     />
     <motion.div
-      className="absolute w-1 h-1 rounded-full bg-gradient-to-r from-orange-400/45 to-yellow-400/45"
+      className="absolute w-1 h-1 rounded-full bg-gradient-to-r from-green-400/45 to-emerald-400/45"
       style={{ left: '30%', top: '85%' }}
       animate={{
         scale: [1, 1.8, 1],
@@ -281,7 +281,7 @@ const LightParticles = ({ className = "" }: { className?: string }) => (
       }}
     />
     <motion.div
-      className="absolute w-0.5 h-0.5 rounded-full bg-gradient-to-r from-orange-300/60 to-yellow-300/60"
+      className="absolute w-0.5 h-0.5 rounded-full bg-gradient-to-r from-green-300/60 to-emerald-300/60"
       style={{ left: '15%', top: '70%' }}
       animate={{
         y: [-6, 6, -6],
@@ -355,7 +355,7 @@ const LightParticles = ({ className = "" }: { className?: string }) => (
       }}
     />
     <motion.div
-      className="absolute w-0.5 h-0.5 rounded-full bg-gradient-to-r from-orange-400/70 to-yellow-400/70"
+      className="absolute w-0.5 h-0.5 rounded-full bg-gradient-to-r from-green-400/70 to-emerald-400/70"
       style={{ left: '95%', top: '35%' }}
       animate={{
         scale: [1, 2, 1],
@@ -429,7 +429,7 @@ const LightParticles = ({ className = "" }: { className?: string }) => (
       }}
     />
     <motion.div
-      className="absolute w-1 h-1 rounded-full bg-gradient-to-r from-amber-400/60 to-orange-400/60"
+      className="absolute w-1 h-1 rounded-full bg-gradient-to-r from-emerald-400/60 to-green-400/60"
       style={{ left: '78%', top: '8%' }}
       animate={{
         scale: [1, 1.8, 1],
@@ -515,7 +515,7 @@ const LightParticles = ({ className = "" }: { className?: string }) => (
       }}
     />
     <motion.div
-      className="absolute w-0.5 h-0.5 rounded-full bg-gradient-to-r from-orange-300/60 to-amber-300/60"
+      className="absolute w-0.5 h-0.5 rounded-full bg-gradient-to-r from-green-300/60 to-emerald-300/60"
       style={{ left: '38%', top: '78%' }}
       animate={{
         y: [-3, 3, -3],
@@ -560,7 +560,7 @@ const LightParticles = ({ className = "" }: { className?: string }) => (
       }}
     />
     <motion.div
-      className="absolute w-0.5 h-0.5 rounded-full bg-gradient-to-r from-yellow-300/55 to-orange-300/55"
+      className="absolute w-0.5 h-0.5 rounded-full bg-gradient-to-r from-emerald-300/55 to-green-300/55"
       style={{ left: '88%', top: '68%' }}
       animate={{
         y: [4, -4, 4],

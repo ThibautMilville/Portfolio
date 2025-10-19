@@ -83,7 +83,7 @@ export default function ObjectivesSection() {
             viewport={{ once: true }}
             className="text-center p-6 rounded-2xl border bg-card/50 backdrop-blur-sm hover:shadow-lg transition-all duration-300"
           >
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-500/10 text-orange-500 mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-500/10 text-green-500 mb-4">
               <Eye className="h-8 w-8" />
             </div>
             <h3 className="text-xl font-semibold mb-3">Vision Long Terme</h3>

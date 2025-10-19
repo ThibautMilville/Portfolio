@@ -250,7 +250,7 @@ const skillCategories = [
     description: "Compétences en design et outils de productivité",
     icon: <Palette className="h-6 w-6" />,
     category: "Tools and software",
-    color: "from-orange-500/20 to-red-500/20",
+    color: "from-green-500/20 to-emerald-500/20",
   },
 ];
 
