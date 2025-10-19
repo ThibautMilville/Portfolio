@@ -32,8 +32,8 @@ interface ProjectCarouselProps {
 const statusColors: Record<string, string> = {
   'Terminé': 'bg-green-500/90 text-white',
   'En cours': 'bg-yellow-500/90 text-white',
-  'En pause': 'bg-orange-500/90 text-white',
-  'Annulé': 'bg-red-500/90 text-white',
+  'En pause': 'bg-green-500/90 text-white',
+  'Annulé': 'bg-green-500/90 text-white',
 };
 
 export default function ProjectCarousel({ projects, isFeatured = false }: ProjectCarouselProps) {

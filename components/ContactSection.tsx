@@ -259,8 +259,8 @@ export default function ContactSection() {
                   <div className="flex items-center justify-between">
                     <span className="text-sm">Missions longues</span>
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                      <span className="text-sm text-orange-600">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span className="text-sm text-green-600">
                         Sur demande
                       </span>
                     </div>

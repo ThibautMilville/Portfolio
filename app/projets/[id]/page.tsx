@@ -265,7 +265,7 @@ export default function ProjectPage() {
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <AlertCircle className="h-5 w-5 text-orange-500" />
+                    <AlertCircle className="h-5 w-5 text-green-500" />
                     Défis rencontrés
                   </CardTitle>
                 </CardHeader>
@@ -276,7 +276,7 @@ export default function ProjectPage() {
                         key={index}
                         className="flex items-start gap-2 text-sm"
                       >
-                        <div className="w-1.5 h-1.5 rounded-full bg-orange-500 mt-2 flex-shrink-0" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-2 flex-shrink-0" />
                         {challenge}
                       </li>
                     ))}
