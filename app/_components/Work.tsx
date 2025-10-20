@@ -1,6 +1,6 @@
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
-import DigitalLabsLogo from "../../public/logos/digitallabs_tm_logo.jpeg";
+import DigitalLabsLogo from "../../public/images/company/logo-digitallabs.png";
 import OsmozLogo from "../../public/logos/osmoz_com_logo.jpeg";
 import SNCFVoyageursLogo from "../../public/logos/sncf_voyageurs_logo.jpeg";
 

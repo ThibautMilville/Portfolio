@@ -15,6 +15,7 @@ import Link from "next/link";
 import { Typewriter } from "@/components/ui/typewriter";
 import { AnimatedParticles } from "./AnimatedParticles";
 import { LocalImage } from "@/components/ui/image";
+import { Tooltip } from "@/components/ui/tooltip";
 
 export default function HeroSection() {
   return (
@@ -226,44 +227,50 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex gap-6 justify-center"
           >
-            <Button
-              variant="ghost"
-              size="icon"
-              asChild
-              className="hover:scale-110 transition-transform"
-            >
-              <a
-                href="https://github.com/ThibautMilville"
-                target="_blank"
-                rel="noopener noreferrer"
+            <Tooltip content="GitHub">
+              <Button
+                variant="ghost"
+                size="icon"
+                asChild
+                className="hover:scale-110 transition-transform"
               >
-                <Github className="h-5 w-5" />
-              </a>
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              asChild
-              className="hover:scale-110 transition-transform"
-            >
-              <a
-                href="https://fr.linkedin.com/in/thibaut-milville"
-                target="_blank"
-                rel="noopener noreferrer"
+                <a
+                  href="https://github.com/ThibautMilville"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Github className="h-5 w-5" />
+                </a>
+              </Button>
+            </Tooltip>
+            <Tooltip content="LinkedIn">
+              <Button
+                variant="ghost"
+                size="icon"
+                asChild
+                className="hover:scale-110 transition-transform"
               >
-                <Linkedin className="h-5 w-5" />
-              </a>
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              asChild
-              className="hover:scale-110 transition-transform"
-            >
-              <Link href="/contact">
-                <Mail className="h-5 w-5" />
-              </Link>
-            </Button>
+                <a
+                  href="https://fr.linkedin.com/in/thibaut-milville"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Linkedin className="h-5 w-5" />
+                </a>
+              </Button>
+            </Tooltip>
+            <Tooltip content="Contact">
+              <Button
+                variant="ghost"
+                size="icon"
+                asChild
+                className="hover:scale-110 transition-transform"
+              >
+                <Link href="/contact">
+                  <Mail className="h-5 w-5" />
+                </Link>
+              </Button>
+            </Tooltip>
           </motion.div>
         </div>
       </div>

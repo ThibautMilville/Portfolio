@@ -40,7 +40,7 @@ const companyLogos = [
   },
   {
     name: 'DigitalLabs TM',
-    src: '/images/company/digitallabs_tm_logo.jpeg',
+    src: '/images/company/logo-digitallabs.png',
     alt: 'DigitalLabs TM',
     linkedinUrl: 'https://www.linkedin.com/company/digitallabs-tm',
   },

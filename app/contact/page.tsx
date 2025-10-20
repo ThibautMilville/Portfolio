@@ -22,6 +22,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import LightParticles from "@/components/ui/light-particles";
+import { Tooltip } from "@/components/ui/tooltip";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -225,48 +226,54 @@ export default function Contact() {
             <div>
               <h3 className="text-xl font-semibold mb-4">Réseaux sociaux</h3>
               <div className="flex gap-4">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  asChild
-                  className="sweep-light"
-                >
-                  <a
-                    href="https://github.com/ThibautMilville"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                <Tooltip content="GitHub">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    asChild
+                    className="hover:scale-110 transition-transform"
                   >
-                    <Github className="h-5 w-5" />
-                  </a>
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  asChild
-                  className="sweep-light"
-                >
-                  <a
-                    href="https://fr.linkedin.com/in/thibaut-milville"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    <a
+                      href="https://github.com/ThibautMilville"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Github className="h-5 w-5" />
+                    </a>
+                  </Button>
+                </Tooltip>
+                <Tooltip content="LinkedIn">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    asChild
+                    className="hover:scale-110 transition-transform"
                   >
-                    <Linkedin className="h-5 w-5" />
-                  </a>
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  asChild
-                  className="sweep-light"
-                >
-                  <a
-                    href="https://t.me/Thybow"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    <a
+                      href="https://fr.linkedin.com/in/thibaut-milville"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Linkedin className="h-5 w-5" />
+                    </a>
+                  </Button>
+                </Tooltip>
+                <Tooltip content="Telegram">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    asChild
+                    className="hover:scale-110 transition-transform"
                   >
-                    <MessageCircle className="h-5 w-5" />
-                  </a>
-                </Button>
+                    <a
+                      href="https://t.me/Thybow"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <MessageCircle className="h-5 w-5" />
+                    </a>
+                  </Button>
+                </Tooltip>
               </div>
             </div>
 

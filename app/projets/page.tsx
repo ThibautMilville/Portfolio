@@ -23,7 +23,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { getAllProjects } from "@/lib/data";
+import { getAllProjects, getProjectSlug } from "@/lib/data";
 import ProjectFilters, {
   ProjectFilterState,
 } from "@/components/ProjectFilters";
@@ -331,7 +331,7 @@ export default function Projets() {
               id={projet.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
             >
               <Link
-                href={`/projets/${projet.id}`}
+                href={`/projets/${getProjectSlug(projet)}`}
                 onClick={() => {
                   if (typeof window !== "undefined") {
                     try {
@@ -364,7 +364,7 @@ export default function Projets() {
                     <div className="absolute top-4 right-4">
                       <Badge
                         variant="secondary"
-                        className="bg-background/80 text-foreground border border-border/50 backdrop-blur px-2 py-1"
+                        className="bg-background/80 text-foreground dark:bg-black dark:text-white border border-border/50 backdrop-blur px-2 py-1"
                       >
                         {projet.category}
                       </Badge>

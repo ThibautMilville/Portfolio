@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Project } from '@/lib/data';
+import { getProjectSlug } from '@/lib/data';
 
 interface ProjectCarouselMiniProps {
   projects: Project[];
@@ -68,7 +69,7 @@ export default function ProjectCarouselMini({ projects, itemsPerView = 2 }: Proj
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
               >
-                <Link href={`/projets/${project.id}`} className="group">
+                <Link href={`/projets/${getProjectSlug(project)}`} className="group">
                   <div className="p-3 rounded-lg border hover:border-primary/50 hover:bg-primary/5 transition-all cursor-pointer h-full">
                     <div className="flex items-start justify-between mb-2">
                       <h5 className="font-medium text-sm group-hover:text-primary transition-colors line-clamp-1">

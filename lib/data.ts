@@ -1,6 +1,8 @@
+import { slugify } from "./utils";
 export interface Project {
   id: number;
   title: string;
+  slug?: string;
   description: string;
   longDescription: string;
   image: string;
@@ -62,7 +64,7 @@ export const experiences: Experience[] = [
     title: "Moderator",
     company: "Ultra",
     location: "Ville de Paris, Île-de-France, France · Remote",
-    date: "Mar 2025 - Présent",
+    date: "Mar 2025 - Oct 2025",
     description: "Moderating international communities, organizing events and helping users. Participating in Black Ice Studios (Ashes of Mankind) game social networks moderation.",
     technologies: ["Community Management", "Event Organization", "Social Media Moderation", "International Communities", "Gaming Industry", "Online Community Moderation"],
     achievements: [
@@ -143,7 +145,7 @@ export const experiences: Experience[] = [
     ],
     projectIds: [],
     relatedFormationIds: [1, 2, 3],
-    logoUrl: "/images/company/digitallabs_tm_logo.jpeg"
+    logoUrl: "/images/company/logo-digitallabs.png"
   },
   {
     id: 2,
@@ -237,7 +239,7 @@ export const formations: Formation[] = [
   {
     id: 1,
     title: "Master's degree (MAALSI)",
-    institution: "CESI",
+    institution: "CESI Nanterre",
     location: "France",
     date: "Sep 2024 - Sep 2026",
     description: "Master en informatique spécialisé en développement et architectures logicielles.",
@@ -251,7 +253,7 @@ export const formations: Formation[] = [
   {
     id: 2,
     title: "Bachelor's degree (CDA)",
-    institution: "CESI",
+    institution: "CESI Nanterre",
     location: "France",
     date: "Sep 2023 - Sep 2024",
     description: "Learn advanced web development techniques, with some DevOps concepts (planning, continuous integration, automated tests...)",
@@ -854,7 +856,6 @@ export const projects: Project[] = [
     demo: "https://launchpad-2ycml.ondigitalocean.app/",
     category: "Web3",
     relatedExperienceId: 8,
-    relatedFormationIds: [3],
     screenshots: [
       "/images/projects/ut-launchpad/ut-launchpad_1.png",
       "/images/projects/ut-launchpad/ut-launchpad_2.png",
@@ -973,6 +974,14 @@ export const projects: Project[] = [
 
 export function getProjectById(id: number): Project | undefined {
   return projects.find(project => project.id === id);
+}
+
+export function getProjectBySlug(slug: string): Project | undefined {
+  return projects.find(project => (project.slug ?? slugify(project.title)) === slug);
+}
+
+export function getProjectSlug(project: Project): string {
+  return project.slug ?? slugify(project.title);
 }
 
 export function getAllProjects(): Project[] {
