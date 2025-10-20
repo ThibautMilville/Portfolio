@@ -4,13 +4,6 @@ import { useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -99,27 +92,57 @@ export default function ProjectFilters({
       </div>
       {/* Ligne 2 : filtres sous la barre (grid responsive) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-3 items-center">
-        <Select
-          value={value.organization}
-          onValueChange={(v) =>
-            onChange({
-              ...value,
-              organization: v as ProjectFilterState["organization"],
-            })
-          }
+        <Popover
+          onOpenChange={(open) => {
+            if (!open) {
+              try {
+                (document.activeElement as HTMLElement)?.blur?.();
+              } catch {}
+            }
+          }}
         >
-          <SelectTrigger className="w-full rounded-full h-11 justify-center text-center focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none">
-            <SelectValue placeholder="Organisation" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">Organisation</SelectItem>
-            {organizations.map((org) => (
-              <SelectItem key={org} value={org}>
-                {org}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
+            >
+              {value.organization === "all" ? "Organisation" : value.organization}
+              {value.organization !== "all" ? (
+                <Badge variant="secondary" className="ml-2">
+                  1
+                </Badge>
+              ) : null}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto max-w-[90vw] sm:max-w-md md:max-w-lg">
+            <div className="flex flex-col gap-2 max-h-60 overflow-auto pr-1">
+              <button
+                className={`text-left text-sm px-2 py-1 rounded hover:bg-accent ${
+                  value.organization === "all" ? "bg-accent" : ""
+                }`}
+                onClick={() => onChange({ ...value, organization: "all" })}
+              >
+                Toutes les organisations
+              </button>
+              {organizations.map((org) => (
+                <button
+                  key={org}
+                  className={`text-left text-sm px-2 py-1 rounded hover:bg-accent ${
+                    value.organization === org ? "bg-accent" : ""
+                  }`}
+                  onClick={() =>
+                    onChange({
+                      ...value,
+                      organization: org as ProjectFilterState["organization"],
+                    })
+                  }
+                >
+                  {org}
+                </button>
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
 
         {/* Catégories avec recherche */}
         <Popover
@@ -145,7 +168,7 @@ export default function ProjectFilters({
               ) : null}
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-80">
+          <PopoverContent className="w-auto max-w-[90vw] sm:max-w-md md:max-w-lg">
             <div className="mb-2">
               <Input
                 value={catQuery}
@@ -185,24 +208,6 @@ export default function ProjectFilters({
           </PopoverContent>
         </Popover>
 
-        <Select
-          value={value.status}
-          onValueChange={(v) =>
-            onChange({ ...value, status: v as ProjectFilterState["status"] })
-          }
-        >
-          <SelectTrigger className="w-full rounded-full h-11 justify-center text-center focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none">
-            <SelectValue placeholder="Statut" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">Statut</SelectItem>
-            <SelectItem value="Terminé">Terminé</SelectItem>
-            <SelectItem value="En cours">En cours</SelectItem>
-            <SelectItem value="En pause">En pause</SelectItem>
-          </SelectContent>
-        </Select>
-
-        {/* Technologies avec recherche intégrée */}
         <Popover
           onOpenChange={(open) => {
             if (!open) {
@@ -217,6 +222,67 @@ export default function ProjectFilters({
               variant="outline"
               className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
             >
+              {value.status === "all" ? "Statut" : value.status}
+              {value.status !== "all" ? (
+                <Badge variant="secondary" className="ml-2">
+                  1
+                </Badge>
+              ) : null}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto max-w-[90vw] sm:max-w-md md:max-w-lg">
+            <div className="flex flex-col gap-2 max-h-60 overflow-auto pr-1">
+              <button
+                className={`text-left text-sm px-2 py-1 rounded hover:bg-accent ${
+                  value.status === "all" ? "bg-accent" : ""
+                }`}
+                onClick={() => onChange({ ...value, status: "all" })}
+              >
+                Tous les statuts
+              </button>
+              <button
+                className={`text-left text-sm px-2 py-1 rounded hover:bg-accent ${
+                  value.status === "Terminé" ? "bg-accent" : ""
+                }`}
+                onClick={() => onChange({ ...value, status: "Terminé" })}
+              >
+                Terminé
+              </button>
+              <button
+                className={`text-left text-sm px-2 py-1 rounded hover:bg-accent ${
+                  value.status === "En cours" ? "bg-accent" : ""
+                }`}
+                onClick={() => onChange({ ...value, status: "En cours" })}
+              >
+                En cours
+              </button>
+              <button
+                className={`text-left text-sm px-2 py-1 rounded hover:bg-accent ${
+                  value.status === "En pause" ? "bg-accent" : ""
+                }`}
+                onClick={() => onChange({ ...value, status: "En pause" })}
+              >
+                En pause
+              </button>
+            </div>
+          </PopoverContent>
+        </Popover>
+
+        {/* Technologies avec recherche intégrée */}
+        <Popover
+          onOpenChange={(open) => {
+            if (!open) {
+              try {
+                (document.activeElement as HTMLElement)?.blur?.();
+              } catch {}
+            }
+          }}
+        >
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none cursor-pointer"
+            >
               <SlidersHorizontal className="mr-2 h-4 w-4" />
               Technologies{" "}
               {techCount ? (
@@ -226,7 +292,7 @@ export default function ProjectFilters({
               ) : null}
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-80">
+          <PopoverContent className="w-auto max-w-[90vw] sm:max-w-md md:max-w-lg">
             <div className="mb-2">
               <Input
                 value={techQuery}
@@ -243,9 +309,9 @@ export default function ProjectFilters({
                 .map((tech) => {
                   const checked = value.techs.includes(tech);
                   return (
-                    <label
+                  <label
                       key={tech}
-                      className="flex items-center gap-2 text-sm"
+                      className="flex items-center gap-2 text-sm cursor-pointer"
                     >
                       <Checkbox
                         checked={checked}
@@ -277,7 +343,7 @@ export default function ProjectFilters({
           <PopoverTrigger asChild>
             <Button
               variant="outline"
-              className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
+              className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none cursor-pointer"
             >
               <SlidersHorizontal className="mr-2 h-4 w-4" />
               Années{" "}
@@ -288,7 +354,7 @@ export default function ProjectFilters({
               ) : null}
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-80">
+          <PopoverContent className="w-auto max-w-[90vw] sm:max-w-md md:max-w-lg">
             <div className="mb-2">
               <Input
                 value={yearQuery}
@@ -305,7 +371,7 @@ export default function ProjectFilters({
                 .map((y) => {
                   const checked = value.years.includes(y);
                   return (
-                    <label key={y} className="flex items-center gap-2 text-sm">
+                  <label key={y} className="flex items-center gap-2 text-sm cursor-pointer">
                       <Checkbox
                         checked={checked}
                         onCheckedChange={(c) => {
@@ -347,7 +413,7 @@ export default function ProjectFilters({
           </Badge>
         )}
         {value.category !== "all" && (
-          <Badge variant="secondary" className="px-3 py-1">
+          <Badge variant="secondary" className="px-3 py-1 dark:bg-black dark:text-white">
             {value.category}
             <button
               className="ml-2"

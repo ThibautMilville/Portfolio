@@ -9,7 +9,7 @@ import { TelegramIcon } from "./icons/TelegramIcon";
 
 export const Header = () => {
   return (
-    <header className="sticky top-0 py-4">
+    <header className="sticky top-0 py-4 z-40">
       <Section className="flex items-baseline">
         <h1 className="text-lg font-bold text-primary">Portfolio</h1>
         <div className="flex-1" />

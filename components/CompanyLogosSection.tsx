@@ -21,7 +21,7 @@ export default function CompanyLogosSection({ logos }: CompanyLogosSectionProps)
       <LightParticles />
       <div className="max-w-5xl mx-auto relative z-10">
         <h3 className="text-center text-xl font-bold mb-8 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-          Ils m'ont fait confiance
+          Ils m'ont fait confiance...
         </h3>
         <div className="relative">
           {/* Background glow effect */}

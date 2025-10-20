@@ -90,7 +90,7 @@ export default function LogoCarousel({ logos, speed = 30 }: LogoCarouselProps) {
                         <motion.img
                           src={logo.src}
                           alt={logo.alt}
-                          className="h-20 w-auto grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-500 cursor-pointer filter drop-shadow-lg hover:drop-shadow-2xl"
+                          className="h-20 w-auto opacity-90 hover:opacity-100 transition-all duration-500 cursor-pointer filter drop-shadow-lg hover:drop-shadow-2xl"
                           whileHover={{
                             filter: "drop-shadow(0 12px 24px rgba(0,0,0,0.25))"
                           }}
@@ -100,7 +100,7 @@ export default function LogoCarousel({ logos, speed = 30 }: LogoCarouselProps) {
                       <motion.img
                         src={logo.src}
                         alt={logo.alt}
-                        className="h-20 w-auto grayscale opacity-80 hover:opacity-100 hover:grayscale-0 transition-all duration-500 cursor-pointer filter drop-shadow-lg hover:drop-shadow-2xl"
+                        className="h-20 w-auto opacity-90 hover:opacity-100 transition-all duration-500 cursor-pointer filter drop-shadow-lg hover:drop-shadow-2xl"
                         whileHover={{
                           filter: "drop-shadow(0 12px 24px rgba(0,0,0,0.25))"
                         }}
