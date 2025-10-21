@@ -54,7 +54,7 @@ export default function Projets() {
   const organizations = useMemo(() => {
     // Dérive depuis experiences liées + mots-clés dans category
     const orgs = new Set<string>();
-    projets.forEach((p) => {
+    projets.forEach((p: any) => {
       // Heuristique simple: mappe quelques IDs connus
       if (p.relatedExperienceId) {
         if ([1, 2].includes(p.relatedExperienceId)) orgs.add("SNCF Voyageurs");
@@ -67,33 +67,33 @@ export default function Projets() {
 
   const technologies = useMemo(() => {
     const set = new Set<string>();
-    projets.forEach((p) => p.technologies.forEach((t) => set.add(t)));
+    projets.forEach((p: any) => p.technologies.forEach((t: string) => set.add(t)));
     return Array.from(set).sort();
   }, []);
 
   const years = useMemo(() => {
     const set = new Set<string>();
-    projets.forEach((p) => {
+    projets.forEach((p: any) => {
       const match = p.date.match(/\d{4}/g);
-      if (match) match.forEach((y) => set.add(y));
+      if (match) match.forEach((y: string) => set.add(y));
     });
     return Array.from(set).sort().reverse();
   }, []);
 
   const categories = useMemo(() => {
     const set = new Set<string>();
-    projets.forEach((p) => set.add(p.category));
+    projets.forEach((p: any) => set.add(p.category));
     return Array.from(set).sort();
   }, []);
 
   const totalProjects = projets.length;
   const web3Count = useMemo(
-    () => projets.filter((p) => p.category === "Web3").length,
+    () => projets.filter((p: any) => p.category === "Web3").length,
     []
   );
 
   const filtered = useMemo(() => {
-    return projets.filter((p) => {
+    return projets.filter((p: any) => {
       if (filters.search) {
         const q = filters.search.toLowerCase();
         const hay = [
@@ -398,7 +398,7 @@ export default function Projets() {
                         Fonctionnalités clés :
                       </h4>
                       <ul className="space-y-1">
-                        {projet.features.slice(0, 3).map((feature, idx) => (
+                        {projet.features.slice(0, 3).map((feature: string, idx: number) => (
                           <li
                             key={idx}
                             className="flex items-start gap-2 text-xs text-muted-foreground truncate"
@@ -415,7 +415,7 @@ export default function Projets() {
                         Technologies :
                       </h4>
                       <div className="flex flex-nowrap items-center gap-1 overflow-hidden min-w-0">
-                        {projet.technologies.slice(0, 4).map((tech) => (
+                        {projet.technologies.slice(0, 4).map((tech: string) => (
                           <Badge
                             key={tech}
                             variant="outline"

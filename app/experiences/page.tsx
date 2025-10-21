@@ -233,7 +233,7 @@ export default function Experiences() {
 
                 <Card className="ml-16 hover:shadow-lg transition-shadow">
                   <CardHeader>
-                    <div className="flex items-start justify-between">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                       <div className="flex items-start gap-4">
                         {group.logoUrl ? (
                           <img
@@ -246,7 +246,7 @@ export default function Experiences() {
                             <Building className="h-6 w-6 text-primary" />
                           </div>
                         )}
-                        <div className="flex-1">
+                        <div className="flex-1 min-w-0">
                           <CardTitle className="text-xl mb-2">
                             {group.company}
                           </CardTitle>
@@ -257,7 +257,7 @@ export default function Experiences() {
                           </CardDescription>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 flex-shrink-0">
+                      <div className="flex items-center justify-start sm:justify-end gap-2 flex-shrink-0">
                         {group.experiences.length > 1 && (
                           <Button
                             variant="ghost"
@@ -272,7 +272,7 @@ export default function Experiences() {
                             )}
                           </Button>
                         )}
-                        <Badge variant="outline">
+                        <Badge variant="outline" className="text-sm">
                           {group.experiences.length > 1
                             ? "Multiples postes"
                             : group.experiences[0].title.includes("Freelance")
@@ -345,7 +345,7 @@ export default function Experiences() {
                               <ul className="space-y-1">
                                 {exp.achievements
                                   .slice(0, 3)
-                                  .map((achievement, idx) => (
+                                  .map((achievement: string, idx: number) => (
                                     <li
                                       key={idx}
                                       className="flex items-start gap-2 text-xs text-muted-foreground"
@@ -358,7 +358,7 @@ export default function Experiences() {
                             </div>
 
                             <div className="flex flex-wrap gap-1">
-                              {exp.technologies.slice(0, 6).map((tech) => (
+                              {exp.technologies.slice(0, 6).map((tech: string) => (
                                 <Badge
                                   key={tech}
                                   variant="secondary"
@@ -391,7 +391,7 @@ export default function Experiences() {
                           </h4>
                           <ul className="space-y-2">
                             {group.experiences[0].achievements.map(
-                              (achievement, idx) => (
+                              (achievement: string, idx: number) => (
                                 <li
                                   key={idx}
                                   className="flex items-start gap-2 text-sm text-muted-foreground"
@@ -409,7 +409,7 @@ export default function Experiences() {
                             Technologies utilisées :
                           </h4>
                           <div className="flex flex-wrap gap-2">
-                            {group.experiences[0].technologies.map((tech) => (
+                            {group.experiences[0].technologies.map((tech: string) => (
                               <Badge
                                 key={tech}
                                 variant="secondary"
@@ -506,7 +506,7 @@ export default function Experiences() {
             <div className="text-center p-6 rounded-2xl border bg-card">
               <div className="text-2xl font-bold text-primary mb-1">
                 {getAllExperiences().reduce(
-                  (acc, exp) => acc + exp.technologies.length,
+                  (acc: number, exp: any) => acc + exp.technologies.length,
                   0
                 )}
                 +

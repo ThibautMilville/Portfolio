@@ -281,7 +281,7 @@ export default function ExperienceCarousel({ experiences }: ExperienceCarouselPr
                             ) : null}
                             {exp.technologies && exp.technologies.length > 0 ? (
                               <div className="flex flex-wrap gap-2 mt-2">
-                                {exp.technologies.map((tech, idx) => (
+                                {exp.technologies.map((tech: string, idx: number) => (
                                   <span key={idx} className="px-3 py-1 bg-zinc-800/80 dark:bg-zinc-800/80 bg-gray-100/80 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 text-zinc-100 dark:text-zinc-100 text-gray-700 font-medium rounded-full text-xs">
                                     {tech}
                                   </span>
