@@ -75,6 +75,33 @@ export default function Navigation() {
     }
   }, [isOpen]);
 
+  // Fermer le menu mobile avec la touche Escape
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("keydown", handleKeyDown);
+      return () => document.removeEventListener("keydown", handleKeyDown);
+    }
+  }, [isOpen]);
+
+  // Empêcher le scroll du body quand le menu est ouvert
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
   useEffect(() => {
     try {
       const stored = localStorage.getItem("locale");
@@ -188,7 +215,7 @@ export default function Navigation() {
 
           {/* Language & Theme & Mobile Menu */}
           <motion.div
-            className="nav-glass__actions flex items-center gap-4"
+            className="nav-glass__actions flex items-center gap-2 md:gap-4"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
@@ -199,7 +226,7 @@ export default function Navigation() {
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="outline"
-                    className="h-9 w-[80px] rounded-full px-3 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none bg-background/20 backdrop-blur-sm border-white/20 hover:bg-background/30 transition-all duration-200"
+                    className="language-selector-trigger h-9 w-[80px] rounded-full px-3 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none bg-background/20 backdrop-blur-sm border-white/20 hover:bg-background/30 transition-colors duration-200"
                   >
                     <span className="mr-2">
                       {locale === "fr" ? (
@@ -216,10 +243,10 @@ export default function Navigation() {
                 <DropdownMenuContent
                   align="center"
                   sideOffset={6}
-                  className="w-fit min-w-[120px] text-center bg-background/95 backdrop-blur-md border-white/20 z-[99999]"
+                  className="w-fit min-w-[120px] text-center bg-background/95 backdrop-blur-md border-white/20 z-[99999] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
                 >
                   <DropdownMenuItem
-                    className="justify-center hover:bg-primary/10 transition-colors"
+                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 focus:bg-transparent"
                     onClick={() => {
                       setLocale("fr");
                       try {
@@ -236,7 +263,66 @@ export default function Navigation() {
                     <span>Français</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    className="justify-center hover:bg-primary/10 transition-colors"
+                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 focus:bg-transparent"
+                    onClick={() => {
+                      setLocale("en");
+                      try {
+                        localStorage.setItem("locale", "en");
+                      } catch {}
+                      try {
+                        (document.activeElement as HTMLElement)?.blur?.();
+                      } catch {}
+                    }}
+                  >
+                    <span className="mr-2">
+                      <BritishFlagIcon className="w-4 h-4" />
+                    </span>
+                    <span>English</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+
+            {/* Language Switcher (mobile) - Compact version */}
+            <div className="md:hidden">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="language-selector-trigger h-9 w-9 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none bg-background/20 backdrop-blur-sm border-white/20 hover:bg-background/30 transition-colors duration-200"
+                  >
+                    {locale === "fr" ? (
+                      <FrenchFlagIcon className="w-4 h-4" />
+                    ) : (
+                      <BritishFlagIcon className="w-4 h-4" />
+                    )}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="end"
+                  sideOffset={6}
+                  className="w-fit min-w-[120px] text-center bg-background/95 backdrop-blur-md border-white/20 z-[99999] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
+                >
+                  <DropdownMenuItem
+                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 focus:bg-transparent"
+                    onClick={() => {
+                      setLocale("fr");
+                      try {
+                        localStorage.setItem("locale", "fr");
+                      } catch {}
+                      try {
+                        (document.activeElement as HTMLElement)?.blur?.();
+                      } catch {}
+                    }}
+                  >
+                    <span className="mr-2">
+                      <FrenchFlagIcon className="w-4 h-4" />
+                    </span>
+                    <span>Français</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 focus:bg-transparent"
                     onClick={() => {
                       setLocale("en");
                       try {
@@ -293,8 +379,8 @@ export default function Navigation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mobile-menu-glass"
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
             onClick={(e) => {
               // Fermer seulement si on clique sur l'overlay (pas sur le contenu)
               if (e.target === e.currentTarget) {
@@ -306,118 +392,96 @@ export default function Navigation() {
             aria-label="Menu de navigation"
           >
             <motion.nav
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: "-100%" }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-              className="mobile-nav-glass"
+              exit={{ opacity: 0, y: "-100%" }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="fixed top-0 left-0 right-0 w-full bg-background/95 backdrop-blur-md border-b border-white/10 shadow-2xl flex flex-col z-50"
               onClick={(e) => e.stopPropagation()}
               role="navigation"
               aria-label="Navigation mobile"
             >
-              {/* Bouton de fermeture */}
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={toggleMenu}
-                className="mobile-close-button h-10 w-10 hover:scale-110 transition-transform duration-200"
-                aria-label="Fermer le menu"
-              >
-                <X className="h-5 w-5" />
-              </Button>
-              {[
-                { href: "/", label: messages[locale].home, icon: Home },
-                {
-                  href: "/formations",
-                  label: messages[locale].formations,
-                  icon: GraduationCap,
-                },
-                {
-                  href: "/experiences",
-                  label: messages[locale].experiences,
-                  icon: Briefcase,
-                },
-                {
-                  href: "/projets",
-                  label: messages[locale].projects,
-                  icon: Code2,
-                },
-                {
-                  href: "/contact",
-                  label: messages[locale].contact,
-                  icon: Mail,
-                },
-              ].map((item) => {
-                const Icon = item.icon;
-                const isActive = pathname === item.href;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={toggleMenu}
-                    className={cn(
-                      "nav-link-glass flex items-center justify-center gap-3 px-6 py-4 rounded-lg text-base font-medium transition-all duration-200",
-                      isActive
-                        ? "bg-primary/20 text-primary border border-primary/30"
-                        : "text-muted-foreground hover:text-foreground hover:bg-white/10"
-                    )}
-                  >
-                    <Icon className="h-5 w-5" />
-                    <span>{item.label}</span>
-                  </Link>
-                );
-              })}
-
-              {/* Language Switcher (mobile) */}
-              <div className="pt-6 border-t border-white/10 w-full">
-                <div className="flex flex-col items-center gap-4">
-                  <span className="text-sm text-muted-foreground font-medium">
-                    Choisir la langue
-                  </span>
-                  <div className="flex gap-3 w-full justify-center">
-                    <Button
-                      variant={locale === "fr" ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => {
-                        setLocale("fr");
-                        try {
-                          localStorage.setItem("locale", "fr");
-                        } catch {}
-                      }}
-                      className="flex-1 max-w-[120px] h-12 rounded-lg"
-                    >
-                      <span className="mr-2">
-                        <FrenchFlagIcon className="w-4 h-4" />
-                      </span>
-                      <span className="text-sm font-medium">Français</span>
-                    </Button>
-                    <Button
-                      variant={locale === "en" ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => {
-                        setLocale("en");
-                        try {
-                          localStorage.setItem("locale", "en");
-                        } catch {}
-                      }}
-                      className="flex-1 max-w-[120px] h-12 rounded-lg"
-                    >
-                      <span className="mr-2">
-                        <BritishFlagIcon className="w-4 h-4" />
-                      </span>
-                      <span className="text-sm font-medium">English</span>
-                    </Button>
-                  </div>
-                </div>
+              {/* Header du menu mobile */}
+              <div className="flex items-center justify-between p-4 border-b border-white/10">
+                <h2 className="text-lg font-semibold text-foreground">
+                  Menu
+                </h2>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={toggleMenu}
+                  className="h-9 w-9 hover:scale-110 transition-transform duration-200"
+                  aria-label="Fermer le menu"
+                >
+                  <X className="h-5 w-5" />
+                </Button>
               </div>
 
-              {/* Réseaux sociaux */}
-              <div className="pt-6 border-t border-white/10 w-full">
-                <div className="flex flex-col items-center gap-3">
-                  <span className="text-sm text-muted-foreground font-medium">
-                    Me suivre
-                  </span>
-                  <div className="flex items-center gap-4">
+              {/* Navigation links */}
+              <div className="p-4 space-y-1">
+                {[
+                  { href: "/", label: messages[locale].home, icon: Home },
+                  {
+                    href: "/formations",
+                    label: messages[locale].formations,
+                    icon: GraduationCap,
+                  },
+                  {
+                    href: "/experiences",
+                    label: messages[locale].experiences,
+                    icon: Briefcase,
+                  },
+                  {
+                    href: "/projets",
+                    label: messages[locale].projects,
+                    icon: Code2,
+                  },
+                  {
+                    href: "/contact",
+                    label: messages[locale].contact,
+                    icon: Mail,
+                  },
+                ].map((item) => {
+                  const Icon = item.icon;
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={toggleMenu}
+                      className={cn(
+                        "flex items-center justify-center gap-3 px-4 py-3 rounded-lg text-base font-medium transition-all duration-200",
+                        isActive
+                          ? "bg-primary/20 text-primary border border-primary/30"
+                          : "text-muted-foreground hover:text-foreground hover:bg-white/10"
+                      )}
+                    >
+                      <Icon className="h-5 w-5" />
+                      <span>{item.label}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {/* Footer du menu mobile */}
+              <div className="p-4 border-t border-white/10">
+                <div className="flex items-center justify-between gap-4">
+                  {/* Theme Switcher */}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                    className="flex-1 h-10 rounded-lg flex items-center gap-2 justify-center"
+                  >
+                    <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                    <Moon className="h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                    <span className="text-sm font-medium">
+                      {theme === "dark" ? "Clair" : "Sombre"}
+                    </span>
+                  </Button>
+
+                  {/* Réseaux sociaux */}
+                  <div className="flex items-center gap-2">
                     <a
                       href={FOOTER_DATA.social.github}
                       target="_blank"
@@ -425,7 +489,7 @@ export default function Navigation() {
                       aria-label="GitHub"
                       className="hover:text-primary transition-colors p-2 rounded-lg hover:bg-white/10"
                     >
-                      <Github className="h-5 w-5" />
+                      <Github className="h-4 w-4" />
                     </a>
                     <a
                       href={FOOTER_DATA.social.linkedin}
@@ -434,14 +498,14 @@ export default function Navigation() {
                       aria-label="LinkedIn"
                       className="hover:text-primary transition-colors p-2 rounded-lg hover:bg-white/10"
                     >
-                      <Linkedin className="h-5 w-5" />
+                      <Linkedin className="h-4 w-4" />
                     </a>
                     <a
                       href={`mailto:${FOOTER_DATA.social.email}`}
                       aria-label="Email"
                       className="hover:text-primary transition-colors p-2 rounded-lg hover:bg-white/10"
                     >
-                      <Mail className="h-5 w-5" />
+                      <Mail className="h-4 w-4" />
                     </a>
                     <a
                       href={FOOTER_DATA.social.telegram}
@@ -450,7 +514,7 @@ export default function Navigation() {
                       aria-label="Telegram"
                       className="hover:text-primary transition-colors p-2 rounded-lg hover:bg-white/10"
                     >
-                      <MessageCircle className="h-5 w-5" />
+                      <MessageCircle className="h-4 w-4" />
                     </a>
                   </div>
                 </div>

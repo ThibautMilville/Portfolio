@@ -602,3 +602,77 @@ html {
 .animate-spin-reverse {
   animation: spin-reverse 12s linear infinite;
 }
+
+/* Fix pour éliminer le scintillement du sélecteur de langue */
+.language-selector-trigger {
+  position: relative;
+  overflow: hidden;
+}
+
+.language-selector-trigger::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  transition: background-color 0.15s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.language-selector-trigger:focus-visible::before {
+  background: transparent;
+}
+
+.language-selector-trigger:active::before {
+  background: transparent;
+}
+
+/* Amélioration des transitions pour les dropdowns */
+[data-radix-dropdown-menu-content] {
+  will-change: transform, opacity;
+  transform-origin: var(--radix-dropdown-menu-content-transform-origin);
+}
+
+[data-radix-dropdown-menu-content][data-state="open"] {
+  animation: dropdown-in 0.15s ease-out;
+}
+
+[data-radix-dropdown-menu-content][data-state="closed"] {
+  animation: dropdown-out 0.1s ease-in;
+}
+
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes dropdown-out {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95) translateY(-4px);
+  }
+}
+
+/* Suppression des effets de focus indésirables */
+.language-selector-trigger:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.language-selector-trigger:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}

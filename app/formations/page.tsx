@@ -84,8 +84,8 @@ export default function Formations() {
 
             <div className="space-y-8">
               {formations
-                .filter((f) => f.type === "Diplôme")
-                .map((formation, index) => (
+                .filter((f: any) => f.type === "Diplôme")
+                .map((formation: any, index: number) => (
                   <motion.div
                     key={formation.id}
                     initial={{ opacity: 0, x: -20 }}
@@ -101,20 +101,20 @@ export default function Formations() {
 
                     <Card className="ml-16 hover:shadow-lg transition-shadow">
                       <CardHeader>
-                        <div className="flex items-start justify-between">
+                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                           <div className="flex items-start gap-4">
                             {formation.logoUrl ? (
                               <img
                                 src={formation.logoUrl}
                                 alt={`Logo ${formation.institution}`}
-                                className="h-10 w-10 rounded object-contain bg-white p-1"
+                                className="h-10 w-10 rounded object-contain bg-white p-1 flex-shrink-0"
                               />
                             ) : (
-                              <div className="p-2 rounded-lg bg-primary/10">
+                              <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
                                 <GraduationCap className="h-6 w-6 text-primary" />
                               </div>
                             )}
-                            <div>
+                            <div className="flex-1 min-w-0">
                               <CardTitle className="text-xl mb-2">
                                 {formation.title}
                               </CardTitle>
@@ -123,12 +123,14 @@ export default function Formations() {
                               </CardDescription>
                             </div>
                           </div>
-                          <Badge
-                            variant="outline"
-                            className="ml-4 px-2 py-1 rounded-full bg-primary/10 text-primary"
-                          >
-                            {formation.type}
-                          </Badge>
+                          <div className="flex justify-start sm:justify-end">
+                            <Badge
+                              variant="outline"
+                              className="px-2 py-1 rounded-full bg-primary/10 text-primary text-sm"
+                            >
+                              {formation.type}
+                            </Badge>
+                          </div>
                         </div>
 
                         <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mt-4">
@@ -159,7 +161,7 @@ export default function Formations() {
                             Compétences acquises :
                           </p>
                           <div className="flex flex-wrap gap-2">
-                            {formation.skills.map((skill) => (
+                            {formation.skills.map((skill: string) => (
                               <Badge
                                 key={skill}
                                 variant="outline"
@@ -215,8 +217,8 @@ export default function Formations() {
 
             <div className="space-y-8">
               {formations
-                .filter((f) => f.type === "Certification")
-                .map((formation, index) => (
+                .filter((f: any) => f.type === "Certification")
+                .map((formation: any, index: number) => (
                   <motion.div
                     key={formation.id}
                     initial={{ opacity: 0, x: -20 }}
@@ -232,20 +234,20 @@ export default function Formations() {
 
                     <Card className="ml-16 hover:shadow-lg transition-shadow">
                       <CardHeader>
-                        <div className="flex items-start justify-between">
+                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                           <div className="flex items-start gap-4">
                             {formation.logoUrl ? (
                               <img
                                 src={formation.logoUrl}
                                 alt={`Logo ${formation.institution}`}
-                                className="h-10 w-10 rounded object-contain bg-white p-1"
+                                className="h-10 w-10 rounded object-contain bg-white p-1 flex-shrink-0"
                               />
                             ) : (
-                              <div className="p-2 rounded-lg bg-primary/10">
+                              <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
                                 <GraduationCap className="h-6 w-6 text-primary" />
                               </div>
                             )}
-                            <div>
+                            <div className="flex-1 min-w-0">
                               <CardTitle className="text-xl mb-2">
                                 {formation.title}
                               </CardTitle>
@@ -254,12 +256,14 @@ export default function Formations() {
                               </CardDescription>
                             </div>
                           </div>
-                          <Badge
-                            variant="outline"
-                            className="ml-4 px-2 py-1 rounded-full bg-primary/10 text-primary"
-                          >
-                            {formation.type}
-                          </Badge>
+                          <div className="flex justify-start sm:justify-end">
+                            <Badge
+                              variant="outline"
+                              className="px-2 py-1 rounded-full bg-primary/10 text-primary text-sm"
+                            >
+                              {formation.type}
+                            </Badge>
+                          </div>
                         </div>
 
                         <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mt-4">
@@ -290,7 +294,7 @@ export default function Formations() {
                             Compétences acquises :
                           </p>
                           <div className="flex flex-wrap gap-2">
-                            {formation.skills.map((skill) => (
+                            {formation.skills.map((skill: string) => (
                               <Badge
                                 key={skill}
                                 variant="outline"
@@ -345,13 +349,13 @@ export default function Formations() {
             </div>
             <div className="text-center p-6 rounded-2xl border bg-card">
               <div className="text-2xl font-bold text-primary mb-1">
-                {formations.filter((f) => f.type === "Diplôme").length}
+                {formations.filter((f: any) => f.type === "Diplôme").length}
               </div>
               <div className="text-sm text-muted-foreground">Diplômes</div>
             </div>
             <div className="text-center p-6 rounded-2xl border bg-card">
               <div className="text-2xl font-bold text-primary mb-1">
-                {formations.filter((f) => f.type === "Certification").length}
+                {formations.filter((f: any) => f.type === "Certification").length}
               </div>
               <div className="text-sm text-muted-foreground">
                 Certifications
@@ -359,7 +363,7 @@ export default function Formations() {
             </div>
             <div className="text-center p-6 rounded-2xl border bg-card">
               <div className="text-2xl font-bold text-primary mb-1">
-                {formations.reduce((acc, f) => acc + f.skills.length, 0)}+
+                {formations.reduce((acc: number, f: any) => acc + f.skills.length, 0)}+
               </div>
               <div className="text-sm text-muted-foreground">Technologies</div>
             </div>
