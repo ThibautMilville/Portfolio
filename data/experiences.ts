@@ -1,0 +1,149 @@
+import { Experience } from './types';
+
+export const experiences: Experience[] = [
+  {
+    id: 7,
+    title: "Moderator",
+    company: "Ultra",
+    location: "Ville de Paris, Île-de-France, France · Remote",
+    date: "Mar 2025 - Oct 2025",
+    description: "Moderating international communities, organizing events and helping users. Participating in Black Ice Studios (Ashes of Mankind) game social networks moderation.",
+    technologies: ["Community Management", "Event Organization", "Social Media Moderation", "International Communities", "Gaming Industry", "Online Community Moderation"],
+    achievements: [
+      "Modération de communautés internationales",
+      "Organisation d'événements",
+      "Aide aux utilisateurs",
+      "Participation à la modération des réseaux sociaux du jeu Black Ice Studios (Ashes of Mankind)",
+      "Modération de communauté en ligne"
+    ],
+    projectIds: [],
+    relatedFormationIds: [3],
+    logoUrl: "/images/company/logo_ultra.png"
+  },
+  {
+    id: 8,
+    title: "MVP",
+    company: "Ultra Times",
+    location: "Paris, Île-de-France, France · Remote",
+    date: "Jan 2025 - Présent",
+    description: "Participation in strategic decision-making as part of the management team, while leading the technical design and development of IT projects.",
+    technologies: ["Strategic Decision Making", "Management", "Technical Design", "IT Project Development", "Leadership"],
+    achievements: [
+      "Participation aux décisions stratégiques en tant que membre de l'équipe de direction",
+      "Conduite de la conception technique et du développement de projets informatiques",
+      "Leadership dans la gestion d'équipe"
+    ],
+    projectIds: [],
+    relatedFormationIds: [3],
+    logoUrl: "/images/company/logo_UT.png"
+  },
+  {
+    id: 9,
+    title: "Junior Software Engineer and Community Contributor",
+    company: "Ultra Times",
+    location: "Paris, Île-de-France, France · Remote",
+    date: "Oct 2024 - Présent",
+    description: "Development using the Ultra blockchain and its APIs, writing technical articles about it, and participating in community activities in both English and French (community engagement, interviews, etc...).",
+    technologies: ["Ultra Blockchain", "API Development", "Technical Writing", "Community Management", "English", "French", "Blockchain Development"],
+    achievements: [
+      "Développement utilisant la blockchain Ultra et ses APIs",
+      "Rédaction d'articles techniques sur la blockchain Ultra",
+      "Participation aux activités communautaires en anglais et français",
+      "Engagement communautaire et interviews"
+    ],
+    projectIds: [],
+    relatedFormationIds: [3],
+    logoUrl: "/images/company/logo_UT.png"
+  },
+  {
+    id: 1,
+    title: "Junior Software Engineer",
+    company: "SNCF Voyageurs",
+    location: "Paris, Île-de-France, France",
+    date: "Sep 2024 - Présent",
+    description: "Designing application solutions to optimise agents' work.",
+    technologies: ["Application Design", "Software Engineering", "Agent Optimization"],
+    achievements: [
+      "Conception de solutions applicatives pour optimiser le travail des agents",
+      "Développement d'applications internes",
+      "Collaboration avec les équipes métier"
+    ],
+    projectIds: [],
+    relatedFormationIds: [1, 2, 3],
+    logoUrl: "/images/company/Logo-SNCF-Voyageurs.webp"
+  },
+  {
+    id: 3,
+    title: "Founder and Director",
+    company: "DigitalLabs TM",
+    location: "France",
+    date: "Oct 2023 - Présent",
+    description: "IT services and custom software development company.",
+    technologies: ["Business Management", "Software Development", "IT Services", "Project Management"],
+    achievements: [
+      "Création et direction d'une entreprise de services informatiques",
+      "Développement de logiciels sur mesure",
+      "Gestion des relations clients et des projets"
+    ],
+    projectIds: [],
+    relatedFormationIds: [1, 2, 3],
+    logoUrl: "/images/company/logo-digitallabs.png"
+  },
+  {
+    id: 2,
+    title: "Web Developer",
+    company: "SNCF Voyageurs",
+    location: "Paris, Île-de-France, France",
+    date: "Sep 2023 - Sep 2024",
+    description: "Production and maintenance of internal applications.",
+    technologies: ["Agile Project Management", "NestJS", "React.js", "TypeScript", "JavaScript", "CodeIgniter", "PHP", "Git", "MySQL", "MySQL Workbench", "HTML", "CSS3", "Bootstrap"],
+    achievements: [
+      "Production et maintenance d'applications internes",
+      "Développement avec NestJS et React.js",
+      "Gestion de projet Agile",
+      "Utilisation de CodeIgniter et PHP"
+    ],
+    projectIds: [],
+    relatedFormationIds: [2, 3],
+    logoUrl: "/images/company/Logo-SNCF-Voyageurs.webp"
+  },
+  {
+    id: 4,
+    title: "Webmaster",
+    company: "Osmoz Communication",
+    location: "Coulommiers, Île-de-France, France",
+    date: "Dec 2021 - Aug 2023",
+    description: "I was in charge of the company's online communication by developing a complete set of websites to promote the products and services sold by the brand. I also managed the social networks and acquired many soft skills, especially in communication thanks to the customer relationship I was often confronted with. This experience allowed me to learn how to manage projects and made me gain confidence.",
+    technologies: ["Social Media Marketing", "Autodidacte", "Rigueur", "Adobe Illustrator", "JavaScript", "MySQL", "PHP", "Search Engine Optimization (SEO)", "Adaptation", "CSS3", "Communication", "WordPress", "Microsoft Office", "HTML", "Content Management Systems (CMS)"],
+    achievements: [
+      "Développement d'un ensemble complet de sites web",
+      "Gestion des réseaux sociaux",
+      "Acquisition de compétences en communication client",
+      "Gestion de projets et développement de la confiance"
+    ],
+    projectIds: [],
+    relatedFormationIds: [3],
+    logoUrl: "/images/company/osmoz_com_logo.jpeg"
+  },
+  {
+    id: 5,
+    title: "Freelance in Digital Marketing",
+    company: "ComeUp",
+    location: "France",
+    date: "Apr 2018 - Dec 2021",
+    description: "I started missions at the age of 17 at the same time as high school and stopped a little over three years later to devote myself fully to my studies. I learned project management, time and stress management and customer relations, while developing skills in several areas (video and image advertising, SEO writing, websites...). I accompanied more than 300 clients with 100% positive reviews and recommendations.",
+    technologies: ["Social Media Marketing", "Autodidacte", "Rigueur", "Search Engine Optimization (SEO)", "Adaptation", "Communication", "Microsoft Office", "Client Relationship Management"],
+    achievements: [
+      "Accompagnement de plus de 300 clients avec 100% d'avis positifs et de recommandations",
+      "Début des missions à 17 ans en parallèle du lycée",
+      "Apprentissage de la gestion de projet",
+      "Gestion du temps et du stress",
+      "Développement de compétences en publicité vidéo et image",
+      "Rédaction SEO et développement de sites web",
+      "Excellence en relations clients et satisfaction client"
+    ],
+    projectIds: [],
+    relatedFormationIds: [3],
+    logoUrl: "/images/company/comeup_logo.jpeg"
+  }
+];

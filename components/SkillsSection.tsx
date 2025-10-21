@@ -6,6 +6,48 @@ import LightParticles from "@/components/ui/light-particles";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { Tooltip } from '@/components/ui/tooltip';
 
+// Composant pour afficher les étoiles de niveau
+function StarRating({ rating }: { rating: number }) {
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 !== 0;
+  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+  return (
+    <div className="flex items-center gap-1">
+      {[...Array(fullStars)].map((_, i) => (
+        <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+      ))}
+      {hasHalfStar && (
+        <div className="relative h-4 w-4">
+          <Star className="h-4 w-4 text-gray-300" />
+          <div className="absolute inset-0 overflow-hidden" style={{ width: '50%' }}>
+            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+          </div>
+        </div>
+      )}
+      {[...Array(emptyStars)].map((_, i) => (
+        <Star key={i + fullStars + (hasHalfStar ? 1 : 0)} className="h-4 w-4 text-gray-300" />
+      ))}
+    </div>
+  );
+}
+
+// Fonction pour mapper les niveaux aux étoiles
+function getLevelRating(level: string): number {
+  switch (level) {
+    case "Expert":
+      return 5;
+    case "Avancé":
+      return 4;
+    case "Intermédiaire":
+      return 3;
+    case "Débutant":
+      return 2;
+    default:
+      return 3;
+  }
+}
+
 const skills = [
   // Front and frameworks
   {
@@ -405,6 +447,9 @@ function TechCard({ skill, skillIndex }: { skill: any; skillIndex: number }) {
               <DialogDescription className="text-lg font-medium text-foreground">
                 {skill.level} • {skill.experience}
               </DialogDescription>
+              <div className="mt-2">
+                <StarRating rating={getLevelRating(skill.level)} />
+              </div>
             </div>
           </div>
         </DialogHeader>
@@ -530,11 +575,13 @@ export default function SkillsSection() {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="flex flex-wrap justify-center gap-3">
                     {skills
                       .filter((skill) => skill.category === category.category)
                       .map((skill, skillIndex) => (
-                        <TechCard key={skill.name} skill={skill} skillIndex={skillIndex} />
+                        <div key={skill.name} className="w-[calc(33.333%-8px)] min-w-[120px]">
+                          <TechCard skill={skill} skillIndex={skillIndex} />
+                        </div>
                       ))}
                   </div>
                 </div>

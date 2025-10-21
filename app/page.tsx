@@ -2,7 +2,7 @@
 
 import { getAllProjects, getAllFormations } from '@/lib/data';
 import HeroSection from '@/components/HeroSection';
-import ProjectsSection from '@/components/ProjectsSection';
+import FeaturedProjectsSection from '@/components/FeaturedProjectsSection';
 import FormationsSection from '@/components/FormationsSection';
 import ExperiencesSection from '@/components/ExperiencesSection';
 import CompanyLogosSection from '@/components/CompanyLogosSection';
@@ -39,12 +39,6 @@ const companyLogos = [
     linkedinUrl: 'https://www.linkedin.com/company/sncf-voyageurs/',
   },
   {
-    name: 'DigitalLabs TM',
-    src: '/images/company/logo-digitallabs.png',
-    alt: 'DigitalLabs TM',
-    linkedinUrl: 'https://www.linkedin.com/company/digitallabs-tm',
-  },
-  {
     name: 'Osmoz Communication',
     src: '/images/company/osmoz_com_logo.jpeg',
     alt: 'Osmoz Communication',
@@ -62,7 +56,7 @@ export default function Home() {
   return (
     <div className="relative overflow-hidden">
       <HeroSection />
-      <ProjectsSection projects={projets} />
+      <FeaturedProjectsSection projects={projets} />
       <ExperiencesSection />
       <FormationsSection formations={formations} />
       <SkillsSection />
