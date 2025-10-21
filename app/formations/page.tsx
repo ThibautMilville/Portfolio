@@ -124,12 +124,8 @@ export default function Formations() {
                             </div>
                           </div>
                           <Badge
-                            variant={
-                              formation.type === "Diplôme"
-                                ? "default"
-                                : "secondary"
-                            }
-                            className="ml-4"
+                            variant="outline"
+                            className="ml-4 px-2 py-1 rounded-full bg-primary/10 text-primary"
                           >
                             {formation.type}
                           </Badge>
@@ -259,12 +255,8 @@ export default function Formations() {
                             </div>
                           </div>
                           <Badge
-                            variant={
-                              formation.type === "Diplôme"
-                                ? "default"
-                                : "secondary"
-                            }
-                            className="ml-4"
+                            variant="outline"
+                            className="ml-4 px-2 py-1 rounded-full bg-primary/10 text-primary"
                           >
                             {formation.type}
                           </Badge>

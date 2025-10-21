@@ -141,7 +141,7 @@ export default function ExperienceCarousel({ experiences }: ExperienceCarouselPr
                 >
                 {isMobile ? (
                   <Link href={`/experiences#${group.company.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}>
-                    <Card className="relative h-full rounded-2xl shadow-xl border border-border bg-card/80 supports-[backdrop-filter]:backdrop-blur-md ring-1 ring-black/5 transition-all duration-300 group-hover:-translate-y-2 hover:shadow-2xl hover:ring-primary/30 overflow-hidden cursor-pointer">
+                    <Card className="relative h-full rounded-3xl shadow-xl bg-gradient-to-br from-zinc-900/95 via-zinc-800/90 to-zinc-900/95 dark:from-zinc-900/95 dark:via-zinc-800/90 dark:to-zinc-900/95 from-white/95 via-gray-50/90 to-white/95 backdrop-blur-md border-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 hover:border-primary/40 dark:hover:border-primary/40 hover:border-blue-400/50 hover:shadow-lg hover:shadow-primary/10 dark:hover:shadow-primary/20 transition-all duration-300 group-hover:-translate-y-2 overflow-hidden cursor-pointer ring-1 ring-zinc-800/50 dark:ring-zinc-800/50 ring-gray-200/50">
                       <div className="p-6 pb-4">
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex items-center gap-2">
@@ -185,7 +185,7 @@ export default function ExperienceCarousel({ experiences }: ExperienceCarouselPr
                 ) : (
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Card className="relative h-full rounded-2xl shadow-xl border border-border bg-card/80 supports-[backdrop-filter]:backdrop-blur-md ring-1 ring-black/5 transition-all duration-300 group-hover:-translate-y-2 hover:shadow-2xl hover:ring-primary/30 overflow-hidden cursor-pointer">
+                    <Card className="relative h-full rounded-3xl shadow-xl bg-gradient-to-br from-zinc-900/95 via-zinc-800/90 to-zinc-900/95 dark:from-zinc-900/95 dark:via-zinc-800/90 dark:to-zinc-900/95 from-white/95 via-gray-50/90 to-white/95 backdrop-blur-md border-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 hover:border-primary/40 dark:hover:border-primary/40 hover:border-blue-400/50 hover:shadow-lg hover:shadow-primary/10 dark:hover:shadow-primary/20 transition-all duration-300 group-hover:-translate-y-2 overflow-hidden cursor-pointer ring-1 ring-zinc-800/50 dark:ring-zinc-800/50 ring-gray-200/50">
                       <div className="p-6 pb-4">
                         <div className="flex items-start justify-between mb-4">
                           <div className="flex items-center gap-2">
@@ -282,7 +282,7 @@ export default function ExperienceCarousel({ experiences }: ExperienceCarouselPr
                             {exp.technologies && exp.technologies.length > 0 ? (
                               <div className="flex flex-wrap gap-2 mt-2">
                                 {exp.technologies.map((tech, idx) => (
-                                  <span key={idx} className="px-3 py-1 bg-muted rounded-full text-xs">
+                                  <span key={idx} className="px-3 py-1 bg-zinc-800/80 dark:bg-zinc-800/80 bg-gray-100/80 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 text-zinc-100 dark:text-zinc-100 text-gray-700 font-medium rounded-full text-xs">
                                     {tech}
                                   </span>
                                 ))}

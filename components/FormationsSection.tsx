@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import LightParticles from "@/components/ui/light-particles";
@@ -83,12 +84,14 @@ export default function FormationsSection({
           className="mt-16"
         >
           <h3 className="text-2xl font-bold mb-12 text-center">Badges de cours</h3>
-          <div className="grid grid-cols-1 gap-6 max-w-5xl mx-auto place-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* Carte cours: badge Cisco */}
             <CourseCard 
               title="Cisco – Introduction to Cybersecurity"
               imageSrc="/images/education/badge-cybersecurity.png"
               pdfHref="/documents/badge-cisco-certification.pdf"
+              organization="Cisco"
+              date="Octobre 2025"
             />
           </div>
         </motion.div>
@@ -110,17 +113,40 @@ export default function FormationsSection({
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { Tooltip } from '@/components/ui/tooltip';
 
-function CourseCard({ title, imageSrc, pdfHref }: { title: string; imageSrc: string; pdfHref?: string }) {
+function CourseCard({ title, imageSrc, pdfHref, organization, date }: { 
+  title: string; 
+  imageSrc: string; 
+  pdfHref?: string;
+  organization: string;
+  date: string;
+}) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button type="button" className="group transition-all w-full flex items-center justify-center">
-          <Tooltip content={title} position="top" distance={0} className="inline-block">
-            <div className="w-[80px] h-[80px] sm:w-[80px] sm:h-[80px] flex items-center justify-center">
-              <img src={imageSrc} alt={title} className="w-full h-full object-contain" />
+        <Card className="relative h-full rounded-3xl shadow-xl bg-gradient-to-br from-zinc-900/95 via-zinc-800/90 to-zinc-900/95 dark:from-zinc-900/95 dark:via-zinc-800/90 dark:to-zinc-900/95 from-white/95 via-gray-50/90 to-white/95 backdrop-blur-md border-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 hover:border-primary/40 dark:hover:border-primary/40 hover:border-blue-400/50 hover:shadow-lg hover:shadow-primary/10 dark:hover:shadow-primary/20 transition-all duration-300 group-hover:-translate-y-2 overflow-hidden cursor-pointer ring-1 ring-zinc-800/50 dark:ring-zinc-800/50 ring-gray-200/50">
+          <div className="p-6">
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-16 h-16 flex items-center justify-center">
+                <img src={imageSrc} alt={title} className="w-full h-full object-contain" />
+              </div>
             </div>
-          </Tooltip>
-        </button>
+            
+            <h3 className="text-lg font-bold mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2 text-center">
+              {title}
+            </h3>
+            
+            <div className="space-y-2 text-center">
+              <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                <span className="font-medium">Organisme:</span>
+                <span>{organization}</span>
+              </div>
+              <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                <span className="font-medium">Date:</span>
+                <span>{date}</span>
+              </div>
+            </div>
+          </div>
+        </Card>
       </DialogTrigger>
       <DialogContent className="w-[95vw] sm:w-auto max-w-xl max-h-[90vh] overflow-y-auto p-4 sm:p-6 pt-8">
         <DialogHeader className="pr-10 mb-4">
@@ -133,7 +159,10 @@ function CourseCard({ title, imageSrc, pdfHref }: { title: string; imageSrc: str
             <img src={imageSrc} alt={title} className="max-h-60 object-contain" />
           </div>
           <div className="text-sm text-muted-foreground">
-            Date d'obtention: Octobre 2025
+            Date d'obtention: {date}
+          </div>
+          <div className="text-sm text-muted-foreground">
+            Organisme: {organization}
           </div>
           {pdfHref ? (
             <div className="text-sm">

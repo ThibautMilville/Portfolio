@@ -272,17 +272,51 @@ export default function HeroSection() {
               </Button>
             </Tooltip>
           </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 1 }}
+            className="mt-12"
+          >
+            <button
+              onClick={() => {
+                // Chercher la section avec le titre "Projets phares"
+                const sections = document.querySelectorAll('section');
+                let projectsSection = null;
+                
+                for (let i = 0; i < sections.length; i++) {
+                  const section = sections[i];
+                  const h2 = section.querySelector('h2');
+                  if (h2 && h2.textContent?.includes('Projets phares')) {
+                    projectsSection = section;
+                    break;
+                  }
+                }
+                
+                // Fallback vers la deuxième section si pas trouvé
+                if (!projectsSection) {
+                  projectsSection = document.querySelector('section:nth-of-type(2)');
+                }
+                
+                if (projectsSection) {
+                  // Ajuster pour voir le titre de la section
+                  const rect = projectsSection.getBoundingClientRect();
+                  const offset = 100; // Ajuster selon vos besoins
+                  window.scrollTo({
+                    top: window.pageYOffset + rect.top - offset,
+                    behavior: 'smooth'
+                  });
+                }
+              }}
+              className="cursor-pointer hover:scale-110 transition-transform duration-200"
+              aria-label="Aller à la section Projets phares"
+            >
+              <ArrowDown className="h-6 w-6 text-muted-foreground animate-bounce mx-auto" />
+            </button>
+          </motion.div>
         </div>
       </div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <ArrowDown className="h-6 w-6 text-muted-foreground animate-bounce" />
-      </motion.div>
     </section>
   );
 }

@@ -75,8 +75,8 @@ export default function FormationCarouselMini({ formations, itemsPerView = 2 }: 
                         {formation.title}
                       </h5>
                       <Badge 
-                        variant={formation.type === "Diplôme" ? "default" : formation.type === "Certification" ? "secondary" : "outline"}
-                        className="text-xs flex-shrink-0"
+                        variant="outline"
+                        className="text-xs flex-shrink-0 px-2 py-1 rounded-full bg-primary/10 text-primary"
                       >
                         {formation.type}
                       </Badge>
