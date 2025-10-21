@@ -2,8 +2,9 @@ import { getProjectBySlug, getRelatedExperience, getRelatedFormations, getAllPro
 import { notFound } from "next/navigation";
 import ClientProjectPage from "./project-client";
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
-  const project = getProjectBySlug(params.slug);
+export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
   if (!project) notFound();
   const relatedExperience = getRelatedExperience(project as Project) as Experience | undefined;
   const relatedFormations = getRelatedFormations(project as Project) as Formation[];
