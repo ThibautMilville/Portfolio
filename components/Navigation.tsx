@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname, useRouter } from "@/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { getLocalizedRoute, getRouteFromPathname } from "@/lib/localized-routes";
 import {
   Menu,
   X,
@@ -28,29 +29,47 @@ import { FrenchFlagIcon, BritishFlagIcon } from "@/components/ui/flag-icons";
 import { FOOTER_DATA } from "@/lib/footer";
 import { Github, Linkedin, Mail, MessageCircle } from "lucide-react";
 
-const messages = {
-  fr: {
-    home: "Accueil",
-    formations: "Formations",
-    experiences: "Expériences",
-    projects: "Projets",
-    contact: "Contact",
-  },
-  en: {
-    home: "Home",
-    formations: "Education",
-    experiences: "Experience",
-    projects: "Projects",
-    contact: "Contact",
-  },
-} as const;
-
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [locale, setLocale] = useState<"fr" | "en">("en");
+  const [isHydrated, setIsHydrated] = useState(false);
+  const locale = useLocale();
   const pathname = usePathname();
+  const router = useRouter();
+  
+  // Fallback: detect locale from URL if useLocale() fails
+  const currentLocale = typeof window !== 'undefined' 
+    ? (window.location.pathname.startsWith('/fr') ? 'fr' : 'en')
+    : locale;
+  
   const { theme, setTheme } = useTheme();
+  const t = useTranslations('Navigation');
+  
+  // Fallback translations based on detected locale
+  const translations = {
+    fr: {
+      home: 'Accueil',
+      formations: 'Formations',
+      experiences: 'Expériences',
+      projects: 'Projets',
+      contact: 'Contact'
+    },
+    en: {
+      home: 'Home',
+      formations: 'Education',
+      experiences: 'Experience',
+      projects: 'Projects',
+      contact: 'Contact'
+    }
+  };
+  
+  const currentTranslations = translations[currentLocale as keyof typeof translations] || translations.en;
+  
+
+  // Hydration effect
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -102,18 +121,6 @@ export default function Navigation() {
     };
   }, [isOpen]);
 
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem("locale");
-      if (stored === "fr" || stored === "en") setLocale(stored);
-      else
-        setLocale(
-          (navigator.language || "en").toLowerCase().startsWith("fr")
-            ? "fr"
-            : "en"
-        );
-    } catch {}
-  }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -155,25 +162,25 @@ export default function Navigation() {
             aria-label="Navigation principale"
           >
             {[
-              { href: "/", label: messages[locale].home, icon: Home },
+              { href: "/", label: currentTranslations.home, icon: Home },
               {
-                href: "/formations",
-                label: messages[locale].formations,
+                href: getLocalizedRoute('formations', currentLocale as 'fr' | 'en'),
+                label: currentTranslations.formations,
                 icon: GraduationCap,
               },
               {
-                href: "/experiences",
-                label: messages[locale].experiences,
+                href: getLocalizedRoute('experiences', currentLocale as 'fr' | 'en'),
+                label: currentTranslations.experiences,
                 icon: Briefcase,
               },
               {
-                href: "/projets",
-                label: messages[locale].projects,
+                href: getLocalizedRoute('projets', currentLocale as 'fr' | 'en'),
+                label: currentTranslations.projects,
                 icon: Code2,
               },
               {
-                href: "/contact",
-                label: messages[locale].contact,
+                href: getLocalizedRoute('contact', currentLocale as 'fr' | 'en'),
+                label: currentTranslations.contact,
                 icon: Mail,
               },
             ].map((item, index) => {
@@ -229,14 +236,16 @@ export default function Navigation() {
                     className="language-selector-trigger h-9 w-[80px] rounded-full px-3 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none bg-background/20 backdrop-blur-sm border-white/20 hover:bg-background/30 transition-colors duration-200"
                   >
                     <span className="mr-2">
-                      {locale === "fr" ? (
+                      {!isHydrated ? (
+                        <div className="w-5 h-5 bg-gray-200 rounded animate-pulse" />
+                      ) : currentLocale === "fr" ? (
                         <FrenchFlagIcon className="w-5 h-5" />
                       ) : (
                         <BritishFlagIcon className="w-5 h-5" />
                       )}
                     </span>
                     <span className="text-xs font-medium">
-                      {locale.toUpperCase()}
+                      {!isHydrated ? '--' : currentLocale.toUpperCase()}
                     </span>
                   </Button>
                 </DropdownMenuTrigger>
@@ -246,12 +255,21 @@ export default function Navigation() {
                   className="w-fit min-w-[120px] text-center bg-background/95 backdrop-blur-md border-white/20 z-[99999] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
                 >
                   <DropdownMenuItem
-                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 focus:bg-transparent cursor-pointer"
+                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 cursor-pointer"
                     onClick={() => {
-                      setLocale("fr");
-                      try {
-                        localStorage.setItem("locale", "fr");
-                      } catch {}
+                      if (currentLocale === 'fr') return; // Déjà en français, ne rien faire
+                      
+                      // Transformer l'URL selon la langue
+                      const cleanPath = pathname.replace(/^\/(fr|en)/, '') || '/';
+                      
+                      // Mapping des routes pour le français
+                      let newPath = cleanPath;
+                      if (cleanPath === '/projects') newPath = '/projets';
+                      else if (cleanPath === '/education') newPath = '/formations';
+                      else if (cleanPath === '/experience') newPath = '/experiences';
+                      
+                      router.push(newPath === '/' ? '' : newPath, { locale: 'fr' });
+                      
                       try {
                         (document.activeElement as HTMLElement)?.blur?.();
                       } catch {}
@@ -263,12 +281,20 @@ export default function Navigation() {
                     <span>Français</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 focus:bg-transparent cursor-pointer"
+                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 cursor-pointer"
                     onClick={() => {
-                      setLocale("en");
-                      try {
-                        localStorage.setItem("locale", "en");
-                      } catch {}
+                      if (currentLocale === 'en') return; // Déjà en anglais, ne rien faire
+                      
+                      // Transformer l'URL selon la langue
+                      const cleanPath = pathname.replace(/^\/(fr|en)/, '') || '/';
+                      
+                      // Mapping des routes pour l'anglais
+                      let newPath = cleanPath;
+                      if (cleanPath === '/projets') newPath = '/projects';
+                      else if (cleanPath === '/formations') newPath = '/education';
+                      else if (cleanPath === '/experiences') newPath = '/experience';
+                      
+                      router.push(newPath === '/' ? '' : newPath, { locale: 'en' });
                       try {
                         (document.activeElement as HTMLElement)?.blur?.();
                       } catch {}
@@ -292,7 +318,9 @@ export default function Navigation() {
                     size="icon"
                     className="language-selector-trigger h-9 w-9 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none bg-background/20 backdrop-blur-sm border-white/20 hover:bg-background/30 transition-colors duration-200"
                   >
-                    {locale === "fr" ? (
+                    {!isHydrated ? (
+                      <div className="w-4 h-4 bg-gray-200 rounded animate-pulse" />
+                    ) : currentLocale === "fr" ? (
                       <FrenchFlagIcon className="w-4 h-4" />
                     ) : (
                       <BritishFlagIcon className="w-4 h-4" />
@@ -305,12 +333,21 @@ export default function Navigation() {
                   className="w-fit min-w-[120px] text-center bg-background/95 backdrop-blur-md border-white/20 z-[99999] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
                 >
                   <DropdownMenuItem
-                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 focus:bg-transparent cursor-pointer"
+                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 cursor-pointer"
                     onClick={() => {
-                      setLocale("fr");
-                      try {
-                        localStorage.setItem("locale", "fr");
-                      } catch {}
+                      if (currentLocale === 'fr') return; // Déjà en français, ne rien faire
+                      
+                      // Transformer l'URL selon la langue
+                      const cleanPath = pathname.replace(/^\/(fr|en)/, '') || '/';
+                      
+                      // Mapping des routes pour le français
+                      let newPath = cleanPath;
+                      if (cleanPath === '/projects') newPath = '/projets';
+                      else if (cleanPath === '/education') newPath = '/formations';
+                      else if (cleanPath === '/experience') newPath = '/experiences';
+                      
+                      router.push(newPath === '/' ? '' : newPath, { locale: 'fr' });
+                      
                       try {
                         (document.activeElement as HTMLElement)?.blur?.();
                       } catch {}
@@ -322,12 +359,20 @@ export default function Navigation() {
                     <span>Français</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 focus:bg-transparent cursor-pointer"
+                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 cursor-pointer"
                     onClick={() => {
-                      setLocale("en");
-                      try {
-                        localStorage.setItem("locale", "en");
-                      } catch {}
+                      if (currentLocale === 'en') return; // Déjà en anglais, ne rien faire
+                      
+                      // Transformer l'URL selon la langue
+                      const cleanPath = pathname.replace(/^\/(fr|en)/, '') || '/';
+                      
+                      // Mapping des routes pour l'anglais
+                      let newPath = cleanPath;
+                      if (cleanPath === '/projets') newPath = '/projects';
+                      else if (cleanPath === '/formations') newPath = '/education';
+                      else if (cleanPath === '/experiences') newPath = '/experience';
+                      
+                      router.push(newPath === '/' ? '' : newPath, { locale: 'en' });
                       try {
                         (document.activeElement as HTMLElement)?.blur?.();
                       } catch {}
@@ -420,25 +465,25 @@ export default function Navigation() {
               {/* Navigation links */}
               <div className="p-4 space-y-1">
                 {[
-                  { href: "/", label: messages[locale].home, icon: Home },
+                  { href: "/", label: currentTranslations.home, icon: Home },
                   {
-                    href: "/formations",
-                    label: messages[locale].formations,
+                    href: getLocalizedRoute('formations', currentLocale as 'fr' | 'en'),
+                    label: currentTranslations.formations,
                     icon: GraduationCap,
                   },
                   {
-                    href: "/experiences",
-                    label: messages[locale].experiences,
+                    href: getLocalizedRoute('experiences', currentLocale as 'fr' | 'en'),
+                    label: currentTranslations.experiences,
                     icon: Briefcase,
                   },
                   {
-                    href: "/projets",
-                    label: messages[locale].projects,
+                    href: getLocalizedRoute('projets', currentLocale as 'fr' | 'en'),
+                    label: currentTranslations.projects,
                     icon: Code2,
                   },
                   {
-                    href: "/contact",
-                    label: messages[locale].contact,
+                    href: getLocalizedRoute('contact', currentLocale as 'fr' | 'en'),
+                    label: currentTranslations.contact,
                     icon: Mail,
                   },
                 ].map((item) => {

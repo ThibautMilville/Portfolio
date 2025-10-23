@@ -147,14 +147,14 @@ export default function ClientProjectPage({ project, relatedExperience, relatedF
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>
-              <Card>
+              <Card className="h-full flex flex-col">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <CheckCircle className="h-5 w-5 text-green-500" />
                     Fonctionnalités
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex-1">
                   <ul className="space-y-2">
                     {project.features.map((feature, index) => (
                       <li key={index} className="flex items-start gap-2 text-sm">
@@ -168,14 +168,14 @@ export default function ClientProjectPage({ project, relatedExperience, relatedF
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }}>
-              <Card>
+              <Card className="h-full flex flex-col">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <AlertCircle className="h-5 w-5 text-green-500" />
                     Défis rencontrés
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex-1">
                   <ul className="space-y-2">
                     {project.challenges.map((challenge, index) => (
                       <li key={index} className="flex items-start gap-2 text-sm">
@@ -189,14 +189,14 @@ export default function ClientProjectPage({ project, relatedExperience, relatedF
             </motion.div>
 
             <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.5 }}>
-              <Card>
+              <Card className="h-full flex flex-col">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <CheckCircle className="h-5 w-5 text-blue-500" />
                     Solutions apportées
                   </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="flex-1">
                   <ul className="space-y-2">
                     {project.solutions.map((solution, index) => (
                       <li key={index} className="flex items-start gap-2 text-sm">
@@ -307,5 +307,3 @@ export default function ClientProjectPage({ project, relatedExperience, relatedF
     </div>
   );
 }
-
-

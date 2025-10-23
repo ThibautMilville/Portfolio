@@ -20,5 +20,3 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 export function generateStaticParams() {
   return getAllProjects().map((p: any) => ({ slug: getProjectSlug(p) }));
 }
-
-
