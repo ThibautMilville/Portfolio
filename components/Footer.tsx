@@ -30,7 +30,7 @@ export default function Footer() {
         <div className="flex flex-col items-center lg:items-start">
           <h3 className="font-semibold mb-3 text-primary">Navigation</h3>
           <ul className="space-y-2">
-            {FOOTER_DATA.navigation.map((item) => (
+            {FOOTER_DATA.navigation.map((item: { title: string; href: string }) => (
               <li key={item.title}>
                 <Link
                   href={item.href}
@@ -46,7 +46,7 @@ export default function Footer() {
         <div className="flex flex-col items-center lg:items-start">
           <h3 className="font-semibold mb-3 text-primary">Formations</h3>
           <ul className="space-y-2">
-            {FOOTER_DATA.diplomes.map((item) => (
+            {FOOTER_DATA.diplomes.map((item: { title: string; href: string }) => (
               <li key={item.title}>
                 <Link
                   href={item.href}
@@ -62,7 +62,7 @@ export default function Footer() {
         <div className="flex flex-col items-center lg:items-start">
           <h3 className="font-semibold mb-3 text-primary">Projets</h3>
           <ul className="space-y-2">
-            {FOOTER_DATA.projets.map((item) => (
+            {FOOTER_DATA.projets.map((item: { title: string; href: string }) => (
               <li key={item.title}>
                 <Link
                   href={item.href}
@@ -80,7 +80,7 @@ export default function Footer() {
       <div className="border-t">
         <div className="max-w-6xl mx-auto py-5 flex flex-col md:flex-row items-center gap-4 md:gap-6 justify-between">
           <div className="flex flex-wrap items-center gap-2">
-            {FOOTER_DATA.skills.map((skill) => (
+            {FOOTER_DATA.skills.map((skill: string) => (
               <span key={skill} className="text-xs rounded-full px-2 py-1 bg-muted text-muted-foreground">
                 {skill}
               </span>
