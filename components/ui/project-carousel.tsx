@@ -7,7 +7,7 @@ import { Card, CardContent } from './card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from './dialog';
 import { Badge } from './badge';
 import { Button } from './button';
-import Link from 'next/link';
+import { Link } from '@/navigation';
 import { getProjectSlug } from '@/lib/data';
 
 interface Project {

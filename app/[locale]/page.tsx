@@ -1,6 +1,4 @@
-'use client';
-
-import { getAllProjects, getAllFormations } from '@/lib/data';
+import { projects, formations } from '@/data';
 import HeroSection from '@/components/HeroSection';
 import FeaturedProjectsSection from '@/components/FeaturedProjectsSection';
 import FormationsSection from '@/components/FormationsSection';
@@ -12,12 +10,12 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import ContactSection from '@/components/ContactSection';
 
 // Récupérer tous les projets
-const allProjects = getAllProjects();
+const allProjects = projects;
 
 // Sélectionner tous les projets pour la section
 const projets = allProjects;
 
-const formations = getAllFormations();
+const formationsData = formations;
 
 const companyLogos = [
   {
@@ -71,7 +69,7 @@ export default function Home() {
       <ExperiencesSection />
       
       {/* Section Formations - Compétences académiques */}
-      <FormationsSection formations={formations} />
+      <FormationsSection formations={formationsData} />
       
       {/* Section Compétences - Expertise technique */}
       <SkillsSection />

@@ -1,0 +1,9 @@
+{
+  "Navigation": {
+    "home": "Accueil",
+    "formations": "Formations",
+    "experiences": "Expériences",
+    "projects": "Projets",
+    "contact": "Contact"
+  }
+}

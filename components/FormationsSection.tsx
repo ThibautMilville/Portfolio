@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import dynamic from "next/dynamic";
 import LightParticles from "@/components/ui/light-particles";
 import { ArrowRight } from "lucide-react";
