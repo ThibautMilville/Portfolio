@@ -37,7 +37,7 @@ export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSe
   );
 
   return (
-    <section className="py-8 px-6 relative">
+    <section className="py-8 px-6 relative" role="region" aria-labelledby="featured-projects-heading">
       <LightParticles />
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
@@ -47,7 +47,7 @@ export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSe
           viewport={{ once: true }}
           className="text-center mb-8"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 id="featured-projects-heading" className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
             Projets phares
           </h2>
           <p className="text-lg text-muted-foreground">

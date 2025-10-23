@@ -19,6 +19,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import LightParticles from "@/components/ui/light-particles";
 import { getAllFormations } from "@/lib/data";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 
 const formations = getAllFormations();
 
@@ -80,7 +81,7 @@ export default function Formations() {
 
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
+            <div className="hidden sm:block absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
 
             <div className="space-y-8">
               {formations
@@ -97,9 +98,9 @@ export default function Formations() {
                     className="relative"
                   >
                     {/* Timeline dot */}
-                    <div className="absolute left-6 top-6 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
+                    <div className="hidden sm:block absolute left-6 top-6 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
 
-                    <Card className="ml-16 hover:shadow-lg transition-shadow">
+                    <Card className="sm:ml-16 hover:shadow-lg transition-shadow">
                       <CardHeader>
                         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                           <div className="flex items-start gap-4">
@@ -213,7 +214,7 @@ export default function Formations() {
 
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
+            <div className="hidden sm:block absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
 
             <div className="space-y-8">
               {formations
@@ -230,9 +231,9 @@ export default function Formations() {
                     className="relative"
                   >
                     {/* Timeline dot */}
-                    <div className="absolute left-6 top-6 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
+                    <div className="hidden sm:block absolute left-6 top-6 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
 
-                    <Card className="ml-16 hover:shadow-lg transition-shadow">
+                    <Card className="sm:ml-16 hover:shadow-lg transition-shadow">
                       <CardHeader>
                         <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                           <div className="flex items-start gap-4">
@@ -333,6 +334,28 @@ export default function Formations() {
           </div>
         </motion.div>
 
+        {/* Section Badges de cours */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mb-16"
+        >
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+            Badges de cours
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {/* Carte cours: badge Cisco */}
+            <CourseCard 
+              title="Cisco – Introduction to Cybersecurity"
+              imageSrc="/images/education/badge-cybersecurity.png"
+              pdfHref="/documents/badge-cisco-certification.pdf"
+              organization="Cisco"
+              date="Octobre 2025"
+            />
+          </div>
+        </motion.div>
+
         {/* Stats Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -341,35 +364,159 @@ export default function Formations() {
           className="mt-16"
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center p-6 rounded-2xl border bg-card">
-              <div className="text-2xl font-bold text-primary mb-1">5+</div>
-              <div className="text-sm text-muted-foreground">
-                Années d'études
+            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
+              {/* Dégradé de base avec vraie transition */}
+              <div 
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
+                style={{ 
+                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
+                }} 
+              >
+                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="relative z-10 text-center">
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">5+</div>
+                <div className="text-sm text-muted-foreground">
+                  Années d'études
+                </div>
               </div>
             </div>
-            <div className="text-center p-6 rounded-2xl border bg-card">
-              <div className="text-2xl font-bold text-primary mb-1">
-                {formations.filter((f: any) => f.type === "Diplôme").length}
+            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
+              {/* Dégradé de base avec vraie transition */}
+              <div 
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
+                style={{ 
+                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
+                }} 
+              >
+                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm0 3a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1z" clipRule="evenodd" />
+                </svg>
               </div>
-              <div className="text-sm text-muted-foreground">Diplômes</div>
+              <div className="relative z-10 text-center">
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
+                  {formations.filter((f: any) => f.type === "Diplôme").length}
+                </div>
+                <div className="text-sm text-muted-foreground">Diplômes</div>
+              </div>
             </div>
-            <div className="text-center p-6 rounded-2xl border bg-card">
-              <div className="text-2xl font-bold text-primary mb-1">
-                {formations.filter((f: any) => f.type === "Certification").length}
+            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
+              {/* Dégradé de base avec vraie transition */}
+              <div 
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
+                style={{ 
+                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
+                }} 
+              >
+                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
               </div>
-              <div className="text-sm text-muted-foreground">
-                Certifications
+              <div className="relative z-10 text-center">
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
+                  {formations.filter((f: any) => f.type === "Certification").length}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Certifications
+                </div>
               </div>
             </div>
-            <div className="text-center p-6 rounded-2xl border bg-card">
-              <div className="text-2xl font-bold text-primary mb-1">
-                {formations.reduce((acc: number, f: any) => acc + f.skills.length, 0)}+
+            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
+              {/* Dégradé de base avec vraie transition */}
+              <div 
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
+                style={{ 
+                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
+                }} 
+              >
+                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                </svg>
               </div>
-              <div className="text-sm text-muted-foreground">Technologies</div>
+              <div className="relative z-10 text-center">
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">1</div>
+                <div className="text-sm text-muted-foreground">Badges</div>
+              </div>
             </div>
           </div>
         </motion.div>
       </div>
     </div>
+  );
+}
+
+// Carte de cours avec tooltip + modale
+function CourseCard({ title, imageSrc, pdfHref, organization, date }: { 
+  title: string; 
+  imageSrc: string; 
+  pdfHref?: string;
+  organization: string;
+  date: string;
+}) {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Card className="relative h-full rounded-3xl shadow-xl bg-gradient-to-br from-zinc-900/95 via-zinc-800/90 to-zinc-900/95 dark:from-zinc-900/95 dark:via-zinc-800/90 dark:to-zinc-900/95 from-white/95 via-gray-50/90 to-white/95 backdrop-blur-md border-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 hover:border-primary/40 dark:hover:border-primary/40 hover:border-blue-400/50 hover:shadow-lg hover:shadow-primary/10 dark:hover:shadow-primary/20 transition-all duration-300 group-hover:-translate-y-2 overflow-hidden cursor-pointer ring-1 ring-zinc-800/50 dark:ring-zinc-800/50 ring-gray-200/50">
+          <div className="p-6">
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-16 h-16 flex items-center justify-center">
+                <img src={imageSrc} alt={title} className="w-full h-full object-contain" />
+              </div>
+            </div>
+            
+            <h3 className="text-lg font-bold mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2 text-center">
+              {title}
+            </h3>
+            
+            <div className="space-y-2 text-center">
+              <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                <span className="font-medium">Organisme:</span>
+                <span>{organization}</span>
+              </div>
+              <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                <span className="font-medium">Date:</span>
+                <span>{date}</span>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </DialogTrigger>
+      <DialogContent className="w-[95vw] sm:w-auto max-w-xl max-h-[90vh] overflow-y-auto p-4 sm:p-6 pt-8">
+        <DialogHeader className="pr-10 mb-4">
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>Cours suivi et justificatif</DialogDescription>
+        </DialogHeader>
+
+        <div className="space-y-6">
+          <div className="rounded-lg overflow-hidden bg-muted flex items-center justify-center p-4">
+            <img src={imageSrc} alt={title} className="max-h-60 object-contain" />
+          </div>
+          <div className="text-sm text-muted-foreground">
+            Date d'obtention: {date}
+          </div>
+          <div className="text-sm text-muted-foreground">
+            Organisme: {organization}
+          </div>
+          {pdfHref ? (
+            <div className="text-sm">
+              <a
+                href={pdfHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
+              >
+                Consulter le document (PDF)
+              </a>
+            </div>
+          ) : null}
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }

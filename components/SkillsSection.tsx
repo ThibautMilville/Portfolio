@@ -474,17 +474,17 @@ function FavoriteTechCard({ tech, index }: { tech: any; index: number }) {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, delay: index * 0.1 }}
           viewport={{ once: true }}
-          className="flex flex-col items-center p-6 rounded-2xl border bg-card hover:border-primary/30 transition-all duration-300 cursor-pointer"
+          className="flex flex-col items-center justify-center p-4 rounded-2xl border bg-card hover:border-primary/30 transition-all duration-300 cursor-pointer h-44 w-32 sm:w-36 lg:w-40"
         >
           <img
             src={tech.logo}
             alt={`Logo ${tech.name}`}
-            className="h-16 w-16 mb-4 scale-110 transition-transform bg-white p-2 rounded-xl shadow-lg"
+            className="h-14 w-14 mb-3 scale-110 transition-transform bg-white p-1 rounded-lg shadow-lg"
           />
-          <h4 className="text-lg font-bold text-foreground mb-2">
+          <h4 className="text-base font-bold text-foreground mb-2 text-center">
             {tech.name}
           </h4>
-          <p className="text-sm text-muted-foreground text-center">
+          <p className="text-sm text-muted-foreground text-center line-clamp-2">
             {tech.description}
           </p>
         </motion.div>
@@ -533,7 +533,7 @@ export default function SkillsSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
             Compétences Techniques
           </h2>
           <p className="text-lg text-muted-foreground">
@@ -607,7 +607,7 @@ export default function SkillsSection() {
             </p>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="flex flex-wrap justify-center gap-4">
             {[
               {
                 name: "React",
@@ -617,42 +617,42 @@ export default function SkillsSection() {
               {
                 name: "Next.js",
                 logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-                description: "Framework React full-stack",
+                description: "Framework React",
               },
               {
                 name: "Node.js",
                 logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-                description: "Runtime JavaScript",
+                description: "Runtime JS",
               },
               {
                 name: "NestJS",
                 logo: "https://imgs.search.brave.com/MqDoXUvr7My9WOzLwntiaYwL363MOd0_77TMBcutPwA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pY29u/bG9nb3ZlY3Rvci5j/b20vdXBsb2Fkcy9p/bWFnZXMvMjAyNS8w/MS9sZy02Nzc4NmYy/ZTA3M2ZiLU5lc3RK/Uy53ZWJw",
-                description: "Framework Node.js backend",
+                description: "Framework Node.js",
               },
               {
                 name: "Tailwind CSS",
                 logo: "https://imgs.search.brave.com/2ZjYUPwN5hgwhGa5hktSrh6HHwn-c0kzJ0QHreWmwWs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9yYXcu/Z2l0aHVidXNlcmNv/bnRlbnQuY29tL2dp/bGJhcmJhcmEvbG9n/b3MvbWFpbi9sb2dv/cy90YWlsd2luZGNz/cy1pY29uLnN2Zw",
-                description: "Framework CSS utilitaire",
+                description: "Framework CSS",
               },
               {
                 name: "Cursor AI",
                 logo: "https://imgs.search.brave.com/izHMUPLtm87oYWrLIkwRPcXoflif63PfsInHa39utD8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9mcmFt/ZXJ1c2VyY29udGVu/dC5jb20vaW1hZ2Vz/L2xmU0JVNEVoS2NN/ZzNpR2c5OEwyRjFF/U2ZBLmpwZw",
-                description: "IDE avec IA intégrée",
+                description: "IDE avec IA",
               },
               {
                 name: "Git",
                 logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-                description: "Contrôle de version",
+                description: "Versioning",
               },
               {
                 name: "Linux",
                 logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg",
-                description: "Système d'exploitation",
+                description: "OS",
               },
               {
                 name: "Terminal",
                 logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg",
-                description: "Interface en ligne de commande",
+                description: "CLI",
               },
             ].map((tech, index) => (
               <FavoriteTechCard key={tech.name} tech={tech} index={index} />
@@ -668,30 +668,76 @@ export default function SkillsSection() {
           viewport={{ once: true }}
           className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20"
         >
-          <div className="text-center p-6 rounded-2xl border bg-card">
-            <div className="text-2xl font-bold text-primary mb-1">
-              {skills.length}+
+          <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
+            {/* Dégradé de base avec vraie transition */}
+            <div 
+              className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
+              style={{ 
+                clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
+              }} 
+            >
+              <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+              </svg>
             </div>
-            <div className="text-sm text-muted-foreground">Technologies</div>
-          </div>
-          <div className="text-center p-6 rounded-2xl border bg-card">
-            <div className="text-2xl font-bold text-primary mb-1">
-              {skillCategories.length}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Domaines d'expertise
-            </div>
-          </div>
-          <div className="text-center p-6 rounded-2xl border bg-card">
-            <div className="text-2xl font-bold text-primary mb-1">6+</div>
-            <div className="text-sm text-muted-foreground">
-              Années d'expérience
+            <div className="relative z-10 text-center">
+              <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">{skills.length}+</div>
+              <div className="text-sm text-muted-foreground">Technologies</div>
             </div>
           </div>
-          <div className="text-center p-6 rounded-2xl border bg-card">
-            <div className="text-2xl font-bold text-primary mb-1">100%</div>
-            <div className="text-sm text-muted-foreground">
-              Satisfaction client
+          <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
+            {/* Dégradé de base avec vraie transition */}
+            <div 
+              className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
+              style={{ 
+                clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
+              }} 
+            >
+              <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="relative z-10 text-center">
+              <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">{skillCategories.length}</div>
+              <div className="text-sm text-muted-foreground">Domaines d'expertise</div>
+            </div>
+          </div>
+          <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
+            {/* Dégradé de base avec vraie transition */}
+            <div 
+              className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
+              style={{ 
+                clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
+              }} 
+            >
+              <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="relative z-10 text-center">
+              <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">6+</div>
+              <div className="text-sm text-muted-foreground">Années d'expérience</div>
+            </div>
+          </div>
+          <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
+            {/* Dégradé de base avec vraie transition */}
+            <div 
+              className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
+              style={{ 
+                clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
+              }} 
+            >
+              <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="relative z-10 text-center">
+              <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">100%</div>
+              <div className="text-sm text-muted-foreground">Satisfaction client</div>
             </div>
           </div>
         </motion.div>

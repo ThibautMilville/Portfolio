@@ -164,21 +164,32 @@ export default function ContactSection() {
               </h3>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-lg bg-primary/10">
+                  <a
+                    href="mailto:tmilville.pro@gmail.com"
+                    className="p-3 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors cursor-pointer"
+                  >
                     <Mail className="h-6 w-6 text-primary" />
-                  </div>
+                  </a>
                   <div>
                     <h4 className="font-semibold mb-1">Email</h4>
-                    <p className="text-muted-foreground">
+                    <a
+                      href="mailto:tmilville.pro@gmail.com"
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
                       tmilville.pro@gmail.com
-                    </p>
+                    </a>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-lg bg-primary/10">
+                  <a
+                    href="https://t.me/Thybow"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors cursor-pointer"
+                  >
                     <MessageCircle className="h-6 w-6 text-primary" />
-                  </div>
+                  </a>
                   <div>
                     <h4 className="font-semibold mb-1">Telegram</h4>
                     <a
@@ -266,8 +277,8 @@ export default function ContactSection() {
                   <div className="flex items-center justify-between">
                     <span className="text-sm">Missions longues</span>
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span className="text-sm text-green-600">
+                      <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                      <span className="text-sm text-orange-600">
                         Sur demande
                       </span>
                     </div>

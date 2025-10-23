@@ -134,13 +134,10 @@ export default function Footer() {
       </div>
 
       <div className="border-t pt-4 pb-6">
-        <div className="max-w-6xl mx-auto flex items-center justify-between text-sm text-muted-foreground">
+        <div className="max-w-6xl mx-auto flex items-center justify-center text-sm text-muted-foreground">
           <p>
             © {currentYear} <Link href="/" className="hover:text-primary font-semibold transition-colors">Thibaut MILVILLE</Link>. Tous droits réservés.
           </p>
-          <Link href="#top" className="hover:text-primary transition-colors">
-            Haut de page
-          </Link>
         </div>
       </div>
     </footer>

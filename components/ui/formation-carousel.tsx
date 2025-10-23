@@ -49,6 +49,8 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
   const [isClient, setIsClient] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [selectedFormation, setSelectedFormation] = useState<Formation | null>(null);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   React.useEffect(() => {
     setIsClient(true);
@@ -91,6 +93,43 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
     setTimeout(() => setIsAnimating(false), 300);
   };
 
+  // Gestion des événements tactiles pour le swipe
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe) {
+      next();
+    } else if (isRightSwipe) {
+      prev();
+    }
+  };
+
+  // Empêcher le scroll vertical lors du swipe horizontal
+  const onTouchMovePrevent = (e: React.TouchEvent) => {
+    if (touchStart && touchEnd) {
+      const distance = Math.abs(touchStart - touchEnd);
+      if (distance > 10) {
+        e.preventDefault();
+      }
+    }
+    onTouchMove(e);
+  };
+
   // Calcul de translation mathématiquement correct
   const translateX = `calc(-${startIndex} * ((100% - ${(cardsToShow - 1)}rem) / ${cardsToShow} + 1rem))`;
 
@@ -125,7 +164,12 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
           <ChevronLeft className="h-6 w-6" />
         </button>
         <div className="w-full">
-          <div className="overflow-hidden py-2">
+          <div 
+            className="overflow-hidden py-2"
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMovePrevent}
+            onTouchEnd={onTouchEnd}
+          >
             <motion.div
               className="flex gap-4"
             initial={false}
