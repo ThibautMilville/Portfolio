@@ -542,53 +542,77 @@ export default function Projets() {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="mt-16"
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="p-8 md:p-10 rounded-3xl border bg-gradient-to-br from-card to-background/60 shadow-md min-h-[160px] flex flex-col justify-center">
-              <div className="flex items-center gap-4 mb-3">
-                <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                  <FolderClosed className="h-6 w-6" />
-                </div>
-                <div className="text-3xl md:text-4xl font-extrabold text-primary">
-                  +25
-                </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
+              {/* Dégradé de base avec vraie transition */}
+              <div 
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
+                style={{ 
+                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
+                }} 
+              >
+                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
+                </svg>
               </div>
-              <div className="text-sm text-muted-foreground">Projets</div>
-            </div>
-            <div className="p-8 md:p-10 rounded-3xl border bg-gradient-to-br from-card to-background/60 shadow-md min-h-[160px] flex flex-col justify-center">
-              <div className="flex items-center gap-4 mb-3">
-                <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500">
-                  <Rocket className="h-6 w-6" />
-                </div>
-                <div className="text-3xl md:text-4xl font-extrabold text-blue-500">
-                  {web3Count}
-                </div>
-              </div>
-              <div className="text-sm text-muted-foreground">Projets Web3</div>
-            </div>
-            <div className="p-8 md:p-10 rounded-3xl border bg-gradient-to-br from-card to-background/60 shadow-md min-h-[160px] flex flex-col justify-center">
-              <div className="flex items-center gap-4 mb-3">
-                <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-600">
-                  <Layers className="h-6 w-6" />
-                </div>
-                <div className="text-3xl md:text-4xl font-extrabold text-emerald-600">
-                  +30
-                </div>
-              </div>
-              <div className="text-sm text-muted-foreground">
-                Technologies maîtrisées
+              <div className="relative z-10 text-center">
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">+25</div>
+                <div className="text-sm text-muted-foreground">Projets</div>
               </div>
             </div>
-            <div className="p-8 md:p-10 rounded-3xl border bg-gradient-to-br from-card to-background/60 shadow-md min-h-[160px] flex flex-col justify-center">
-              <div className="flex items-center gap-4 mb-3">
-                <div className="p-2 rounded-lg bg-green-500/10 text-green-600">
-                  <Hourglass className="h-6 w-6" />
-                </div>
-                <div className="text-3xl md:text-4xl font-extrabold text-green-600">
-                  6+
-                </div>
+            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
+              {/* Dégradé de base avec vraie transition */}
+              <div 
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
+                style={{ 
+                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
+                }} 
+              >
+                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                </svg>
               </div>
-              <div className="text-sm text-muted-foreground">
-                Années d'expérience
+              <div className="relative z-10 text-center">
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">{web3Count}</div>
+                <div className="text-sm text-muted-foreground">Projets Web3</div>
+              </div>
+            </div>
+            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
+              {/* Dégradé de base avec vraie transition */}
+              <div 
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
+                style={{ 
+                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
+                }} 
+              >
+                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="relative z-10 text-center">
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">+30</div>
+                <div className="text-sm text-muted-foreground">Technologies maîtrisées</div>
+              </div>
+            </div>
+            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
+              {/* Dégradé de base avec vraie transition */}
+              <div 
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
+                style={{ 
+                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
+                }} 
+              >
+                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="relative z-10 text-center">
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">6+</div>
+                <div className="text-sm text-muted-foreground">Années d'expérience</div>
               </div>
             </div>
           </div>

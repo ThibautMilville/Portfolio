@@ -216,7 +216,7 @@ export default function Experiences() {
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
+          <div className="hidden sm:block absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
 
           <div className="space-y-8">
             {groupedExperiences.map((group, index) => (
@@ -229,9 +229,9 @@ export default function Experiences() {
                 className="relative"
               >
                 {/* Timeline dot */}
-                <div className="absolute left-6 top-6 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
+                <div className="hidden sm:block absolute left-6 top-6 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
 
-                <Card className="ml-16 hover:shadow-lg transition-shadow">
+                <Card className="sm:ml-16 hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                       <div className="flex items-start gap-4">
@@ -485,33 +485,82 @@ export default function Experiences() {
           className="mt-16"
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="text-center p-6 rounded-2xl border bg-card">
-              <div className="text-2xl font-bold text-primary mb-1">6+</div>
-              <div className="text-sm text-muted-foreground">
-                Années d'expérience
+            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
+              {/* Dégradé de base avec vraie transition */}
+              <div 
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
+                style={{ 
+                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
+                }} 
+              >
+                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="relative z-10 text-center">
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">6+</div>
+                <div className="text-sm text-muted-foreground">Années d'expérience</div>
               </div>
             </div>
-            <div className="text-center p-6 rounded-2xl border bg-card">
-              <div className="text-2xl font-bold text-primary mb-1">
-                {getAllExperiences().length}
+            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
+              {/* Dégradé de base avec vraie transition */}
+              <div 
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
+                style={{ 
+                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
+                }} 
+              >
+                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                </svg>
               </div>
-              <div className="text-sm text-muted-foreground">Expériences</div>
+              <div className="relative z-10 text-center">
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">{getAllExperiences().length}</div>
+                <div className="text-sm text-muted-foreground">Expériences</div>
+              </div>
             </div>
-            <div className="text-center p-6 rounded-2xl border bg-card">
-              <div className="text-2xl font-bold text-primary mb-1">
-                {groupedExperiences.length}
+            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
+              {/* Dégradé de base avec vraie transition */}
+              <div 
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
+                style={{ 
+                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
+                }} 
+              >
+                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm3 1h6v4H7V5zm8 8v2h1v-2h-1zm-2-2H7v4h6v-4z" clipRule="evenodd" />
+                </svg>
               </div>
-              <div className="text-sm text-muted-foreground">Entreprises</div>
+              <div className="relative z-10 text-center">
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">{groupedExperiences.length}</div>
+                <div className="text-sm text-muted-foreground">Entreprises</div>
+              </div>
             </div>
-            <div className="text-center p-6 rounded-2xl border bg-card">
-              <div className="text-2xl font-bold text-primary mb-1">
-                {getAllExperiences().reduce(
-                  (acc: number, exp: any) => acc + exp.technologies.length,
-                  0
-                )}
-                +
+            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
+              {/* Dégradé de base avec vraie transition */}
+              <div 
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
+                style={{ 
+                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
+                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
+                }} 
+              >
+                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                </svg>
               </div>
-              <div className="text-sm text-muted-foreground">Technologies</div>
+              <div className="relative z-10 text-center">
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
+                  {getAllExperiences().reduce(
+                    (acc: number, exp: any) => acc + exp.technologies.length,
+                    0
+                  )}+
+                </div>
+                <div className="text-sm text-muted-foreground">Technologies</div>
+              </div>
             </div>
           </div>
         </motion.div>

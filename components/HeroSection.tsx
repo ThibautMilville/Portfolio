@@ -19,7 +19,7 @@ import { Tooltip } from "@/components/ui/tooltip";
 
 export default function HeroSection() {
   return (
-    <section className="min-h-screen flex items-center justify-center relative px-6 pt-12 md:pt-0">
+    <section className="min-h-screen flex items-center justify-center relative px-6 pt-12 md:pt-0" role="banner" aria-label="Présentation de Thibaut MILVILLE">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-background to-background" />
       <AnimatedParticles />

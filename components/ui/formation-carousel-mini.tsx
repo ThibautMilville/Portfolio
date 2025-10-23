@@ -14,8 +14,11 @@ interface FormationCarouselMiniProps {
 }
 
 export default function FormationCarouselMini({ formations, itemsPerView = 2 }: FormationCarouselMiniProps) {
+  // Sur mobile, afficher 1 élément à la fois, sur desktop utiliser itemsPerView
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const actualItemsPerView = isMobile ? 1 : itemsPerView;
   const [currentIndex, setCurrentIndex] = useState(0);
-  const totalPages = Math.ceil(formations.length / itemsPerView);
+  const totalPages = Math.ceil(formations.length / actualItemsPerView);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % totalPages);
@@ -26,8 +29,8 @@ export default function FormationCarouselMini({ formations, itemsPerView = 2 }: 
   };
 
   const visibleFormations = formations.slice(
-    currentIndex * itemsPerView,
-    (currentIndex + 1) * itemsPerView
+    currentIndex * actualItemsPerView,
+    (currentIndex + 1) * actualItemsPerView
   );
 
   if (formations.length === 0) return null;
@@ -57,7 +60,7 @@ export default function FormationCarouselMini({ formations, itemsPerView = 2 }: 
       )}
 
       {/* Formations grid with padding for arrows */}
-      <div className="px-12">
+      <div className="px-8 sm:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <AnimatePresence mode="wait">
             {visibleFormations.map((formation, index) => (

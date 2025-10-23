@@ -246,7 +246,7 @@ export default function Navigation() {
                   className="w-fit min-w-[120px] text-center bg-background/95 backdrop-blur-md border-white/20 z-[99999] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
                 >
                   <DropdownMenuItem
-                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 focus:bg-transparent"
+                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 focus:bg-transparent cursor-pointer"
                     onClick={() => {
                       setLocale("fr");
                       try {
@@ -263,7 +263,7 @@ export default function Navigation() {
                     <span>Français</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 focus:bg-transparent"
+                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 focus:bg-transparent cursor-pointer"
                     onClick={() => {
                       setLocale("en");
                       try {
@@ -305,7 +305,7 @@ export default function Navigation() {
                   className="w-fit min-w-[120px] text-center bg-background/95 backdrop-blur-md border-white/20 z-[99999] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
                 >
                   <DropdownMenuItem
-                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 focus:bg-transparent"
+                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 focus:bg-transparent cursor-pointer"
                     onClick={() => {
                       setLocale("fr");
                       try {
@@ -322,7 +322,7 @@ export default function Navigation() {
                     <span>Français</span>
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 focus:bg-transparent"
+                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 focus:bg-transparent cursor-pointer"
                     onClick={() => {
                       setLocale("en");
                       try {
