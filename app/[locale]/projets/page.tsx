@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import {
   Github,
   ExternalLink,
@@ -29,6 +30,7 @@ import ProjectFilters, {
 } from "@/components/ProjectFilters";
 import { useMemo, useState, useEffect } from "react";
 import LightParticles from "@/components/ui/light-particles";
+import { useTranslatedData } from "@/hooks/useTranslatedData";
 import {
   Pagination,
   PaginationContent,
@@ -42,6 +44,8 @@ import {
 const projets = getAllProjects();
 
 export default function Projets() {
+  const t = useTranslations('Pages.projets');
+  const { getTranslatedProject } = useTranslatedData();
   const [filters, setFilters] = useState<ProjectFilterState>({
     search: "",
     organization: "all",
@@ -268,7 +272,7 @@ export default function Projets() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Mes Projets</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('title')}</h1>
 
           {/* Barre horizontale stylisée moderne et dynamique */}
           <motion.div
@@ -296,7 +300,7 @@ export default function Projets() {
           </motion.div>
 
           <p className="text-lg text-muted-foreground">
-            Une sélection de mes réalisations techniques les plus significatives
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -307,22 +311,25 @@ export default function Projets() {
           technologies={technologies}
           years={years}
           categories={categories}
+          t={t}
         />
 
         <div className="text-sm text-muted-foreground mb-4">
           {sorted.length > 0 ? (
             <span>
-              Affichage {startIndex + 1}–
-              {Math.min(startIndex + PER_PAGE, sorted.length)} sur{" "}
-              {sorted.length} projets
+              {t('displaying', {
+                count: sorted.length
+              })}
             </span>
           ) : (
-            <span>Aucun projet ne correspond à ces filtres.</span>
+            <span>{t('noResults')}</span>
           )}
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {pageItems.map((projet, index) => (
+          {pageItems.map((projet, index) => {
+            const translatedProject = getTranslatedProject(projet);
+            return (
             <motion.div
               key={projet.id}
               initial={{ opacity: 0, y: 20 }}
@@ -346,8 +353,8 @@ export default function Projets() {
                 <Card className="h-full min-h-[560px] hover:shadow-xl transition-all duration-300 group cursor-pointer flex flex-col">
                   <div className="relative overflow-hidden rounded-t-lg">
                     <Image
-                      src={projet.image}
-                      alt={projet.title}
+                      src={translatedProject.image}
+                      alt={translatedProject.title}
                       width={400}
                       height={200}
                       className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
@@ -355,10 +362,10 @@ export default function Projets() {
                     <div className="absolute top-4 left-4">
                       <Badge
                         variant={
-                          projet.status === "Terminé" ? "default" : "secondary"
+                          translatedProject.status === "Terminé" ? "default" : "secondary"
                         }
                       >
-                        {projet.status}
+                        {translatedProject.status}
                       </Badge>
                     </div>
                     <div className="absolute top-4 right-4">
@@ -366,7 +373,7 @@ export default function Projets() {
                         variant="secondary"
                         className="bg-background/80 text-foreground dark:bg-black dark:text-white border border-border/50 backdrop-blur px-2 py-1"
                       >
-                        {projet.category}
+                        {translatedProject.category}
                       </Badge>
                     </div>
                     {/* Overlay avec icône */}
@@ -379,7 +386,7 @@ export default function Projets() {
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <CardTitle className="text-lg mb-2 group-hover:text-primary transition-colors line-clamp-1 min-h-[28px]">
-                          {projet.title}
+                          {translatedProject.title}
                         </CardTitle>
                         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                           <Calendar className="h-4 w-4" />
@@ -388,17 +395,17 @@ export default function Projets() {
                       </div>
                     </div>
                     <CardDescription className="text-sm leading-relaxed line-clamp-3 min-h-[66px] max-h-[66px] overflow-hidden">
-                      {projet.description}
+                      {translatedProject.description}
                     </CardDescription>
                   </CardHeader>
 
                   <CardContent className="space-y-4 flex flex-col flex-1">
                     <div className="min-h-[66px] max-h-[66px] overflow-hidden">
                       <h4 className="font-semibold text-sm mb-2">
-                        Fonctionnalités clés :
+                        {t('keyFeatures')}
                       </h4>
                       <ul className="space-y-1">
-                        {projet.features.slice(0, 3).map((feature: string, idx: number) => (
+                        {translatedProject.features.slice(0, 3).map((feature: string, idx: number) => (
                           <li
                             key={idx}
                             className="flex items-start gap-2 text-xs text-muted-foreground truncate"
@@ -412,7 +419,7 @@ export default function Projets() {
 
                     <div className="min-h-[56px] max-h-[56px] overflow-hidden">
                       <h4 className="font-semibold text-sm mb-2">
-                        Technologies :
+                        {t('technologies')}
                       </h4>
                       <div className="flex flex-nowrap items-center gap-1 overflow-hidden min-w-0">
                         {projet.technologies.slice(0, 4).map((tech: string) => (
@@ -447,7 +454,7 @@ export default function Projets() {
                         }}
                       >
                         <Github className="mr-2 h-4 w-4" />
-                        Code
+                        {t('code')}
                       </Button>
                       {projet.demo && (
                         <Button
@@ -464,8 +471,8 @@ export default function Projets() {
                           {["Showcase", "E-commerce", "Corporate"].includes(
                             projet.category
                           )
-                            ? "Voir le site"
-                            : "Demo"}
+                            ? t('viewSite')
+                            : t('demo')}
                         </Button>
                       )}
                     </div>
@@ -473,7 +480,8 @@ export default function Projets() {
                 </Card>
               </Link>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
 
         {totalPages > 1 && (
@@ -558,7 +566,7 @@ export default function Projets() {
               </div>
               <div className="relative z-10 text-center">
                 <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">+25</div>
-                <div className="text-sm text-muted-foreground">Projets</div>
+                <div className="text-sm text-muted-foreground">{t('projects')}</div>
               </div>
             </div>
             <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
@@ -576,7 +584,7 @@ export default function Projets() {
               </div>
               <div className="relative z-10 text-center">
                 <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">{web3Count}</div>
-                <div className="text-sm text-muted-foreground">Projets Web3</div>
+                <div className="text-sm text-muted-foreground">{t('web3Projects')}</div>
               </div>
             </div>
             <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
@@ -594,7 +602,7 @@ export default function Projets() {
               </div>
               <div className="relative z-10 text-center">
                 <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">+30</div>
-                <div className="text-sm text-muted-foreground">Technologies maîtrisées</div>
+                <div className="text-sm text-muted-foreground">{t('masteredTechnologies')}</div>
               </div>
             </div>
             <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
@@ -612,7 +620,7 @@ export default function Projets() {
               </div>
               <div className="relative z-10 text-center">
                 <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">6+</div>
-                <div className="text-sm text-muted-foreground">Années d'expérience</div>
+                <div className="text-sm text-muted-foreground">{t('yearsExperience')}</div>
               </div>
             </div>
           </div>

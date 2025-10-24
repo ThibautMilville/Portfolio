@@ -1,0 +1,16 @@
+{
+  "Navigation": {
+    "home": "Home",
+    "formations": "Education",
+    "experiences": "Experience",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "Footer": {
+    "description": "Fullstack Developer · React, Next.js, NestJS",
+    "navigation": "Navigation",
+    "formations": "Education",
+    "projects": "Projects",
+    "copyright": "All rights reserved."
+  }
+}

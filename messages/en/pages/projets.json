@@ -1,0 +1,53 @@
+{
+  "title": "Projects",
+  "subtitle": "My achievements and development projects",
+  "displaying": "Displaying {count} project{count, plural, one {} other {s}}",
+  "noResults": "No projects found",
+  "keyFeatures": "Key features",
+  "technologies": "Technologies",
+  "code": "Code",
+  "viewSite": "View site",
+  "demo": "Demo",
+  "projects": "Projects",
+  "web3Projects": "Web3 Projects",
+  "masteredTechnologies": "Mastered technologies",
+  "yearsExperience": "Years of experience",
+  "filters": {
+    "search": "Search for a project, technology, category...",
+    "organization": "Organization",
+    "allOrganizations": "All organizations",
+    "category": "Category",
+    "allCategories": "All categories",
+    "searchCategory": "Search for a category...",
+    "status": "Status",
+    "allStatuses": "All statuses",
+    "completed": "Completed",
+    "inProgress": "In Progress",
+    "paused": "Paused",
+    "technologies": "Technologies",
+    "allTechnologies": "All technologies",
+    "searchTechnologies": "Search for a technology...",
+    "years": "Years",
+    "allYears": "All years",
+    "searchYears": "Search for a year...",
+    "clearAll": "Clear all",
+    "appliedFilters": "Applied filters"
+  },
+  "project": {
+    "viewProject": "View project",
+    "viewCode": "View code",
+    "viewDemo": "View demo",
+    "technologies": "Technologies",
+    "features": "Features",
+    "status": "Status",
+    "category": "Category",
+    "role": "Role",
+    "duration": "Duration"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page",
+    "of": "of"
+  }
+}

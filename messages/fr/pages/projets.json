@@ -1,0 +1,53 @@
+{
+  "title": "Projets",
+  "subtitle": "Mes réalisations et projets de développement",
+  "displaying": "Affichage de {count} projet{count, plural, one {} other {s}}",
+  "noResults": "Aucun projet trouvé",
+  "keyFeatures": "Fonctionnalités clés",
+  "technologies": "Technologies",
+  "code": "Code",
+  "viewSite": "Voir le site",
+  "demo": "Démo",
+  "projects": "Projets",
+  "web3Projects": "Projets Web3",
+  "masteredTechnologies": "Technologies maîtrisées",
+  "yearsExperience": "Années d'expérience",
+  "filters": {
+    "search": "Rechercher un projet, une techno, une catégorie...",
+    "organization": "Organisation",
+    "allOrganizations": "Toutes les organisations",
+    "category": "Catégorie",
+    "allCategories": "Toutes les catégories",
+    "searchCategory": "Rechercher une catégorie...",
+    "status": "Statut",
+    "allStatuses": "Tous les statuts",
+    "completed": "Terminé",
+    "inProgress": "En cours",
+    "paused": "En pause",
+    "technologies": "Technologies",
+    "allTechnologies": "Toutes les technologies",
+    "searchTechnologies": "Rechercher une techno...",
+    "years": "Années",
+    "allYears": "Toutes les années",
+    "searchYears": "Rechercher une année...",
+    "clearAll": "Effacer tout",
+    "appliedFilters": "Filtres appliqués"
+  },
+  "project": {
+    "viewProject": "Voir le projet",
+    "viewCode": "Voir le code",
+    "viewDemo": "Voir la démo",
+    "technologies": "Technologies",
+    "features": "Fonctionnalités",
+    "status": "Statut",
+    "category": "Catégorie",
+    "role": "Rôle",
+    "duration": "Durée"
+  },
+  "pagination": {
+    "previous": "Précédent",
+    "next": "Suivant",
+    "page": "Page",
+    "of": "sur"
+  }
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import {
   Building,
   Calendar,
@@ -32,10 +33,13 @@ import ProjectCarouselMini from "@/components/ui/project-carousel-mini";
 import FormationCarouselMini from "@/components/ui/formation-carousel-mini";
 import LightParticles from "@/components/ui/light-particles";
 import { useState, useEffect } from "react";
+import { useTranslatedData } from "@/hooks/useTranslatedData";
 
 const groupedExperiences = getGroupedExperiences();
 
 export default function Experiences() {
+  const t = useTranslations('Pages.experiences');
+  const { getTranslatedExperience, getTranslatedProject, getTranslatedFormation } = useTranslatedData();
   // Initialiser avec toutes les entreprises qui ont plusieurs expériences
   const [expandedCompanies, setExpandedCompanies] = useState<Set<string>>(
     new Set(
@@ -181,7 +185,7 @@ export default function Experiences() {
           />
 
           <div className="relative z-10">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Expériences</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('title')}</h1>
 
             {/* Barre horizontale stylisée moderne et dynamique */}
             <motion.div
@@ -252,7 +256,7 @@ export default function Experiences() {
                           </CardTitle>
                           <CardDescription className="text-base font-medium text-foreground">
                             {group.experiences.length > 1
-                              ? `${group.experiences.length} postes`
+                              ? `${group.experiences.length} ${t('positions')}`
                               : group.experiences[0].title}
                           </CardDescription>
                         </div>
@@ -274,7 +278,7 @@ export default function Experiences() {
                         )}
                         <Badge variant="outline" className="text-sm">
                           {group.experiences.length > 1
-                            ? "Multiples postes"
+                            ? t('multiplePositions')
                             : group.experiences[0].title.includes("Freelance")
                             ? "Freelance"
                             : group.experiences[0].title.includes("Founder")
@@ -291,15 +295,27 @@ export default function Experiences() {
                     <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mt-4">
                       <div className="flex items-center gap-1">
                         <Calendar className="h-4 w-4" />
-                        {group.totalDuration}
+                        {(() => {
+                          const firstExp = getTranslatedExperience(group.experiences[group.experiences.length - 1]);
+                          const lastExp = getTranslatedExperience(group.experiences[0]);
+                          if (group.experiences.length === 1) {
+                            return firstExp.date;
+                          } else {
+                            const startDate = firstExp.date.split(' - ')[0];
+                            const endDate = lastExp.date.includes('Présent') || lastExp.date.includes('Present') ? 
+                              (t('multiplePositions').includes('Multiple') ? 'Present' : 'Présent') : 
+                              lastExp.date.split(' - ')[1];
+                            return `${startDate} - ${endDate}`;
+                          }
+                        })()}
                       </div>
                       <div className="flex items-center gap-1">
                         <MapPin className="h-4 w-4" />
-                        {group.experiences[0].location}
+                        {getTranslatedExperience(group.experiences[0]).location}
                       </div>
                       <div className="flex items-center gap-1">
                         <Users className="h-4 w-4" />
-                        {group.experiences.length} poste
+                        {group.experiences.length} {t('position')}
                         {group.experiences.length > 1 ? "s" : ""}
                       </div>
                     </div>
@@ -309,7 +325,9 @@ export default function Experiences() {
                     {/* Affichage des postes individuels si plusieurs expériences */}
                     {group.experiences.length > 1 && (
                       <div className="space-y-4">
-                        {group.experiences.map((exp, expIndex) => (
+                        {group.experiences.map((exp, expIndex) => {
+                          const translatedExp = getTranslatedExperience(exp);
+                          return (
                           <motion.div
                             key={exp.id}
                             initial={{ opacity: 0, height: 0 }}
@@ -328,22 +346,22 @@ export default function Experiences() {
                           >
                             <div className="flex items-center justify-between mb-2">
                               <h4 className="font-semibold text-foreground">
-                                {exp.title}
+                                {translatedExp.title}
                               </h4>
                               <span className="text-sm text-muted-foreground">
-                                {exp.date}
+                                {translatedExp.date}
                               </span>
                             </div>
                             <p className="text-sm text-muted-foreground mb-3">
-                              {exp.description}
+                              {translatedExp.description}
                             </p>
 
                             <div className="mb-3">
                               <h5 className="font-medium text-sm mb-2">
-                                Réalisations :
+                                {t('achievements')}
                               </h5>
                               <ul className="space-y-1">
-                                {exp.achievements
+                                {translatedExp.achievements
                                   .slice(0, 3)
                                   .map((achievement: string, idx: number) => (
                                     <li
@@ -358,7 +376,7 @@ export default function Experiences() {
                             </div>
 
                             <div className="flex flex-wrap gap-1">
-                              {exp.technologies.slice(0, 6).map((tech: string) => (
+                              {translatedExp.technologies.slice(0, 6).map((tech: string) => (
                                 <Badge
                                   key={tech}
                                   variant="secondary"
@@ -367,30 +385,33 @@ export default function Experiences() {
                                   {tech}
                                 </Badge>
                               ))}
-                              {exp.technologies.length > 6 && (
+                              {translatedExp.technologies.length > 6 && (
                                 <Badge variant="secondary" className="text-xs">
-                                  +{exp.technologies.length - 6}
+                                  +{translatedExp.technologies.length - 6}
                                 </Badge>
                               )}
                             </div>
                           </motion.div>
-                        ))}
+                          );
+                        })}
                       </div>
                     )}
 
                     {/* Affichage pour une seule expérience */}
-                    {group.experiences.length === 1 && (
+                    {group.experiences.length === 1 && (() => {
+                      const translatedExp = getTranslatedExperience(group.experiences[0]);
+                      return (
                       <>
                         <p className="text-muted-foreground">
-                          {group.experiences[0].description}
+                          {translatedExp.description}
                         </p>
 
                         <div>
                           <h4 className="font-semibold mb-3">
-                            Réalisations clés :
+                            {t('keyAchievements')}
                           </h4>
                           <ul className="space-y-2">
-                            {group.experiences[0].achievements.map(
+                            {translatedExp.achievements.map(
                               (achievement: string, idx: number) => (
                                 <li
                                   key={idx}
@@ -406,10 +427,10 @@ export default function Experiences() {
 
                         <div>
                           <h4 className="font-semibold mb-3">
-                            Technologies utilisées :
+                            {t('technologiesUsed')}
                           </h4>
                           <div className="flex flex-wrap gap-2">
-                            {group.experiences[0].technologies.map((tech: string) => (
+                            {translatedExp.technologies.map((tech: string) => (
                               <Badge
                                 key={tech}
                                 variant="secondary"
@@ -421,7 +442,8 @@ export default function Experiences() {
                           </div>
                         </div>
                       </>
-                    )}
+                      );
+                    })()}
 
                     {/* Projets associés (tous les projets de toutes les expériences du groupe) */}
                     {(() => {
@@ -432,15 +454,16 @@ export default function Experiences() {
                         (project, index, self) =>
                           index === self.findIndex((p) => p.id === project.id)
                       );
+                      const translatedProjects = uniqueProjects.map(project => getTranslatedProject(project));
 
                       return uniqueProjects.length > 0 ? (
                         <div>
                           <h4 className="font-semibold mb-3 flex items-center gap-2">
                             <ExternalLink className="h-4 w-4" />
-                            Projets associés
+                            {t('relatedProjects')}
                           </h4>
                           <ProjectCarouselMini
-                            projects={uniqueProjects}
+                            projects={translatedProjects as any}
                             itemsPerView={2}
                           />
                         </div>
@@ -456,15 +479,16 @@ export default function Experiences() {
                         (formation, index, self) =>
                           index === self.findIndex((f) => f.id === formation.id)
                       );
+                      const translatedFormations = uniqueFormations.map(formation => getTranslatedFormation(formation));
 
                       return uniqueFormations.length > 0 ? (
                         <div>
                           <h4 className="font-semibold mb-3 flex items-center gap-2">
                             <GraduationCap className="h-4 w-4" />
-                            Formations associées
+                            {t('relatedFormations')}
                           </h4>
                           <FormationCarouselMini
-                            formations={uniqueFormations}
+                            formations={translatedFormations as any}
                             itemsPerView={2}
                           />
                         </div>

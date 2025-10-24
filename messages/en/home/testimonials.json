@@ -1,0 +1,24 @@
+{
+  "title": "Testimonials",
+  "subtitle": "What my clients and collaborators say",
+  "testimonials": [
+    {
+      "name": "Cédric Lemaire",
+      "role": "Production Manager",
+      "company": "OSMOZ COMMUNICATION",
+      "image": "testimonials/cedric-lemaire.jpeg",
+      "content": "I am writing these few lines to warmly recommend Thibaut, who worked as an apprentice in our company for 2 years. During his contract, Thibaut demonstrated great adaptability and unwavering commitment. He showed great autonomy while being an active member of our team. His initiative and problem-solving skills were particularly appreciated. His sociability and empathy make Thibaut an asset to any team.",
+      "rating": 5
+    },
+    {
+      "name": "Jean-Claude Ravineau",
+      "role": "Founder and CEO",
+      "company": "Manage Transport",
+      "image": "testimonials/jc-ravineau.jpeg",
+      "content": "Thibaut perfectly understood my expectations in creating my professional website. He shows listening skills and adaptability to a field he didn't know. It was a pleasure to collaborate with him, I recommend him without hesitation.",
+      "rating": 5
+    }
+  ],
+  "at": "at",
+  "loading": "Loading testimonials..."
+}

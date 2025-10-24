@@ -1,0 +1,66 @@
+{
+  "title": "Technical Skills",
+  "subtitle": "My areas of expertise and mastered technologies",
+  "categories": {
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "database": "Database",
+    "tools": "Tools & DevOps",
+    "design": "Design & UX"
+  },
+  "levels": {
+    "expert": "Expert",
+    "advanced": "Advanced",
+    "intermediate": "Intermediate",
+    "beginner": "Beginner"
+  },
+  "stats": {
+    "domains": "Expertise domains",
+    "experience": "Years of experience",
+    "satisfaction": "Client satisfaction"
+  },
+  "skillCategories": {
+    "frontend": {
+      "title": "Frontend Development",
+      "description": "Complete mastery of modern web technologies"
+    },
+    "backend": {
+      "title": "Backend Development",
+      "description": "Expertise in server development and APIs"
+    },
+    "infrastructure": {
+      "title": "Infrastructure & DevOps",
+      "description": "Complete infrastructure and deployment management"
+    },
+    "design": {
+      "title": "Design & Tools",
+      "description": "Design skills and productivity tools"
+    }
+  },
+  "favoriteStack": {
+    "title": "My Favorite Stack",
+    "subtitle": "The technologies I use daily"
+  },
+  "modals": {
+    "favoriteTech": "Favorite Technology",
+    "favoriteDescription": "This technology is part of my favorite stack that I use daily in my projects.",
+    "courseDescription": "Course taken and proof"
+  },
+  "techDescriptions": {
+    "react": "UI Library",
+    "nextjs": "React Framework",
+    "nodejs": "JS Runtime",
+    "nestjs": "Node.js Framework",
+    "tailwind": "CSS Framework",
+    "typescript": "Programming Language",
+    "mongodb": "NoSQL Database",
+    "postgresql": "Relational Database",
+    "docker": "Containerization",
+    "git": "Version Control",
+    "vscode": "Code Editor",
+    "figma": "UI/UX Design",
+    "terminal": "CLI",
+    "cursor": "AI-powered IDE",
+    "linux": "Operating System"
+  }
+}

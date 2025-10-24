@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, GraduationCap, Award, BookOpen, MapPin, Calendar, ExternalLink } from 'lucide-react';
 import { Card, CardContent } from './card';
@@ -43,6 +44,8 @@ const typeColors: Record<string, string> = {
 };
 
 export default function FormationCarousel({ formations }: FormationCarouselProps) {
+  const t = useTranslations('Components.carousels.formation');
+  const tModals = useTranslations('Home.formations.modals');
   const [startIndex, setStartIndex] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(1);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -147,7 +150,7 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
   if (!isClient) {
     return (
       <div className="relative max-w-4xl mx-auto flex items-center justify-center py-8">
-        <div className="text-muted-foreground">Chargement...</div>
+        <div className="text-muted-foreground">{t('loading')}</div>
       </div>
     );
   }
@@ -308,17 +311,17 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="flex items-center gap-2 text-sm">
                           <Calendar className="h-4 w-4 text-primary" />
-                          <span className="font-medium">Période :</span>
+                          <span className="font-medium">{tModals('period')}</span>
                           <span>{formation.date}</span>
                         </div>
                         <div className="flex items-center gap-2 text-sm">
                           <MapPin className="h-4 w-4 text-primary" />
-                          <span className="font-medium">Lieu :</span>
+                          <span className="font-medium">{tModals('location')}</span>
                           <span>{formation.location}</span>
                         </div>
                         <div className="flex items-center gap-2 text-sm">
                           <Award className="h-4 w-4 text-primary" />
-                          <span className="font-medium">Type :</span>
+                          <span className="font-medium">{tModals('type')}</span>
                           <span className="px-2 py-1 rounded-full bg-primary/10 text-primary text-xs">
                             {formation.type}
                           </span>
@@ -367,7 +370,7 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
                             className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
                           >
                             <ExternalLink className="h-4 w-4" />
-                            Voir le certificat officiel
+                            {tModals('viewCertificate')}
                           </a>
                         </div>
                       )}

@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Github, ExternalLink, Calendar, Users } from 'lucide-react';
 import { Card, CardContent } from './card';
@@ -40,6 +41,7 @@ const statusColors: Record<string, string> = {
 };
 
 export default function ProjectCarousel({ projects, isFeatured = false }: ProjectCarouselProps) {
+  const t = useTranslations('Components.carousels.project');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [imageIndexByProject, setImageIndexByProject] = useState<Record<number, number>>({});
@@ -120,7 +122,7 @@ export default function ProjectCarousel({ projects, isFeatured = false }: Projec
   if (projects.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-muted-foreground">Aucun projet à afficher</p>
+        <p className="text-muted-foreground">{t('empty')}</p>
       </div>
     );
   }
@@ -518,7 +520,7 @@ export default function ProjectCarousel({ projects, isFeatured = false }: Projec
                       )}
                       <Link href={`/projets/${getProjectSlug(project as any)}`} className="ml-auto">
                         <Button variant="ghost" className="flex items-center gap-2">
-                          Détails du projet
+                          {t('viewDetails')}
                           <ChevronRight className="h-4 w-4" />
                         </Button>
                       </Link>

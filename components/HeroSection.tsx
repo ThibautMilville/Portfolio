@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import {
   ArrowDown,
   Download,
@@ -18,6 +19,7 @@ import { LocalImage } from "@/components/ui/image";
 import { Tooltip } from "@/components/ui/tooltip";
 
 export default function HeroSection() {
+  const t = useTranslations('Home.hero');
   return (
     <section className="min-h-screen flex items-center justify-center relative px-6 pt-12 md:pt-0" role="banner" aria-label="Présentation de Thibaut MILVILLE">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20" />
@@ -176,9 +178,9 @@ export default function HeroSection() {
               <div className="text-xl md:text-2xl text-muted-foreground mb-4 md:mb-8 font-mono flex flex-col items-center lg:items-start gap-2">
                 <Typewriter
                   words={[
-                    "<Software Engineer />",
-                    "<Expert React & Next.js />",
-                    "<Passionné par l'innovation />",
+                    t('typewriter.softwareEngineer').replace(/&lt;/g, '<').replace(/&gt;/g, '>'),
+                    t('typewriter.expertReact').replace(/&lt;/g, '<').replace(/&gt;/g, '>'),
+                    t('typewriter.passionate').replace(/&lt;/g, '<').replace(/&gt;/g, '>'),
                   ]}
                   typingSpeed={70}
                   deletingSpeed={40}
@@ -197,9 +199,7 @@ export default function HeroSection() {
             transition={{ duration: 0.8 }}
           >
             <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
-              Passionné par la création d'expériences web modernes avec React,
-              Next.js et NestJS. Je transforme vos idées en applications
-              performantes et scalables.
+              {t('descriptionText')}
             </p>
           </motion.div>
 
@@ -211,13 +211,13 @@ export default function HeroSection() {
           >
             <Button size="lg" asChild className="sweep-light">
               <Link href="/projets">
-                Voir mes projets
+                {t('buttons.viewProjects')}
                 <ArrowRight className="ml-2 h-4 w-4 text-white" />
               </Link>
             </Button>
             <Button variant="outline" size="lg" className="sweep-light">
               <Download className="mr-2 h-4 w-4" />
-              Télécharger CV
+              {t('buttons.downloadCV')}
             </Button>
           </motion.div>
 
@@ -227,7 +227,7 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex gap-6 justify-center"
           >
-            <Tooltip content="GitHub">
+            <Tooltip content={t('tooltips.github')}>
               <Button
                 variant="ghost"
                 size="icon"
@@ -243,7 +243,7 @@ export default function HeroSection() {
                 </a>
               </Button>
             </Tooltip>
-            <Tooltip content="LinkedIn">
+            <Tooltip content={t('tooltips.linkedin')}>
               <Button
                 variant="ghost"
                 size="icon"
@@ -259,7 +259,7 @@ export default function HeroSection() {
                 </a>
               </Button>
             </Tooltip>
-            <Tooltip content="Contact">
+            <Tooltip content={t('tooltips.contact')}>
               <Button
                 variant="ghost"
                 size="icon"

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/navigation";
 import dynamic from "next/dynamic";
@@ -11,13 +12,15 @@ const ExperienceCarousel = dynamic(
   () => import("@/components/ui/experience-carousel"),
   {
     ssr: false,
-    loading: () => (
-      <div className="text-center py-8">Chargement des expériences...</div>
-    ),
+    loading: () => {
+      const t = useTranslations('Home.experiences');
+      return <div className="text-center py-8">{t('loading')}</div>;
+    },
   }
 );
 
 export default function ExperiencesSection() {
+  const t = useTranslations('Home.experiences');
   return (
     <section className="py-6 md:py-8 px-6 relative">
       <LightParticles />
@@ -30,10 +33,10 @@ export default function ExperiencesSection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-            Expériences Professionnelles
+            {t('title')}
           </h2>
           <p className="text-lg text-muted-foreground">
-            Mon parcours professionnel et mes réalisations
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -49,7 +52,7 @@ export default function ExperiencesSection() {
         <div className="flex justify-center mt-12">
           <Button size="lg" asChild className="sweep-light">
             <Link href="/experiences">
-              Voir toutes les expériences
+              {t('viewAll')}
               <ArrowRight className="ml-2 h-4 w-4 text-white" />
             </Link>
           </Button>

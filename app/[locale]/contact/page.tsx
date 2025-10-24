@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import {
   Mail,
   MessageCircle,
@@ -25,6 +26,7 @@ import LightParticles from "@/components/ui/light-particles";
 import { Tooltip } from "@/components/ui/tooltip";
 
 export default function Contact() {
+  const t = useTranslations('Pages.contact');
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -36,7 +38,7 @@ export default function Contact() {
     e.preventDefault();
     // Ici, vous pourriez intégrer avec un service d'email
     console.log("Formulaire soumis:", formData);
-    alert("Message envoyé ! Je vous répondrai dans les plus brefs délais.");
+    alert(t('form.success'));
   };
 
   const handleChange = (
@@ -58,7 +60,7 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('title')}</h1>
 
           {/* Barre horizontale stylisée moderne et dynamique */}
           <motion.div
@@ -86,7 +88,7 @@ export default function Contact() {
           </motion.div>
 
           <p className="text-lg text-muted-foreground">
-            Discutons de votre prochain projet ensemble
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -99,32 +101,32 @@ export default function Contact() {
           >
             <Card>
               <CardHeader>
-                <CardTitle>Envoyez-moi un message</CardTitle>
+                <CardTitle>{t('form.title')}</CardTitle>
                 <CardDescription>
-                  Je réponds généralement dans les 24 heures
+                  {t('form.description')}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Nom complet</Label>
+                      <Label htmlFor="name">{t('form.fields.name')}</Label>
                       <Input
                         id="name"
                         name="name"
-                        placeholder="John Doe"
+                        placeholder={t('form.placeholders.name')}
                         value={formData.name}
                         onChange={handleChange}
                         required
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
+                      <Label htmlFor="email">{t('form.fields.email')}</Label>
                       <Input
                         id="email"
                         name="email"
                         type="email"
-                        placeholder="john@example.com"
+                        placeholder={t('form.placeholders.email')}
                         value={formData.email}
                         onChange={handleChange}
                         required
@@ -133,11 +135,11 @@ export default function Contact() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="subject">Sujet</Label>
+                    <Label htmlFor="subject">{t('form.fields.subject')}</Label>
                     <Input
                       id="subject"
                       name="subject"
-                      placeholder="Sujet de votre message"
+                      placeholder={t('form.placeholders.subject')}
                       value={formData.subject}
                       onChange={handleChange}
                       required
@@ -145,11 +147,11 @@ export default function Contact() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="message">Message</Label>
+                    <Label htmlFor="message">{t('form.fields.message')}</Label>
                     <Textarea
                       id="message"
                       name="message"
-                      placeholder="Décrivez votre projet ou votre demande..."
+                      placeholder={t('form.placeholders.message')}
                       rows={6}
                       value={formData.message}
                       onChange={handleChange}
@@ -163,7 +165,7 @@ export default function Contact() {
                     className="w-full sweep-light"
                   >
                     <Send className="mr-2 h-4 w-4" />
-                    Envoyer le message
+                    {t('form.submit')}
                   </Button>
                 </form>
               </CardContent>
@@ -179,7 +181,7 @@ export default function Contact() {
           >
             <div>
               <h3 className="text-2xl font-bold mb-6">
-                Informations de contact
+                {t('info.title')}
               </h3>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
@@ -190,7 +192,7 @@ export default function Contact() {
                     <Mail className="h-6 w-6 text-primary" />
                   </a>
                   <div>
-                    <h4 className="font-semibold mb-1">Email</h4>
+                    <h4 className="font-semibold mb-1">{t('info.email')}</h4>
                     <a
                       href="mailto:tmilville.pro@gmail.com"
                       className="text-muted-foreground hover:text-primary transition-colors"
@@ -210,7 +212,7 @@ export default function Contact() {
                     <MessageCircle className="h-6 w-6 text-primary" />
                   </a>
                   <div>
-                    <h4 className="font-semibold mb-1">Telegram</h4>
+                    <h4 className="font-semibold mb-1">{t('info.telegram')}</h4>
                     <a
                       href="https://t.me/Thybow"
                       target="_blank"
@@ -227,7 +229,7 @@ export default function Contact() {
                     <MapPin className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-1">Localisation</h4>
+                    <h4 className="font-semibold mb-1">{t('info.location')}</h4>
                     <p className="text-muted-foreground">Paris, France</p>
                   </div>
                 </div>
@@ -235,9 +237,9 @@ export default function Contact() {
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold mb-4">Réseaux sociaux</h3>
+              <h3 className="text-xl font-semibold mb-4">{t('info.socialNetworks')}</h3>
               <div className="flex gap-4">
-                <Tooltip content="GitHub">
+                <Tooltip content={t('tooltips.github')}>
                   <Button
                     variant="ghost"
                     size="icon"
@@ -253,7 +255,7 @@ export default function Contact() {
                     </a>
                   </Button>
                 </Tooltip>
-                <Tooltip content="LinkedIn">
+                <Tooltip content={t('tooltips.linkedin')}>
                   <Button
                     variant="ghost"
                     size="icon"
@@ -269,7 +271,7 @@ export default function Contact() {
                     </a>
                   </Button>
                 </Tooltip>
-                <Tooltip content="Telegram">
+                <Tooltip content={t('tooltips.telegram')}>
                   <Button
                     variant="ghost"
                     size="icon"
@@ -290,37 +292,37 @@ export default function Contact() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Disponibilité</CardTitle>
+                <CardTitle>{t('availability.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm">Projets freelance</span>
+                    <span className="text-sm">{t('availability.freelance')}</span>
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span className="text-sm text-green-600">Disponible</span>
+                      <span className="text-sm text-green-600">{t('availability.available')}</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm">Consulting technique</span>
+                    <span className="text-sm">{t('availability.consulting')}</span>
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span className="text-sm text-green-600">Disponible</span>
+                      <span className="text-sm text-green-600">{t('availability.available')}</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm">Missions longues</span>
+                    <span className="text-sm">{t('availability.longMissions')}</span>
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
                       <span className="text-sm text-orange-600">
-                        Sur demande
+                        {t('availability.onRequest')}
                       </span>
                     </div>
                   </div>
                 </div>
                 <div className="mt-4 p-3 bg-muted rounded-lg">
                   <p className="text-sm text-muted-foreground">
-                    Réponse garantie sous 24h pour tous les projets sérieux
+                    {t('availability.guarantee')}
                   </p>
                 </div>
               </CardContent>

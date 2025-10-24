@@ -1,0 +1,59 @@
+{
+  "formations": [
+    {
+      "id": 4,
+      "title": "Microsoft Certified: Azure Fundamentals",
+      "institution": "Microsoft",
+      "location": "En ligne",
+      "date": "Avril 2025",
+      "description": "Certification officielle Microsoft pour les fondamentaux Azure et le cloud computing.",
+      "skills": ["Informatique en Nuage", "Azure", "Microsoft Cloud"],
+      "mention": "C62D8F485B8E1CD7",
+      "type": "Certification"
+    },
+    {
+      "id": 5,
+      "title": "Analyse et Visualisation de Données avec Microsoft Power BI - Débutant",
+      "institution": "Groupe SNCF",
+      "location": "Paris La Défense",
+      "date": "Mars 2025",
+      "description": "Formation sur l'analyse et la visualisation de données avec Microsoft Power BI.",
+      "skills": ["Power BI", "Analyse de Données", "Visualisation de Données", "Intelligence d'Affaires"],
+      "mention": "",
+      "type": "Certification"
+    },
+    {
+      "id": 1,
+      "title": "Master (MAALSI)",
+      "institution": "CESI Nanterre",
+      "location": "France",
+      "date": "Sept 2024 - Sept 2026",
+      "description": "Master en informatique spécialisé en développement et architectures logicielles.",
+      "skills": ["Informatique", "Architecture Logicielle", "Développement Avancé"],
+      "mention": "",
+      "type": "Diplôme"
+    },
+    {
+      "id": 2,
+      "title": "Licence (CDA)",
+      "institution": "CESI Nanterre",
+      "location": "France",
+      "date": "Sept 2023 - Sept 2024",
+      "description": "Apprentissage des techniques avancées de développement web, avec des concepts DevOps (planification, intégration continue, tests automatisés...).",
+      "skills": ["StarUML", "React.js", "Gestion de Projet Agile", "MySQL Workbench"],
+      "mention": "Félicitations du jury",
+      "type": "Diplôme"
+    },
+    {
+      "id": 3,
+      "title": "BTS SIO Option SLAM",
+      "institution": "CFA Émerainville",
+      "location": "France",
+      "date": "Sept 2021 - Juil 2023",
+      "description": "Bases de l'informatique, apprentissage des langages web essentiels, découverte des bases de données et PHP, travail sur applications web et mobiles.",
+      "skills": ["PHP", "Adaptation", "Communication", "JavaScript", "Tailwind", "Bootstrap", "GitHub", "Python", "HTML", "CSS3", "SASS", "Rigueur", "MySQL", "Autodidacte"],
+      "mention": "Validé",
+      "type": "Diplôme"
+    }
+  ]
+}

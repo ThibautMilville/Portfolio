@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "@/navigation";
@@ -12,9 +13,10 @@ const FormationCarousel = dynamic(
   () => import("@/components/ui/formation-carousel"),
   {
     ssr: false,
-    loading: () => (
-      <div className="text-center py-8">Chargement des formations...</div>
-    ),
+    loading: () => {
+      const t = useTranslations('Home.formations');
+      return <div className="text-center py-8">{t('loading')}</div>;
+    },
   }
 );
 
@@ -41,6 +43,7 @@ interface FormationsSectionProps {
 export default function FormationsSection({
   formations,
 }: FormationsSectionProps) {
+  const t = useTranslations('Home.formations');
   return (
     <section className="py-6 md:py-8 px-6 relative">
       <LightParticles />
@@ -53,10 +56,10 @@ export default function FormationsSection({
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-            Formations & Certifications
+            {t('title')}
           </h2>
           <p className="text-lg text-muted-foreground">
-            Un parcours académique et professionnel solide
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -70,7 +73,7 @@ export default function FormationsSection({
             <FormationCarousel formations={formations} />
           ) : (
             <div className="text-center py-8 text-muted-foreground">
-              Aucune formation disponible
+              {t('empty')}
             </div>
           )}
         </motion.div>
@@ -83,7 +86,7 @@ export default function FormationsSection({
           viewport={{ once: true }}
           className="mt-16"
         >
-          <h3 className="text-2xl font-bold mb-12 text-center">Badges de cours</h3>
+          <h3 className="text-2xl font-bold mb-12 text-center">{t('courseBadges')}</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* Carte cours: badge Cisco */}
             <CourseCard 
@@ -92,6 +95,7 @@ export default function FormationsSection({
               pdfHref="/documents/badge-cisco-certification.pdf"
               organization="Cisco"
               date="Octobre 2025"
+              courseDescription={t('modals.courseDescription')}
             />
           </div>
         </motion.div>
@@ -99,7 +103,7 @@ export default function FormationsSection({
         <div className="flex justify-center mt-12">
           <Button size="lg" asChild className="sweep-light">
             <Link href="/formations">
-              Voir toutes les formations
+              {t('viewAll')}
               <ArrowRight className="ml-2 h-4 w-4 text-white" />
             </Link>
           </Button>
@@ -113,12 +117,13 @@ export default function FormationsSection({
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { Tooltip } from '@/components/ui/tooltip';
 
-function CourseCard({ title, imageSrc, pdfHref, organization, date }: { 
+function CourseCard({ title, imageSrc, pdfHref, organization, date, courseDescription }: { 
   title: string; 
   imageSrc: string; 
   pdfHref?: string;
   organization: string;
   date: string;
+  courseDescription: string;
 }) {
   return (
     <Dialog>
@@ -151,7 +156,7 @@ function CourseCard({ title, imageSrc, pdfHref, organization, date }: {
       <DialogContent className="w-[95vw] sm:w-auto max-w-xl max-h-[90vh] overflow-y-auto p-4 sm:p-6 pt-8">
         <DialogHeader className="pr-10 mb-4">
           <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>Cours suivi et justificatif</DialogDescription>
+          <DialogDescription>{courseDescription}</DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6">
