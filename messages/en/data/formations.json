@@ -1,0 +1,59 @@
+{
+  "formations": [
+    {
+      "id": 4,
+      "title": "Microsoft Certified: Azure Fundamentals",
+      "institution": "Microsoft",
+      "location": "Online",
+      "date": "April 2025",
+      "description": "Official Microsoft certification for Azure fundamentals and cloud computing.",
+      "skills": ["Cloud Computing", "Azure", "Microsoft Cloud"],
+      "mention": "C62D8F485B8E1CD7",
+      "type": "Certification"
+    },
+    {
+      "id": 5,
+      "title": "Analyzing and Visualizing Data with Microsoft Power BI - Beginner",
+      "institution": "SNCF Group",
+      "location": "Paris La Défense",
+      "date": "March 2025",
+      "description": "Training on data analysis and visualization with Microsoft Power BI.",
+      "skills": ["Power BI", "Data Analysis", "Data Visualization", "Business Intelligence"],
+      "mention": "",
+      "type": "Certification"
+    },
+    {
+      "id": 1,
+      "title": "Master's degree (MAALSI)",
+      "institution": "CESI Nanterre",
+      "location": "France",
+      "date": "Sep 2024 - Sep 2026",
+      "description": "Master's degree in computer science specialized in software development and architectures.",
+      "skills": ["Computer Science", "Software Architecture", "Advanced Development"],
+      "mention": "",
+      "type": "Degree"
+    },
+    {
+      "id": 2,
+      "title": "Bachelor's degree (CDA)",
+      "institution": "CESI Nanterre",
+      "location": "France",
+      "date": "Sep 2023 - Sep 2024",
+      "description": "Learn advanced web development techniques, with some DevOps concepts (planning, continuous integration, automated tests...).",
+      "skills": ["StarUML", "React.js", "Agile Project Management", "MySQL Workbench"],
+      "mention": "Honors of the jury",
+      "type": "Degree"
+    },
+    {
+      "id": 3,
+      "title": "BTS SIO Option SLAM",
+      "institution": "CFA Émerainville",
+      "location": "France",
+      "date": "Sep 2021 - Jul 2023",
+      "description": "Basics of computer science, learning essential web languages, discovering databases and PHP, working on web and mobile applications.",
+      "skills": ["PHP", "Adaptation", "Communication", "JavaScript", "Tailwind", "Bootstrap", "GitHub", "Python", "HTML", "CSS3", "SASS", "Rigor", "MySQL", "Self-taught"],
+      "mention": "Validated",
+      "type": "Degree"
+    }
+  ]
+}

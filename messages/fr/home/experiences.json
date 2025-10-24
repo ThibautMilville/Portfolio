@@ -1,0 +1,15 @@
+{
+  "title": "Expériences Professionnelles",
+  "subtitle": "Mon parcours professionnel et mes réalisations",
+  "viewAll": "Voir toutes les expériences",
+  "loading": "Chargement des expériences...",
+  "modals": {
+    "duration": "Durée :",
+    "location": "Lieu :",
+    "team": "Équipe :",
+    "technologies": "Technologies :",
+    "achievements": "Réalisations :",
+    "description": "Description :",
+    "viewOnPage": "Voir sur la page expériences"
+  }
+}

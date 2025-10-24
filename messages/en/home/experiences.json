@@ -1,0 +1,15 @@
+{
+  "title": "Professional Experience",
+  "subtitle": "My professional journey and achievements",
+  "viewAll": "View all experiences",
+  "loading": "Loading experiences...",
+  "modals": {
+    "duration": "Duration:",
+    "location": "Location:",
+    "team": "Team:",
+    "technologies": "Technologies:",
+    "achievements": "Achievements:",
+    "description": "Description:",
+    "viewOnPage": "View on experiences page"
+  }
+}

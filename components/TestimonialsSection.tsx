@@ -1,32 +1,31 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { Star, Quote } from "lucide-react";
 import LightParticles from "@/components/ui/light-particles";
 import { LocalImage } from "@/components/ui/image";
-
-const testimonials = [
-  {
-    name: "Cédric Lemaire",
-    role: "Responsable de production",
-    company: "OSMOZ COMMUNICATION",
-    image: "testimonials/cedric-lemaire.jpeg",
-    content:
-      "Je me permets d'écrire ces quelques lignes pour recommander chaleureusement Thibaut, qui a travaillé en alternance dans notre société pendant 2 ans. Durant son contrat, Thibaut a démontré une grande capacité d'adaptation et un engagement sans faille. Il a su faire preuve d'une grande autonomie tout en étant un membre actif de notre équipe. Son sens de l'initiative et sa capacité à résoudre les problèmes ont été particulièrement appréciés. Sa sociabilité et son empathie, fait de Thibaut un atout pour une équipe.",
-    rating: 5,
-  },
-  {
-    name: "Jean-Claude Ravineau",
-    role: "Fondateur et dirigeant",
-    company: "Manage Transport",
-    image: "testimonials/jc-ravineau.jpeg",
-    content:
-      "Thibaut a parfaitement compris mes attentes dans la création de mon site internet professionnel. Il fait preuve d'écoute et d'adaptabilité à un métier qu'il ne connaissait pas. Un plaisir d'avoir collaboré avec lui, je vous le recommande sans hésitation.",
-    rating: 5,
-  },
-];
+import React from "react";
 
 export default function TestimonialsSection() {
+  const t = useTranslations('Home.testimonials');
+  const locale = useLocale();
+  const [testimonials, setTestimonials] = React.useState<any[]>([]);
+  
+  React.useEffect(() => {
+    const loadTestimonials = async () => {
+      try {
+        const testimonialsData = await import(`@/messages/${locale}/home/testimonials.json`);
+        setTestimonials(testimonialsData.default.testimonials || []);
+      } catch (error) {
+        console.warn('Could not load testimonials:', error);
+      }
+    };
+    
+    loadTestimonials();
+  }, [locale]);
+  
   return (
     <section className="py-6 md:py-8 px-6 relative bg-gradient-to-b from-background via-background/95 to-background">
       <LightParticles />
@@ -39,15 +38,20 @@ export default function TestimonialsSection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-            Témoignages Clients
+            {t('title')}
           </h2>
           <p className="text-lg text-muted-foreground">
-            Ce que disent mes clients de mon travail
+            {t('subtitle')}
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {testimonials.map((testimonial, index) => (
+          {testimonials.length === 0 ? (
+            <div className="col-span-2 text-center py-8">
+              <p className="text-muted-foreground">{t('loading')}</p>
+            </div>
+          ) : (
+            testimonials.map((testimonial: any, index: number) => (
             <motion.div
               key={testimonial.name}
               initial={{ opacity: 0, y: 20 }}
@@ -81,7 +85,7 @@ export default function TestimonialsSection() {
                       {testimonial.name}
                     </p>
                     <p className="text-sm text-primary/80 font-medium">
-                      {testimonial.role} chez {testimonial.company}
+                      {testimonial.role} {t('at')} {testimonial.company}
                     </p>
                   </div>
                 </div>
@@ -102,7 +106,8 @@ export default function TestimonialsSection() {
                 </p>
               </div>
             </motion.div>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </section>

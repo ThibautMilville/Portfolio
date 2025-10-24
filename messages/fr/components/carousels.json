@@ -1,0 +1,14 @@
+{
+  "project": {
+    "loading": "Chargement...",
+    "empty": "Aucun projet à afficher",
+    "viewDetails": "Détails du projet"
+  },
+  "formation": {
+    "loading": "Chargement...",
+    "empty": "Aucune formation disponible"
+  },
+  "experience": {
+    "loading": "Chargement..."
+  }
+}

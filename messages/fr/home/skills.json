@@ -1,0 +1,66 @@
+{
+  "title": "Compétences Techniques",
+  "subtitle": "Mes domaines d'expertise et mes technologies maîtrisées",
+  "categories": {
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "database": "Base de données",
+    "tools": "Outils & DevOps",
+    "design": "Design & UX"
+  },
+  "levels": {
+    "expert": "Expert",
+    "advanced": "Avancé",
+    "intermediate": "Intermédiaire",
+    "beginner": "Débutant"
+  },
+  "stats": {
+    "domains": "Domaines d'expertise",
+    "experience": "Années d'expérience",
+    "satisfaction": "Satisfaction client"
+  },
+  "skillCategories": {
+    "frontend": {
+      "title": "Développement Frontend",
+      "description": "Maîtrise complète des technologies web modernes"
+    },
+    "backend": {
+      "title": "Développement Backend",
+      "description": "Expertise en développement serveur et APIs"
+    },
+    "infrastructure": {
+      "title": "Infrastructure & DevOps",
+      "description": "Gestion complète de l'infrastructure et du déploiement"
+    },
+    "design": {
+      "title": "Design & Outils",
+      "description": "Compétences en design et outils de productivité"
+    }
+  },
+  "favoriteStack": {
+    "title": "Ma Stack Favorite",
+    "subtitle": "Les technologies que j'utilise au quotidien"
+  },
+  "modals": {
+    "favoriteTech": "Technologie favorite",
+    "favoriteDescription": "Cette technologie fait partie de ma stack favorite que j'utilise quotidiennement dans mes projets.",
+    "courseDescription": "Cours suivi et justificatif"
+  },
+  "techDescriptions": {
+    "react": "Bibliothèque UI",
+    "nextjs": "Framework React",
+    "nodejs": "Runtime JS",
+    "nestjs": "Framework Node.js",
+    "tailwind": "Framework CSS",
+    "typescript": "Langage de programmation",
+    "mongodb": "Base de données NoSQL",
+    "postgresql": "Base de données relationnelle",
+    "docker": "Conteneurisation",
+    "git": "Contrôle de version",
+    "vscode": "Éditeur de code",
+    "figma": "Design UI/UX",
+    "terminal": "CLI",
+    "cursor": "IDE avec IA",
+    "linux": "Système d'exploitation"
+  }
+}

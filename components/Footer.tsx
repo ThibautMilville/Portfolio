@@ -3,8 +3,11 @@ import { LocalImage } from '@/components/ui/image';
 import { FOOTER_DATA } from '@/lib/footer';
 import { Github, Linkedin, Mail, MessageCircle, ArrowUpRight } from 'lucide-react';
 import { Tooltip } from '@/components/ui/tooltip';
+import { useTranslations } from 'next-intl';
 
 export default function Footer() {
+  const t = useTranslations('Footer');
+  const tNav = useTranslations('Navigation');
   const currentYear = new Date().getFullYear();
 
   return (
@@ -23,28 +26,58 @@ export default function Footer() {
             Thibaut MILVILLE
           </Link>
           <p className="text-sm text-muted-foreground text-center lg:text-left">
-            Développeur Fullstack · React, Next.js, NestJS
+            {t('description')}
           </p>
         </div>
 
         <div className="flex flex-col items-center lg:items-start">
-          <h3 className="font-semibold mb-3 text-primary">Navigation</h3>
+          <h3 className="font-semibold mb-3 text-primary">{t('navigation')}</h3>
           <ul className="space-y-2">
-            {FOOTER_DATA.navigation.map((item: { title: string; href: string }) => (
-              <li key={item.title}>
-                <Link
-                  href={item.href}
-                  className="hover:underline text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  {item.title}
-                </Link>
-              </li>
-            ))}
+            <li>
+              <Link
+                href="/"
+                className="hover:underline text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                {tNav('home')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/projets"
+                className="hover:underline text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                {tNav('projects')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/formations"
+                className="hover:underline text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                {tNav('formations')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/experiences"
+                className="hover:underline text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                {tNav('experiences')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/contact"
+                className="hover:underline text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                {tNav('contact')}
+              </Link>
+            </li>
           </ul>
         </div>
 
         <div className="flex flex-col items-center lg:items-start">
-          <h3 className="font-semibold mb-3 text-primary">Formations</h3>
+          <h3 className="font-semibold mb-3 text-primary">{t('formations')}</h3>
           <ul className="space-y-2">
             {FOOTER_DATA.diplomes.map((item: { title: string; href: string }) => (
               <li key={item.title}>
@@ -60,7 +93,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col items-center lg:items-start">
-          <h3 className="font-semibold mb-3 text-primary">Projets</h3>
+          <h3 className="font-semibold mb-3 text-primary">{t('projects')}</h3>
           <ul className="space-y-2">
             {FOOTER_DATA.projets.map((item: { title: string; href: string }) => (
               <li key={item.title}>
@@ -136,7 +169,7 @@ export default function Footer() {
       <div className="border-t pt-4 pb-6">
         <div className="max-w-6xl mx-auto flex items-center justify-center text-sm text-muted-foreground">
           <p>
-            © {currentYear} <Link href="/" className="hover:text-primary font-semibold transition-colors">Thibaut MILVILLE</Link>. Tous droits réservés.
+            © {currentYear} <Link href="/" className="hover:text-primary font-semibold transition-colors">Thibaut MILVILLE</Link>. {t('copyright')}
           </p>
         </div>
       </div>

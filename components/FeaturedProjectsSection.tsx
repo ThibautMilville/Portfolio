@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
@@ -26,6 +27,7 @@ interface FeaturedProjectsSectionProps {
 }
 
 export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSectionProps) {
+  const t = useTranslations('Home.featuredProjects');
   // Utiliser les mêmes projets phares qu'avant
   const featuredProjectTitles = [
     "UT Marketplace",
@@ -48,10 +50,10 @@ export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSe
           className="text-center mb-8"
         >
           <h2 id="featured-projects-heading" className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-            Projets phares
+            {t('title')}
           </h2>
           <p className="text-lg text-muted-foreground">
-            Quelques réalisations techniques marquantes
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -90,7 +92,7 @@ export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSe
                   </div>
                   <div className="absolute top-4 right-4 flex gap-2">
                     {featuredProjects[0]?.demo && (
-                      <Tooltip content="Voir la démo" position="top">
+                      <Tooltip content={t('viewDemo')} position="top">
                         <button
                           onClick={(e) => {
                             e.preventDefault();
@@ -106,7 +108,7 @@ export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSe
                         </button>
                       </Tooltip>
                     )}
-                    <Tooltip content="Voir le code source" position="top">
+                    <Tooltip content={t('viewCode')} position="top">
                       <button
                         onClick={(e) => {
                           e.preventDefault();
@@ -227,7 +229,7 @@ export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSe
                       </div>
                       <div className="absolute top-3 right-3 flex gap-1">
                         {project.demo && (
-                          <Tooltip content="Voir la démo" position="top">
+                          <Tooltip content={t('viewDemo')} position="top">
                             <button
                               onClick={(e) => {
                                 e.preventDefault();
@@ -243,7 +245,7 @@ export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSe
                             </button>
                           </Tooltip>
                         )}
-                        <Tooltip content="Voir le code source" position="top">
+                        <Tooltip content={t('viewCode')} position="top">
                           <button
                             onClick={(e) => {
                               e.preventDefault();

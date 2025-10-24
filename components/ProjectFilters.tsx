@@ -2,6 +2,14 @@
 
 import { useMemo, useState } from "react";
 import { Input } from "@/components/ui/input";
+
+// Constantes pour les statuts
+const STATUS_VALUES = {
+  ALL: "all",
+  COMPLETED: "Terminé",
+  IN_PROGRESS: "En cours", 
+  PAUSED: "En pause"
+} as const;
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -28,6 +36,7 @@ interface ProjectFiltersProps {
   technologies: string[];
   years: string[];
   categories: string[];
+  t: any;
 }
 
 export default function ProjectFilters({
@@ -37,6 +46,7 @@ export default function ProjectFilters({
   technologies,
   years,
   categories,
+  t,
 }: ProjectFiltersProps) {
   const techCount = value.techs.length;
   const yearCount = value.years.length;
@@ -52,7 +62,7 @@ export default function ProjectFilters({
       organization: "all",
       techs: [],
       years: [],
-      status: "all",
+      status: STATUS_VALUES.ALL,
       category: "all",
     });
 
@@ -60,7 +70,7 @@ export default function ProjectFilters({
     const parts: string[] = [];
     if (value.organization !== "all") parts.push(`Org: ${value.organization}`);
     if (value.category !== "all") parts.push(`Cat: ${value.category}`);
-    if (value.status !== "all") parts.push(`Statut: ${value.status}`);
+    if (value.status !== STATUS_VALUES.ALL) parts.push(`${t('filters.status')}: ${value.status}`);
     if (techCount) parts.push(`${techCount} tech` + (techCount > 1 ? "s" : ""));
     if (yearCount)
       parts.push(`${yearCount} année` + (yearCount > 1 ? "s" : ""));
@@ -76,13 +86,13 @@ export default function ProjectFilters({
           <Input
             value={value.search}
             onChange={(e) => onChange({ ...value, search: e.target.value })}
-            placeholder="Rechercher un projet, une techno, une catégorie..."
+            placeholder={t('filters.search')}
             className="w-full h-14 lg:h-16 text-base lg:text-lg pl-12 pr-12 rounded-full shadow-sm"
           />
           {value.search && (
             <button
               className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-              aria-label="Effacer la recherche"
+              aria-label={t('filters.clearAll')}
               onClick={() => onChange({ ...value, search: "" })}
             >
               <X className="h-5 w-5" />
@@ -106,7 +116,7 @@ export default function ProjectFilters({
               variant="outline"
               className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
             >
-              {value.organization === "all" ? "Organisation" : value.organization}
+              {value.organization === "all" ? t('filters.organization') : value.organization}
               {value.organization !== "all" ? (
                 <Badge variant="secondary" className="ml-2">
                   1
@@ -122,7 +132,7 @@ export default function ProjectFilters({
                 }`}
                 onClick={() => onChange({ ...value, organization: "all" })}
               >
-                Toutes les organisations
+                {t('filters.allOrganizations')}
               </button>
               {organizations.map((org) => (
                 <button
@@ -160,7 +170,7 @@ export default function ProjectFilters({
               className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
             >
               <SlidersHorizontal className="mr-2 h-4 w-4" />
-              {value.category === "all" ? "Catégorie" : value.category}
+              {value.category === "all" ? t('filters.category') : value.category}
               {value.category !== "all" ? (
                 <Badge variant="secondary" className="ml-2">
                   1
@@ -173,7 +183,7 @@ export default function ProjectFilters({
               <Input
                 value={catQuery}
                 onChange={(e) => setCatQuery(e.target.value)}
-                placeholder="Rechercher une catégorie..."
+                placeholder={t('filters.searchCategory')}
                 className="h-9"
               />
             </div>
@@ -184,7 +194,7 @@ export default function ProjectFilters({
                 }`}
                 onClick={() => onChange({ ...value, category: "all" })}
               >
-                Toutes les catégories
+                {t('filters.allCategories')}
               </button>
               {categories
                 .filter((c) => c.toLowerCase().includes(catQuery.toLowerCase()))
@@ -222,8 +232,8 @@ export default function ProjectFilters({
               variant="outline"
               className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
             >
-              {value.status === "all" ? "Statut" : value.status}
-              {value.status !== "all" ? (
+              {value.status === STATUS_VALUES.ALL ? t('filters.status') : value.status}
+              {value.status !== STATUS_VALUES.ALL ? (
                 <Badge variant="secondary" className="ml-2">
                   1
                 </Badge>
@@ -234,35 +244,35 @@ export default function ProjectFilters({
             <div className="flex flex-col gap-2 max-h-60 overflow-auto pr-1">
               <button
                 className={`text-left text-sm px-2 py-1 rounded hover:bg-accent ${
-                  value.status === "all" ? "bg-accent" : ""
+                  value.status === STATUS_VALUES.ALL ? "bg-accent" : ""
                 }`}
-                onClick={() => onChange({ ...value, status: "all" })}
+                onClick={() => onChange({ ...value, status: STATUS_VALUES.ALL })}
               >
-                Tous les statuts
+                {t('filters.allStatuses')}
               </button>
               <button
                 className={`text-left text-sm px-2 py-1 rounded hover:bg-accent ${
-                  value.status === "Terminé" ? "bg-accent" : ""
+                  value.status === STATUS_VALUES.COMPLETED ? "bg-accent" : ""
                 }`}
-                onClick={() => onChange({ ...value, status: "Terminé" })}
+                onClick={() => onChange({ ...value, status: STATUS_VALUES.COMPLETED })}
               >
-                Terminé
+                {t('filters.completed')}
               </button>
               <button
                 className={`text-left text-sm px-2 py-1 rounded hover:bg-accent ${
-                  value.status === "En cours" ? "bg-accent" : ""
+                  value.status === STATUS_VALUES.IN_PROGRESS ? "bg-accent" : ""
                 }`}
-                onClick={() => onChange({ ...value, status: "En cours" })}
+                onClick={() => onChange({ ...value, status: STATUS_VALUES.IN_PROGRESS })}
               >
-                En cours
+                {t('filters.inProgress')}
               </button>
               <button
                 className={`text-left text-sm px-2 py-1 rounded hover:bg-accent ${
-                  value.status === "En pause" ? "bg-accent" : ""
+                  value.status === STATUS_VALUES.PAUSED ? "bg-accent" : ""
                 }`}
-                onClick={() => onChange({ ...value, status: "En pause" })}
+                onClick={() => onChange({ ...value, status: STATUS_VALUES.PAUSED })}
               >
-                En pause
+                {t('filters.paused')}
               </button>
             </div>
           </PopoverContent>
@@ -284,7 +294,7 @@ export default function ProjectFilters({
               className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none cursor-pointer"
             >
               <SlidersHorizontal className="mr-2 h-4 w-4" />
-              Technologies{" "}
+              {t('filters.technologies')}{" "}
               {techCount ? (
                 <Badge variant="secondary" className="ml-2">
                   {techCount}
@@ -297,7 +307,7 @@ export default function ProjectFilters({
               <Input
                 value={techQuery}
                 onChange={(e) => setTechQuery(e.target.value)}
-                placeholder="Rechercher une techno..."
+                placeholder={t('filters.searchTechnologies')}
                 className="h-9"
               />
             </div>
@@ -346,7 +356,7 @@ export default function ProjectFilters({
               className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none cursor-pointer"
             >
               <SlidersHorizontal className="mr-2 h-4 w-4" />
-              Années{" "}
+              {t('filters.years')}{" "}
               {yearCount ? (
                 <Badge variant="secondary" className="ml-2">
                   {yearCount}
@@ -359,7 +369,7 @@ export default function ProjectFilters({
               <Input
                 value={yearQuery}
                 onChange={(e) => setYearQuery(e.target.value)}
-                placeholder="Filtrer une année..."
+                placeholder={t('filters.searchYears')}
                 className="h-9"
               />
             </div>
@@ -394,7 +404,7 @@ export default function ProjectFilters({
           onClick={clearAll}
           className="w-full h-11 rounded-full"
         >
-          Réinitialiser
+          {t('filters.clearAll')}
         </Button>
       </div>
 
@@ -424,12 +434,12 @@ export default function ProjectFilters({
             </button>
           </Badge>
         )}
-        {value.status !== "all" && (
+        {value.status !== STATUS_VALUES.ALL && (
           <Badge variant="secondary" className="px-3 py-1">
             {value.status}
             <button
               className="ml-2"
-              onClick={() => onChange({ ...value, status: "all" })}
+              onClick={() => onChange({ ...value, status: STATUS_VALUES.ALL })}
               aria-label="Supprimer"
             >
               <X className="h-3 w-3" />

@@ -1,0 +1,45 @@
+{
+  "title": "Prêt à démarrer votre projet ?",
+  "subtitle": "Discutons de votre prochain projet ensemble",
+  "form": {
+    "title": "Envoyez-moi un message",
+    "description": "Je réponds généralement dans les 24 heures",
+    "fields": {
+      "name": "Nom complet",
+      "email": "Email",
+      "subject": "Sujet",
+      "message": "Message"
+    },
+    "placeholders": {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "subject": "Sujet de votre message",
+      "message": "Décrivez votre projet ou votre demande..."
+    },
+    "submit": "Envoyer le message",
+    "success": "Message envoyé ! Je vous répondrai dans les plus brefs délais."
+  },
+  "info": {
+    "title": "Informations de contact",
+    "description": "N'hésitez pas à me contacter pour discuter de votre projet",
+    "email": "Email",
+    "telegram": "Telegram",
+    "location": "Localisation",
+    "socialNetworks": "Réseaux sociaux",
+    "response": "Temps de réponse"
+  },
+  "tooltips": {
+    "github": "Visiter mon profil GitHub",
+    "linkedin": "Visiter mon profil LinkedIn",
+    "telegram": "Me contacter sur Telegram"
+  },
+  "availability": {
+    "title": "Disponibilité",
+    "freelance": "Projets freelance",
+    "consulting": "Consulting technique",
+    "longMissions": "Missions longues",
+    "available": "Disponible",
+    "onRequest": "Sur demande",
+    "guarantee": "Réponse garantie sous 24h pour tous les projets sérieux"
+  }
+}

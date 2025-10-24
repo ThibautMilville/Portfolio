@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import {
   GraduationCap,
   Calendar,
@@ -20,10 +21,13 @@ import { Button } from "@/components/ui/button";
 import LightParticles from "@/components/ui/light-particles";
 import { getAllFormations } from "@/lib/data";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
+import { useTranslatedData } from "@/hooks/useTranslatedData";
 
 const formations = getAllFormations();
 
 export default function Formations() {
+  const t = useTranslations('Pages.formations');
+  const { getTranslatedFormation } = useTranslatedData();
   return (
     <div className="py-6 md:py-8 px-6 relative">
       <LightParticles />
@@ -35,7 +39,7 @@ export default function Formations() {
           className="text-center mb-16"
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Formations & Certifications
+            {t('title')}
           </h1>
 
           {/* Barre horizontale stylisée moderne et dynamique */}
@@ -64,7 +68,7 @@ export default function Formations() {
           </motion.div>
 
           <p className="text-lg text-muted-foreground">
-            Mon parcours académique et mes certifications professionnelles
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -76,7 +80,7 @@ export default function Formations() {
           className="mb-16"
         >
           <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-            Diplômes
+            {t('diplomas')}
           </h2>
 
           <div className="relative">
@@ -86,7 +90,9 @@ export default function Formations() {
             <div className="space-y-8">
               {formations
                 .filter((f: any) => f.type === "Diplôme")
-                .map((formation: any, index: number) => (
+                .map((formation: any, index: number) => {
+                  const translatedFormation = getTranslatedFormation(formation);
+                  return (
                   <motion.div
                     key={formation.id}
                     initial={{ opacity: 0, x: -20 }}
@@ -117,10 +123,10 @@ export default function Formations() {
                             )}
                             <div className="flex-1 min-w-0">
                               <CardTitle className="text-xl mb-2">
-                                {formation.title}
+                                {translatedFormation.title}
                               </CardTitle>
                               <CardDescription className="text-base">
-                                {formation.institution}
+                                {translatedFormation.institution}
                               </CardDescription>
                             </div>
                           </div>
@@ -129,7 +135,7 @@ export default function Formations() {
                               variant="outline"
                               className="px-2 py-1 rounded-full bg-primary/10 text-primary text-sm"
                             >
-                              {formation.type}
+                              {translatedFormation.type}
                             </Badge>
                           </div>
                         </div>
@@ -137,16 +143,16 @@ export default function Formations() {
                         <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mt-4">
                           <div className="flex items-center gap-1">
                             <Calendar className="h-4 w-4" />
-                            {formation.date}
+                            {translatedFormation.date}
                           </div>
                           <div className="flex items-center gap-1">
                             <MapPin className="h-4 w-4" />
-                            {formation.location}
+                            {translatedFormation.location}
                           </div>
-                          {formation.mention && (
+                          {translatedFormation.mention && (
                             <div className="flex items-center gap-1">
                               <Award className="h-4 w-4" />
-                              {formation.mention}
+                                {translatedFormation.mention}
                             </div>
                           )}
                         </div>
@@ -154,15 +160,15 @@ export default function Formations() {
 
                       <CardContent>
                         <p className="text-muted-foreground mb-4">
-                          {formation.description}
+                          {translatedFormation.description}
                         </p>
 
                         <div className="space-y-2">
                           <p className="text-sm font-medium">
-                            Compétences acquises :
+                            {t('skillsAcquired')}
                           </p>
                           <div className="flex flex-wrap gap-2">
-                            {formation.skills.map((skill: string) => (
+                            {translatedFormation.skills.map((skill: string) => (
                               <Badge
                                 key={skill}
                                 variant="outline"
@@ -174,7 +180,7 @@ export default function Formations() {
                           </div>
                         </div>
 
-                        {formation.credentialUrl && (
+                        {translatedFormation.credentialUrl && (
                           <div className="mt-4">
                             <Button
                               variant="outline"
@@ -183,12 +189,12 @@ export default function Formations() {
                               className="sweep-light"
                             >
                               <a
-                                href={formation.credentialUrl}
+                                href={translatedFormation.credentialUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
                                 <ExternalLink className="h-4 w-4 mr-2" />
-                                Vérifier la certification
+                                {t('verifyCertification')}
                               </a>
                             </Button>
                           </div>
@@ -196,7 +202,8 @@ export default function Formations() {
                       </CardContent>
                     </Card>
                   </motion.div>
-                ))}
+                  );
+                })}
             </div>
           </div>
         </motion.div>
@@ -209,7 +216,7 @@ export default function Formations() {
           className="mb-16"
         >
           <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-            Certifications
+            {t('certifications')}
           </h2>
 
           <div className="relative">
@@ -219,7 +226,9 @@ export default function Formations() {
             <div className="space-y-8">
               {formations
                 .filter((f: any) => f.type === "Certification")
-                .map((formation: any, index: number) => (
+                .map((formation: any, index: number) => {
+                  const translatedFormation = getTranslatedFormation(formation);
+                  return (
                   <motion.div
                     key={formation.id}
                     initial={{ opacity: 0, x: -20 }}
@@ -250,10 +259,10 @@ export default function Formations() {
                             )}
                             <div className="flex-1 min-w-0">
                               <CardTitle className="text-xl mb-2">
-                                {formation.title}
+                                {translatedFormation.title}
                               </CardTitle>
                               <CardDescription className="text-base">
-                                {formation.institution}
+                                {translatedFormation.institution}
                               </CardDescription>
                             </div>
                           </div>
@@ -262,7 +271,7 @@ export default function Formations() {
                               variant="outline"
                               className="px-2 py-1 rounded-full bg-primary/10 text-primary text-sm"
                             >
-                              {formation.type}
+                              {translatedFormation.type}
                             </Badge>
                           </div>
                         </div>
@@ -270,16 +279,16 @@ export default function Formations() {
                         <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mt-4">
                           <div className="flex items-center gap-1">
                             <Calendar className="h-4 w-4" />
-                            {formation.date}
+                            {translatedFormation.date}
                           </div>
                           <div className="flex items-center gap-1">
                             <MapPin className="h-4 w-4" />
-                            {formation.location}
+                            {translatedFormation.location}
                           </div>
-                          {formation.mention && (
+                          {translatedFormation.mention && (
                             <div className="flex items-center gap-1">
                               <Award className="h-4 w-4" />
-                              {formation.mention}
+                                {translatedFormation.mention}
                             </div>
                           )}
                         </div>
@@ -287,15 +296,15 @@ export default function Formations() {
 
                       <CardContent>
                         <p className="text-muted-foreground mb-4">
-                          {formation.description}
+                          {translatedFormation.description}
                         </p>
 
                         <div className="space-y-2">
                           <p className="text-sm font-medium">
-                            Compétences acquises :
+                            {t('skillsAcquired')}
                           </p>
                           <div className="flex flex-wrap gap-2">
-                            {formation.skills.map((skill: string) => (
+                            {translatedFormation.skills.map((skill: string) => (
                               <Badge
                                 key={skill}
                                 variant="outline"
@@ -307,7 +316,7 @@ export default function Formations() {
                           </div>
                         </div>
 
-                        {formation.credentialUrl && (
+                        {translatedFormation.credentialUrl && (
                           <div className="mt-4">
                             <Button
                               variant="outline"
@@ -316,12 +325,12 @@ export default function Formations() {
                               className="sweep-light"
                             >
                               <a
-                                href={formation.credentialUrl}
+                                href={translatedFormation.credentialUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >
                                 <ExternalLink className="h-4 w-4 mr-2" />
-                                Vérifier la certification
+                                {t('verifyCertification')}
                               </a>
                             </Button>
                           </div>
@@ -329,7 +338,8 @@ export default function Formations() {
                       </CardContent>
                     </Card>
                   </motion.div>
-                ))}
+                  );
+                })}
             </div>
           </div>
         </motion.div>
@@ -342,16 +352,18 @@ export default function Formations() {
           className="mb-16"
         >
           <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-            Badges de cours
+            {t('courseBadges')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* Carte cours: badge Cisco */}
             <CourseCard 
-              title="Cisco – Introduction to Cybersecurity"
+              title={t('badgeData.cisco.title')}
               imageSrc="/images/education/badge-cybersecurity.png"
               pdfHref="/documents/badge-cisco-certification.pdf"
-              organization="Cisco"
-              date="Octobre 2025"
+              organization={t('badgeData.cisco.organization')}
+              date={t('badgeData.cisco.date')}
+              courseDescription={t('modals.courseDescription')}
+              t={t}
             />
           </div>
         </motion.div>
@@ -401,7 +413,7 @@ export default function Formations() {
                 <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
                   {formations.filter((f: any) => f.type === "Diplôme").length}
                 </div>
-                <div className="text-sm text-muted-foreground">Diplômes</div>
+                 <div className="text-sm text-muted-foreground">{t('diplomas')}</div>
               </div>
             </div>
             <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
@@ -421,9 +433,9 @@ export default function Formations() {
                 <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
                   {formations.filter((f: any) => f.type === "Certification").length}
                 </div>
-                <div className="text-sm text-muted-foreground">
-                  Certifications
-                </div>
+                 <div className="text-sm text-muted-foreground">
+                   {t('certifications')}
+                 </div>
               </div>
             </div>
             <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
@@ -452,12 +464,14 @@ export default function Formations() {
 }
 
 // Carte de cours avec tooltip + modale
-function CourseCard({ title, imageSrc, pdfHref, organization, date }: { 
+function CourseCard({ title, imageSrc, pdfHref, organization, date, courseDescription, t }: { 
   title: string; 
   imageSrc: string; 
   pdfHref?: string;
   organization: string;
   date: string;
+  courseDescription: string;
+  t: any;
 }) {
   return (
     <Dialog>
@@ -476,11 +490,11 @@ function CourseCard({ title, imageSrc, pdfHref, organization, date }: {
             
             <div className="space-y-2 text-center">
               <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                <span className="font-medium">Organisme:</span>
+                <span className="font-medium">{t('courseCard.organization')}</span>
                 <span>{organization}</span>
               </div>
               <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                <span className="font-medium">Date:</span>
+                <span className="font-medium">{t('courseCard.date')}</span>
                 <span>{date}</span>
               </div>
             </div>
@@ -490,7 +504,7 @@ function CourseCard({ title, imageSrc, pdfHref, organization, date }: {
       <DialogContent className="w-[95vw] sm:w-auto max-w-xl max-h-[90vh] overflow-y-auto p-4 sm:p-6 pt-8">
         <DialogHeader className="pr-10 mb-4">
           <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>Cours suivi et justificatif</DialogDescription>
+          <DialogDescription>{courseDescription}</DialogDescription>
         </DialogHeader>
 
         <div className="space-y-6">
@@ -498,10 +512,10 @@ function CourseCard({ title, imageSrc, pdfHref, organization, date }: {
             <img src={imageSrc} alt={title} className="max-h-60 object-contain" />
           </div>
           <div className="text-sm text-muted-foreground">
-            Date d'obtention: {date}
+            {t('courseCard.obtainedDate')} {date}
           </div>
           <div className="text-sm text-muted-foreground">
-            Organisme: {organization}
+            {t('courseCard.organizationName')} {organization}
           </div>
           {pdfHref ? (
             <div className="text-sm">
@@ -511,7 +525,7 @@ function CourseCard({ title, imageSrc, pdfHref, organization, date }: {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
               >
-                Consulter le document (PDF)
+                {t('courseCard.viewDocument')}
               </a>
             </div>
           ) : null}

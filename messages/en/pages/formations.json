@@ -1,0 +1,26 @@
+{
+  "title": "Education & Certifications",
+  "subtitle": "My academic journey and professional certifications",
+  "courseBadges": "Course Badges",
+  "diplomas": "Diplomas",
+  "certifications": "Certifications",
+  "skillsAcquired": "Skills acquired:",
+  "verifyCertification": "Verify certification",
+  "modals": {
+    "courseDescription": "Course taken and proof"
+  },
+  "courseCard": {
+    "organization": "Organization:",
+    "date": "Date:",
+    "obtainedDate": "Date obtained:",
+    "organizationName": "Organization:",
+    "viewDocument": "View document (PDF)"
+  },
+  "badgeData": {
+    "cisco": {
+      "title": "Cisco – Introduction to Cybersecurity",
+      "organization": "Cisco",
+      "date": "October 2025"
+    }
+  }
+}

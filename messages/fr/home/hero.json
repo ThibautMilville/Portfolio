@@ -1,0 +1,20 @@
+{
+  "title": "Développeur Full-Stack & Expert Blockchain",
+  "subtitle": "Passionné par l'innovation technologique et les solutions décentralisées",
+  "description": "Je crée des applications web modernes et des solutions blockchain robustes pour transformer vos idées en réalité numérique.",
+  "typewriter": {
+    "softwareEngineer": "&lt;Software Engineer /&gt;",
+    "expertReact": "&lt;Expert React & Next.js /&gt;",
+    "passionate": "&lt;Passionné par l'innovation /&gt;"
+  },
+  "descriptionText": "Passionné par la création d'expériences web modernes avec React, Next.js et NestJS. Je transforme vos idées en applications performantes et scalables.",
+  "buttons": {
+    "viewProjects": "Voir mes projets",
+    "downloadCV": "Télécharger CV"
+  },
+  "tooltips": {
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "contact": "Contact"
+  }
+}

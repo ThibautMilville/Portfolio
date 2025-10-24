@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Building, Calendar, MapPin, Users, ExternalLink } from 'lucide-react';
 import { Card, CardContent } from './card';
@@ -43,6 +44,8 @@ const getCardsToShow = (totalGroups: number) => {
 };
 
 export default function ExperienceCarousel({ experiences }: ExperienceCarouselProps) {
+  const t = useTranslations('Components.carousels.experience');
+  const tModals = useTranslations('Home.experiences.modals');
   const [startIndex, setStartIndex] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(1);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -137,7 +140,7 @@ export default function ExperienceCarousel({ experiences }: ExperienceCarouselPr
   if (!isClient) {
     return (
       <div className="relative max-w-4xl mx-auto flex items-center justify-center py-8">
-        <div className="text-muted-foreground">Chargement...</div>
+        <div className="text-muted-foreground">{t('loading')}</div>
       </div>
     );
   }
@@ -299,14 +302,14 @@ export default function ExperienceCarousel({ experiences }: ExperienceCarouselPr
                         <div className="flex gap-2 text-sm items-start">
                           <Calendar className="h-4 w-4 text-primary mt-0.5" />
                           <div className="grid grid-cols-[auto,1fr] gap-x-2">
-                            <span className="font-medium whitespace-nowrap">Durée :</span>
+                            <span className="font-medium whitespace-nowrap">{tModals('duration')}</span>
                             <span className="break-words">{group.totalDuration}</span>
                           </div>
                         </div>
                         <div className="flex gap-2 text-sm items-start">
                           <MapPin className="h-4 w-4 text-primary mt-0.5" />
                           <div className="grid grid-cols-[auto,1fr] gap-x-2">
-                            <span className="font-medium whitespace-nowrap">Lieu :</span>
+                            <span className="font-medium whitespace-nowrap">{tModals('location')}</span>
                             <span className="break-words">{group.experiences[0].location}</span>
                           </div>
                         </div>
@@ -343,7 +346,7 @@ export default function ExperienceCarousel({ experiences }: ExperienceCarouselPr
                           className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
                         >
                           <ExternalLink className="h-4 w-4" />
-                          Voir sur la page expériences
+                          {tModals('viewOnPage')}
                         </a>
                       </div>
                     </div>

@@ -1,10 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Target, Users, Rocket, Eye } from "lucide-react";
 import LightParticles from "@/components/ui/light-particles";
 
 export default function ObjectivesSection() {
+  const t = useTranslations('Home.objectives');
   return (
     <section className="py-6 md:py-8 px-6 bg-gradient-to-br from-background via-background/95 to-background/90 relative">
       <LightParticles />
@@ -17,10 +19,10 @@ export default function ObjectivesSection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-            Objectifs & Vision
+            {t('title')}
           </h2>
           <p className="text-lg text-muted-foreground">
-            Ma mission et mes ambitions professionnelles
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -43,11 +45,10 @@ export default function ObjectivesSection() {
               </div>
               
               <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-blue-800 dark:from-blue-400 dark:to-blue-300 bg-clip-text text-transparent">
-                Innovation Continue
+                {t('goals.innovation.title')}
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
-                Rester à la pointe des technologies émergentes et contribuer à
-                l'évolution du développement web moderne.
+                {t('goals.innovation.description')}
               </p>
             </div>
           </motion.div>
@@ -70,11 +71,10 @@ export default function ObjectivesSection() {
               </div>
               
               <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-800 dark:from-emerald-400 dark:to-emerald-300 bg-clip-text text-transparent">
-                Impact Social
+                {t('goals.impact.title')}
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
-                Créer des solutions technologiques qui améliorent la vie des
-                utilisateurs et contribuent au bien commun.
+                {t('goals.impact.description')}
               </p>
             </div>
           </motion.div>
@@ -97,11 +97,10 @@ export default function ObjectivesSection() {
               </div>
               
               <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-purple-800 dark:from-purple-400 dark:to-purple-300 bg-clip-text text-transparent">
-                Excellence Technique
+                {t('goals.excellence.title')}
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
-                Développer des applications performantes, scalables et
-                maintenables selon les meilleures pratiques.
+                {t('goals.excellence.description')}
               </p>
             </div>
           </motion.div>
@@ -124,11 +123,10 @@ export default function ObjectivesSection() {
               </div>
               
               <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-amber-600 to-amber-800 dark:from-amber-400 dark:to-amber-300 bg-clip-text text-transparent">
-                Vision Long Terme
+                {t('goals.vision.title')}
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
-                Construire une carrière durable en tant qu'expert technique et
-                leader dans l'écosystème tech français.
+                {t('goals.vision.description')}
               </p>
             </div>
           </motion.div>
@@ -166,17 +164,14 @@ export default function ObjectivesSection() {
               
               {/* Titre avec effet de dégradé */}
               <h3 className="text-3xl md:text-4xl font-bold mb-6 text-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
-                Ma Philosophie
+                {t('philosophy.title')}
               </h3>
               
               {/* Citation avec style moderne */}
               <div className="relative">
                 <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-indigo-500 to-purple-500 rounded-full"></div>
                 <blockquote className="pl-8 text-xl md:text-2xl text-slate-700 dark:text-slate-300 leading-relaxed font-medium italic">
-                  "La technologie doit servir l'humain. Mon objectif est de créer
-                  des expériences numériques qui non seulement fonctionnent
-                  parfaitement, mais qui enrichissent véritablement la vie de leurs
-                  utilisateurs."
+                  "{t('philosophy.quote')}"
                 </blockquote>
               </div>
               
@@ -184,7 +179,7 @@ export default function ObjectivesSection() {
               <div className="mt-8 text-center">
                 <div className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 font-medium">
                   <div className="w-2 h-2 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full"></div>
-                  <span>Thibaut - Développeur Full-Stack</span>
+                  <span>{t('philosophy.signature')}</span>
                   <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
                 </div>
               </div>

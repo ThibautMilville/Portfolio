@@ -1,0 +1,27 @@
+{
+  "title": "Objectifs & Vision",
+  "subtitle": "Ma mission et mes ambitions professionnelles",
+  "goals": {
+    "innovation": {
+      "title": "Innovation Continue",
+      "description": "Rester à la pointe des technologies émergentes et contribuer à l'évolution du développement web moderne."
+    },
+    "impact": {
+      "title": "Impact Social",
+      "description": "Créer des solutions technologiques qui améliorent la vie des utilisateurs et contribuent au bien commun."
+    },
+    "excellence": {
+      "title": "Excellence Technique",
+      "description": "Développer des applications performantes, scalables et maintenables selon les meilleures pratiques."
+    },
+    "vision": {
+      "title": "Vision Long Terme",
+      "description": "Construire une carrière durable dans le développement web avec une vision stratégique et innovante."
+    }
+  },
+  "philosophy": {
+    "title": "Ma Philosophie",
+    "quote": "La technologie doit servir l'humain. Mon objectif est de créer des expériences numériques qui non seulement fonctionnent parfaitement, mais qui enrichissent véritablement la vie de leurs utilisateurs.",
+    "signature": "Thibaut - Développeur Full-Stack"
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "experiences": [
+    {
+      "id": 7,
+      "title": "Modérateur",
+      "company": "Ultra",
+      "location": "Ville de Paris, Île-de-France, France · Remote",
+      "date": "Mar 2025 - Oct 2025",
+      "description": "Modération de communautés internationales, organisation d'événements et aide aux utilisateurs. Participation à la modération des réseaux sociaux du jeu Black Ice Studios (Ashes of Mankind).",
+      "technologies": ["Gestion de Communauté", "Organisation d'Événements", "Modération Réseaux Sociaux", "Communautés Internationales", "Industrie du Jeu", "Modération Communauté en Ligne"],
+      "achievements": [
+        "Modération de communautés internationales",
+        "Organisation d'événements",
+        "Aide aux utilisateurs",
+        "Participation à la modération des réseaux sociaux du jeu Black Ice Studios (Ashes of Mankind)",
+        "Modération de communauté en ligne"
+      ]
+    },
+    {
+      "id": 8,
+      "title": "MVP",
+      "company": "Ultra Times",
+      "location": "Paris, Île-de-France, France · Remote",
+      "date": "Jan 2025 - Présent",
+      "description": "Participation aux décisions stratégiques en tant que membre de l'équipe de direction, tout en dirigeant la conception technique et le développement de projets informatiques.",
+      "technologies": ["Prise de Décision Stratégique", "Management", "Conception Technique", "Développement de Projets IT", "Leadership"],
+      "achievements": [
+        "Participation aux décisions stratégiques en tant que membre de l'équipe de direction",
+        "Conduite de la conception technique et du développement de projets informatiques",
+        "Leadership dans la gestion d'équipe"
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Ingénieur Logiciel Junior et Contributeur Communautaire",
+      "company": "Ultra Times",
+      "location": "Paris, Île-de-France, France · Remote",
+      "date": "Oct 2024 - Présent",
+      "description": "Développement utilisant la blockchain Ultra et ses APIs, rédaction d'articles techniques à ce sujet, et participation aux activités communautaires en anglais et français (engagement communautaire, interviews, etc...).",
+      "technologies": ["Blockchain Ultra", "Développement API", "Rédaction Technique", "Gestion de Communauté", "Anglais", "Français", "Développement Blockchain"],
+      "achievements": [
+        "Développement utilisant la blockchain Ultra et ses APIs",
+        "Rédaction d'articles techniques sur la blockchain Ultra",
+        "Participation aux activités communautaires en anglais et français",
+        "Engagement communautaire et interviews"
+      ]
+    },
+    {
+      "id": 1,
+      "title": "Ingénieur Logiciel Junior",
+      "company": "SNCF Voyageurs",
+      "location": "Paris, Île-de-France, France",
+      "date": "Sep 2024 - Présent",
+      "description": "Conception de solutions applicatives pour optimiser le travail des agents.",
+      "technologies": ["Conception d'Applications", "Ingénierie Logicielle", "Optimisation des Agents"],
+      "achievements": [
+        "Conception de solutions applicatives pour optimiser le travail des agents",
+        "Développement d'applications internes",
+        "Collaboration avec les équipes métier"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Fondateur et Directeur",
+      "company": "DigitalLabs TM",
+      "location": "France",
+      "date": "Oct 2023 - Présent",
+      "description": "Entreprise de services informatiques et de développement de logiciels sur mesure.",
+      "technologies": ["Gestion d'Entreprise", "Développement Logiciel", "Services Informatiques", "Gestion de Projet"],
+      "achievements": [
+        "Création et direction d'une entreprise de services informatiques",
+        "Développement de logiciels sur mesure",
+        "Gestion des relations clients et des projets"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Développeur Web",
+      "company": "SNCF Voyageurs",
+      "location": "Paris, Île-de-France, France",
+      "date": "Sep 2023 - Sep 2024",
+      "description": "Production et maintenance d'applications internes.",
+      "technologies": ["Gestion de Projet Agile", "NestJS", "React.js", "TypeScript", "JavaScript", "CodeIgniter", "PHP", "Git", "MySQL", "MySQL Workbench", "HTML", "CSS3", "Bootstrap"],
+      "achievements": [
+        "Production et maintenance d'applications internes",
+        "Développement avec NestJS et React.js",
+        "Gestion de projet Agile",
+        "Utilisation de CodeIgniter et PHP"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Webmaster",
+      "company": "Osmoz Communication",
+      "location": "Coulommiers, Île-de-France, France",
+      "date": "Dec 2021 - Aug 2023",
+      "description": "J'étais en charge de la communication en ligne de l'entreprise en développant un ensemble complet de sites web pour promouvoir les produits et services vendus par la marque. J'ai également géré les réseaux sociaux et acquis de nombreuses compétences relationnelles, notamment en communication grâce à la relation client à laquelle j'étais souvent confronté. Cette expérience m'a permis d'apprendre à gérer des projets et m'a donné confiance.",
+      "technologies": ["Marketing Réseaux Sociaux", "Autodidacte", "Rigueur", "Adobe Illustrator", "JavaScript", "MySQL", "PHP", "Optimisation Moteurs de Recherche (SEO)", "Adaptation", "CSS3", "Communication", "WordPress", "Microsoft Office", "HTML", "Systèmes de Gestion de Contenu (CMS)"],
+      "achievements": [
+        "Développement d'un ensemble complet de sites web",
+        "Gestion des réseaux sociaux",
+        "Acquisition de compétences en communication client",
+        "Gestion de projets et développement de la confiance"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Freelance en Marketing Digital",
+      "company": "ComeUp",
+      "location": "France",
+      "date": "Avr 2018 - Déc 2021",
+      "description": "J'ai commencé les missions à l'âge de 17 ans en parallèle du lycée et arrêté un peu plus de trois ans plus tard pour me consacrer entièrement à mes études. J'ai appris la gestion de projet, la gestion du temps et du stress et les relations clients, tout en développant des compétences dans plusieurs domaines (publicité vidéo et image, rédaction SEO, sites web...). J'ai accompagné plus de 300 clients avec 100% d'avis positifs et de recommandations.",
+      "technologies": ["Marketing Réseaux Sociaux", "Autodidacte", "Rigueur", "Optimisation Moteurs de Recherche (SEO)", "Adaptation", "Communication", "Microsoft Office", "Gestion Relation Client"],
+      "achievements": [
+        "Accompagnement de plus de 300 clients avec 100% d'avis positifs et de recommandations",
+        "Début des missions à 17 ans en parallèle du lycée",
+        "Apprentissage de la gestion de projet",
+        "Gestion du temps et du stress",
+        "Développement de compétences en publicité vidéo et image",
+        "Rédaction SEO et développement de sites web",
+        "Excellence en relations clients et satisfaction client"
+      ]
+    }
+  ]
+}

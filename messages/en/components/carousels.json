@@ -1,0 +1,14 @@
+{
+  "project": {
+    "loading": "Loading...",
+    "empty": "No projects to display",
+    "viewDetails": "Project details"
+  },
+  "formation": {
+    "loading": "Loading...",
+    "empty": "No education available"
+  },
+  "experience": {
+    "loading": "Loading..."
+  }
+}
