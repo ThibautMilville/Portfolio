@@ -135,7 +135,7 @@ export default function HeroSection() {
               {/* Image de profil avec animation fluide */}
               <div className="relative w-48 h-48 lg:w-64 lg:h-64 overflow-hidden border-4 border-white/50 shadow-2xl bg-gradient-to-br from-primary/10 to-secondary/10 backdrop-blur-sm transition-all duration-500 animate-smooth-morph">
                 <LocalImage
-                  imageName="photo_profil.png"
+                  imageName="photo_profil.jpg"
                   alt="Thibaut Milville"
                   className="w-full h-full object-cover"
                 />

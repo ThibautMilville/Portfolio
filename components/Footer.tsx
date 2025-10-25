@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="flex flex-col items-center lg:items-start gap-4">
           <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-primary/20 shadow-lg">
             <LocalImage
-              imageName="photo_profil.png"
+              imageName="photo_profil.jpg"
               alt="Thibaut Milville"
               className="w-full h-full object-cover"
             />
