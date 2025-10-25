@@ -8,7 +8,7 @@ export default function StructuredData() {
     "jobTitle": "Développeur Fullstack",
     "description": "Développeur Fullstack spécialisé en React, Next.js et NestJS. Créateur d'applications web modernes et performantes.",
     "url": "https://thibaut-milville.dev",
-    "image": "https://thibaut-milville.dev/images/photo_profil.png",
+    "image": "https://thibaut-milville.dev/images/photo_profil.jpg",
     "sameAs": [
       "https://github.com/ThibautMilville",
       "https://fr.linkedin.com/in/thibaut-milville",

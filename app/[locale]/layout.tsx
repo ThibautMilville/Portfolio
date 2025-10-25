@@ -93,7 +93,7 @@ export async function generateMetadata({
       siteName: isFrench ? 'Portfolio Thibaut MILVILLE' : 'Thibaut MILVILLE Portfolio',
       images: [
         {
-          url: '/images/photo_profil.png',
+          url: '/images/photo_profil.jpg',
           width: 1200,
           height: 630,
           alt: isFrench ? 'Thibaut MILVILLE - Développeur Fullstack' : 'Thibaut MILVILLE - Fullstack Developer',
@@ -108,7 +108,7 @@ export async function generateMetadata({
       description: isFrench
         ? 'Développeur Fullstack spécialisé en React, Next.js et NestJS. Créateur d\'applications web modernes et performantes.'
         : 'Fullstack developer specialized in React, Next.js and NestJS. Creator of modern and performant web applications.',
-      images: ['/images/photo_profil.png'],
+      images: ['/images/photo_profil.jpg'],
     },
     icons: {
       icon: IMAGES.favicon,

@@ -5,7 +5,7 @@ export const getImagePath = (imageName: string): string => {
 
 // Images principales
 export const IMAGES = {
-  profile: getImagePath('photo_profil.png'),
+  profile: getImagePath('photo_profil.jpg'),
   favicon: getImagePath('favicon.ico'),
   ultra: getImagePath('company/logo_ultra.png'),
   ultraTimes: getImagePath('company/logo_UT.png'),
