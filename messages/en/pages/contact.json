@@ -23,7 +23,23 @@
     "title": "Contact information",
     "description": "Feel free to contact me to discuss your project",
     "email": "Email",
+    "telegram": "Telegram",
     "location": "Location",
-    "response": "Response time"
+    "response": "Response time",
+    "socialNetworks": "Social networks"
+  },
+  "tooltips": {
+    "github": "View my GitHub profile",
+    "linkedin": "View my LinkedIn profile",
+    "telegram": "Contact me on Telegram"
+  },
+  "availability": {
+    "title": "Availability",
+    "freelance": "Freelance",
+    "consulting": "Consulting",
+    "longMissions": "Long-term missions",
+    "available": "Available",
+    "onRequest": "On request",
+    "guarantee": "I commit to responding within 24 hours for any project request."
   }
 }

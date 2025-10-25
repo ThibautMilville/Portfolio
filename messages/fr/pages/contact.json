@@ -23,7 +23,23 @@
     "title": "Informations de contact",
     "description": "N'hésitez pas à me contacter pour discuter de votre projet",
     "email": "Email",
+    "telegram": "Telegram",
     "location": "Localisation",
-    "response": "Temps de réponse"
+    "response": "Temps de réponse",
+    "socialNetworks": "Réseaux sociaux"
+  },
+  "tooltips": {
+    "github": "Voir mon profil GitHub",
+    "linkedin": "Voir mon profil LinkedIn",
+    "telegram": "Me contacter sur Telegram"
+  },
+  "availability": {
+    "title": "Disponibilité",
+    "freelance": "Freelance",
+    "consulting": "Conseil",
+    "longMissions": "Missions longues",
+    "available": "Disponible",
+    "onRequest": "Sur demande",
+    "guarantee": "Je m'engage à vous répondre dans les 24h pour toute demande de projet."
   }
 }
