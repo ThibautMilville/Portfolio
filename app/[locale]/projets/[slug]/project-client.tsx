@@ -2,7 +2,18 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, Github, ExternalLink, Calendar, Users, Clock, CheckCircle, AlertCircle, Pause, GraduationCap } from "lucide-react";
+import {
+  ArrowLeft,
+  Github,
+  ExternalLink,
+  Calendar,
+  Users,
+  Clock,
+  CheckCircle,
+  AlertCircle,
+  Pause,
+  GraduationCap,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,10 +28,13 @@ import { useTranslatedData } from "@/hooks/useTranslatedData";
 const getStatusIcon = (status: string) => {
   switch (status) {
     case "Terminé":
+    case "Completed":
       return <CheckCircle className="h-4 w-4 text-green-500" />;
     case "En cours":
+    case "In Progress":
       return <AlertCircle className="h-4 w-4 text-blue-500" />;
     case "En pause":
+    case "Paused":
       return <Pause className="h-4 w-4 text-yellow-500" />;
     default:
       return <AlertCircle className="h-4 w-4" />;
@@ -30,29 +44,48 @@ const getStatusIcon = (status: string) => {
 const getStatusColor = (status: string) => {
   switch (status) {
     case "Terminé":
-      return "bg-green-500/10 text-green-700 border-green-500/20";
+    case "Completed":
+      return "bg-green-500/20 text-green-800 dark:text-green-200 border-green-500/40 dark:border-green-400/40";
     case "En cours":
-      return "bg-blue-500/10 text-blue-700 border-blue-500/20";
+    case "In Progress":
+      return "bg-blue-500/20 text-blue-800 dark:text-blue-200 border-blue-500/40 dark:border-blue-400/40";
     case "En pause":
-      return "bg-yellow-500/10 text-yellow-700 border-yellow-500/20";
+    case "Paused":
+      return "bg-yellow-500/20 text-yellow-800 dark:text-yellow-200 border-yellow-500/40 dark:border-yellow-400/40";
     default:
-      return "bg-gray-500/10 text-gray-700 border-gray-500/20";
+      return "bg-gray-500/20 text-gray-800 dark:text-gray-200 border-gray-500/40 dark:border-gray-400/40";
   }
 };
 
-export default function ClientProjectPage({ project, relatedExperience, relatedFormations }: { project: Project; relatedExperience?: Experience; relatedFormations: Formation[]; }) {
-  const t = useTranslations('Pages.projets');
-  const { getTranslatedProject, getTranslatedExperience, getTranslatedFormation } = useTranslatedData();
+export default function ClientProjectPage({
+  project,
+  relatedExperience,
+  relatedFormations,
+}: {
+  project: Project;
+  relatedExperience?: Experience;
+  relatedFormations: Formation[];
+}) {
+  const t = useTranslations("Pages.projets");
+  const {
+    getTranslatedProject,
+    getTranslatedExperience,
+    getTranslatedFormation,
+  } = useTranslatedData();
   const [isClient, setIsClient] = React.useState(false);
-  
+
   React.useEffect(() => {
     setIsClient(true);
   }, []);
-  
+
   const translatedProject = getTranslatedProject(project);
-  const translatedExperience = relatedExperience ? getTranslatedExperience(relatedExperience) : undefined;
-  const translatedFormations = relatedFormations.map(formation => getTranslatedFormation(formation));
-  
+  const translatedExperience = relatedExperience
+    ? getTranslatedExperience(relatedExperience)
+    : undefined;
+  const translatedFormations = relatedFormations.map((formation) =>
+    getTranslatedFormation(formation)
+  );
+
   return (
     <div className="min-h-screen bg-background relative">
       <LightParticles />
@@ -67,38 +100,74 @@ export default function ClientProjectPage({ project, relatedExperience, relatedF
               }`}
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
-              {t('backToProjects')}
+              {t("backToProjects")}
             </Link>
           </Button>
         </div>
       </div>
 
       <div className="container mx-auto px-6 py-12 relative z-10">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
           <div className="mb-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
               <div>
-                {translatedProject.screenshots && translatedProject.screenshots.length > 0 ? (
-                  <ProjectGallery images={translatedProject.screenshots} title={translatedProject.title} />
+                {translatedProject.screenshots &&
+                translatedProject.screenshots.length > 0 ? (
+                  <ProjectGallery
+                    images={translatedProject.screenshots}
+                    title={translatedProject.title}
+                  />
                 ) : (
-                  <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative overflow-hidden rounded-2xl shadow-2xl">
-                    <img src={translatedProject.image} alt={translatedProject.title} className="w-full h-80 object-cover" />
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="relative overflow-hidden rounded-2xl shadow-2xl"
+                  >
+                    <img
+                      src={translatedProject.image}
+                      alt={translatedProject.title}
+                      className="w-full h-80 object-cover"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                   </motion.div>
                 )}
 
                 <div className="flex gap-4 mt-6">
                   <Button asChild className="flex-1">
-                    <a href={translatedProject.github} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={translatedProject.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <Github className="mr-2 h-4 w-4" />
-                      {t('viewCode')}
+                      {t("viewCode")}
                     </a>
                   </Button>
                   {translatedProject.demo && (
-                    <Button variant="outline" asChild className="flex-1 sweep-light">
-                      <a href={translatedProject.demo} target="_blank" rel="noopener noreferrer">
+                    <Button
+                      variant="outline"
+                      asChild
+                      className="flex-1 sweep-light"
+                    >
+                      <a
+                        href={translatedProject.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <ExternalLink className="mr-2 h-4 w-4" />
-                        {["Showcase", "E-commerce", "Corporate"].includes(translatedProject.category) ? t('viewSite') : t('viewDemo')}
+                        {translatedProject.title ===
+                        "Ashes of Mankind - Empires"
+                          ? t("viewGame")
+                          : ["Showcase", "E-commerce", "Corporate"].includes(
+                              translatedProject.category
+                            )
+                          ? t("viewSite")
+                          : t("viewDemo")}
                       </a>
                     </Button>
                   )}
@@ -107,19 +176,29 @@ export default function ClientProjectPage({ project, relatedExperience, relatedF
 
               <div className="space-y-6">
                 <div>
-                  <Badge variant="outline" className="mb-3 dark:bg-black dark:text-white dark:border-white/20">
+                  <Badge
+                    variant="outline"
+                    className="mb-3 dark:bg-black dark:text-white dark:border-white/20"
+                  >
                     {translatedProject.category}
                   </Badge>
-                  <h1 className="text-4xl font-bold mb-4">{translatedProject.title}</h1>
-                  <p className="text-lg text-muted-foreground leading-relaxed">{translatedProject.longDescription}</p>
+                  <h1 className="text-4xl font-bold mb-4">
+                    {translatedProject.title}
+                  </h1>
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    {translatedProject.longDescription}
+                  </p>
                 </div>
 
-                {translatedProject.periods && translatedProject.periods.length > 1 && (
-                  <div>
-                    <h3 className="text-lg font-semibold mb-3">{t('workPeriods')}</h3>
-                    <ProjectTimeline periods={translatedProject.periods} />
-                  </div>
-                )}
+                {translatedProject.periods &&
+                  translatedProject.periods.length > 1 && (
+                    <div>
+                      <h3 className="text-lg font-semibold mb-3">
+                        {t("workPeriods")}
+                      </h3>
+                      <ProjectTimeline periods={translatedProject.periods} />
+                    </div>
+                  )}
 
                 <div className="grid grid-cols-2 gap-4">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -133,19 +212,27 @@ export default function ClientProjectPage({ project, relatedExperience, relatedF
                   {translatedProject.teamSize && (
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Users className="h-4 w-4" />
-                      {translatedProject.teamSize} {translatedProject.teamSize > 1 ? t('peoplePlural') : t('people')}
+                      {translatedProject.teamSize}{" "}
+                      {translatedProject.teamSize > 1
+                        ? t("peoplePlural")
+                        : t("people")}
                     </div>
                   )}
                   <div className="flex items-center gap-2">
                     {getStatusIcon(translatedProject.status)}
-                    <Badge variant="outline" className={getStatusColor(translatedProject.status)}>
+                    <Badge
+                      variant="outline"
+                      className={getStatusColor(translatedProject.status)}
+                    >
                       {translatedProject.status}
                     </Badge>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold mb-3">{t('technologiesUsed')}</h3>
+                  <h3 className="text-lg font-semibold mb-3">
+                    {t("technologiesUsed")}
+                  </h3>
                   <div className="flex flex-wrap gap-2">
                     {translatedProject.technologies.map((tech: string) => (
                       <Badge key={tech} variant="secondary">
@@ -159,74 +246,106 @@ export default function ClientProjectPage({ project, relatedExperience, relatedF
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.3 }}>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
               <Card className="h-full flex flex-col">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <CheckCircle className="h-5 w-5 text-green-500" />
-                    {t('features')}
+                    {t("features")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="flex-1">
                   <ul className="space-y-2">
-                    {translatedProject.features.map((feature: string, index: number) => (
-                      <li key={index} className="flex items-start gap-2 text-sm">
-                        <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-2 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
+                    {translatedProject.features.map(
+                      (feature: string, index: number) => (
+                        <li
+                          key={index}
+                          className="flex items-start gap-2 text-sm"
+                        >
+                          <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-2 flex-shrink-0" />
+                          {feature}
+                        </li>
+                      )
+                    )}
                   </ul>
                 </CardContent>
               </Card>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.4 }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
               <Card className="h-full flex flex-col">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <AlertCircle className="h-5 w-5 text-green-500" />
-                    {t('challenges')}
+                    {t("challenges")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="flex-1">
                   <ul className="space-y-2">
-                    {translatedProject.challenges.map((challenge: string, index: number) => (
-                      <li key={index} className="flex items-start gap-2 text-sm">
-                        <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-2 flex-shrink-0" />
-                        {challenge}
-                      </li>
-                    ))}
+                    {translatedProject.challenges.map(
+                      (challenge: string, index: number) => (
+                        <li
+                          key={index}
+                          className="flex items-start gap-2 text-sm"
+                        >
+                          <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-2 flex-shrink-0" />
+                          {challenge}
+                        </li>
+                      )
+                    )}
                   </ul>
                 </CardContent>
               </Card>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.5 }}>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+            >
               <Card className="h-full flex flex-col">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <CheckCircle className="h-5 w-5 text-blue-500" />
-                    {t('solutions')}
+                    {t("solutions")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="flex-1">
                   <ul className="space-y-2">
-                    {translatedProject.solutions.map((solution: string, index: number) => (
-                      <li key={index} className="flex items-start gap-2 text-sm">
-                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
-                        {solution}
-                      </li>
-                    ))}
+                    {translatedProject.solutions.map(
+                      (solution: string, index: number) => (
+                        <li
+                          key={index}
+                          className="flex items-start gap-2 text-sm"
+                        >
+                          <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                          {solution}
+                        </li>
+                      )
+                    )}
                   </ul>
                 </CardContent>
               </Card>
             </motion.div>
           </div>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.6 }} className="mt-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mt-12"
+          >
             <Card>
               <CardHeader>
-                <CardTitle>{t('myRole')}</CardTitle>
+                <CardTitle>{t("myRole")}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center gap-3">
@@ -236,7 +355,7 @@ export default function ClientProjectPage({ project, relatedExperience, relatedF
                   <div>
                     <h4 className="font-semibold">{translatedProject.role}</h4>
                     <p className="text-muted-foreground text-sm">
-                      {t('mainContribution')}
+                      {t("mainContribution")}
                     </p>
                   </div>
                 </div>
@@ -245,7 +364,12 @@ export default function ClientProjectPage({ project, relatedExperience, relatedF
           </motion.div>
 
           {(relatedExperience || relatedFormations.length > 0) && (
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.7 }} className="mt-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="mt-8"
+            >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {translatedExperience && (
                   <Card>
@@ -254,25 +378,41 @@ export default function ClientProjectPage({ project, relatedExperience, relatedF
                         <div className="p-2 rounded-lg bg-blue-500/10">
                           <Calendar className="h-5 w-5 text-blue-500" />
                         </div>
-                        {t('relatedExperience')}
+                        {t("relatedExperience")}
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-3">
                         <div>
-                          <h4 className="font-semibold text-lg">{translatedExperience.title}</h4>
-                          <p className="text-primary font-medium">{translatedExperience.company}</p>
-                          <p className="text-sm text-muted-foreground">{translatedExperience.date}</p>
+                          <h4 className="font-semibold text-lg">
+                            {translatedExperience.title}
+                          </h4>
+                          <p className="text-primary font-medium">
+                            {translatedExperience.company}
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            {translatedExperience.date}
+                          </p>
                         </div>
-                        <p className="text-sm text-muted-foreground">{translatedExperience.description}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {translatedExperience.description}
+                        </p>
                         <div>
-                          <h5 className="font-medium text-sm mb-2">{t('technologiesUsedInExperience')}</h5>
+                          <h5 className="font-medium text-sm mb-2">
+                            {t("technologiesUsedInExperience")}
+                          </h5>
                           <div className="flex flex-wrap gap-1">
-                            {translatedExperience.technologies.map((tech: string) => (
-                              <Badge key={tech} variant="outline" className="text-xs">
-                                {tech}
-                              </Badge>
-                            ))}
+                            {translatedExperience.technologies.map(
+                              (tech: string) => (
+                                <Badge
+                                  key={tech}
+                                  variant="outline"
+                                  className="text-xs"
+                                >
+                                  {tech}
+                                </Badge>
+                              )
+                            )}
                           </div>
                         </div>
                       </div>
@@ -287,23 +427,38 @@ export default function ClientProjectPage({ project, relatedExperience, relatedF
                         <div className="p-2 rounded-lg bg-green-500/10">
                           <GraduationCap className="h-5 w-5 text-green-500" />
                         </div>
-                        {t('relatedFormations')}
+                        {t("relatedFormations")}
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-4">
                         {translatedFormations.map((formation) => (
-                          <div key={formation.id} className="border-l-2 border-primary/20 pl-4">
-                            <h4 className="font-semibold text-sm">{formation.title}</h4>
-                            <p className="text-primary font-medium text-xs">{formation.institution}</p>
-                            <p className="text-xs text-muted-foreground">{formation.date}</p>
+                          <div
+                            key={formation.id}
+                            className="border-l-2 border-primary/20 pl-4"
+                          >
+                            <h4 className="font-semibold text-sm">
+                              {formation.title}
+                            </h4>
+                            <p className="text-primary font-medium text-xs">
+                              {formation.institution}
+                            </p>
+                            <p className="text-xs text-muted-foreground">
+                              {formation.date}
+                            </p>
                             <div className="mt-2">
                               <div className="flex flex-wrap gap-1">
-                                {formation.skills.slice(0, 3).map((skill: string) => (
-                                  <Badge key={skill} variant="secondary" className="text-xs">
-                                    {skill}
-                                  </Badge>
-                                ))}
+                                {formation.skills
+                                  .slice(0, 3)
+                                  .map((skill: string) => (
+                                    <Badge
+                                      key={skill}
+                                      variant="secondary"
+                                      className="text-xs"
+                                    >
+                                      {skill}
+                                    </Badge>
+                                  ))}
                               </div>
                             </div>
                           </div>

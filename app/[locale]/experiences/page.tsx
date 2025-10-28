@@ -1,13 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { translateDateSimple } from "@/lib/utils";
 import {
   Building,
   Calendar,
   MapPin,
   Users,
-  Briefcase,
   ExternalLink,
   GraduationCap,
   ChevronDown,
@@ -38,8 +38,13 @@ import { useTranslatedData } from "@/hooks/useTranslatedData";
 const groupedExperiences = getGroupedExperiences();
 
 export default function Experiences() {
-  const t = useTranslations('Pages.experiences');
-  const { getTranslatedExperience, getTranslatedProject, getTranslatedFormation } = useTranslatedData();
+  const t = useTranslations("Pages.experiences");
+  const locale = useLocale();
+  const {
+    getTranslatedExperience,
+    getTranslatedProject,
+    getTranslatedFormation,
+  } = useTranslatedData();
   // Initialiser avec toutes les entreprises qui ont plusieurs expériences
   const [expandedCompanies, setExpandedCompanies] = useState<Set<string>>(
     new Set(
@@ -185,7 +190,9 @@ export default function Experiences() {
           />
 
           <div className="relative z-10">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('title')}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              {t("title")}
+            </h1>
 
             {/* Barre horizontale stylisée moderne et dynamique */}
             <motion.div
@@ -212,9 +219,7 @@ export default function Experiences() {
               />
             </motion.div>
 
-            <p className="text-lg text-muted-foreground">
-              Mon parcours professionnel et mes réalisations principales
-            </p>
+            <p className="text-lg text-muted-foreground">{t("subtitle")}</p>
           </div>
         </motion.div>
 
@@ -256,7 +261,7 @@ export default function Experiences() {
                           </CardTitle>
                           <CardDescription className="text-base font-medium text-foreground">
                             {group.experiences.length > 1
-                              ? `${group.experiences.length} ${t('positions')}`
+                              ? `${group.experiences.length} ${t("positions")}`
                               : group.experiences[0].title}
                           </CardDescription>
                         </div>
@@ -278,7 +283,7 @@ export default function Experiences() {
                         )}
                         <Badge variant="outline" className="text-sm">
                           {group.experiences.length > 1
-                            ? t('multiplePositions')
+                            ? t("multiplePositions")
                             : group.experiences[0].title.includes("Freelance")
                             ? "Freelance"
                             : group.experiences[0].title.includes("Founder")
@@ -296,15 +301,23 @@ export default function Experiences() {
                       <div className="flex items-center gap-1">
                         <Calendar className="h-4 w-4" />
                         {(() => {
-                          const firstExp = getTranslatedExperience(group.experiences[group.experiences.length - 1]);
-                          const lastExp = getTranslatedExperience(group.experiences[0]);
+                          const firstExp = getTranslatedExperience(
+                            group.experiences[group.experiences.length - 1]
+                          );
+                          const lastExp = getTranslatedExperience(
+                            group.experiences[0]
+                          );
                           if (group.experiences.length === 1) {
-                            return firstExp.date;
+                            return translateDateSimple(firstExp.date, locale);
                           } else {
-                            const startDate = firstExp.date.split(' - ')[0];
-                            const endDate = lastExp.date.includes('Présent') || lastExp.date.includes('Present') ? 
-                              (t('multiplePositions').includes('Multiple') ? 'Present' : 'Présent') : 
-                              lastExp.date.split(' - ')[1];
+                            const startDate = firstExp.date.split(" - ")[0];
+                            const endDate =
+                              lastExp.date.includes("Présent") ||
+                              lastExp.date.includes("Present")
+                                ? locale === "fr"
+                                  ? "Présent"
+                                  : "Present"
+                                : lastExp.date.split(" - ")[1];
                             return `${startDate} - ${endDate}`;
                           }
                         })()}
@@ -315,7 +328,7 @@ export default function Experiences() {
                       </div>
                       <div className="flex items-center gap-1">
                         <Users className="h-4 w-4" />
-                        {group.experiences.length} {t('position')}
+                        {group.experiences.length} {t("position")}
                         {group.experiences.length > 1 ? "s" : ""}
                       </div>
                     </div>
@@ -328,122 +341,135 @@ export default function Experiences() {
                         {group.experiences.map((exp, expIndex) => {
                           const translatedExp = getTranslatedExperience(exp);
                           return (
-                          <motion.div
-                            key={exp.id}
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{
-                              opacity: expandedCompanies.has(group.company)
-                                ? 1
-                                : 0,
-                              height: expandedCompanies.has(group.company)
-                                ? "auto"
-                                : 0,
-                            }}
-                            transition={{ duration: 0.3 }}
-                            className={`overflow-hidden border-l-2 border-primary/20 pl-4 ${
-                              expIndex > 0 ? "pt-4" : ""
-                            }`}
-                          >
-                            <div className="flex items-center justify-between mb-2">
-                              <h4 className="font-semibold text-foreground">
-                                {translatedExp.title}
-                              </h4>
-                              <span className="text-sm text-muted-foreground">
-                                {translatedExp.date}
-                              </span>
-                            </div>
-                            <p className="text-sm text-muted-foreground mb-3">
-                              {translatedExp.description}
-                            </p>
+                            <motion.div
+                              key={exp.id}
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{
+                                opacity: expandedCompanies.has(group.company)
+                                  ? 1
+                                  : 0,
+                                height: expandedCompanies.has(group.company)
+                                  ? "auto"
+                                  : 0,
+                              }}
+                              transition={{ duration: 0.3 }}
+                              className={`overflow-hidden border-l-2 border-primary/20 pl-4 ${
+                                expIndex > 0 ? "pt-4" : ""
+                              }`}
+                            >
+                              <div className="flex items-center justify-between mb-2">
+                                <h4 className="font-semibold text-foreground">
+                                  {translatedExp.title}
+                                </h4>
+                                <span className="text-sm text-muted-foreground">
+                                  {translateDateSimple(
+                                    translatedExp.date,
+                                    locale
+                                  )}
+                                </span>
+                              </div>
+                              <p className="text-sm text-muted-foreground mb-3">
+                                {translatedExp.description}
+                              </p>
 
-                            <div className="mb-3">
-                              <h5 className="font-medium text-sm mb-2">
-                                {t('achievements')}
-                              </h5>
-                              <ul className="space-y-1">
-                                {translatedExp.achievements
-                                  .slice(0, 3)
-                                  .map((achievement: string, idx: number) => (
-                                    <li
-                                      key={idx}
-                                      className="flex items-start gap-2 text-xs text-muted-foreground"
+                              <div className="mb-3">
+                                <h5 className="font-medium text-sm mb-2">
+                                  {t("achievements")}
+                                </h5>
+                                <ul className="space-y-1">
+                                  {translatedExp.achievements
+                                    .slice(0, 3)
+                                    .map((achievement: string, idx: number) => (
+                                      <li
+                                        key={idx}
+                                        className="flex items-start gap-2 text-xs text-muted-foreground"
+                                      >
+                                        <div className="w-1 h-1 rounded-full bg-primary mt-1.5 flex-shrink-0"></div>
+                                        {achievement}
+                                      </li>
+                                    ))}
+                                </ul>
+                              </div>
+
+                              <div className="flex flex-wrap gap-1">
+                                {translatedExp.technologies
+                                  .slice(0, 6)
+                                  .map((tech: string) => (
+                                    <Badge
+                                      key={tech}
+                                      variant="secondary"
+                                      className="text-xs"
                                     >
-                                      <div className="w-1 h-1 rounded-full bg-primary mt-1.5 flex-shrink-0"></div>
-                                      {achievement}
-                                    </li>
+                                      {tech}
+                                    </Badge>
                                   ))}
-                              </ul>
-                            </div>
-
-                            <div className="flex flex-wrap gap-1">
-                              {translatedExp.technologies.slice(0, 6).map((tech: string) => (
-                                <Badge
-                                  key={tech}
-                                  variant="secondary"
-                                  className="text-xs"
-                                >
-                                  {tech}
-                                </Badge>
-                              ))}
-                              {translatedExp.technologies.length > 6 && (
-                                <Badge variant="secondary" className="text-xs">
-                                  +{translatedExp.technologies.length - 6}
-                                </Badge>
-                              )}
-                            </div>
-                          </motion.div>
+                                {translatedExp.technologies.length > 6 && (
+                                  <Badge
+                                    variant="secondary"
+                                    className="text-xs"
+                                  >
+                                    +{translatedExp.technologies.length - 6}
+                                  </Badge>
+                                )}
+                              </div>
+                            </motion.div>
                           );
                         })}
                       </div>
                     )}
 
                     {/* Affichage pour une seule expérience */}
-                    {group.experiences.length === 1 && (() => {
-                      const translatedExp = getTranslatedExperience(group.experiences[0]);
-                      return (
-                      <>
-                        <p className="text-muted-foreground">
-                          {translatedExp.description}
-                        </p>
+                    {group.experiences.length === 1 &&
+                      (() => {
+                        const translatedExp = getTranslatedExperience(
+                          group.experiences[0]
+                        );
+                        return (
+                          <>
+                            <p className="text-muted-foreground">
+                              {translatedExp.description}
+                            </p>
 
-                        <div>
-                          <h4 className="font-semibold mb-3">
-                            {t('keyAchievements')}
-                          </h4>
-                          <ul className="space-y-2">
-                            {translatedExp.achievements.map(
-                              (achievement: string, idx: number) => (
-                                <li
-                                  key={idx}
-                                  className="flex items-start gap-2 text-sm text-muted-foreground"
-                                >
-                                  <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-                                  {achievement}
-                                </li>
-                              )
-                            )}
-                          </ul>
-                        </div>
+                            <div>
+                              <h4 className="font-semibold mb-3">
+                                {t("keyAchievements")}
+                              </h4>
+                              <ul className="space-y-2">
+                                {translatedExp.achievements.map(
+                                  (achievement: string, idx: number) => (
+                                    <li
+                                      key={idx}
+                                      className="flex items-start gap-2 text-sm text-muted-foreground"
+                                    >
+                                      <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+                                      {achievement}
+                                    </li>
+                                  )
+                                )}
+                              </ul>
+                            </div>
 
-                        <div>
-                          <h4 className="font-semibold mb-3">
-                            {t('technologiesUsed')}
-                          </h4>
-                          <div className="flex flex-wrap gap-2">
-                            {translatedExp.technologies.map((tech: string) => (
-                              <Badge
-                                key={tech}
-                                variant="secondary"
-                                className="text-xs"
-                              >
-                                {tech}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                      </>
-                      );
-                    })()}
+                            <div>
+                              <h4 className="font-semibold mb-3">
+                                {t("technologiesUsed")}
+                              </h4>
+                              <div className="flex flex-wrap gap-2">
+                                {translatedExp.technologies.map(
+                                  (tech: string) => (
+                                    <Badge
+                                      key={tech}
+                                      variant="secondary"
+                                      className="text-xs"
+                                    >
+                                      {tech}
+                                    </Badge>
+                                  )
+                                )}
+                              </div>
+                            </div>
+                          </>
+                        );
+                      })()}
 
                     {/* Projets associés (tous les projets de toutes les expériences du groupe) */}
                     {(() => {
@@ -454,13 +480,15 @@ export default function Experiences() {
                         (project, index, self) =>
                           index === self.findIndex((p) => p.id === project.id)
                       );
-                      const translatedProjects = uniqueProjects.map(project => getTranslatedProject(project));
+                      const translatedProjects = uniqueProjects.map((project) =>
+                        getTranslatedProject(project)
+                      );
 
                       return uniqueProjects.length > 0 ? (
                         <div>
                           <h4 className="font-semibold mb-3 flex items-center gap-2">
                             <ExternalLink className="h-4 w-4" />
-                            {t('relatedProjects')}
+                            {t("relatedProjects")}
                           </h4>
                           <ProjectCarouselMini
                             projects={translatedProjects as any}
@@ -479,13 +507,15 @@ export default function Experiences() {
                         (formation, index, self) =>
                           index === self.findIndex((f) => f.id === formation.id)
                       );
-                      const translatedFormations = uniqueFormations.map(formation => getTranslatedFormation(formation));
+                      const translatedFormations = uniqueFormations.map(
+                        (formation) => getTranslatedFormation(formation)
+                      );
 
                       return uniqueFormations.length > 0 ? (
                         <div>
                           <h4 className="font-semibold mb-3 flex items-center gap-2">
                             <GraduationCap className="h-4 w-4" />
-                            {t('relatedFormations')}
+                            {t("relatedFormations")}
                           </h4>
                           <FormationCarouselMini
                             formations={translatedFormations as any}
@@ -511,69 +541,113 @@ export default function Experiences() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
               {/* Dégradé de base avec vraie transition */}
-              <div 
-                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
-                style={{ 
-                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
-                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
-                }} 
+              <div
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2"
+                style={{
+                  clipPath: "polygon(0 0, 100% 0, 0 100%)",
+                  backgroundImage:
+                    "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)",
+                }}
               >
-                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                <svg
+                  className="w-7 h-7 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </div>
               <div className="relative z-10 text-center">
-                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">6+</div>
-                <div className="text-sm text-muted-foreground">Années d'expérience</div>
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
+                  6+
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  Années d'expérience
+                </div>
               </div>
             </div>
             <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
               {/* Dégradé de base avec vraie transition */}
-              <div 
-                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
-                style={{ 
-                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
-                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
-                }} 
+              <div
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2"
+                style={{
+                  clipPath: "polygon(0 0, 100% 0, 0 100%)",
+                  backgroundImage:
+                    "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)",
+                }}
               >
-                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                <svg
+                  className="w-7 h-7 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </div>
               <div className="relative z-10 text-center">
-                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">{getAllExperiences().length}</div>
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
+                  {getAllExperiences().length}
+                </div>
                 <div className="text-sm text-muted-foreground">Expériences</div>
               </div>
             </div>
             <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
               {/* Dégradé de base avec vraie transition */}
-              <div 
-                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
-                style={{ 
-                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
-                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
-                }} 
+              <div
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2"
+                style={{
+                  clipPath: "polygon(0 0, 100% 0, 0 100%)",
+                  backgroundImage:
+                    "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)",
+                }}
               >
-                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm3 1h6v4H7V5zm8 8v2h1v-2h-1zm-2-2H7v4h6v-4z" clipRule="evenodd" />
+                <svg
+                  className="w-7 h-7 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm3 1h6v4H7V5zm8 8v2h1v-2h-1zm-2-2H7v4h6v-4z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </div>
               <div className="relative z-10 text-center">
-                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">{groupedExperiences.length}</div>
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
+                  {groupedExperiences.length}
+                </div>
                 <div className="text-sm text-muted-foreground">Entreprises</div>
               </div>
             </div>
             <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
               {/* Dégradé de base avec vraie transition */}
-              <div 
-                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
-                style={{ 
-                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
-                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
-                }} 
+              <div
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2"
+                style={{
+                  clipPath: "polygon(0 0, 100% 0, 0 100%)",
+                  backgroundImage:
+                    "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)",
+                }}
               >
-                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                <svg
+                  className="w-7 h-7 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </div>
               <div className="relative z-10 text-center">
@@ -581,9 +655,12 @@ export default function Experiences() {
                   {getAllExperiences().reduce(
                     (acc: number, exp: any) => acc + exp.technologies.length,
                     0
-                  )}+
+                  )}
+                  +
                 </div>
-                <div className="text-sm text-muted-foreground">Technologies</div>
+                <div className="text-sm text-muted-foreground">
+                  Technologies
+                </div>
               </div>
             </div>
           </div>

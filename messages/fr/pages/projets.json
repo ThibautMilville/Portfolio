@@ -1,6 +1,9 @@
 {
   "title": "Projets",
   "subtitle": "Mes réalisations et projets de développement",
+  "featuredProjects": "Projets mis en avant",
+  "featuredProjectsDescription": "Découvrez mes projets les plus importants et représentatifs de mon expertise",
+  "featured": "Mis en avant",
   "displaying": "Affichage de {count} projet{count, plural, one {} other {s}}",
   "noResults": "Aucun projet trouvé",
   "keyFeatures": "Fonctionnalités clés",
@@ -15,6 +18,7 @@
   "backToProjects": "Retour aux projets",
   "viewCode": "Voir le code",
   "viewDemo": "Voir la démo",
+  "viewGame": "Voir le jeu",
   "workPeriods": "Périodes de travail",
   "people": "personne",
   "peoplePlural": "personnes",

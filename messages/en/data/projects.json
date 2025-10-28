@@ -5,6 +5,7 @@
       "title": "UT Marketplace",
       "description": "Web3 marketplace for selling UNIQs (NFTs) on the Ultra blockchain.",
       "longDescription": "UT Marketplace is a Web3 marketplace dedicated to selling UNIQs (NFTs) on the Ultra blockchain. It features an advanced marketplace section as well as dedicated spaces for collections, transactions and statistics to track sales performance. The application is connected to the Ultra blockchain with wallet integration and transaction processing. A multilingual system is included. MVP developed as part of a fundraising round in collaboration with Ultra Times.",
+      "date": "Nov 2024 - Aug 2025",
       "status": "Completed",
       "category": "Web3",
       "role": "Full Stack Web3 Developer",
@@ -32,6 +33,7 @@
       "title": "HR Request V2",
       "description": "New HR application to automate and modernize onboarding processes.",
       "longDescription": "Complete overhaul of the HR application to simplify and automate tasks related to employee onboarding (regardless of status). Significant gains in productivity and efficiency for the HR team.",
+      "date": "Dec 2024 - Jan 2025",
       "status": "Completed",
       "category": "Business",
       "role": "Full Stack Developer",
@@ -83,7 +85,8 @@
         "Progressive migration and testing",
         "New adapted modeling",
         "Comprehensive regression testing"
-      ]
+      ],
+      "date": "Feb 2025 - Apr 2025"
     },
     {
       "id": 13,
@@ -96,7 +99,8 @@
       "duration": "1 month",
       "features": ["Event listings", "Dedicated pages", "Responsive design"],
       "challenges": ["Simple content updates"],
-      "solutions": ["Flexible content structure"]
+      "solutions": ["Flexible content structure"],
+      "date": "Feb 2025"
     },
     {
       "id": 14,
@@ -109,7 +113,8 @@
       "duration": "2 months",
       "features": ["Score tracking", "Voice announcements", "Simple interface"],
       "challenges": ["Cross-platform voice synthesis"],
-      "solutions": ["TTS abstraction"]
+      "solutions": ["TTS abstraction"],
+      "date": "Dec 2024 - Jan 2025"
     },
     {
       "id": 15,
@@ -120,9 +125,14 @@
       "category": "Frontend",
       "role": "Frontend Developer",
       "duration": "1 month",
-      "features": ["Framer Motion animations", "Shareable results", "Responsive"],
+      "features": [
+        "Framer Motion animations",
+        "Shareable results",
+        "Responsive"
+      ],
       "challenges": ["Smooth transitions"],
-      "solutions": ["Optimized animations"]
+      "solutions": ["Optimized animations"],
+      "date": "Dec 2024"
     },
     {
       "id": 16,
@@ -135,7 +145,8 @@
       "duration": "3 months",
       "features": ["Live pricing", "Technical indicators", "Related articles"],
       "challenges": ["Data reliability"],
-      "solutions": ["Fallbacks and retries"]
+      "solutions": ["Fallbacks and retries"],
+      "date": "Oct 2024 - Dec 2024"
     },
     {
       "id": 17,
@@ -146,9 +157,15 @@
       "category": "Business",
       "role": "Full Stack Developer",
       "duration": "6 months",
-      "features": ["Simple UI for agents", "GLPI sync", "Remote updates", "Improved ticket tracking"],
+      "features": [
+        "Simple UI for agents",
+        "GLPI sync",
+        "Remote updates",
+        "Improved ticket tracking"
+      ],
       "challenges": ["Reliable sync", "Field user experience"],
-      "solutions": ["Recovery strategies", "Usage-oriented design"]
+      "solutions": ["Recovery strategies", "Usage-oriented design"],
+      "date": "May 2024 - Nov 2024"
     },
     {
       "id": 18,
@@ -161,7 +178,8 @@
       "duration": "1 month",
       "features": ["Live stats", "Minimalist UI"],
       "challenges": ["Refresh rate"],
-      "solutions": ["Controlled polling"]
+      "solutions": ["Controlled polling"],
+      "date": "Nov 2024"
     },
     {
       "id": 19,
@@ -174,7 +192,8 @@
       "duration": "3 months",
       "features": ["Accessibility", "Optimizations", "Maintenance"],
       "challenges": ["Wide compatibility"],
-      "solutions": ["Tests and audits"]
+      "solutions": ["Tests and audits"],
+      "date": "Feb 2024 - May 2024"
     },
     {
       "id": 20,
@@ -187,7 +206,8 @@
       "duration": "3 months",
       "features": ["QR code scan", "Auto emails", "Optimizations"],
       "challenges": ["Field usage simplicity"],
-      "solutions": ["Concise UX"]
+      "solutions": ["Concise UX"],
+      "date": "Dec 2023 - Feb 2024"
     },
     {
       "id": 21,
@@ -200,7 +220,8 @@
       "duration": "1 week",
       "features": ["Combat system", "Rewards", "AI assets"],
       "challenges": ["Fun game loop"],
-      "solutions": ["Rapid playtests"]
+      "solutions": ["Rapid playtests"],
+      "date": "Jan 2024"
     },
     {
       "id": 22,
@@ -213,7 +234,8 @@
       "duration": "3 months",
       "features": ["Online requests", "Optimizations", "V2 after feedback"],
       "challenges": ["Simplicity and security"],
-      "solutions": ["Hardening and UX"]
+      "solutions": ["Hardening and UX"],
+      "date": "Nov 2023 - Jan 2024"
     },
     {
       "id": 23,
@@ -226,7 +248,8 @@
       "duration": "2 months",
       "features": ["Multi-case requests", "Auto emails"],
       "challenges": ["Clear HR flows"],
-      "solutions": ["Simple interfaces"]
+      "solutions": ["Simple interfaces"],
+      "date": "Nov 2023 - Dec 2023"
     },
     {
       "id": 24,
@@ -239,7 +262,8 @@
       "duration": "1 month",
       "features": ["Blacklist", "Auto emails"],
       "challenges": ["Matching rules"],
-      "solutions": ["Drawing algorithm"]
+      "solutions": ["Drawing algorithm"],
+      "date": "Nov 2023 - Dec 2023"
     },
     {
       "id": 25,
@@ -252,13 +276,15 @@
       "duration": "2 months",
       "features": ["Pagination/sorting", "Maintenance"],
       "challenges": ["Performance with lists"],
-      "solutions": ["Query optimizations"]
+      "solutions": ["Query optimizations"],
+      "date": "Oct 2023 - Nov 2023"
     },
     {
       "id": 26,
       "title": "OZC Signage Commercial Website",
       "description": "Signage merchant site for individuals and professionals.",
       "longDescription": "E-commerce site for signage sales across France.",
+      "date": "May 2025 - Jun 2025",
       "status": "Completed",
       "category": "E-commerce",
       "role": "Webmaster",
@@ -272,6 +298,7 @@
       "title": "French Sticker Commercial Website",
       "description": "E-commerce site for decorative panels.",
       "longDescription": "Site for decorative panel sales (B2C).",
+      "date": "May 2025 - Jun 2025",
       "status": "Completed",
       "category": "E-commerce",
       "role": "Webmaster",
@@ -285,6 +312,7 @@
       "title": "OZC Institutional Website",
       "description": "Institutional website highlighting services and activities.",
       "longDescription": "Company showcase website with contact conversion focus.",
+      "date": "May 2025 - Jun 2025",
       "status": "Completed",
       "category": "Corporate",
       "role": "Webmaster",
@@ -304,7 +332,8 @@
       "duration": "2 months",
       "features": ["Portfolio", "Contact"],
       "challenges": ["Image highlighting"],
-      "solutions": ["Responsive optimization"]
+      "solutions": ["Responsive optimization"],
+      "date": "Oct 2022 - Nov 2022"
     },
     {
       "id": 30,
@@ -315,9 +344,21 @@
       "category": "Showcase",
       "role": "Web Developer",
       "duration": "1 month + 2 months",
-      "features": ["Presentation", "Contact", "Next.js redesign", "Performance/SEO", "Accessibility", "Contact form"],
+      "features": [
+        "Presentation",
+        "Contact",
+        "Next.js redesign",
+        "Performance/SEO",
+        "Accessibility",
+        "Contact form"
+      ],
       "challenges": ["Limited budget", "Content migration", "Preserved SEO"],
-      "solutions": ["Optimized theme", "Clean redirects", "Lighthouse optimization"]
+      "solutions": [
+        "Optimized theme",
+        "Clean redirects",
+        "Lighthouse optimization"
+      ],
+      "date": "Sep 2021 - Oct 2021 ; May 2025 - Jun 2025"
     },
     {
       "id": 31,
@@ -328,9 +369,23 @@
       "category": "Web3",
       "role": "Full Stack Web3 Developer",
       "duration": "2 months",
-      "features": ["Ultra Wallet connection", "Quest creation and management", "Admin dashboard per game", "Ultra blockchain integration"],
-      "challenges": ["Ultra wallet integration", "Permission management", "Quest model design"],
-      "solutions": ["Ultra SDK/extension integration", "RBAC on API and UI side", "Modular data schema"]
+      "features": [
+        "Ultra Wallet connection",
+        "Quest creation and management",
+        "Admin dashboard per game",
+        "Ultra blockchain integration"
+      ],
+      "challenges": [
+        "Ultra wallet integration",
+        "Permission management",
+        "Quest model design"
+      ],
+      "solutions": [
+        "Ultra SDK/extension integration",
+        "RBAC on API and UI side",
+        "Modular data schema"
+      ],
+      "date": "Sep 2021 - Oct 2021"
     },
     {
       "id": 32,
@@ -341,9 +396,23 @@
       "category": "Showcase",
       "role": "Frontend Developer",
       "duration": "1 month",
-      "features": ["Web/digital services presentation", "Portfolio / highlights", "Contact form", "Responsive and performant design"],
-      "challenges": ["Clear offer positioning", "Basic SEO and performance", "Service highlighting"],
-      "solutions": ["Structured architecture and content", "Performance/SEO optimizations (Next.js, images, meta)", "Clean and effective UI aligned with identity"]
+      "features": [
+        "Web/digital services presentation",
+        "Portfolio / highlights",
+        "Contact form",
+        "Responsive and performant design"
+      ],
+      "challenges": [
+        "Clear offer positioning",
+        "Basic SEO and performance",
+        "Service highlighting"
+      ],
+      "solutions": [
+        "Structured architecture and content",
+        "Performance/SEO optimizations (Next.js, images, meta)",
+        "Clean and effective UI aligned with identity"
+      ],
+      "date": "May 2025 - Jun 2025"
     },
     {
       "id": 33,
@@ -354,9 +423,24 @@
       "category": "Web3",
       "role": "Full Stack Web3 Developer",
       "duration": "3 months",
-      "features": ["UNIQ (NFT) collection launches", "Connection and participation via Ultra Wallet", "Phygital concept (burn → physical artwork)", "Campaign phases/rounds", "Admin dashboard and indicators"],
-      "challenges": ["Ultra blockchain integration and transaction reliability", "Campaign and role modeling", "Security and API controls"],
-      "solutions": ["Ultra Wallet SDK/extension with error state management", "Modular data schema and validations", "RBAC and API safeguards"]
+      "features": [
+        "UNIQ (NFT) collection launches",
+        "Connection and participation via Ultra Wallet",
+        "Phygital concept (burn → physical artwork)",
+        "Campaign phases/rounds",
+        "Admin dashboard and indicators"
+      ],
+      "challenges": [
+        "Ultra blockchain integration and transaction reliability",
+        "Campaign and role modeling",
+        "Security and API controls"
+      ],
+      "solutions": [
+        "Ultra Wallet SDK/extension with error state management",
+        "Modular data schema and validations",
+        "RBAC and API safeguards"
+      ],
+      "date": "May 2025 - Jun 2025"
     },
     {
       "id": 34,
@@ -367,9 +451,23 @@
       "category": "Web3",
       "role": "Full Stack Web3 Developer",
       "duration": "2 months",
-      "features": ["Ultra blockchain snapshots", "UNIQ holder identification", "Asset distribution view", "Collection/UNIQ filters and search"],
-      "challenges": ["On-chain data reliability and consistency", "API pagination and limits", "Performance on large volumes"],
-      "solutions": ["Batched queries and retries", "Caching and aggregation strategy", "Performant and reusable UI components"]
+      "features": [
+        "Ultra blockchain snapshots",
+        "UNIQ holder identification",
+        "Asset distribution view",
+        "Collection/UNIQ filters and search"
+      ],
+      "challenges": [
+        "On-chain data reliability and consistency",
+        "API pagination and limits",
+        "Performance on large volumes"
+      ],
+      "solutions": [
+        "Batched queries and retries",
+        "Caching and aggregation strategy",
+        "Performant and reusable UI components"
+      ],
+      "date": "Jul 2025 - Jul 2025"
     },
     {
       "id": 35,
@@ -380,9 +478,113 @@
       "category": "Web3",
       "role": "Full Stack Web3 Developer",
       "duration": "2 months",
-      "features": ["Mission/service marketplace (offers, profiles, reviews)", "Crypto payments and Ultra integration", "Talent ↔ opportunity matching", "Freelancer and client dashboard"],
-      "challenges": ["Transaction security and state management", "Offer, profile and order flow modeling", "Smooth user experience on complex journeys"],
-      "solutions": ["Robust status and error management on Web3 side", "Structured data schema and reusable components", "Guided journeys and UI-side validations"]
+      "features": [
+        "Mission/service marketplace (offers, profiles, reviews)",
+        "Crypto payments and Ultra integration",
+        "Talent ↔ opportunity matching",
+        "Freelancer and client dashboard"
+      ],
+      "challenges": [
+        "Transaction security and state management",
+        "Offer, profile and order flow modeling",
+        "Smooth user experience on complex journeys"
+      ],
+      "solutions": [
+        "Robust status and error management on Web3 side",
+        "Structured data schema and reusable components",
+        "Guided journeys and UI-side validations"
+      ],
+      "date": "Apr 2025 - Jun 2025"
+    },
+    {
+      "id": 36,
+      "title": "Ashes of Mankind - Empires",
+      "description": "Web3 game with Ultra blockchain integration for the gaming ecosystem.",
+      "longDescription": "Development of the Web3 integration layer of Ashes of Mankind (Empires), connecting the game to Ultra blockchain smart contracts (EOS fork) through custom frontend logic. Built the React frontend and NestJS backend, ensuring smooth interaction between the player interface and blockchain components. Collaborated in an Agile environment, participating in sprint planning, technical reviews, and iterative feature development to ensure continuous delivery and quality. Participated in international technical meetings (Canada, Colombia, Japan, etc.), coordinating with global teams to align on technical direction and game design goals. Engaged in game design discussions, helping bridge user experience and blockchain features to create a cohesive gameplay flow.",
+      "date": "Aug 2025 - Present",
+      "status": "In Progress",
+      "category": "Web3",
+      "role": "Full Stack Web3 Developer",
+      "duration": "In Progress",
+      "features": [
+        "Custom Web3 integration layer",
+        "React frontend and NestJS backend",
+        "Ultra blockchain smart contracts connection",
+        "International Agile collaboration",
+        "Global team coordination",
+        "Game design and UX discussions"
+      ],
+      "challenges": [
+        "Reliable Ultra blockchain integration",
+        "International team coordination",
+        "Bridge between UX and blockchain features"
+      ],
+      "solutions": [
+        "Robust custom frontend logic",
+        "Effective communication via technical meetings",
+        "Collaborative approach for UX"
+      ]
+    },
+    {
+      "id": 37,
+      "title": "FED V3",
+      "description": "Internal SNCF platform for infrastructure project tracking.",
+      "longDescription": "Contributed to the development of FED V3, an internal SNCF platform designed to track the progress of infrastructure projects, covering both financial management and construction execution. Developed and maintained key features using React (frontend) and NestJS/MySQL (backend), ensuring reliable data flow and intuitive project monitoring. Collaborated with design teams in Figma to deliver a clean and efficient user interface aligned with SNCF's internal standards. Operated in an Agile environment, participating in sprints, daily stand-ups, and reviews to ensure continuous delivery and collaboration. Optimized workflows and reduced manual reporting time, saving project teams several hours per week and improving cross-department coordination.",
+      "status": "In Progress",
+      "category": "Enterprise",
+      "role": "Full Stack Developer",
+      "duration": "In Progress",
+      "features": [
+        "Infrastructure project tracking",
+        "Financial management and construction execution",
+        "Intuitive user interface",
+        "Reliable data flow",
+        "Design team collaboration",
+        "Agile environment"
+      ],
+      "challenges": [
+        "Complex data integration",
+        "SNCF standards alignment",
+        "Workflow optimization",
+        "Cross-department coordination"
+      ],
+      "solutions": [
+        "Robust React/NestJS architecture",
+        "Close design collaboration",
+        "Optimized Agile process",
+        "Report automation"
+      ],
+      "date": "Sep 2025 - Present"
+    },
+    {
+      "id": 38,
+      "title": "Valentin Automatisation",
+      "description": "Showcase website for an AI automation services company.",
+      "longDescription": "Developed the showcase website for Valentin Automatisation, a company providing AI automation agent services. Built a modern and responsive frontend to clearly present the company's offerings and enhance its online visibility. Focused on clean UI design, performance, and accessibility for an optimal user experience.",
+      "status": "Completed",
+      "category": "Showcase",
+      "role": "Frontend Developer",
+      "duration": "1 month",
+      "features": [
+        "Modern and responsive showcase website",
+        "Clear presentation of AI automation services",
+        "Clean and professional UI design",
+        "Performance and accessibility optimizations",
+        "Optimized user experience"
+      ],
+      "challenges": [
+        "Clear presentation of technical services",
+        "Performance optimization",
+        "Web accessibility",
+        "Professional and modern design"
+      ],
+      "solutions": [
+        "Optimized Next.js architecture",
+        "Consistent design system",
+        "Accessibility testing",
+        "Image and code optimizations"
+      ],
+      "date": "Oct 2025 - Oct 2025"
     }
   ]
 }

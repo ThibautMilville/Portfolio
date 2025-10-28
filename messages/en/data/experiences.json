@@ -1,13 +1,47 @@
 {
   "experiences": [
     {
+      "id": 10,
+      "title": "Junior Software Engineer",
+      "company": "Black Ice Studios Inc.",
+      "location": "Paris, Île-de-France, France · Remote",
+      "date": "Aug 2025 - Present",
+      "description": "Development of the Web3 (blockchain) component of the game Ashes of Mankind (Empires). Implementation of the entire Web3 frontend and interaction with smart contracts. Participation in daily meetings and technical discussions in English.",
+      "technologies": [
+        "React.js",
+        "Node.js",
+        "NestJS",
+        "Blockchain",
+        "Web3",
+        "Smart Contracts",
+        "Agile",
+        "Git",
+        "GitLab",
+        "Tailwind"
+      ],
+      "achievements": [
+        "Development of the Web3 integration layer of Ashes of Mankind (Empires) game",
+        "Complete implementation of Web3 frontend and smart contract interaction",
+        "Participation in daily meetings and technical discussions in English",
+        "Agile environment collaboration with international teams",
+        "Coordination with global teams for technical alignment"
+      ]
+    },
+    {
       "id": 7,
       "title": "Moderator",
       "company": "Ultra",
       "location": "Paris, Île-de-France, France · Remote",
       "date": "Mar 2025 - Oct 2025",
       "description": "Moderating international communities, organizing events and helping users. Participating in Black Ice Studios (Ashes of Mankind) game social networks moderation.",
-      "technologies": ["Community Management", "Event Organization", "Social Media Moderation", "International Communities", "Gaming Industry", "Online Community Moderation"],
+      "technologies": [
+        "Community Management",
+        "Event Organization",
+        "Social Media Moderation",
+        "International Communities",
+        "Gaming Industry",
+        "Online Community Moderation"
+      ],
       "achievements": [
         "Moderating international communities",
         "Event organization",
@@ -23,7 +57,13 @@
       "location": "Paris, Île-de-France, France · Remote",
       "date": "Jan 2025 - Present",
       "description": "Participation in strategic decision-making as part of the management team, while leading the technical design and development of IT projects.",
-      "technologies": ["Strategic Decision Making", "Management", "Technical Design", "IT Project Development", "Leadership"],
+      "technologies": [
+        "Strategic Decision Making",
+        "Management",
+        "Technical Design",
+        "IT Project Development",
+        "Leadership"
+      ],
       "achievements": [
         "Participation in strategic decision-making as part of the management team",
         "Leading technical design and development of IT projects",
@@ -37,7 +77,15 @@
       "location": "Paris, Île-de-France, France · Remote",
       "date": "Oct 2024 - Present",
       "description": "Development using the Ultra blockchain and its APIs, writing technical articles about it, and participating in community activities in both English and French (community engagement, interviews, etc...).",
-      "technologies": ["Ultra Blockchain", "API Development", "Technical Writing", "Community Management", "English", "French", "Blockchain Development"],
+      "technologies": [
+        "Ultra Blockchain",
+        "API Development",
+        "Technical Writing",
+        "Community Management",
+        "English",
+        "French",
+        "Blockchain Development"
+      ],
       "achievements": [
         "Development using the Ultra blockchain and its APIs",
         "Writing technical articles about the Ultra blockchain",
@@ -52,7 +100,11 @@
       "location": "Paris, Île-de-France, France",
       "date": "Sep 2024 - Present",
       "description": "Designing application solutions to optimize agents' work.",
-      "technologies": ["Application Design", "Software Engineering", "Agent Optimization"],
+      "technologies": [
+        "Application Design",
+        "Software Engineering",
+        "Agent Optimization"
+      ],
       "achievements": [
         "Designing application solutions to optimize agents' work",
         "Internal application development",
@@ -66,7 +118,12 @@
       "location": "France",
       "date": "Oct 2023 - Present",
       "description": "IT services and custom software development company.",
-      "technologies": ["Business Management", "Software Development", "IT Services", "Project Management"],
+      "technologies": [
+        "Business Management",
+        "Software Development",
+        "IT Services",
+        "Project Management"
+      ],
       "achievements": [
         "Creation and management of an IT services company",
         "Custom software development",
@@ -80,7 +137,21 @@
       "location": "Paris, Île-de-France, France",
       "date": "Sep 2023 - Sep 2024",
       "description": "Production and maintenance of internal applications.",
-      "technologies": ["Agile Project Management", "NestJS", "React.js", "TypeScript", "JavaScript", "CodeIgniter", "PHP", "Git", "MySQL", "MySQL Workbench", "HTML", "CSS3", "Bootstrap"],
+      "technologies": [
+        "Agile Project Management",
+        "NestJS",
+        "React.js",
+        "TypeScript",
+        "JavaScript",
+        "CodeIgniter",
+        "PHP",
+        "Git",
+        "MySQL",
+        "MySQL Workbench",
+        "HTML",
+        "CSS3",
+        "Bootstrap"
+      ],
       "achievements": [
         "Production and maintenance of internal applications",
         "Development with NestJS and React.js",
@@ -95,7 +166,23 @@
       "location": "Coulommiers, Île-de-France, France",
       "date": "Dec 2021 - Aug 2023",
       "description": "I was in charge of the company's online communication by developing a complete set of websites to promote the products and services sold by the brand. I also managed the social networks and acquired many soft skills, especially in communication thanks to the customer relationship I was often confronted with. This experience allowed me to learn how to manage projects and made me gain confidence.",
-      "technologies": ["Social Media Marketing", "Self-taught", "Rigor", "Adobe Illustrator", "JavaScript", "MySQL", "PHP", "Search Engine Optimization (SEO)", "Adaptation", "CSS3", "Communication", "WordPress", "Microsoft Office", "HTML", "Content Management Systems (CMS)"],
+      "technologies": [
+        "Social Media Marketing",
+        "Self-taught",
+        "Rigor",
+        "Adobe Illustrator",
+        "JavaScript",
+        "MySQL",
+        "PHP",
+        "Search Engine Optimization (SEO)",
+        "Adaptation",
+        "CSS3",
+        "Communication",
+        "WordPress",
+        "Microsoft Office",
+        "HTML",
+        "Content Management Systems (CMS)"
+      ],
       "achievements": [
         "Development of a complete set of websites",
         "Social media management",
@@ -110,7 +197,16 @@
       "location": "France",
       "date": "Apr 2018 - Dec 2021",
       "description": "I started missions at the age of 17 at the same time as high school and stopped a little over three years later to devote myself fully to my studies. I learned project management, time and stress management and customer relations, while developing skills in several areas (video and image advertising, SEO writing, websites...). I accompanied more than 300 clients with 100% positive reviews and recommendations.",
-      "technologies": ["Social Media Marketing", "Self-taught", "Rigor", "Search Engine Optimization (SEO)", "Adaptation", "Communication", "Microsoft Office", "Client Relationship Management"],
+      "technologies": [
+        "Social Media Marketing",
+        "Self-taught",
+        "Rigor",
+        "Search Engine Optimization (SEO)",
+        "Adaptation",
+        "Communication",
+        "Microsoft Office",
+        "Client Relationship Management"
+      ],
       "achievements": [
         "Accompanied more than 300 clients with 100% positive reviews and recommendations",
         "Started missions at age 17 alongside high school",

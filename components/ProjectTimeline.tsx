@@ -1,8 +1,9 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
-import { Tooltip } from '@/components/ui/tooltip';
+import { motion } from "framer-motion";
+import { cn, translateDateSimple } from "@/lib/utils";
+import { Tooltip } from "@/components/ui/tooltip";
+import { useTranslations, useLocale } from "next-intl";
 
 export interface ProjectPeriodItem {
   title?: string;
@@ -16,13 +17,19 @@ interface ProjectTimelineProps {
   className?: string;
 }
 
-export default function ProjectTimeline({ periods, compact = false, className }: ProjectTimelineProps) {
+export default function ProjectTimeline({
+  periods,
+  compact = false,
+  className,
+}: ProjectTimelineProps) {
+  const locale = useLocale();
+
   if (!periods?.length) return null;
 
   if (compact) {
     // Mini timeline horizontale
     return (
-      <div className={cn('mt-3', className)}>
+      <div className={cn("mt-3", className)}>
         <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
           <span className="font-medium">Périodes</span>
           <span>•</span>
@@ -34,11 +41,18 @@ export default function ProjectTimeline({ periods, compact = false, className }:
             {periods.map((p, idx) => (
               <Tooltip
                 key={idx}
-                content={`${p.title || 'Période'} - ${p.date}${p.description ? '\n\n' + p.description : ''}`}
+                content={`${p.title || "Période"} - ${translateDateSimple(
+                  p.date,
+                  locale
+                )}${p.description ? "\n\n" + p.description : ""}`}
               >
                 <button
                   type="button"
-                  aria-label={p.title ? `${p.title} – ${p.date}` : p.date}
+                  aria-label={
+                    p.title
+                      ? `${p.title} – ${translateDateSimple(p.date, locale)}`
+                      : translateDateSimple(p.date, locale)
+                  }
                   className="relative -translate-y-1 w-3 h-3 rounded-full bg-primary outline-none focus:ring-2 focus:ring-primary/40"
                 />
               </Tooltip>
@@ -51,7 +65,7 @@ export default function ProjectTimeline({ periods, compact = false, className }:
 
   // Timeline verticale détaillée
   return (
-    <div className={cn('relative pl-6', className)}>
+    <div className={cn("relative pl-6", className)}>
       <div className="absolute left-2 top-0 bottom-0 w-0.5 bg-border" />
       <div className="space-y-6">
         {periods.map((p, idx) => (
@@ -64,10 +78,14 @@ export default function ProjectTimeline({ periods, compact = false, className }:
           >
             <div className="absolute left-0 top-1 w-3 h-3 rounded-full bg-primary border-4 border-background" />
             <div className="ml-4">
-              <div className="text-sm text-muted-foreground">{p.date}</div>
+              <div className="text-sm text-muted-foreground">
+                {translateDateSimple(p.date, locale)}
+              </div>
               {p.title ? <div className="font-semibold">{p.title}</div> : null}
               {p.description ? (
-                <p className="text-sm text-muted-foreground mt-1">{p.description}</p>
+                <p className="text-sm text-muted-foreground mt-1">
+                  {p.description}
+                </p>
               ) : null}
             </div>
           </motion.div>
@@ -76,5 +94,3 @@ export default function ProjectTimeline({ periods, compact = false, className }:
     </div>
   );
 }
-
-
