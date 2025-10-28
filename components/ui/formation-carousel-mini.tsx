@@ -1,21 +1,26 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, GraduationCap } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { Formation } from '@/lib/data';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, GraduationCap } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Link } from "@/navigation";
+import { Formation } from "@/lib/data";
+import { useLocale } from "next-intl";
 
 interface FormationCarouselMiniProps {
   formations: Formation[];
   itemsPerView?: number;
 }
 
-export default function FormationCarouselMini({ formations, itemsPerView = 2 }: FormationCarouselMiniProps) {
+export default function FormationCarouselMini({
+  formations,
+  itemsPerView = 2,
+}: FormationCarouselMiniProps) {
+  const locale = useLocale();
   // Sur mobile, afficher 1 élément à la fois, sur desktop utiliser itemsPerView
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
   const actualItemsPerView = isMobile ? 1 : itemsPerView;
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalPages = Math.ceil(formations.length / actualItemsPerView);
@@ -71,13 +76,18 @@ export default function FormationCarouselMini({ formations, itemsPerView = 2 }: 
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
               >
-                <Link href={`/formations#${formation.id}`} className="group">
+                <Link
+                  href={`/${locale === "en" ? "education" : "formations"}#${
+                    formation.id
+                  }`}
+                  className="group"
+                >
                   <div className="p-3 rounded-lg border hover:border-green-500/50 hover:bg-green-500/5 transition-all cursor-pointer h-full bg-gradient-to-br from-green-50/50 to-emerald-50/30 dark:from-green-950/20 dark:to-emerald-950/10">
                     <div className="flex items-start justify-between mb-2">
                       <h5 className="font-medium text-sm group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors line-clamp-1">
                         {formation.title}
                       </h5>
-                      <Badge 
+                      <Badge
                         variant="outline"
                         className="text-xs flex-shrink-0 px-2 py-1 rounded-full bg-primary/10 text-primary"
                       >
@@ -92,12 +102,19 @@ export default function FormationCarouselMini({ formations, itemsPerView = 2 }: 
                     </p>
                     <div className="flex flex-wrap gap-1">
                       {formation.skills.slice(0, 2).map((skill) => (
-                        <Badge key={skill} variant="outline" className="text-xs bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800">
+                        <Badge
+                          key={skill}
+                          variant="outline"
+                          className="text-xs bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800"
+                        >
                           {skill}
                         </Badge>
                       ))}
                       {formation.skills.length > 2 && (
-                        <Badge variant="outline" className="text-xs bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800">
+                        <Badge
+                          variant="outline"
+                          className="text-xs bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800"
+                        >
                           +{formation.skills.length - 2}
                         </Badge>
                       )}
@@ -118,7 +135,9 @@ export default function FormationCarouselMini({ formations, itemsPerView = 2 }: 
               key={i}
               onClick={() => setCurrentIndex(i)}
               className={`w-3 h-3 rounded-full transition-all hover:scale-110 ${
-                i === currentIndex ? 'bg-green-500 shadow-md' : 'bg-muted hover:bg-muted-foreground'
+                i === currentIndex
+                  ? "bg-green-500 shadow-md"
+                  : "bg-muted hover:bg-muted-foreground"
               }`}
             />
           ))}
@@ -126,4 +145,4 @@ export default function FormationCarouselMini({ formations, itemsPerView = 2 }: 
       )}
     </div>
   );
-} 
+}

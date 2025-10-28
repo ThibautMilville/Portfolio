@@ -1,22 +1,27 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { Project } from '@/lib/data';
-import { getProjectSlug } from '@/lib/data';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Link } from "@/navigation";
+import { Project } from "@/lib/data";
+import { getProjectSlug } from "@/lib/data";
+import { useLocale } from "next-intl";
 
 interface ProjectCarouselMiniProps {
   projects: Project[];
   itemsPerView?: number;
 }
 
-export default function ProjectCarouselMini({ projects, itemsPerView = 2 }: ProjectCarouselMiniProps) {
+export default function ProjectCarouselMini({
+  projects,
+  itemsPerView = 2,
+}: ProjectCarouselMiniProps) {
+  const locale = useLocale();
   // Sur mobile, afficher 1 élément à la fois, sur desktop utiliser itemsPerView
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
   const actualItemsPerView = isMobile ? 1 : itemsPerView;
   const [currentIndex, setCurrentIndex] = useState(0);
   const totalPages = Math.ceil(projects.length / actualItemsPerView);
@@ -72,14 +77,25 @@ export default function ProjectCarouselMini({ projects, itemsPerView = 2 }: Proj
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
               >
-                <Link href={`/projets/${getProjectSlug(project)}`} className="group">
+                <Link
+                  href={`/${
+                    locale === "en" ? "projects" : "projets"
+                  }/${getProjectSlug(project)}`}
+                  className="group"
+                >
                   <div className="p-3 rounded-lg border hover:border-primary/50 hover:bg-primary/5 transition-all cursor-pointer h-full">
                     <div className="flex items-start justify-between mb-2">
                       <h5 className="font-medium text-sm group-hover:text-primary transition-colors line-clamp-1">
                         {project.title}
                       </h5>
-                      <Badge 
-                        variant={project.status === "Terminé" ? "default" : project.status === "En cours" ? "secondary" : "outline"}
+                      <Badge
+                        variant={
+                          project.status === "Terminé"
+                            ? "default"
+                            : project.status === "En cours"
+                            ? "secondary"
+                            : "outline"
+                        }
                         className="text-xs flex-shrink-0"
                       >
                         {project.status}
@@ -116,7 +132,9 @@ export default function ProjectCarouselMini({ projects, itemsPerView = 2 }: Proj
               key={i}
               onClick={() => setCurrentIndex(i)}
               className={`w-3 h-3 rounded-full transition-all hover:scale-110 ${
-                i === currentIndex ? 'bg-primary shadow-md' : 'bg-muted hover:bg-muted-foreground'
+                i === currentIndex
+                  ? "bg-primary shadow-md"
+                  : "bg-muted hover:bg-muted-foreground"
               }`}
             />
           ))}
@@ -124,4 +142,4 @@ export default function ProjectCarouselMini({ projects, itemsPerView = 2 }: Proj
       )}
     </div>
   );
-} 
+}
