@@ -1,14 +1,16 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
-import Image from 'next/image';
-import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
-import { Tooltip } from '@/components/ui/tooltip';
-import { ExternalLink, Github } from 'lucide-react';
-import LightParticles from '@/components/ui/light-particles';
+import { motion } from "framer-motion";
+import { useTranslations, useLocale } from "next-intl";
+import Image from "next/image";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { Tooltip } from "@/components/ui/tooltip";
+import { ExternalLink, Github } from "lucide-react";
+import LightParticles from "@/components/ui/light-particles";
+import { slugify, translateDateSimple } from "@/lib/utils";
+import { useTranslatedData } from "@/hooks/useTranslatedData";
 
 interface Project {
   id: number;
@@ -26,20 +28,31 @@ interface FeaturedProjectsSectionProps {
   projects: Project[];
 }
 
-export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSectionProps) {
-  const t = useTranslations('Home.featuredProjects');
+export default function FeaturedProjectsSection({
+  projects,
+}: FeaturedProjectsSectionProps) {
+  const t = useTranslations("Home.featuredProjects");
+  const locale = useLocale();
+  const { getTranslatedProject } = useTranslatedData();
   // Utiliser les mêmes projets phares qu'avant
   const featuredProjectTitles = [
+    "Ashes of Mankind - Empires",
     "UT Marketplace",
-    "Institutional website OZC",
     "Commercial website OZC Signalétique",
   ];
-  const featuredProjects = projects.filter((p) =>
-    featuredProjectTitles.includes(p.title)
-  );
+  const featuredProjects = featuredProjectTitles
+    .map((title) => projects.find((p) => p.title === title))
+    .filter((project): project is NonNullable<typeof project> =>
+      Boolean(project)
+    )
+    .map((project) => getTranslatedProject(project as any));
 
   return (
-    <section className="py-8 px-6 relative" role="region" aria-labelledby="featured-projects-heading">
+    <section
+      className="py-8 px-6 relative"
+      role="region"
+      aria-labelledby="featured-projects-heading"
+    >
       <LightParticles />
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
@@ -49,12 +62,13 @@ export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSe
           viewport={{ once: true }}
           className="text-center mb-8"
         >
-          <h2 id="featured-projects-heading" className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
-            {t('title')}
+          <h2
+            id="featured-projects-heading"
+            className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
+          >
+            {t("title")}
           </h2>
-          <p className="text-lg text-muted-foreground">
-            {t('subtitle')}
-          </p>
+          <p className="text-lg text-muted-foreground">{t("subtitle")}</p>
         </motion.div>
 
         <motion.div
@@ -72,12 +86,16 @@ export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSe
             viewport={{ once: true }}
             className="lg:col-span-1"
           >
-            <Link href={`/projets/${featuredProjects[0]?.title.toLowerCase().replace(/\s+/g, '-')}`}>
+            <Link
+              href={`/projets/${slugify(featuredProjects[0]?.title || "")}`}
+            >
               <Card className="group h-full bg-gradient-to-br from-zinc-900/95 via-zinc-800/90 to-zinc-900/95 dark:from-zinc-900/95 dark:via-zinc-800/90 dark:to-zinc-900/95 from-white/95 via-gray-50/90 to-white/95 backdrop-blur-md border-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 hover:border-primary/70 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/40 rounded-3xl overflow-hidden shadow-2xl ring-1 ring-zinc-800/50 dark:ring-zinc-800/50 ring-gray-200/50">
                 <div className="relative h-64 md:h-80 overflow-hidden">
                   <Image
-                    src={featuredProjects[0]?.image || '/images/placeholder.jpg'}
-                    alt={featuredProjects[0]?.title || 'Projet'}
+                    src={
+                      featuredProjects[0]?.image || "/images/placeholder.jpg"
+                    }
+                    alt={featuredProjects[0]?.title || "Projet"}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
@@ -86,19 +104,34 @@ export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSe
                     <Badge className="bg-primary/90 text-white">
                       {featuredProjects[0]?.status}
                     </Badge>
-                    <Badge variant="secondary" className="bg-background/80 text-foreground">
+                    <Badge
+                      variant="secondary"
+                      className="bg-background/80 text-foreground"
+                    >
                       {featuredProjects[0]?.category}
                     </Badge>
                   </div>
                   <div className="absolute top-4 right-4 flex gap-2">
                     {featuredProjects[0]?.demo && (
-                      <Tooltip content={t('viewDemo')} position="top">
+                      <Tooltip
+                        content={
+                          featuredProjects[0]?.title ===
+                          "Ashes of Mankind - Empires"
+                            ? t("viewGame")
+                            : t("viewDemo")
+                        }
+                        position="top"
+                      >
                         <button
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
                             if (featuredProjects[0].demo) {
-                              window.open(featuredProjects[0].demo, '_blank', 'noopener,noreferrer');
+                              window.open(
+                                featuredProjects[0].demo,
+                                "_blank",
+                                "noopener,noreferrer"
+                              );
                             }
                           }}
                           onMouseDown={(e) => e.stopPropagation()}
@@ -108,12 +141,16 @@ export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSe
                         </button>
                       </Tooltip>
                     )}
-                    <Tooltip content={t('viewCode')} position="top">
+                    <Tooltip content={t("viewCode")} position="top">
                       <button
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          window.open(featuredProjects[0]?.github, '_blank', 'noopener,noreferrer');
+                          window.open(
+                            featuredProjects[0]?.github,
+                            "_blank",
+                            "noopener,noreferrer"
+                          );
                         }}
                         onMouseDown={(e) => e.stopPropagation()}
                         className="p-2 bg-background/80 backdrop-blur-sm rounded-full hover:bg-primary/90 transition-colors"
@@ -137,62 +174,83 @@ export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSe
                   <p className="text-muted-foreground mb-4 text-base leading-relaxed">
                     {featuredProjects[0]?.description}
                   </p>
-                  
+
                   {/* Informations détaillées pour le projet principal */}
                   <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span className="text-muted-foreground">Status: {featuredProjects[0]?.status}</span>
+                      <span className="text-muted-foreground">
+                        {t("status")}: {featuredProjects[0]?.status}
+                      </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                      <span className="text-muted-foreground">Web3 & Blockchain</span>
+                      <span className="text-muted-foreground">
+                        {featuredProjects[0]?.category}
+                      </span>
                     </div>
                   </div>
-                  
+
                   {/* Section des fonctionnalités clés */}
                   <div className="mb-4">
-                    <h4 className="text-sm font-semibold text-foreground mb-2">Fonctionnalités clés</h4>
+                    <h4 className="text-sm font-semibold text-foreground mb-2">
+                      {t("keyFeatures")}
+                    </h4>
                     <div className="grid grid-cols-1 gap-2">
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                        <span>Marketplace avancée avec listes et offres</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                        <span>Intégration portefeuille Ultra</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                        <span>Traitement des transactions on-chain</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                        <span>Système multilingue intégré</span>
-                      </div>
+                      {featuredProjects[0]?.features
+                        ?.slice(0, 4)
+                        .map((feature: string, index: number) => (
+                          <div
+                            key={index}
+                            className="flex items-center gap-2 text-xs text-muted-foreground"
+                          >
+                            <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                            <span>{feature}</span>
+                          </div>
+                        ))}
                     </div>
                   </div>
-                  
-                  
+
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {featuredProjects[0]?.technologies.slice(0, 4).map((tech, index) => (
-                      <Badge key={index} variant="outline" className="text-xs bg-zinc-800/80 dark:bg-zinc-800/80 bg-gray-100/80 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 text-zinc-100 dark:text-zinc-100 text-gray-700 font-medium">
-                        {tech}
-                      </Badge>
-                    ))}
+                    {featuredProjects[0]?.technologies
+                      .slice(0, 4)
+                      .map((tech: string, index: number) => (
+                        <Badge
+                          key={index}
+                          variant="outline"
+                          className="text-xs bg-zinc-800/80 dark:bg-zinc-800/80 bg-gray-100/80 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 text-zinc-100 dark:text-zinc-100 text-gray-700 font-medium"
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
                     {featuredProjects[0]?.technologies.length > 4 && (
-                      <Badge variant="outline" className="text-xs bg-zinc-800/80 dark:bg-zinc-800/80 bg-gray-100/80 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 text-zinc-100 dark:text-zinc-100 text-gray-700 font-medium">
+                      <Badge
+                        variant="outline"
+                        className="text-xs bg-zinc-800/80 dark:bg-zinc-800/80 bg-gray-100/80 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 text-zinc-100 dark:text-zinc-100 text-gray-700 font-medium"
+                      >
                         +{featuredProjects[0].technologies.length - 4} autres
                       </Badge>
                     )}
                   </div>
-                  
+
                   {/* Call to action */}
                   <div className="flex items-center justify-between pt-2 border-t-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80">
-                    <span className="text-sm text-muted-foreground">Voir le projet</span>
+                    <span className="text-sm text-muted-foreground">
+                      {t("viewProject")}
+                    </span>
                     <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
-                      <svg className="w-3 h-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      <svg
+                        className="w-3 h-3 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
                       </svg>
                     </div>
                   </div>
@@ -212,7 +270,7 @@ export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSe
                 viewport={{ once: true }}
                 className="flex-1"
               >
-                <Link href={`/projets/${project.title.toLowerCase().replace(/\s+/g, '-')}`}>
+                <Link href={`/projets/${slugify(project.title)}`}>
                   <Card className="group h-full bg-gradient-to-br from-zinc-900/95 via-zinc-800/90 to-zinc-900/95 dark:from-zinc-900/95 dark:via-zinc-800/90 dark:to-zinc-900/95 from-white/95 via-gray-50/90 to-white/95 backdrop-blur-md border-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 hover:border-primary/70 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/40 rounded-3xl overflow-hidden shadow-2xl ring-1 ring-zinc-800/50 dark:ring-zinc-800/50 ring-gray-200/50">
                     <div className="relative h-48 overflow-hidden">
                       <Image
@@ -229,13 +287,24 @@ export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSe
                       </div>
                       <div className="absolute top-3 right-3 flex gap-1">
                         {project.demo && (
-                          <Tooltip content={t('viewDemo')} position="top">
+                          <Tooltip
+                            content={
+                              project.title === "Ashes of Mankind - Empires"
+                                ? t("viewGame")
+                                : t("viewDemo")
+                            }
+                            position="top"
+                          >
                             <button
                               onClick={(e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
                                 if (project.demo) {
-                                  window.open(project.demo, '_blank', 'noopener,noreferrer');
+                                  window.open(
+                                    project.demo,
+                                    "_blank",
+                                    "noopener,noreferrer"
+                                  );
                                 }
                               }}
                               onMouseDown={(e) => e.stopPropagation()}
@@ -245,12 +314,16 @@ export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSe
                             </button>
                           </Tooltip>
                         )}
-                        <Tooltip content={t('viewCode')} position="top">
+                        <Tooltip content={t("viewCode")} position="top">
                           <button
                             onClick={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
-                              window.open(project.github, '_blank', 'noopener,noreferrer');
+                              window.open(
+                                project.github,
+                                "_blank",
+                                "noopener,noreferrer"
+                              );
                             }}
                             onMouseDown={(e) => e.stopPropagation()}
                             className="p-1.5 bg-background/80 backdrop-blur-sm rounded-full hover:bg-primary/90 transition-colors"
@@ -274,16 +347,27 @@ export default function FeaturedProjectsSection({ projects }: FeaturedProjectsSe
                       </p>
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                        <span className="text-xs text-muted-foreground">{project.status}</span>
+                        <span className="text-xs text-muted-foreground">
+                          {project.status}
+                        </span>
                       </div>
                       <div className="flex flex-wrap gap-1">
-                        {project.technologies.slice(0, 2).map((tech, techIndex) => (
-                          <Badge key={techIndex} variant="outline" className="text-xs bg-zinc-800/80 dark:bg-zinc-800/80 bg-gray-100/80 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 text-zinc-100 dark:text-zinc-100 text-gray-700 font-medium">
-                            {tech}
-                          </Badge>
-                        ))}
+                        {project.technologies
+                          .slice(0, 2)
+                          .map((tech: string, techIndex: number) => (
+                            <Badge
+                              key={techIndex}
+                              variant="outline"
+                              className="text-xs bg-zinc-800/80 dark:bg-zinc-800/80 bg-gray-100/80 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 text-zinc-100 dark:text-zinc-100 text-gray-700 font-medium"
+                            >
+                              {tech}
+                            </Badge>
+                          ))}
                         {project.technologies.length > 2 && (
-                          <Badge variant="outline" className="text-xs bg-zinc-800/80 dark:bg-zinc-800/80 bg-gray-100/80 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 text-zinc-100 dark:text-zinc-100 text-gray-700 font-medium">
+                          <Badge
+                            variant="outline"
+                            className="text-xs bg-zinc-800/80 dark:bg-zinc-800/80 bg-gray-100/80 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 text-zinc-100 dark:text-zinc-100 text-gray-700 font-medium"
+                          >
                             +{project.technologies.length - 2}
                           </Badge>
                         )}

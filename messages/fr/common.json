@@ -12,5 +12,9 @@
     "formations": "Formations",
     "projects": "Projets",
     "copyright": "Tous droits réservés."
+  },
+  "Dates": {
+    "present": "Présent",
+    "presentShort": "Présent"
   }
 }

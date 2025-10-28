@@ -44,7 +44,7 @@ import {
 const projets = getAllProjects();
 
 export default function Projets() {
-  const t = useTranslations('Pages.projets');
+  const t = useTranslations("Pages.projets");
   const { getTranslatedProject } = useTranslatedData();
   const [filters, setFilters] = useState<ProjectFilterState>({
     search: "",
@@ -71,7 +71,9 @@ export default function Projets() {
 
   const technologies = useMemo(() => {
     const set = new Set<string>();
-    projets.forEach((p: any) => p.technologies.forEach((t: string) => set.add(t)));
+    projets.forEach((p: any) =>
+      p.technologies.forEach((t: string) => set.add(t))
+    );
     return Array.from(set).sort();
   }, []);
 
@@ -208,9 +210,19 @@ export default function Projets() {
   };
 
   const sorted = useMemo(() => {
-    return [...filtered].sort(
-      (a, b) => getProjectStartTs(b.date) - getProjectStartTs(a.date)
-    );
+    return [...filtered].sort((a, b) => {
+      // Les projets en cours (status "En cours" ou "In Progress") en premier
+      const aIsInProgress =
+        a.status === "En cours" || a.status === "In Progress";
+      const bIsInProgress =
+        b.status === "En cours" || b.status === "In Progress";
+
+      if (aIsInProgress && !bIsInProgress) return -1;
+      if (!aIsInProgress && bIsInProgress) return 1;
+
+      // Si les deux sont en cours ou terminés, trier par date de début (plus récent en premier)
+      return getProjectStartTs(b.date) - getProjectStartTs(a.date);
+    });
   }, [filtered]);
 
   const PER_PAGE = 18;
@@ -272,7 +284,7 @@ export default function Projets() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t('title')}</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t("title")}</h1>
 
           {/* Barre horizontale stylisée moderne et dynamique */}
           <motion.div
@@ -299,9 +311,7 @@ export default function Projets() {
             />
           </motion.div>
 
-          <p className="text-lg text-muted-foreground">
-            {t('subtitle')}
-          </p>
+          <p className="text-lg text-muted-foreground">{t("subtitle")}</p>
         </motion.div>
 
         <ProjectFilters
@@ -314,15 +324,200 @@ export default function Projets() {
           t={t}
         />
 
+        {/* Section des projets mis en avant - seulement si aucun filtre actif */}
+        {!filters.search &&
+          filters.organization === "all" &&
+          filters.category === "all" &&
+          filters.status === "all" &&
+          filters.techs.length === 0 &&
+          filters.years.length === 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="mb-16"
+            >
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold mb-4">
+                  {t("featuredProjects")}
+                </h2>
+                <p className="text-muted-foreground">
+                  {t("featuredProjectsDescription")}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {[
+                  "Ashes of Mankind - Empires",
+                  "UT Marketplace",
+                  "Commercial website OZC Signalétique",
+                ].map((projectTitle, index) => {
+                  const project = projets.find(
+                    (p: any) => p.title === projectTitle
+                  );
+                  if (!project) return null;
+
+                  const translatedProject = getTranslatedProject(project);
+                  return (
+                    <motion.div
+                      key={project.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
+                    >
+                      <Link href={`/projets/${getProjectSlug(project)}`}>
+                        <Card className="h-full hover:shadow-xl transition-all duration-300 group cursor-pointer flex flex-col border-2 border-primary/20 hover:border-primary/40">
+                          <div className="relative overflow-hidden rounded-t-lg">
+                            <Image
+                              src={translatedProject.image}
+                              alt={translatedProject.title}
+                              width={400}
+                              height={200}
+                              className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                            <div className="absolute top-4 left-4">
+                              <Badge
+                                variant="default"
+                                className="bg-primary text-primary-foreground"
+                              >
+                                {t("featured")}
+                              </Badge>
+                            </div>
+                            <div className="absolute top-4 right-4">
+                              <Badge
+                                variant="secondary"
+                                className="bg-background/80 text-foreground dark:bg-black dark:text-white border border-border/50 backdrop-blur px-2 py-1"
+                              >
+                                {translatedProject.category}
+                              </Badge>
+                            </div>
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                              <ArrowRight className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-x-2 group-hover:translate-x-0" />
+                            </div>
+                          </div>
+
+                          <CardHeader className="flex-0 min-h-[132px]">
+                            <div className="flex items-start justify-between">
+                              <div className="flex-1">
+                                <CardTitle className="text-lg mb-2 group-hover:text-primary transition-colors line-clamp-1 min-h-[28px]">
+                                  {translatedProject.title}
+                                </CardTitle>
+                                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                                  <Calendar className="h-4 w-4" />
+                                  {translatedProject.date}
+                                </div>
+                              </div>
+                            </div>
+                            <CardDescription className="text-sm leading-relaxed line-clamp-3 min-h-[66px] max-h-[66px] overflow-hidden">
+                              {translatedProject.description}
+                            </CardDescription>
+                          </CardHeader>
+
+                          <CardContent className="space-y-4 flex flex-col flex-1">
+                            <div className="min-h-[66px] max-h-[66px] overflow-hidden">
+                              <h4 className="font-semibold text-sm mb-2">
+                                {t("keyFeatures")}
+                              </h4>
+                              <ul className="space-y-1">
+                                {translatedProject.features
+                                  .slice(0, 3)
+                                  .map((feature: string, idx: number) => (
+                                    <li
+                                      key={idx}
+                                      className="flex items-start gap-2 text-xs text-muted-foreground truncate"
+                                    >
+                                      <Star className="h-3 w-3 mt-0.5 flex-shrink-0 text-primary" />
+                                      {feature}
+                                    </li>
+                                  ))}
+                              </ul>
+                            </div>
+
+                            <div className="min-h-[56px] max-h-[56px] overflow-hidden">
+                              <h4 className="font-semibold text-sm mb-2">
+                                {t("technologies")}
+                              </h4>
+                              <div className="flex flex-nowrap items-center gap-1 overflow-hidden min-w-0">
+                                {project.technologies
+                                  .slice(0, 4)
+                                  .map((tech: string) => (
+                                    <Badge
+                                      key={tech}
+                                      variant="outline"
+                                      className="text-xs whitespace-nowrap"
+                                    >
+                                      {tech}
+                                    </Badge>
+                                  ))}
+                                {project.technologies.length > 4 && (
+                                  <Badge
+                                    variant="outline"
+                                    className="text-xs whitespace-nowrap"
+                                  >
+                                    +{project.technologies.length - 4}
+                                  </Badge>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="mt-auto pt-4 flex gap-2">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                className="flex-1 sweep-light"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  e.stopPropagation();
+                                  window.open(project.github, "_blank");
+                                }}
+                              >
+                                <Github className="mr-2 h-4 w-4" />
+                                {t("code")}
+                              </Button>
+                              {project.demo && (
+                                <Button
+                                  size="sm"
+                                  className="flex-1 sweep-light"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    if (!project.demo) return;
+                                    window.open(project.demo, "_blank");
+                                  }}
+                                >
+                                  <ExternalLink className="mr-2 h-4 w-4" />
+                                  {project.title ===
+                                  "Ashes of Mankind - Empires"
+                                    ? t("viewGame")
+                                    : [
+                                        "Showcase",
+                                        "E-commerce",
+                                        "Corporate",
+                                      ].includes(project.category)
+                                    ? t("viewSite")
+                                    : t("viewDemo")}
+                                </Button>
+                              )}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+
         <div className="text-sm text-muted-foreground mb-4">
           {sorted.length > 0 ? (
             <span>
-              {t('displaying', {
-                count: sorted.length
+              {t("displaying", {
+                count: sorted.length,
               })}
             </span>
           ) : (
-            <span>{t('noResults')}</span>
+            <span>{t("noResults")}</span>
           )}
         </div>
 
@@ -330,156 +525,166 @@ export default function Projets() {
           {pageItems.map((projet, index) => {
             const translatedProject = getTranslatedProject(projet);
             return (
-            <motion.div
-              key={projet.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.06 }}
-              id={projet.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
-            >
-              <Link
-                href={`/projets/${getProjectSlug(projet)}`}
-                onClick={() => {
-                  if (typeof window !== "undefined") {
-                    try {
-                      sessionStorage.setItem(
-                        "projetsPage",
-                        String(currentPage)
-                      );
-                    } catch {}
-                  }
-                }}
+              <motion.div
+                key={projet.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.06 }}
+                id={projet.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
               >
-                <Card className="h-full min-h-[560px] hover:shadow-xl transition-all duration-300 group cursor-pointer flex flex-col">
-                  <div className="relative overflow-hidden rounded-t-lg">
-                    <Image
-                      src={translatedProject.image}
-                      alt={translatedProject.title}
-                      width={400}
-                      height={200}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute top-4 left-4">
-                      <Badge
-                        variant={
-                          translatedProject.status === "Terminé" ? "default" : "secondary"
-                        }
-                      >
-                        {translatedProject.status}
-                      </Badge>
+                <Link
+                  href={`/projets/${getProjectSlug(projet)}`}
+                  onClick={() => {
+                    if (typeof window !== "undefined") {
+                      try {
+                        sessionStorage.setItem(
+                          "projetsPage",
+                          String(currentPage)
+                        );
+                      } catch {}
+                    }
+                  }}
+                >
+                  <Card className="h-full min-h-[560px] hover:shadow-xl transition-all duration-300 group cursor-pointer flex flex-col border-2 border-primary/20 hover:border-primary/40">
+                    <div className="relative overflow-hidden rounded-t-lg">
+                      <Image
+                        src={translatedProject.image}
+                        alt={translatedProject.title}
+                        width={400}
+                        height={200}
+                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute top-4 left-4">
+                        <Badge
+                          variant={
+                            translatedProject.status === "Terminé"
+                              ? "default"
+                              : "secondary"
+                          }
+                        >
+                          {translatedProject.status}
+                        </Badge>
+                      </div>
+                      <div className="absolute top-4 right-4">
+                        <Badge
+                          variant="secondary"
+                          className="bg-background/80 text-foreground dark:bg-black dark:text-white border border-border/50 backdrop-blur px-2 py-1"
+                        >
+                          {translatedProject.category}
+                        </Badge>
+                      </div>
+                      {/* Overlay avec icône */}
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                        <ArrowRight className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-x-2 group-hover:translate-x-0" />
+                      </div>
                     </div>
-                    <div className="absolute top-4 right-4">
-                      <Badge
-                        variant="secondary"
-                        className="bg-background/80 text-foreground dark:bg-black dark:text-white border border-border/50 backdrop-blur px-2 py-1"
-                      >
-                        {translatedProject.category}
-                      </Badge>
-                    </div>
-                    {/* Overlay avec icône */}
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                      <ArrowRight className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-x-2 group-hover:translate-x-0" />
-                    </div>
-                  </div>
 
-                  <CardHeader className="flex-0 min-h-[132px]">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <CardTitle className="text-lg mb-2 group-hover:text-primary transition-colors line-clamp-1 min-h-[28px]">
-                          {translatedProject.title}
-                        </CardTitle>
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                          <Calendar className="h-4 w-4" />
-                          {projet.date}
+                    <CardHeader className="flex-0 min-h-[132px]">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <CardTitle className="text-lg mb-2 group-hover:text-primary transition-colors line-clamp-1 min-h-[28px]">
+                            {translatedProject.title}
+                          </CardTitle>
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                            <Calendar className="h-4 w-4" />
+                            {translatedProject.date}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <CardDescription className="text-sm leading-relaxed line-clamp-3 min-h-[66px] max-h-[66px] overflow-hidden">
-                      {translatedProject.description}
-                    </CardDescription>
-                  </CardHeader>
+                      <CardDescription className="text-sm leading-relaxed line-clamp-3 min-h-[66px] max-h-[66px] overflow-hidden">
+                        {translatedProject.description}
+                      </CardDescription>
+                    </CardHeader>
 
-                  <CardContent className="space-y-4 flex flex-col flex-1">
-                    <div className="min-h-[66px] max-h-[66px] overflow-hidden">
-                      <h4 className="font-semibold text-sm mb-2">
-                        {t('keyFeatures')}
-                      </h4>
-                      <ul className="space-y-1">
-                        {translatedProject.features.slice(0, 3).map((feature: string, idx: number) => (
-                          <li
-                            key={idx}
-                            className="flex items-start gap-2 text-xs text-muted-foreground truncate"
-                          >
-                            <Star className="h-3 w-3 mt-0.5 flex-shrink-0 text-primary" />
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="min-h-[56px] max-h-[56px] overflow-hidden">
-                      <h4 className="font-semibold text-sm mb-2">
-                        {t('technologies')}
-                      </h4>
-                      <div className="flex flex-nowrap items-center gap-1 overflow-hidden min-w-0">
-                        {projet.technologies.slice(0, 4).map((tech: string) => (
-                          <Badge
-                            key={tech}
-                            variant="outline"
-                            className="text-xs whitespace-nowrap"
-                          >
-                            {tech}
-                          </Badge>
-                        ))}
-                        {projet.technologies.length > 4 && (
-                          <Badge
-                            variant="outline"
-                            className="text-xs whitespace-nowrap"
-                          >
-                            +{projet.technologies.length - 4}
-                          </Badge>
-                        )}
+                    <CardContent className="space-y-4 flex flex-col flex-1">
+                      <div className="min-h-[66px] max-h-[66px] overflow-hidden">
+                        <h4 className="font-semibold text-sm mb-2">
+                          {t("keyFeatures")}
+                        </h4>
+                        <ul className="space-y-1">
+                          {translatedProject.features
+                            .slice(0, 3)
+                            .map((feature: string, idx: number) => (
+                              <li
+                                key={idx}
+                                className="flex items-start gap-2 text-xs text-muted-foreground truncate"
+                              >
+                                <Star className="h-3 w-3 mt-0.5 flex-shrink-0 text-primary" />
+                                {feature}
+                              </li>
+                            ))}
+                        </ul>
                       </div>
-                    </div>
 
-                    <div className="mt-auto pt-4 flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="flex-1 sweep-light"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          window.open(projet.github, "_blank");
-                        }}
-                      >
-                        <Github className="mr-2 h-4 w-4" />
-                        {t('code')}
-                      </Button>
-                      {projet.demo && (
+                      <div className="min-h-[56px] max-h-[56px] overflow-hidden">
+                        <h4 className="font-semibold text-sm mb-2">
+                          {t("technologies")}
+                        </h4>
+                        <div className="flex flex-nowrap items-center gap-1 overflow-hidden min-w-0">
+                          {projet.technologies
+                            .slice(0, 4)
+                            .map((tech: string) => (
+                              <Badge
+                                key={tech}
+                                variant="outline"
+                                className="text-xs whitespace-nowrap"
+                              >
+                                {tech}
+                              </Badge>
+                            ))}
+                          {projet.technologies.length > 4 && (
+                            <Badge
+                              variant="outline"
+                              className="text-xs whitespace-nowrap"
+                            >
+                              +{projet.technologies.length - 4}
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="mt-auto pt-4 flex gap-2">
                         <Button
+                          variant="outline"
                           size="sm"
                           className="flex-1 sweep-light"
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
-                            if (!projet.demo) return;
-                            window.open(projet.demo, "_blank");
+                            window.open(projet.github, "_blank");
                           }}
                         >
-                          <ExternalLink className="mr-2 h-4 w-4" />
-                          {["Showcase", "E-commerce", "Corporate"].includes(
-                            projet.category
-                          )
-                            ? t('viewSite')
-                            : t('demo')}
+                          <Github className="mr-2 h-4 w-4" />
+                          {t("code")}
                         </Button>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            </motion.div>
+                        {projet.demo && (
+                          <Button
+                            size="sm"
+                            className="flex-1 sweep-light"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              if (!projet.demo) return;
+                              window.open(projet.demo, "_blank");
+                            }}
+                          >
+                            <ExternalLink className="mr-2 h-4 w-4" />
+                            {projet.title === "Ashes of Mankind - Empires"
+                              ? t("viewGame")
+                              : [
+                                  "Showcase",
+                                  "E-commerce",
+                                  "Corporate",
+                                ].includes(projet.category)
+                              ? t("viewSite")
+                              : t("viewDemo")}
+                          </Button>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </motion.div>
             );
           })}
         </div>
@@ -553,74 +758,126 @@ export default function Projets() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
               {/* Dégradé de base avec vraie transition */}
-              <div 
-                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
-                style={{ 
-                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
-                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
-                }} 
+              <div
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2"
+                style={{
+                  clipPath: "polygon(0 0, 100% 0, 0 100%)",
+                  backgroundImage:
+                    "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)",
+                }}
               >
-                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clipRule="evenodd" />
+                <svg
+                  className="w-7 h-7 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </div>
               <div className="relative z-10 text-center">
-                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">+25</div>
-                <div className="text-sm text-muted-foreground">{t('projects')}</div>
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
+                  +25
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  {t("projects")}
+                </div>
               </div>
             </div>
             <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
               {/* Dégradé de base avec vraie transition */}
-              <div 
-                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
-                style={{ 
-                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
-                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
-                }} 
+              <div
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2"
+                style={{
+                  clipPath: "polygon(0 0, 100% 0, 0 100%)",
+                  backgroundImage:
+                    "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)",
+                }}
               >
-                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                <svg
+                  className="w-7 h-7 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </div>
               <div className="relative z-10 text-center">
-                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">{web3Count}</div>
-                <div className="text-sm text-muted-foreground">{t('web3Projects')}</div>
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
+                  {web3Count}
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  {t("web3Projects")}
+                </div>
               </div>
             </div>
             <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
               {/* Dégradé de base avec vraie transition */}
-              <div 
-                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
-                style={{ 
-                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
-                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
-                }} 
+              <div
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2"
+                style={{
+                  clipPath: "polygon(0 0, 100% 0, 0 100%)",
+                  backgroundImage:
+                    "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)",
+                }}
               >
-                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+                <svg
+                  className="w-7 h-7 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </div>
               <div className="relative z-10 text-center">
-                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">+30</div>
-                <div className="text-sm text-muted-foreground">{t('masteredTechnologies')}</div>
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
+                  +30
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  {t("masteredTechnologies")}
+                </div>
               </div>
             </div>
             <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
               {/* Dégradé de base avec vraie transition */}
-              <div 
-                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
-                style={{ 
-                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
-                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
-                }} 
+              <div
+                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2"
+                style={{
+                  clipPath: "polygon(0 0, 100% 0, 0 100%)",
+                  backgroundImage:
+                    "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)",
+                }}
               >
-                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                <svg
+                  className="w-7 h-7 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </div>
               <div className="relative z-10 text-center">
-                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">6+</div>
-                <div className="text-sm text-muted-foreground">{t('yearsExperience')}</div>
+                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
+                  6+
+                </div>
+                <div className="text-sm text-muted-foreground">
+                  {t("yearsExperience")}
+                </div>
               </div>
             </div>
           </div>

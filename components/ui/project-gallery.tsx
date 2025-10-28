@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
-import { Button } from './button';
+import React, { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { Button } from "./button";
 
 interface ProjectGalleryProps {
   images: string[];
@@ -35,19 +35,19 @@ export default function ProjectGallery({ images, title }: ProjectGalleryProps) {
   useEffect(() => {
     if (!isModalOpen) return;
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'ArrowRight') {
+      if (event.key === "ArrowRight") {
         event.preventDefault();
         next();
-      } else if (event.key === 'ArrowLeft') {
+      } else if (event.key === "ArrowLeft") {
         event.preventDefault();
         prev();
-      } else if (event.key === 'Escape') {
+      } else if (event.key === "Escape") {
         event.preventDefault();
         closeModal();
       }
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isModalOpen, next, prev]);
 
   if (!images || images.length === 0) return null;
@@ -65,7 +65,7 @@ export default function ProjectGallery({ images, title }: ProjectGalleryProps) {
             onClick={() => openModal(currentIndex)}
             whileHover={{ scale: 1.02 }}
           />
-          <div 
+          <div
             className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 rounded-2xl cursor-pointer"
             onClick={() => openModal(currentIndex)}
           />
@@ -103,8 +103,8 @@ export default function ProjectGallery({ images, title }: ProjectGalleryProps) {
                     }}
                     className={`w-2 h-2 rounded-full transition-all ${
                       index === currentIndex
-                        ? 'bg-white scale-125'
-                        : 'bg-white/50 hover:bg-white/75'
+                        ? "bg-white scale-125"
+                        : "bg-white/50 hover:bg-white/75"
                     }`}
                   />
                 ))}
@@ -121,16 +121,18 @@ export default function ProjectGallery({ images, title }: ProjectGalleryProps) {
         {/* Miniatures */}
         {images.length > 1 && (
           <div className="grid grid-cols-4 gap-3">
-            {images.slice(1).map((image, index) => (
+            {images.map((image, index) => (
               <motion.div
-                key={index + 1}
-                className="relative group cursor-pointer"
+                key={index}
+                className={`relative group cursor-pointer rounded-lg ${
+                  index === currentIndex ? "ring-2 ring-primary" : ""
+                }`}
                 whileHover={{ scale: 1.05 }}
-                onClick={() => openModal(index + 1)}
+                onClick={() => setCurrentIndex(index)}
               >
                 <img
                   src={image}
-                  alt={`${title} - Vue ${index + 2}`}
+                  alt={`${title} - Vue ${index + 1}`}
                   className="w-full h-24 object-cover rounded-lg shadow-lg"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 rounded-lg" />
@@ -208,8 +210,8 @@ export default function ProjectGallery({ images, title }: ProjectGalleryProps) {
                         }}
                         className={`w-2 h-2 rounded-full transition-all ${
                           index === currentIndex
-                            ? 'bg-white scale-125'
-                            : 'bg-white/50 hover:bg-white/75'
+                            ? "bg-white scale-125"
+                            : "bg-white/50 hover:bg-white/75"
                         }`}
                       />
                     ))}
@@ -227,4 +229,4 @@ export default function ProjectGallery({ images, title }: ProjectGalleryProps) {
       </AnimatePresence>
     </>
   );
-} 
+}

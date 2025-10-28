@@ -12,5 +12,9 @@
     "formations": "Education",
     "projects": "Projects",
     "copyright": "All rights reserved."
+  },
+  "Dates": {
+    "present": "Present",
+    "presentShort": "Present"
   }
 }
