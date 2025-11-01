@@ -13,19 +13,31 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const smtpUser = process.env.SMTP_USER;
+    const smtpPassword = process.env.SMTP_PASSWORD;
+    const contactEmail = process.env.CONTACT_EMAIL || smtpUser;
+
+    if (!smtpUser || !smtpPassword) {
+      console.error('Configuration SMTP manquante');
+      return NextResponse.json(
+        { error: 'Erreur de configuration serveur' },
+        { status: 500 }
+      );
+    }
+
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST || 'smtp.gmail.com',
       port: parseInt(process.env.SMTP_PORT || '587'),
       secure: process.env.SMTP_SECURE === 'true',
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASSWORD,
+        user: smtpUser,
+        pass: smtpPassword,
       },
     });
 
     const mailOptions = {
-      from: process.env.SMTP_USER,
-      to: process.env.CONTACT_EMAIL || process.env.SMTP_USER,
+      from: smtpUser,
+      to: contactEmail,
       replyTo: email,
       subject: `Portfolio Contact: ${subject}`,
       html: `
@@ -63,7 +75,8 @@ ${message}
       { status: 200 }
     );
   } catch (error) {
-    console.error('Erreur lors de l\'envoi de l\'email:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Erreur inconnue';
+    console.error('Erreur lors de l\'envoi de l\'email:', errorMessage);
     return NextResponse.json(
       { error: 'Erreur lors de l\'envoi de l\'email. Veuillez réessayer plus tard.' },
       { status: 500 }
