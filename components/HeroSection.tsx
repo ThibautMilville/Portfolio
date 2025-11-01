@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import {
   ArrowDown,
   Download,
@@ -20,6 +20,11 @@ import { Tooltip } from "@/components/ui/tooltip";
 
 export default function HeroSection() {
   const t = useTranslations('Home.hero');
+  const locale = useLocale();
+  
+  const cvPath = locale === 'fr' 
+    ? '/documents/CV  Thibaut MILVILLE FR.pdf'
+    : '/documents/CV Thibaut MILVILLE EN.pdf';
   return (
     <section className="min-h-screen flex items-center justify-center relative px-6 pt-12 md:pt-0" role="banner" aria-label="Présentation de Thibaut MILVILLE">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20" />
@@ -215,9 +220,11 @@ export default function HeroSection() {
                 <ArrowRight className="ml-2 h-4 w-4 text-white" />
               </Link>
             </Button>
-            <Button variant="outline" size="lg" className="sweep-light">
-              <Download className="mr-2 h-4 w-4" />
-              {t('buttons.downloadCV')}
+            <Button variant="outline" size="lg" className="sweep-light" asChild>
+              <a href={cvPath} download target="_blank" rel="noopener noreferrer">
+                <Download className="mr-2 h-4 w-4" />
+                {t('buttons.downloadCV')}
+              </a>
             </Button>
           </motion.div>
 
