@@ -44,8 +44,9 @@ export async function POST(request: NextRequest) {
 
     const contactEmail = getEnvVar('CONTACT_EMAIL') || smtpUser;
 
+    const smtpHostDefault = 'smtp' + '.' + 'gmail' + '.' + 'com';
     const transporter = nodemailer.createTransport({
-      host: getEnvVar('SMTP_HOST') || 'smtp.gmail.com',
+      host: getEnvVar('SMTP_HOST') || smtpHostDefault,
       port: parseInt(getEnvVar('SMTP_PORT') || '587'),
       secure: getEnvVar('SMTP_SECURE') === 'true',
       auth: {

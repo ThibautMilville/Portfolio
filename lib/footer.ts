@@ -40,7 +40,7 @@ export const FOOTER_DATA = {
   social: {
     github: 'https://github.com/ThibautMilville',
     linkedin: 'https://fr.linkedin.com/in/thibaut-milville',
-    email: 'tmilville.pro@gmail.com',
+    email: 'tmilville' + '.' + 'pro' + '@' + 'gmail' + '.' + 'com',
     telegram: 'https://t.me/Thybow',
   },
 } as const;

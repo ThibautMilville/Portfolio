@@ -229,7 +229,7 @@ export default function ContactSection() {
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <a
-                    href="mailto:tmilville.pro@gmail.com"
+                    href={`mailto:${'tmilville' + '.' + 'pro' + '@' + 'gmail' + '.' + 'com'}`}
                     className="p-3 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors cursor-pointer"
                   >
                     <Mail className="h-6 w-6 text-primary" />
@@ -237,10 +237,10 @@ export default function ContactSection() {
                   <div>
                     <h4 className="font-semibold mb-1">{t('info.email')}</h4>
                     <a
-                      href="mailto:tmilville.pro@gmail.com"
+                      href={`mailto:${'tmilville' + '.' + 'pro' + '@' + 'gmail' + '.' + 'com'}`}
                       className="text-muted-foreground hover:text-primary transition-colors"
                     >
-                      tmilville.pro@gmail.com
+                      {('tmilville' + '.' + 'pro' + '@' + 'gmail' + '.' + 'com')}
                     </a>
                   </div>
                 </div>

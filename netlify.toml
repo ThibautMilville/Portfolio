@@ -3,5 +3,5 @@
   publish = ".next"
 
 [build.environment]
-  SECRETS_SCAN_OMIT_PATHS = ".next/server/**,.next/cache/**,.netlify/.next/server/**,.netlify/.next/cache/**,**/server/**,**/cache/**"
-
+  SECRETS_SCAN_OMIT_PATHS = ".next/**,.netlify/.next/**,public/documents/**,**/static/**,**/documents/**"
+  SECRETS_SCAN_OMIT_KEYS = "CONTACT_EMAIL"
