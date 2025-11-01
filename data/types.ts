@@ -39,6 +39,7 @@ export interface Experience {
   projectIds?: number[];
   relatedFormationIds?: number[];
   logoUrl?: string;
+  employmentType?: "freelance" | "fullTime" | "entrepreneur" | "apprenticeship";
 }
 
 export interface Formation {

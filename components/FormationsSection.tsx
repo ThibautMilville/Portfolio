@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { translateDateSimple } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "@/navigation";
@@ -44,6 +45,9 @@ export default function FormationsSection({
   formations,
 }: FormationsSectionProps) {
   const t = useTranslations('Home.formations');
+  const tPages = useTranslations('Pages.formations');
+  const tCourseCard = useTranslations('Pages.formations.courseCard');
+  const locale = useLocale();
   return (
     <section className="py-6 md:py-8 px-6 relative">
       <LightParticles />
@@ -90,12 +94,14 @@ export default function FormationsSection({
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* Carte cours: badge Cisco */}
             <CourseCard 
-              title="Cisco – Introduction to Cybersecurity"
+              title={tPages('badgeData.cisco.title')}
               imageSrc="/images/education/badge-cybersecurity.png"
               pdfHref="/documents/badge-cisco-certification.pdf"
-              organization="Cisco"
-              date="Octobre 2025"
+              organization={tPages('badgeData.cisco.organization')}
+              date={tPages('badgeData.cisco.date')}
               courseDescription={t('modals.courseDescription')}
+              tCourseCard={tCourseCard}
+              locale={locale}
             />
           </div>
         </motion.div>
@@ -117,13 +123,15 @@ export default function FormationsSection({
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { Tooltip } from '@/components/ui/tooltip';
 
-function CourseCard({ title, imageSrc, pdfHref, organization, date, courseDescription }: { 
+function CourseCard({ title, imageSrc, pdfHref, organization, date, courseDescription, tCourseCard, locale }: { 
   title: string; 
   imageSrc: string; 
   pdfHref?: string;
   organization: string;
   date: string;
   courseDescription: string;
+  tCourseCard: any;
+  locale: string;
 }) {
   return (
     <Dialog>
@@ -142,12 +150,12 @@ function CourseCard({ title, imageSrc, pdfHref, organization, date, courseDescri
             
             <div className="space-y-2 text-center">
               <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                <span className="font-medium">Organisme:</span>
+                <span className="font-medium">{tCourseCard('organization')}</span>
                 <span>{organization}</span>
               </div>
               <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                <span className="font-medium">Date:</span>
-                <span>{date}</span>
+                <span className="font-medium">{tCourseCard('date')}</span>
+                <span>{translateDateSimple(date, locale)}</span>
               </div>
             </div>
           </div>
@@ -164,10 +172,10 @@ function CourseCard({ title, imageSrc, pdfHref, organization, date, courseDescri
             <img src={imageSrc} alt={title} className="max-h-60 object-contain" />
           </div>
           <div className="text-sm text-muted-foreground">
-            Date d'obtention: {date}
+            {tCourseCard('obtainedDate')} {translateDateSimple(date, locale)}
           </div>
           <div className="text-sm text-muted-foreground">
-            Organisme: {organization}
+            {tCourseCard('organizationName')} {organization}
           </div>
           {pdfHref ? (
             <div className="text-sm">
@@ -177,7 +185,7 @@ function CourseCard({ title, imageSrc, pdfHref, organization, date, courseDescri
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
               >
-                Consulter le document (PDF)
+                {tCourseCard('viewDocument')}
               </a>
             </div>
           ) : null}

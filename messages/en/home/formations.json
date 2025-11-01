@@ -12,6 +12,8 @@
     "institution": "Institution:",
     "type": "Type:",
     "description": "Description:",
+    "mention": "Mention:",
+    "skillsAcquired": "Skills acquired",
     "viewCertificate": "View official certificate"
   }
 }

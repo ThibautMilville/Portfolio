@@ -24,7 +24,6 @@ export const projects: Project[] = [
     demo: "https://ut-marketplace.vercel.app/fr",
     category: "Web3",
     relatedExperienceId: 8,
-    relatedFormationIds: [3],
     screenshots: [
       "/images/projects/ut-marketplace/ut-marketplace_1.png",
       "/images/projects/ut-marketplace/ut-marketplace_2.png",
@@ -434,7 +433,7 @@ export const projects: Project[] = [
     github: "https://github.com/ThibautMilville",
     demo: "https://www.ozc-signaletique.fr/",
     category: "E-commerce",
-    relatedExperienceId: 4,
+    relatedExperienceId: 3,
     screenshots: ["/images/projects/ozc-signaletique/ozc-signaletique_1.jpeg"],
     features: ["Catalogue produits", "Paiement en ligne"],
     challenges: ["Référencement"],
@@ -475,7 +474,7 @@ export const projects: Project[] = [
     demo: "https://www.ozc.fr/",
     screenshots: ["/images/projects/ozc/ozc_1.jpeg"],
     category: "Corporate",
-    relatedExperienceId: 4,
+    relatedExperienceId: 3,
     features: ["Pages services", "Formulaire de contact"],
     challenges: ["Clarté des contenus"],
     solutions: ["Arborescence UX"],
@@ -714,7 +713,6 @@ export const projects: Project[] = [
     demo: "https://ut-snapshot.vercel.app/",
     category: "Web3",
     relatedExperienceId: 8,
-    relatedFormationIds: [3],
     screenshots: [
       "/images/projects/ut-snapshot/ut-snapshot_1.png",
       "/images/projects/ut-snapshot/ut-snapshot_2.png",
@@ -758,7 +756,6 @@ export const projects: Project[] = [
     demo: "https://we-need-u.vercel.app/",
     category: "Web3",
     relatedExperienceId: 8,
-    relatedFormationIds: [3],
     screenshots: [
       "/images/projects/weneedu/weneedu_1.png",
       "/images/projects/weneedu/weneedu_2.png",

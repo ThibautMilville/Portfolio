@@ -14,6 +14,14 @@
     "intermediate": "Intermédiaire",
     "beginner": "Débutant"
   },
+  "experienceYears": {
+    "6+ ans": "6+ ans",
+    "5+ ans": "5+ ans",
+    "4+ ans": "4+ ans",
+    "3+ ans": "3+ ans",
+    "2+ ans": "2+ ans",
+    "1+ an": "1+ an"
+  },
   "stats": {
     "domains": "Domaines d'expertise",
     "experience": "Années d'expérience",

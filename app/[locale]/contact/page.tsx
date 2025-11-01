@@ -33,12 +33,47 @@ export default function Contact() {
     subject: "",
     message: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Ici, vous pourriez intégrer avec un service d'email
-    console.log("Formulaire soumis:", formData);
-    alert(t('form.success'));
+    setIsLoading(true);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Une erreur est survenue');
+      }
+
+      setSuccess(true);
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+
+      setTimeout(() => {
+        setSuccess(false);
+      }, 5000);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Une erreur est survenue');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (
@@ -159,13 +194,40 @@ export default function Contact() {
                     />
                   </div>
 
+                  <motion.div
+                    initial={false}
+                    animate={error ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    {error && (
+                      <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm">
+                        {error}
+                      </div>
+                    )}
+                  </motion.div>
+                  <motion.div
+                    initial={false}
+                    animate={success ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    {success && (
+                      <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400 text-sm">
+                        {t('form.success')}
+                      </div>
+                    )}
+                  </motion.div>
                   <Button
                     type="submit"
                     size="lg"
                     className="w-full sweep-light"
+                    disabled={isLoading}
                   >
                     <Send className="mr-2 h-4 w-4" />
-                    {t('form.submit')}
+                    {isLoading ? t('form.submitting') : t('form.submit')}
                   </Button>
                 </form>
               </CardContent>

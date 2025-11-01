@@ -22,8 +22,9 @@ import ProjectGallery from "@/components/ui/project-gallery";
 import LightParticles from "@/components/ui/light-particles";
 import ProjectTimeline from "@/components/ProjectTimeline";
 import type { Project, Experience, Formation } from "@/lib/data";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useTranslatedData } from "@/hooks/useTranslatedData";
+import { translateDateSimple } from "@/lib/utils";
 
 const getStatusIcon = (status: string) => {
   switch (status) {
@@ -67,6 +68,7 @@ export default function ClientProjectPage({
   relatedFormations: Formation[];
 }) {
   const t = useTranslations("Pages.projets");
+  const locale = useLocale();
   const {
     getTranslatedProject,
     getTranslatedExperience,
@@ -391,7 +393,7 @@ export default function ClientProjectPage({
                             {translatedExperience.company}
                           </p>
                           <p className="text-sm text-muted-foreground">
-                            {translatedExperience.date}
+                            {translateDateSimple(translatedExperience.date, locale)}
                           </p>
                         </div>
                         <p className="text-sm text-muted-foreground">

@@ -1,8 +1,10 @@
 'use client'
 
 import React, { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
+import { translateDateSimple } from '@/lib/utils';
+import { useTranslatedData } from '@/hooks/useTranslatedData';
 import { ChevronLeft, ChevronRight, GraduationCap, Award, BookOpen, MapPin, Calendar, ExternalLink } from 'lucide-react';
 import { Card, CardContent } from './card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from './dialog';
@@ -46,6 +48,8 @@ const typeColors: Record<string, string> = {
 export default function FormationCarousel({ formations }: FormationCarouselProps) {
   const t = useTranslations('Components.carousels.formation');
   const tModals = useTranslations('Home.formations.modals');
+  const locale = useLocale();
+  const { getTranslatedFormation } = useTranslatedData();
   const [startIndex, setStartIndex] = useState(0);
   const [cardsToShow, setCardsToShow] = useState(1);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -137,14 +141,14 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
   const translateX = `calc(-${startIndex} * ((100% - ${(cardsToShow - 1)}rem) / ${cardsToShow} + 1rem))`;
 
   const getIcon = (type: string) => {
-    switch (type.toLowerCase()) {
-      case 'diplôme':
-        return <GraduationCap className="h-8 w-8" />;
-      case 'certification':
-        return <Award className="h-8 w-8" />;
-      default:
-        return <BookOpen className="h-8 w-8" />;
+    const typeLower = type.toLowerCase();
+    if (typeLower === 'diplôme' || typeLower === 'degree') {
+      return <GraduationCap className="h-8 w-8" />;
     }
+    if (typeLower === 'certification') {
+      return <Award className="h-8 w-8" />;
+    }
+    return <BookOpen className="h-8 w-8" />;
   };
 
   if (!isClient) {
@@ -186,7 +190,9 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
               duration: 0.3
             }}
           >
-            {formations.map((formation, idx) => (
+            {formations.map((formation, idx) => {
+              const translatedFormation = getTranslatedFormation(formation);
+              return (
                 <motion.div
                   key={formation.id}
                   className="flex-shrink-0 w-full group"
@@ -205,79 +211,77 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
                           e.preventDefault();
                           setSelectedFormation(formation);
                         }}
-                        className="relative h-full rounded-2xl shadow-xl border border-border bg-card/80 supports-[backdrop-filter]:backdrop-blur-md ring-1 ring-black/5 transition-all duration-300 group-hover:-translate-y-2 hover:shadow-2xl hover:ring-primary/30 overflow-hidden cursor-pointer"
+                        className="relative h-full flex flex-col rounded-2xl shadow-xl border border-border bg-card/80 supports-[backdrop-filter]:backdrop-blur-md ring-1 ring-black/5 transition-all duration-300 group-hover:-translate-y-2 hover:shadow-2xl hover:ring-primary/30 overflow-hidden cursor-pointer"
                       >
-                        {/* Header avec badge unique */}
-                        <div className="p-6 pb-4">
+                        <div className="p-6 pb-4 flex-1 flex flex-col">
                           <div className="flex items-start justify-between mb-4">
                             <div className="flex items-center gap-2">
                               {formation.logoUrl ? (
                                 <img 
                                   src={formation.logoUrl} 
-                                  alt={`Logo ${formation.institution}`}
+                                  alt={`Logo ${translatedFormation.institution}`}
                                   className="h-12 w-12 rounded object-contain bg-white p-1"
                                 />
                               ) : (
-                                <div className={`p-2 rounded-lg ${typeColors[formation.type.toLowerCase()] || 'bg-muted text-foreground'}`}>
-                                  {getIcon(formation.type)}
+                                <div className={`p-2 rounded-lg ${typeColors[translatedFormation.type.toLowerCase()] || 'bg-muted text-foreground'}`}>
+                                  {getIcon(translatedFormation.type)}
                                 </div>
                               )}
                             </div>
                             <span className="text-xs font-semibold px-2 py-1 rounded-full bg-primary/10 text-primary">
-                              {formation.type}
+                              {translatedFormation.type}
                             </span>
                           </div>
                           
-                          {/* Titre et institution */}
                           <h3 className="text-lg font-bold mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                            {formation.title}
+                            {translatedFormation.title}
                           </h3>
-                          <p className="text-sm text-muted-foreground font-medium mb-3">
-                            {formation.institution}
+                          <p className="text-sm text-muted-foreground font-medium">
+                            {translatedFormation.institution}
                           </p>
-                          
-                          {/* Date */}
+                        </div>
+                        
+                        <div className="px-6 pb-6">
                           <div className="inline-flex items-center gap-2 text-xs text-muted-foreground">
                             <div className="w-1 h-1 rounded-full bg-primary"></div>
-                            {formation.date}
+                            {translateDateSimple(translatedFormation.date, locale)}
                           </div>
                         </div>
                       </a>
                     ) : (
-                      <Card className="relative h-full rounded-3xl shadow-xl bg-gradient-to-br from-zinc-900/95 via-zinc-800/90 to-zinc-900/95 dark:from-zinc-900/95 dark:via-zinc-800/90 dark:to-zinc-900/95 from-white/95 via-gray-50/90 to-white/95 backdrop-blur-md border-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 hover:border-primary/40 dark:hover:border-primary/40 hover:border-blue-400/50 hover:shadow-lg hover:shadow-primary/10 dark:hover:shadow-primary/20 transition-all duration-300 group-hover:-translate-y-2 overflow-hidden cursor-pointer ring-1 ring-zinc-800/50 dark:ring-zinc-800/50 ring-gray-200/50">
-                        {/* Header avec badge unique */}
-                        <div className="p-6 pb-4">
+                      <Card className="relative h-full flex flex-col rounded-3xl shadow-xl bg-gradient-to-br from-zinc-900/95 via-zinc-800/90 to-zinc-900/95 dark:from-zinc-900/95 dark:via-zinc-800/90 dark:to-zinc-900/95 from-white/95 via-gray-50/90 to-white/95 backdrop-blur-md border-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 hover:border-primary/40 dark:hover:border-primary/40 hover:border-blue-400/50 hover:shadow-lg hover:shadow-primary/10 dark:hover:shadow-primary/20 transition-all duration-300 group-hover:-translate-y-2 overflow-hidden cursor-pointer ring-1 ring-zinc-800/50 dark:ring-zinc-800/50 ring-gray-200/50">
+                        <div className="p-6 pb-4 flex-1 flex flex-col">
                           <div className="flex items-start justify-between mb-4">
                             <div className="flex items-center gap-2">
                               {formation.logoUrl ? (
                                 <img 
                                   src={formation.logoUrl} 
-                                  alt={`Logo ${formation.institution}`}
+                                  alt={`Logo ${translatedFormation.institution}`}
                                   className="h-12 w-12 rounded object-contain bg-white p-1"
                                 />
                               ) : (
-                                <div className={`p-2 rounded-lg ${typeColors[formation.type.toLowerCase()] || 'bg-muted text-foreground'}`}>
-                                  {getIcon(formation.type)}
+                                <div className={`p-2 rounded-lg ${typeColors[translatedFormation.type.toLowerCase()] || 'bg-muted text-foreground'}`}>
+                                  {getIcon(translatedFormation.type)}
                                 </div>
                               )}
                             </div>
                             <span className="text-xs font-semibold px-2 py-1 rounded-full bg-primary/10 text-primary">
-                              {formation.type}
+                              {translatedFormation.type}
                             </span>
                           </div>
                           
-                          {/* Titre et institution */}
                           <h3 className="text-lg font-bold mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                            {formation.title}
+                            {translatedFormation.title}
                           </h3>
-                          <p className="text-sm text-muted-foreground font-medium mb-3">
-                            {formation.institution}
+                          <p className="text-sm text-muted-foreground font-medium">
+                            {translatedFormation.institution}
                           </p>
-                          
-                          {/* Date */}
+                        </div>
+                        
+                        <div className="px-6 pb-6">
                           <div className="inline-flex items-center gap-2 text-xs text-muted-foreground">
                             <div className="w-1 h-1 rounded-full bg-primary"></div>
-                            {formation.date}
+                            {translateDateSimple(translatedFormation.date, locale)}
                           </div>
                         </div>
                       </Card>
@@ -289,18 +293,18 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
                         {formation.logoUrl ? (
                           <img 
                             src={formation.logoUrl} 
-                            alt={`Logo ${formation.institution}`}
+                            alt={`Logo ${translatedFormation.institution}`}
                             className="h-16 w-16 rounded object-contain bg-white p-2"
                           />
                         ) : (
-                          <div className={`p-3 rounded-lg ${typeColors[formation.type.toLowerCase()] || 'bg-muted text-foreground'}`}>
-                            {getIcon(formation.type)}
+                          <div className={`p-3 rounded-lg ${typeColors[translatedFormation.type.toLowerCase()] || 'bg-muted text-foreground'}`}>
+                            {getIcon(translatedFormation.type)}
                           </div>
                         )}
                         <div>
-                          <DialogTitle className="text-2xl">{formation.title}</DialogTitle>
+                          <DialogTitle className="text-2xl">{translatedFormation.title}</DialogTitle>
                           <DialogDescription className="text-lg font-medium text-foreground">
-                            {formation.institution}
+                            {translatedFormation.institution}
                           </DialogDescription>
                         </div>
                       </div>
@@ -312,43 +316,43 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
                         <div className="flex items-center gap-2 text-sm">
                           <Calendar className="h-4 w-4 text-primary" />
                           <span className="font-medium">{tModals('period')}</span>
-                          <span>{formation.date}</span>
+                          <span>{translateDateSimple(translatedFormation.date, locale)}</span>
                         </div>
                         <div className="flex items-center gap-2 text-sm">
                           <MapPin className="h-4 w-4 text-primary" />
                           <span className="font-medium">{tModals('location')}</span>
-                          <span>{formation.location}</span>
+                          <span>{translatedFormation.location}</span>
                         </div>
                         <div className="flex items-center gap-2 text-sm">
                           <Award className="h-4 w-4 text-primary" />
                           <span className="font-medium">{tModals('type')}</span>
                           <span className="px-2 py-1 rounded-full bg-primary/10 text-primary text-xs">
-                            {formation.type}
+                            {translatedFormation.type}
                           </span>
                         </div>
-                        {formation.mention && (
+                        {translatedFormation.mention && (
                           <div className="flex items-center gap-2 text-sm">
                             <GraduationCap className="h-4 w-4 text-primary" />
-                            <span className="font-medium">Mention :</span>
-                            <span>{formation.mention}</span>
+                            <span className="font-medium">{tModals('mention')}</span>
+                            <span>{translatedFormation.mention}</span>
                           </div>
                         )}
                       </div>
 
                       {/* Description */}
                       <div>
-                        <h4 className="font-semibold mb-2">Description</h4>
+                        <h4 className="font-semibold mb-2">{tModals('description')}</h4>
                         <p className="text-sm text-muted-foreground leading-relaxed">
-                          {formation.description}
+                          {translatedFormation.description}
                         </p>
                       </div>
 
                       {/* Compétences */}
-                      {formation.skills && formation.skills.length > 0 && (
+                      {translatedFormation.skills && translatedFormation.skills.length > 0 && (
                         <div>
-                          <h4 className="font-semibold mb-3">Compétences acquises</h4>
+                          <h4 className="font-semibold mb-3">{tModals('skillsAcquired')}</h4>
                           <div className="flex flex-wrap gap-2">
-                            {formation.skills.map((skill, index) => (
+                            {translatedFormation.skills.map((skill, index) => (
                               <span 
                                 key={index}
                                 className="px-3 py-1 bg-muted rounded-full text-sm"
@@ -378,7 +382,8 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
                   </DialogContent>
                 </Dialog>
               </motion.div>
-            ))}
+            );
+            })}
           </motion.div>
           </div>
         </div>

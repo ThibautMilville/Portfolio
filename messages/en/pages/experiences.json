@@ -8,5 +8,11 @@
   "positions": "positions",
   "position": "position",
   "relatedProjects": "Related projects",
-  "relatedFormations": "Related formations"
+  "relatedFormations": "Related formations",
+  "employmentTypes": {
+    "freelance": "Freelance",
+    "entrepreneur": "Entrepreneur",
+    "apprenticeship": "Apprenticeship",
+    "fullTime": "Full-time"
+  }
 }

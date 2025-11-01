@@ -1,10 +1,35 @@
 {
   "experiences": [
     {
+      "id": 11,
+      "title": "Ingénieur Logiciel",
+      "company": "Ultra Tech Alliance (UTA)",
+      "location": "Paris, Île-de-France, France · Remote",
+      "date": "Oct 2024 - Présent",
+      "description": "Contribution au développement d'outils et bibliothèques open-source pour l'écosystème blockchain Ultra. Implémentation de fonctionnalités et amélioration des SDK, scripts et outils d'automatisation pour développeurs. Participation à des ateliers techniques et meetups développeurs pour soutenir la croissance communautaire. Collaboration avec des ingénieurs et contributeurs pour créer des ressources et documentations pour la communauté développeurs Ultra. Soutien actif à l'adoption de la technologie Ultra par le développement pratique et le partage de connaissances.",
+      "technologies": [
+        "React.js",
+        "Node.js",
+        "NestJS",
+        "C++",
+        "Git",
+        "Intelligence Artificielle (IA)",
+        "Gestion de Projet Agile"
+      ],
+      "achievements": [
+        "Contribution au développement d'outils et bibliothèques open-source pour l'écosystème blockchain Ultra",
+        "Implémentation de fonctionnalités et amélioration des SDK, scripts et outils d'automatisation pour développeurs",
+        "Participation à des ateliers techniques et meetups développeurs pour soutenir la croissance communautaire",
+        "Collaboration avec des ingénieurs et contributeurs pour créer des ressources et documentations pour la communauté développeurs Ultra",
+        "Soutien actif à l'adoption de la technologie Ultra par le développement pratique et le partage de connaissances",
+        "Impact: Amélioration de l'écosystème développeurs Ultra en fournissant des outils fiables centrés sur les développeurs et en améliorant les ressources d'intégration, permettant aux constructeurs et accélérant l'adoption sur la plateforme"
+      ]
+    },
+    {
       "id": 10,
       "title": "Développeur Junior",
       "company": "Black Ice Studios Inc.",
-      "location": "Paris, Île-de-France, France · Remote",
+      "location": "Montréal, Québec, Canada · Remote",
       "date": "Août 2025 - Présent",
       "description": "Développement de la composante Web3 (blockchain) du jeu Ashes of Mankind (Empires). Implémentation complète du frontend Web3 et interaction avec les smart contracts. Participation aux réunions quotidiennes et discussions techniques en anglais.",
       "technologies": [
@@ -52,29 +77,37 @@
     },
     {
       "id": 8,
-      "title": "MVP",
+      "title": "Lead Developer & MVP",
       "company": "Ultra Times",
-      "location": "Paris, Île-de-France, France · Remote",
+      "location": "Bangkok, Thaïlande · Remote",
       "date": "Jan 2025 - Présent",
-      "description": "Participation aux décisions stratégiques en tant que membre de l'équipe de direction, tout en dirigeant la conception technique et le développement de projets informatiques.",
+      "description": "Direction de la conception technique, du développement et du déploiement de 7 applications décentralisées sur la blockchain Ultra, supervision de l'architecture fullstack et garantie de la scalabilité et de la sécurité. Participation aux décisions stratégiques en tant que membre de l'équipe de direction, alignement des initiatives techniques avec les objectifs commerciaux et de levée de fonds. Rédaction de contenu technique et engagement avec la communauté en anglais et français, incluant des interviews avec des développeurs blockchain et de jeux, améliorant la visibilité et le leadership d'opinion de la plateforme. Gestion de sprints Agile, coordination des workflows de développement et garantie de la livraison dans les délais des MVPs sur des projets basés sur la blockchain Ultra.",
       "technologies": [
+        "React.js",
+        "Node.js",
+        "NestJS",
+        "Blockchain",
+        "Blockchain Ultra",
+        "Architecture Fullstack",
+        "Gestion de Projet Agile",
+        "Rédaction Technique",
+        "Gestion de Communauté",
+        "Leadership",
         "Prise de Décision Stratégique",
-        "Management",
-        "Conception Technique",
-        "Développement de Projets IT",
-        "Leadership"
+        "Git"
       ],
       "achievements": [
-        "Participation aux décisions stratégiques en tant que membre de l'équipe de direction",
-        "Conduite de la conception technique et du développement de projets informatiques",
-        "Leadership dans la gestion d'équipe"
+        "Direction de la conception technique, du développement et du déploiement de 7 applications décentralisées sur la blockchain Ultra, supervision de l'architecture fullstack et garantie de la scalabilité et de la sécurité",
+        "Participation aux décisions stratégiques en tant que membre de l'équipe de direction, alignement des initiatives techniques avec les objectifs commerciaux et de levée de fonds",
+        "Rédaction de contenu technique et engagement avec la communauté en anglais et français, incluant des interviews avec des développeurs blockchain et de jeux, améliorant la visibilité et le leadership d'opinion de la plateforme",
+        "Gestion de sprints Agile, coordination des workflows de développement et garantie de la livraison dans les délais des MVPs sur des projets basés sur la blockchain Ultra"
       ]
     },
     {
       "id": 9,
       "title": "Ingénieur Logiciel Junior et Contributeur Communautaire",
       "company": "Ultra Times",
-      "location": "Paris, Île-de-France, France · Remote",
+      "location": "Bangkok, Thaïlande · Remote",
       "date": "Oct 2024 - Présent",
       "description": "Développement utilisant la blockchain Ultra et ses APIs, rédaction d'articles techniques à ce sujet, et participation aux activités communautaires en anglais et français (engagement communautaire, interviews, etc...).",
       "technologies": [

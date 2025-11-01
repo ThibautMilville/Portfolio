@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
+import { translateDateSimple } from "@/lib/utils";
 import {
   GraduationCap,
   Calendar,
@@ -27,6 +28,7 @@ const formations = getAllFormations();
 
 export default function Formations() {
   const t = useTranslations('Pages.formations');
+  const locale = useLocale();
   const { getTranslatedFormation } = useTranslatedData();
   return (
     <div className="py-6 md:py-8 px-6 relative">
@@ -143,7 +145,7 @@ export default function Formations() {
                         <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mt-4">
                           <div className="flex items-center gap-1">
                             <Calendar className="h-4 w-4" />
-                            {translatedFormation.date}
+                            {translateDateSimple(translatedFormation.date, locale)}
                           </div>
                           <div className="flex items-center gap-1">
                             <MapPin className="h-4 w-4" />
@@ -279,7 +281,7 @@ export default function Formations() {
                         <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mt-4">
                           <div className="flex items-center gap-1">
                             <Calendar className="h-4 w-4" />
-                            {translatedFormation.date}
+                            {translateDateSimple(translatedFormation.date, locale)}
                           </div>
                           <div className="flex items-center gap-1">
                             <MapPin className="h-4 w-4" />

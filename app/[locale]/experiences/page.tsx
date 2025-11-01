@@ -284,15 +284,14 @@ export default function Experiences() {
                         <Badge variant="outline" className="text-sm">
                           {group.experiences.length > 1
                             ? t("multiplePositions")
-                            : group.experiences[0].title.includes("Freelance")
-                            ? "Freelance"
-                            : group.experiences[0].title.includes("Founder")
-                            ? "Entrepreneur"
-                            : group.experiences[0].title.includes(
-                                "Apprenticeship"
-                              )
-                            ? "Alternance"
-                            : "CDI"}
+                            : (() => {
+                                const firstExp = getTranslatedExperience(
+                                  group.experiences[0]
+                                );
+                                const employmentType =
+                                  group.experiences[0].employmentType || "fullTime";
+                                return t(`employmentTypes.${employmentType}`);
+                              })()}
                         </Badge>
                       </div>
                     </div>

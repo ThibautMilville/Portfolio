@@ -17,7 +17,9 @@
       "message": "Describe your project or request..."
     },
     "submit": "Send message",
-    "success": "Message sent! I'll get back to you as soon as possible."
+    "submitting": "Sending...",
+    "success": "Message sent! I'll get back to you as soon as possible.",
+    "error": "An error occurred while sending. Please try again."
   },
   "info": {
     "title": "Contact information",

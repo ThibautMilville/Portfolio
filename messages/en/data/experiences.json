@@ -1,10 +1,35 @@
 {
   "experiences": [
     {
+      "id": 11,
+      "title": "Software Engineer",
+      "company": "Ultra Tech Alliance (UTA)",
+      "location": "Paris, Île-de-France, France · Remote",
+      "date": "Oct 2024 - Present",
+      "description": "Contributing to the development of open-source tools and libraries for the Ultra blockchain ecosystem. Implementing features and improving SDKs, scripts, and automation tools for developers. Participating in technical workshops and developer meetups to support community growth. Collaborating with engineers and contributors to build resources and documentation for the Ultra developer community. Actively supporting the adoption of Ultra's technology through hands-on development and knowledge sharing.",
+      "technologies": [
+        "React.js",
+        "Node.js",
+        "NestJS",
+        "C++",
+        "Git",
+        "Artificial Intelligence (AI)",
+        "Agile Project Management"
+      ],
+      "achievements": [
+        "Contributing to the development of open-source tools and libraries for the Ultra blockchain ecosystem",
+        "Implementing features and improving SDKs, scripts, and automation tools for developers",
+        "Participating in technical workshops and developer meetups to support community growth",
+        "Collaborating with engineers and contributors to build resources and documentation for the Ultra developer community",
+        "Actively supporting the adoption of Ultra's technology through hands-on development and knowledge sharing",
+        "Impact: Enhanced Ultra's developer ecosystem by delivering reliable, developer-focused tooling and improving onboarding resources, empowering builders and accelerating adoption across the platform"
+      ]
+    },
+    {
       "id": 10,
       "title": "Junior Software Engineer",
       "company": "Black Ice Studios Inc.",
-      "location": "Paris, Île-de-France, France · Remote",
+      "location": "Montréal, Québec, Canada · Remote",
       "date": "Aug 2025 - Present",
       "description": "Development of the Web3 (blockchain) component of the game Ashes of Mankind (Empires). Implementation of the entire Web3 frontend and interaction with smart contracts. Participation in daily meetings and technical discussions in English.",
       "technologies": [
@@ -52,29 +77,37 @@
     },
     {
       "id": 8,
-      "title": "MVP",
+      "title": "Lead Developer & MVP",
       "company": "Ultra Times",
-      "location": "Paris, Île-de-France, France · Remote",
+      "location": "Bangkok, Thailand · Remote",
       "date": "Jan 2025 - Present",
-      "description": "Participation in strategic decision-making as part of the management team, while leading the technical design and development of IT projects.",
+      "description": "Leading the technical design, development, and deployment of 7 decentralized applications on the Ultra blockchain, overseeing fullstack architecture and ensuring scalability and security. Participating in strategic decision-making as part of the management team, aligning technical initiatives with business goals and fundraising objectives. Authoring technical content and engaging with the community in English and French, including interviews with blockchain and game developers, enhancing the platform's visibility and thought leadership. Managing Agile sprints, coordinating development workflows, and ensuring timely delivery of MVPs on Ultra blockchain-based projects.",
       "technologies": [
+        "React.js",
+        "Node.js",
+        "NestJS",
+        "Blockchain",
+        "Ultra Blockchain",
+        "Fullstack Architecture",
+        "Agile Project Management",
+        "Technical Writing",
+        "Community Management",
+        "Leadership",
         "Strategic Decision Making",
-        "Management",
-        "Technical Design",
-        "IT Project Development",
-        "Leadership"
+        "Git"
       ],
       "achievements": [
-        "Participation in strategic decision-making as part of the management team",
-        "Leading technical design and development of IT projects",
-        "Team management leadership"
+        "Led the technical design, development, and deployment of 7 decentralized applications on the Ultra blockchain, overseeing fullstack architecture and ensuring scalability and security",
+        "Participated in strategic decision-making as part of the management team, aligning technical initiatives with business goals and fundraising objectives",
+        "Authored technical content and engaged with the community in English and French, including interviews with blockchain and game developers, enhancing the platform's visibility and thought leadership",
+        "Managed Agile sprints, coordinated development workflows, and ensured timely delivery of MVPs on Ultra blockchain-based projects"
       ]
     },
     {
       "id": 9,
       "title": "Junior Software Engineer and Community Contributor",
       "company": "Ultra Times",
-      "location": "Paris, Île-de-France, France · Remote",
+      "location": "Bangkok, Thailand · Remote",
       "date": "Oct 2024 - Present",
       "description": "Development using the Ultra blockchain and its APIs, writing technical articles about it, and participating in community activities in both English and French (community engagement, interviews, etc...).",
       "technologies": [

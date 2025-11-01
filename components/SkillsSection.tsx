@@ -33,6 +33,17 @@ function StarRating({ rating }: { rating: number }) {
   );
 }
 
+// Fonction pour mapper les niveaux français vers les clés de traduction
+function getLevelKey(level: string): string {
+  const levelMap: { [key: string]: string } = {
+    "Expert": "expert",
+    "Avancé": "advanced",
+    "Intermédiaire": "intermediate",
+    "Débutant": "beginner"
+  };
+  return levelMap[level] || "intermediate";
+}
+
 // Fonction pour mapper les niveaux aux étoiles
 function getLevelRating(level: string): number {
   switch (level) {
@@ -380,7 +391,19 @@ const testimonials = [
 // Les skillCategories seront créées dynamiquement avec les traductions
 
 // Composant pour les cartes de technologie avec popup
-function TechCard({ skill, skillIndex, translatedDescription }: { skill: any; skillIndex: number; translatedDescription?: string }) {
+function TechCard({ 
+  skill, 
+  skillIndex, 
+  translatedDescription,
+  translateLevel,
+  translateExperience
+}: { 
+  skill: any; 
+  skillIndex: number; 
+  translatedDescription?: string;
+  translateLevel: (level: string) => string;
+  translateExperience: (experience: string) => string;
+}) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -415,7 +438,7 @@ function TechCard({ skill, skillIndex, translatedDescription }: { skill: any; sk
             <div>
               <DialogTitle className="text-2xl">{skill.name}</DialogTitle>
               <DialogDescription className="text-lg font-medium text-foreground">
-                {skill.level} • {skill.experience}
+                {translateLevel(skill.level)} • {translateExperience(skill.experience)}
               </DialogDescription>
               <div className="mt-2">
                 <StarRating rating={getLevelRating(skill.level)} />
@@ -498,6 +521,22 @@ function FavoriteTechCard({ tech, index, favoriteTech, favoriteDescription }: {
 export default function SkillsSection() {
   const t = useTranslations('Home.skills');
   const tSkillDescriptions = useTranslations('Home.skillDescriptions');
+  
+  // Fonction pour traduire un niveau
+  const translateLevel = (level: string): string => {
+    const levelKey = getLevelKey(level);
+    return t(`levels.${levelKey}`);
+  };
+
+  // Fonction pour traduire les années d'expérience
+  const translateExperience = (experience: string): string => {
+    try {
+      const translated = t(`experienceYears.${experience}`);
+      return translated || experience;
+    } catch {
+      return experience;
+    }
+  };
   
   // Fonction pour obtenir la clé de traduction basée sur le nom de la technologie
   const getSkillKey = (name: string): string => {
@@ -645,6 +684,8 @@ export default function SkillsSection() {
                               skill={skill} 
                               skillIndex={skillIndex} 
                               translatedDescription={translatedDescription}
+                              translateLevel={translateLevel}
+                              translateExperience={translateExperience}
                             />
                           </div>
                         );

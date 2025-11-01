@@ -144,13 +144,39 @@ export function getGroupedExperiences(): Array<{
     });
   });
   
-  // Trier par date (plus récent en premier)
+  // Trier par date de début de l'expérience la plus récente (plus récent en premier)
   return result.sort((a, b) => {
-    const getYear = (dateStr: string) => {
-      if (dateStr.includes('Présent')) return new Date().getFullYear();
-      const yearMatch = dateStr.match(/(\d{4})/);
-      return yearMatch ? parseInt(yearMatch[1]) : 0;
+    const getDateTimestamp = (dateStr: string) => {
+      const monthNames: { [key: string]: number } = {
+        'Jan': 0, 'Fév': 1, 'Feb': 1, 'Mar': 2, 'Avr': 3, 'Apr': 3,
+        'Mai': 4, 'May': 4, 'Juin': 5, 'Jun': 5, 'Jul': 6, 'Août': 7, 'Aug': 7,
+        'Sep': 8, 'Oct': 9, 'Nov': 10, 'Déc': 11, 'Dec': 11
+      };
+      const parts = dateStr.split(' - ');
+      const startPart = parts[0].trim();
+      
+      if (startPart.includes('Présent') || startPart.includes('Present')) {
+        return Date.now();
+      }
+      
+      const monthMatch = startPart.match(/^([A-Za-zÀ-ÿ]+)/);
+      const yearMatch = startPart.match(/(\d{4})/);
+      
+      if (monthMatch && yearMatch) {
+        const month = monthNames[monthMatch[1]] ?? 0;
+        const year = parseInt(yearMatch[1]);
+        return new Date(year, month).getTime();
+      }
+      const yearOnly = startPart.match(/(\d{4})/);
+      if (yearOnly) {
+        return new Date(parseInt(yearOnly[1]), 0).getTime();
+      }
+      return 0;
     };
-    return getYear(b.totalDuration) - getYear(a.totalDuration);
+    
+    const mostRecentA = a.experiences[0];
+    const mostRecentB = b.experiences[0];
+    
+    return getDateTimestamp(mostRecentB.date) - getDateTimestamp(mostRecentA.date);
   });
 }

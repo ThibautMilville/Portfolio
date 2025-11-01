@@ -257,7 +257,7 @@ export default function ExperienceCarousel({
                           <div className="space-y-2">
                             <div className="flex items-center gap-2 text-xs text-muted-foreground">
                               <Calendar className="h-3 w-3" />
-                              {group.totalDuration}
+                              {translateDateSimple(group.totalDuration, locale)}
                             </div>
                             <div className="flex items-center gap-2 text-xs text-muted-foreground">
                               <MapPin className="h-3 w-3" />
@@ -303,7 +303,7 @@ export default function ExperienceCarousel({
                             <div className="space-y-2">
                               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                                 <Calendar className="h-3 w-3" />
-                                {group.totalDuration}
+                                {translateDateSimple(group.totalDuration, locale)}
                               </div>
                               <div className="flex items-center gap-2 text-xs text-muted-foreground">
                                 <MapPin className="h-3 w-3" />
@@ -348,7 +348,7 @@ export default function ExperienceCarousel({
                                   {tModals("duration")}
                                 </span>
                                 <span className="break-words">
-                                  {group.totalDuration}
+                                  {translateDateSimple(group.totalDuration, locale)}
                                 </span>
                               </div>
                             </div>

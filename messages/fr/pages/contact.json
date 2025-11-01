@@ -17,7 +17,9 @@
       "message": "Décrivez votre projet ou votre demande..."
     },
     "submit": "Envoyer le message",
-    "success": "Message envoyé ! Je vous répondrai dans les plus brefs délais."
+    "submitting": "Envoi en cours...",
+    "success": "Message envoyé ! Je vous répondrai dans les plus brefs délais.",
+    "error": "Une erreur est survenue lors de l'envoi. Veuillez réessayer."
   },
   "info": {
     "title": "Informations de contact",
