@@ -1,6 +1,9 @@
 node_modules
 .next
 .netlify
+.netlify/**
+.netlify/.next
+.netlify/.next/**
 .turbo
 
 .env

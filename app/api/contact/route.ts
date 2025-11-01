@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
+function getEnvVar(key: string): string | undefined {
+  return process.env[key];
+}
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -13,9 +17,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const smtpUser = process.env.SMTP_USER;
-    const smtpPassword = process.env.SMTP_PASSWORD;
-    const contactEmail = process.env.CONTACT_EMAIL || smtpUser;
+    const smtpUser = getEnvVar('SMTP_USER');
+    const smtpPassword = getEnvVar('SMTP_PASSWORD');
+    const contactEmail = getEnvVar('CONTACT_EMAIL') || smtpUser;
 
     if (!smtpUser || !smtpPassword) {
       console.error('Configuration SMTP manquante');
@@ -26,9 +30,9 @@ export async function POST(request: NextRequest) {
     }
 
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'smtp.gmail.com',
-      port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: process.env.SMTP_SECURE === 'true',
+      host: getEnvVar('SMTP_HOST') || 'smtp.gmail.com',
+      port: parseInt(getEnvVar('SMTP_PORT') || '587'),
+      secure: getEnvVar('SMTP_SECURE') === 'true',
       auth: {
         user: smtpUser,
         pass: smtpPassword,
