@@ -1,8 +1,22 @@
+import 'server-only';
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
 function getEnvVar(key: string): string | undefined {
-  return process.env[key];
+  if (typeof process === 'undefined' || typeof process.env === 'undefined') {
+    throw new Error('Environment variables are not available');
+  }
+  const envKey = key;
+  const envObj = process.env;
+  if (!envObj || typeof envObj !== 'object') {
+    return undefined;
+  }
+  const rawValue = envObj[envKey];
+  if (rawValue === undefined || rawValue === null || rawValue === '') {
+    return undefined;
+  }
+  const result = String(rawValue);
+  return result.length > 0 ? result : undefined;
 }
 
 export async function POST(request: NextRequest) {
