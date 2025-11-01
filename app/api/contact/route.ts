@@ -19,8 +19,7 @@ export async function POST(request: NextRequest) {
 
     const smtpUser = getEnvVar('SMTP_USER');
     const smtpPassword = getEnvVar('SMTP_PASSWORD');
-    const contactEmail = getEnvVar('CONTACT_EMAIL') || smtpUser;
-
+    
     if (!smtpUser || !smtpPassword) {
       console.error('Configuration SMTP manquante');
       return NextResponse.json(
@@ -28,6 +27,8 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+
+    const contactEmail = getEnvVar('CONTACT_EMAIL') || smtpUser;
 
     const transporter = nodemailer.createTransport({
       host: getEnvVar('SMTP_HOST') || 'smtp.gmail.com',
