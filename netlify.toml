@@ -3,5 +3,9 @@
   publish = ".next"
 
 [build.environment]
-  SECRETS_SCAN_OMIT_PATHS = ".next/**,.netlify/.next/**,public/documents/**,**/static/**,**/documents/**"
-  SECRETS_SCAN_OMIT_KEYS = "CONTACT_EMAIL"
+  SECRETS_SCAN_OMIT_PATHS = ".next/**,.netlify/.next/**,public/documents/**,**/static/**,**/documents/**,**/server/**,**/cache/**"
+  SECRETS_SCAN_OMIT_KEYS = "CONTACT_EMAIL,SMTP_HOST,SMTP_USER,SMTP_PASSWORD,SMTP_PORT,SMTP_SECURE"
+
+[context.production.environment]
+  SECRETS_SCAN_OMIT_PATHS = ".next/**,.netlify/.next/**,public/documents/**,**/static/**,**/documents/**,**/server/**,**/cache/**"
+  SECRETS_SCAN_OMIT_KEYS = "CONTACT_EMAIL,SMTP_HOST,SMTP_USER,SMTP_PASSWORD,SMTP_PORT,SMTP_SECURE"
