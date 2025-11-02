@@ -4,7 +4,9 @@
     "formations": "Formations",
     "experiences": "Expériences",
     "projects": "Projets",
-    "contact": "Contact"
+    "contact": "Contact",
+    "light": "Clair",
+    "dark": "Sombre"
   },
   "Footer": {
     "description": "Développeur Fullstack · React, Next.js, NestJS",
