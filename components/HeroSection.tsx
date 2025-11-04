@@ -177,7 +177,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent leading-normal pb-1">
                 Thibaut MILVILLE
               </h1>
               <div className="text-xl md:text-2xl text-muted-foreground mb-4 md:mb-8 font-mono flex flex-col items-center lg:items-start gap-2">

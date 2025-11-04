@@ -64,7 +64,7 @@ export default function FeaturedProjectsSection({
         >
           <h2
             id="featured-projects-heading"
-            className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent"
+            className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent leading-normal pb-1"
           >
             {t("title")}
           </h2>

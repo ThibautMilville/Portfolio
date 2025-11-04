@@ -22,7 +22,7 @@ export default function CompanyLogosSection({ logos }: CompanyLogosSectionProps)
     <section className="py-16 px-6 bg-gradient-to-b from-background via-background/95 to-background relative">
       <LightParticles />
       <div className="max-w-5xl mx-auto relative z-10">
-        <h3 className="text-center text-xl font-bold mb-8 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+        <h3 className="text-center text-xl font-bold mb-8 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent leading-normal pb-1">
           {t('title')}
         </h3>
         <div className="relative">

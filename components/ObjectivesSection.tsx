@@ -18,7 +18,7 @@ export default function ObjectivesSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent leading-normal pb-1">
             {t('title')}
           </h2>
           <p className="text-lg text-muted-foreground">
@@ -44,7 +44,7 @@ export default function ObjectivesSection() {
                 </div>
               </div>
               
-              <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-blue-800 dark:from-blue-400 dark:to-blue-300 bg-clip-text text-transparent">
+              <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-blue-800 dark:from-blue-400 dark:to-blue-300 bg-clip-text text-transparent leading-normal pb-1">
                 {t('goals.innovation.title')}
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
@@ -70,7 +70,7 @@ export default function ObjectivesSection() {
                 </div>
               </div>
               
-              <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-800 dark:from-emerald-400 dark:to-emerald-300 bg-clip-text text-transparent">
+              <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-emerald-600 to-emerald-800 dark:from-emerald-400 dark:to-emerald-300 bg-clip-text text-transparent leading-normal pb-1">
                 {t('goals.impact.title')}
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
@@ -96,7 +96,7 @@ export default function ObjectivesSection() {
                 </div>
               </div>
               
-              <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-purple-800 dark:from-purple-400 dark:to-purple-300 bg-clip-text text-transparent">
+              <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-purple-800 dark:from-purple-400 dark:to-purple-300 bg-clip-text text-transparent leading-normal pb-1">
                 {t('goals.excellence.title')}
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
@@ -122,7 +122,7 @@ export default function ObjectivesSection() {
                 </div>
               </div>
               
-              <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-amber-600 to-amber-800 dark:from-amber-400 dark:to-amber-300 bg-clip-text text-transparent">
+              <h3 className="text-xl font-bold mb-4 bg-gradient-to-r from-amber-600 to-amber-800 dark:from-amber-400 dark:to-amber-300 bg-clip-text text-transparent leading-normal pb-1">
                 {t('goals.vision.title')}
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
@@ -163,7 +163,7 @@ export default function ObjectivesSection() {
               </div>
               
               {/* Titre avec effet de dégradé */}
-              <h3 className="text-3xl md:text-4xl font-bold mb-6 text-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+              <h3 className="text-3xl md:text-4xl font-bold mb-6 text-center bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent leading-normal pb-1">
                 {t('philosophy.title')}
               </h3>
               
