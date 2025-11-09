@@ -11,6 +11,7 @@ import { ExternalLink, Github } from "lucide-react";
 import LightParticles from "@/components/ui/light-particles";
 import { slugify, translateDateSimple } from "@/lib/utils";
 import { useTranslatedData } from "@/hooks/useTranslatedData";
+import { getProjectSlug } from "@/lib/data";
 
 interface Project {
   id: number;
@@ -40,12 +41,14 @@ export default function FeaturedProjectsSection({
     "UT Marketplace",
     "Commercial website OZC Signalétique",
   ];
-  const featuredProjects = featuredProjectTitles
+  const originalFeaturedProjects = featuredProjectTitles
     .map((title) => projects.find((p) => p.title === title))
     .filter((project): project is NonNullable<typeof project> =>
       Boolean(project)
-    )
-    .map((project) => getTranslatedProject(project as any));
+    );
+  const featuredProjects = originalFeaturedProjects.map((project) =>
+    getTranslatedProject(project as any)
+  );
 
   return (
     <section
@@ -87,7 +90,7 @@ export default function FeaturedProjectsSection({
             className="lg:col-span-1"
           >
             <Link
-              href={`/projets/${slugify(featuredProjects[0]?.title || "")}`}
+              href={`/projets/${getProjectSlug(originalFeaturedProjects[0])}`}
             >
               <Card className="group h-full bg-gradient-to-br from-zinc-900/95 via-zinc-800/90 to-zinc-900/95 dark:from-zinc-900/95 dark:via-zinc-800/90 dark:to-zinc-900/95 from-white/95 via-gray-50/90 to-white/95 backdrop-blur-md border-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 hover:border-primary/70 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/40 rounded-3xl overflow-hidden shadow-2xl ring-1 ring-zinc-800/50 dark:ring-zinc-800/50 ring-gray-200/50">
                 <div className="relative h-64 md:h-80 overflow-hidden">
@@ -261,7 +264,9 @@ export default function FeaturedProjectsSection({
 
           {/* Deuxième et troisième projets - deuxième colonne divisée en deux */}
           <div className="lg:col-span-1 flex flex-col gap-6">
-            {featuredProjects.slice(1, 3).map((project, index) => (
+            {featuredProjects.slice(1, 3).map((project, index) => {
+              const originalProject = originalFeaturedProjects[index + 1];
+              return (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -270,7 +275,7 @@ export default function FeaturedProjectsSection({
                 viewport={{ once: true }}
                 className="flex-1"
               >
-                <Link href={`/projets/${slugify(project.title)}`}>
+                <Link href={`/projets/${getProjectSlug(originalProject)}`}>
                   <Card className="group h-full bg-gradient-to-br from-zinc-900/95 via-zinc-800/90 to-zinc-900/95 dark:from-zinc-900/95 dark:via-zinc-800/90 dark:to-zinc-900/95 from-white/95 via-gray-50/90 to-white/95 backdrop-blur-md border-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 hover:border-primary/70 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/40 rounded-3xl overflow-hidden shadow-2xl ring-1 ring-zinc-800/50 dark:ring-zinc-800/50 ring-gray-200/50">
                     <div className="relative h-48 overflow-hidden">
                       <Image
@@ -376,7 +381,8 @@ export default function FeaturedProjectsSection({
                   </Card>
                 </Link>
               </motion.div>
-            ))}
+              );
+            })}
           </div>
         </motion.div>
       </div>

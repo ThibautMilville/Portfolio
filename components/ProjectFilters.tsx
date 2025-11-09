@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/popover";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Badge } from "@/components/ui/badge";
-import { SlidersHorizontal, Search, X } from "lucide-react";
+import { SlidersHorizontal, Search, X, Building2, CheckCircle2, RotateCcw } from "lucide-react";
 
 export interface ProjectFilterState {
   search: string;
@@ -117,6 +117,7 @@ export default function ProjectFilters({
               variant="outline"
               className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
             >
+              <Building2 className="mr-2 h-4 w-4" />
               {value.organization === "all"
                 ? t("filters.organization")
                 : value.organization}
@@ -237,6 +238,7 @@ export default function ProjectFilters({
               variant="outline"
               className="w-full rounded-full h-11 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
             >
+              <CheckCircle2 className="mr-2 h-4 w-4" />
               {value.status === STATUS_VALUES.ALL
                 ? t("filters.status")
                 : value.status}
@@ -422,6 +424,7 @@ export default function ProjectFilters({
           onClick={clearAll}
           className="w-full h-11 rounded-full"
         >
+          <RotateCcw className="mr-2 h-4 w-4" />
           {t("filters.clearAll")}
         </Button>
       </div>

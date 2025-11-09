@@ -22,6 +22,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Tooltip } from "@/components/ui/tooltip";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { LocalImage } from "@/components/ui/image";
@@ -33,6 +34,8 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
+  const [isLanguageMenuOpenDesktop, setIsLanguageMenuOpenDesktop] = useState(false);
+  const [isLanguageMenuOpenMobile, setIsLanguageMenuOpenMobile] = useState(false);
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -229,26 +232,32 @@ export default function Navigation() {
           >
             {/* Language Switcher (desktop) */}
             <div className="hidden md:block">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="language-selector-trigger h-9 w-[80px] rounded-full px-3 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none bg-background/20 backdrop-blur-sm border-white/20 hover:bg-background/30 transition-colors duration-200"
-                  >
-                    <span className="mr-2">
-                      {!isHydrated ? (
-                        <div className="w-5 h-5 bg-gray-200 rounded animate-pulse" />
-                      ) : currentLocale === "fr" ? (
-                        <FrenchFlagIcon className="w-5 h-5" />
-                      ) : (
-                        <BritishFlagIcon className="w-5 h-5" />
-                      )}
-                    </span>
-                    <span className="text-xs font-medium">
-                      {!isHydrated ? '--' : currentLocale.toUpperCase()}
-                    </span>
-                  </Button>
-                </DropdownMenuTrigger>
+              <Tooltip
+                content={currentLocale === "fr" ? t('switchToEnglish') : t('switchToFrench')}
+                position="bottom"
+                forcePosition={true}
+                disabled={isLanguageMenuOpenDesktop}
+              >
+                <DropdownMenu onOpenChange={setIsLanguageMenuOpenDesktop}>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="language-selector-trigger h-9 w-[80px] rounded-full px-3 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none bg-background/20 backdrop-blur-sm border-white/20 hover:bg-background/30 transition-colors duration-200"
+                    >
+                      <span className="mr-2">
+                        {!isHydrated ? (
+                          <div className="w-5 h-5 bg-gray-200 rounded animate-pulse" />
+                        ) : currentLocale === "fr" ? (
+                          <FrenchFlagIcon className="w-5 h-5" />
+                        ) : (
+                          <BritishFlagIcon className="w-5 h-5" />
+                        )}
+                      </span>
+                      <span className="text-xs font-medium">
+                        {!isHydrated ? '--' : currentLocale.toUpperCase()}
+                      </span>
+                    </Button>
+                  </DropdownMenuTrigger>
                 <DropdownMenuContent
                   align="center"
                   sideOffset={6}
@@ -307,26 +316,33 @@ export default function Navigation() {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+              </Tooltip>
             </div>
 
             {/* Language Switcher (mobile) - Compact version */}
             <div className="md:hidden">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="language-selector-trigger h-9 w-9 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none bg-background/20 backdrop-blur-sm border-white/20 hover:bg-background/30 transition-colors duration-200"
-                  >
-                    {!isHydrated ? (
-                      <div className="w-4 h-4 bg-gray-200 rounded animate-pulse" />
-                    ) : currentLocale === "fr" ? (
-                      <FrenchFlagIcon className="w-4 h-4" />
-                    ) : (
-                      <BritishFlagIcon className="w-4 h-4" />
-                    )}
-                  </Button>
-                </DropdownMenuTrigger>
+              <Tooltip
+                content={currentLocale === "fr" ? t('switchToEnglish') : t('switchToFrench')}
+                position="bottom"
+                forcePosition={true}
+                disabled={isLanguageMenuOpenMobile}
+              >
+                <DropdownMenu onOpenChange={setIsLanguageMenuOpenMobile}>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      className="language-selector-trigger h-9 w-9 rounded-full focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none bg-background/20 backdrop-blur-sm border-white/20 hover:bg-background/30 transition-colors duration-200"
+                    >
+                      {!isHydrated ? (
+                        <div className="w-4 h-4 bg-gray-200 rounded animate-pulse" />
+                      ) : currentLocale === "fr" ? (
+                        <FrenchFlagIcon className="w-4 h-4" />
+                      ) : (
+                        <BritishFlagIcon className="w-4 h-4" />
+                      )}
+                    </Button>
+                  </DropdownMenuTrigger>
                 <DropdownMenuContent
                   align="end"
                   sideOffset={6}
@@ -385,19 +401,26 @@ export default function Navigation() {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+              </Tooltip>
             </div>
 
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="h-9 w-9 hover:scale-110 transition-transform duration-200"
-              aria-label="Changer le thème"
+            <Tooltip
+              content={theme === "dark" ? t('switchToLight') : t('switchToDark')}
+              position="bottom"
+              forcePosition={true}
             >
-              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              <span className="sr-only">Toggle theme</span>
-            </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className="h-9 w-9 hover:scale-110 transition-transform duration-200"
+                aria-label="Changer le thème"
+              >
+                <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                <span className="sr-only">Toggle theme</span>
+              </Button>
+            </Tooltip>
 
             <Button
               variant="ghost"

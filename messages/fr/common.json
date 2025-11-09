@@ -6,7 +6,11 @@
     "projects": "Projets",
     "contact": "Contact",
     "light": "Clair",
-    "dark": "Sombre"
+    "dark": "Sombre",
+    "switchToDark": "Passer en mode sombre",
+    "switchToLight": "Passer en mode clair",
+    "switchToFrench": "Passer en français",
+    "switchToEnglish": "Passer en anglais"
   },
   "Footer": {
     "description": "Développeur Fullstack · React, Next.js, NestJS",

@@ -10,9 +10,11 @@ interface TooltipProps {
   className?: string;
   distance?: number;
   hasUpwardAnimation?: boolean;
+  disabled?: boolean;
+  forcePosition?: boolean;
 }
 
-export const Tooltip: React.FC<TooltipProps> = React.memo(({ children, content, position = "top", className = "", distance = 8, hasUpwardAnimation = false }) => {
+export const Tooltip: React.FC<TooltipProps> = React.memo(({ children, content, position = "top", className = "", distance = 8, hasUpwardAnimation = false, disabled = false, forcePosition = false }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 });
   const [tooltipWidth, setTooltipWidth] = useState(200);
@@ -30,6 +32,12 @@ export const Tooltip: React.FC<TooltipProps> = React.memo(({ children, content, 
 
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  useEffect(() => {
+    if (disabled) {
+      setIsVisible(false);
+    }
+  }, [disabled]);
 
   useEffect(() => {
     if (isVisible && triggerRef.current && !isMobile) {
@@ -108,7 +116,7 @@ export const Tooltip: React.FC<TooltipProps> = React.memo(({ children, content, 
           left = rect.left + rect.width / 2 - calculatedTooltipWidth / 2;
 
           // Vérifier si le tooltip sort en bas de la viewport
-          if (top + calculatedTooltipHeight > viewportHeight - 10) {
+          if (!forcePosition && top + calculatedTooltipHeight > viewportHeight - 10) {
             currentPosition = "top";
             top = rect.top - calculatedTooltipHeight - distance;
           }
@@ -138,7 +146,8 @@ export const Tooltip: React.FC<TooltipProps> = React.memo(({ children, content, 
       }
 
       // Dernière vérification : si on est toujours en position top et qu'on chevauche encore
-      if (currentPosition === "top" && top + calculatedTooltipHeight > rect.top) {
+      // Ignorer si forcePosition est true et que la position demandée est "bottom"
+      if (!(forcePosition && position === "bottom") && currentPosition === "top" && top + calculatedTooltipHeight > rect.top) {
         // Si le tooltip chevauche encore l'élément en position top, essaie d'autres positions
         if (rect.bottom + calculatedTooltipHeight + distance < viewportHeight - 10) {
           currentPosition = "bottom";
@@ -164,19 +173,25 @@ export const Tooltip: React.FC<TooltipProps> = React.memo(({ children, content, 
       }
 
       // Ajustement final pour s'assurer que le tooltip reste dans la viewport verticalement
-      if (top < 10) {
-        top = 10;
-      } else if (top + calculatedTooltipHeight > viewportHeight - 10) {
-        top = viewportHeight - calculatedTooltipHeight - 10;
+      // Si forcePosition est true et position est "bottom", ne pas ajuster verticalement
+      if (!(forcePosition && position === "bottom")) {
+        if (top < 10) {
+          top = 10;
+        } else if (top + calculatedTooltipHeight > viewportHeight - 10) {
+          top = viewportHeight - calculatedTooltipHeight - 10;
+        }
       }
 
       // Dernière vérification : ajuste la position si nécessaire pour éviter le chevauchement
       // Distance de sécurité plus grande pour les éléments animés
-      const safeDistance = hasUpwardAnimation ? 20 : 12;
-      if (currentPosition === "top" && top + calculatedTooltipHeight > rect.top - safeDistance) {
-        const overlapAmount = (top + calculatedTooltipHeight) - (rect.top - safeDistance);
-        if (overlapAmount > 0) {
-          top = top - overlapAmount - (hasUpwardAnimation ? 5 : 3); // Espace supplémentaire pour les éléments animés
+      // Ignorer si forcePosition est true et que la position demandée est "bottom"
+      if (!(forcePosition && position === "bottom") && currentPosition === "top") {
+        const safeDistance = hasUpwardAnimation ? 20 : 12;
+        if (top + calculatedTooltipHeight > rect.top - safeDistance) {
+          const overlapAmount = (top + calculatedTooltipHeight) - (rect.top - safeDistance);
+          if (overlapAmount > 0) {
+            top = top - overlapAmount - (hasUpwardAnimation ? 5 : 3); // Espace supplémentaire pour les éléments animés
+          }
         }
       }
 
@@ -186,7 +201,7 @@ export const Tooltip: React.FC<TooltipProps> = React.memo(({ children, content, 
       setTooltipWidth(calculatedTooltipWidth);
       setActualPosition(currentPosition);
     }
-  }, [isVisible, position, content, distance, isMobile, hasUpwardAnimation]);
+  }, [isVisible, position, content, distance, isMobile, hasUpwardAnimation, forcePosition]);
 
   // Système de suivi en temps réel ultra-réactif pour les animations
   useEffect(() => {
@@ -233,11 +248,43 @@ export const Tooltip: React.FC<TooltipProps> = React.memo(({ children, content, 
       const tooltipHeight = tempElement.offsetHeight + 2;
       document.body.removeChild(tempElement);
 
-      // Calculer la position avec les vraies dimensions
-      const animationOffset = hasUpwardAnimation ? 20 : 0;
+      // Calculer la position avec les vraies dimensions selon la position demandée
       const distance = 8;
-      const top = rect.top - tooltipHeight - distance - animationOffset;
-      const left = rect.left + rect.width / 2 - tooltipWidth / 2;
+      let top = 0;
+      let left = rect.left + rect.width / 2 - tooltipWidth / 2;
+
+      if (position === "bottom") {
+        top = rect.bottom + distance;
+      } else if (position === "top") {
+        const animationOffset = hasUpwardAnimation ? 20 : 0;
+        top = rect.top - tooltipHeight - distance - animationOffset;
+      } else if (position === "left") {
+        top = rect.top + rect.height / 2 - tooltipHeight / 2;
+        left = rect.left - tooltipWidth - distance;
+      } else if (position === "right") {
+        top = rect.top + rect.height / 2 - tooltipHeight / 2;
+        left = rect.right + distance;
+      } else {
+        // Par défaut, position top
+        const animationOffset = hasUpwardAnimation ? 20 : 0;
+        top = rect.top - tooltipHeight - distance - animationOffset;
+      }
+
+      // Ajustement horizontal pour rester dans la viewport
+      if (left < 10) {
+        left = 10;
+      } else if (left + tooltipWidth > window.innerWidth - 10) {
+        left = window.innerWidth - tooltipWidth - 10;
+      }
+
+      // Ajustement vertical seulement si forcePosition n'est pas activé
+      if (!(forcePosition && position === "bottom")) {
+        if (top < 10) {
+          top = 10;
+        } else if (top + tooltipHeight > window.innerHeight - 10) {
+          top = window.innerHeight - tooltipHeight - 10;
+        }
+      }
 
       // Mettre à jour immédiatement la position et les dimensions
       setTooltipPosition({ top, left });
@@ -255,7 +302,7 @@ export const Tooltip: React.FC<TooltipProps> = React.memo(({ children, content, 
         cancelAnimationFrame(rafId);
       }
     };
-  }, [isVisible, hasUpwardAnimation, isMobile]);
+  }, [isVisible, hasUpwardAnimation, isMobile, position, forcePosition, content]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -292,13 +339,13 @@ export const Tooltip: React.FC<TooltipProps> = React.memo(({ children, content, 
       <div
         ref={triggerRef}
         className={`relative inline-block ${className}`}
-        onMouseEnter={() => !isMobile && setIsVisible(true)}
+        onMouseEnter={() => !isMobile && !disabled && setIsVisible(true)}
         onMouseLeave={() => setIsVisible(false)}
         title=""
       >
         {childrenWithoutTitle}
       </div>
-      {isVisible && !isMobile &&
+      {isVisible && !isMobile && !disabled &&
         createPortal(
           <div
             className="pointer-events-none fixed z-[10000001] rounded-lg bg-black px-3 py-2 text-center text-sm text-white transition-opacity duration-200"
