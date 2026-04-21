@@ -6,7 +6,7 @@ import { Link } from "@/navigation";
 import dynamic from "next/dynamic";
 import LightParticles from "@/components/ui/light-particles";
 import { ArrowRight } from "lucide-react";
-import type { Project } from "@/lib/data";
+import type { Project } from "@/types/portfolio";
 
 const ProjectCarousel = dynamic(
   () => import("@/components/ui/project-carousel"),
@@ -18,20 +18,12 @@ interface ProjectsSectionProps {
 }
 
 export default function ProjectsSection({ projects }: ProjectsSectionProps) {
-  // Séparer les projets phares des autres projets
-  const featuredProjectTitles = [
-    "UT Marketplace",
-    "Institutional website OZC",
-    "Commercial website OZC Signalétique",
-  ];
-  const featuredProjects = projects.filter((p) =>
-    featuredProjectTitles.includes(p.title)
-  );
+  const featuredProjects = projects.filter((p) => p.isFeatured).slice(0, 5);
 
   // Récupérer les 15 derniers projets réalisés (excluant les projets phares)
   // Trier par ID décroissant pour avoir les plus récents en premier
   const otherProjects = projects
-    .filter((p) => !featuredProjectTitles.includes(p.title))
+    .filter((p) => !p.isFeatured)
     .sort((a, b) => b.id - a.id)
     .slice(0, 15);
 

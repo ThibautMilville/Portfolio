@@ -4,6 +4,7 @@
   "featuredProjects": "Featured Projects",
   "featuredProjectsDescription": "Discover my most important and representative projects showcasing my expertise",
   "featured": "Featured",
+  "loading": "Loading projects...",
   "displaying": "Displaying {count} project{count, plural, one {} other {s}}",
   "noResults": "No projects found",
   "keyFeatures": "Key features",

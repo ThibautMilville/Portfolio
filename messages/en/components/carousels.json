@@ -9,6 +9,7 @@
     "empty": "No education available"
   },
   "experience": {
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "empty": "No experience available"
   }
 }

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 
 export default function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isChatbotOpen, setIsChatbotOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -38,6 +39,24 @@ export default function BackToTop() {
     };
   }, []);
 
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+
+    const body = document.body;
+    const updateState = () => {
+      setIsChatbotOpen(body.dataset.chatbotOpen === "true");
+    };
+
+    updateState();
+    const observer = new MutationObserver(updateState);
+    observer.observe(body, {
+      attributes: true,
+      attributeFilter: ["data-chatbot-open"]
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -47,13 +66,13 @@ export default function BackToTop() {
 
   return (
     <AnimatePresence>
-      {isVisible && (
+      {isVisible && !isChatbotOpen && (
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
-          className="fixed bottom-6 right-6 z-50"
+          className="fixed bottom-24 right-6 z-40"
         >
           <Button
             onClick={scrollToTop}

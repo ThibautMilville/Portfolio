@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Target, Users, Rocket, Eye } from "lucide-react";
 import LightParticles from "@/components/ui/light-particles";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export default function ObjectivesSection() {
   const t = useTranslations('Home.objectives');
@@ -16,14 +17,13 @@ export default function ObjectivesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent leading-normal pb-1">
-            {t('title')}
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            {t('subtitle')}
-          </p>
+          <SectionHeading
+            title={t("title")}
+            subtitle={t("subtitle")}
+            icon={Target}
+          />
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 py-16 px-4 relative z-10">
@@ -34,7 +34,7 @@ export default function ObjectivesSection() {
             viewport={{ once: true }}
             className="group relative z-20"
           >
-            <div className="relative h-full p-8 rounded-3xl bg-gradient-to-br from-blue-50 via-blue-50/80 to-transparent dark:from-blue-950/20 dark:via-blue-950/10 dark:to-transparent border border-blue-200/50 dark:border-blue-800/30 hover:border-blue-300/70 dark:hover:border-blue-700/50 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/10">
+            <div className="relative h-full p-8 rounded-3xl bg-gradient-to-br from-blue-50 via-blue-50/80 to-transparent dark:from-blue-950/20 dark:via-blue-950/10 dark:to-transparent border border-blue-200/50 dark:border-blue-800/30 hover:border-blue-300/70 dark:hover:border-blue-700/50 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10">
               
               {/* Icône avec effet de halo */}
               <div className="relative mb-6">
@@ -60,7 +60,7 @@ export default function ObjectivesSection() {
             viewport={{ once: true }}
             className="group relative z-20"
           >
-            <div className="relative h-full p-8 rounded-3xl bg-gradient-to-br from-emerald-50 via-emerald-50/80 to-transparent dark:from-emerald-950/20 dark:via-emerald-950/10 dark:to-transparent border border-emerald-200/50 dark:border-emerald-800/30 hover:border-emerald-300/70 dark:hover:border-emerald-700/50 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-emerald-500/10">
+            <div className="relative h-full p-8 rounded-3xl bg-gradient-to-br from-emerald-50 via-emerald-50/80 to-transparent dark:from-emerald-950/20 dark:via-emerald-950/10 dark:to-transparent border border-emerald-200/50 dark:border-emerald-800/30 hover:border-emerald-300/70 dark:hover:border-emerald-700/50 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/10">
               
               {/* Icône avec effet de halo */}
               <div className="relative mb-6">
@@ -86,7 +86,7 @@ export default function ObjectivesSection() {
             viewport={{ once: true }}
             className="group relative z-20"
           >
-            <div className="relative h-full p-8 rounded-3xl bg-gradient-to-br from-purple-50 via-purple-50/80 to-transparent dark:from-purple-950/20 dark:via-purple-950/10 dark:to-transparent border border-purple-200/50 dark:border-purple-800/30 hover:border-purple-300/70 dark:hover:border-purple-700/50 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-purple-500/10">
+            <div className="relative h-full p-8 rounded-3xl bg-gradient-to-br from-purple-50 via-purple-50/80 to-transparent dark:from-purple-950/20 dark:via-purple-950/10 dark:to-transparent border border-purple-200/50 dark:border-purple-800/30 hover:border-purple-300/70 dark:hover:border-purple-700/50 transition-all duration-500 hover:shadow-2xl hover:shadow-purple-500/10">
               
               {/* Icône avec effet de halo */}
               <div className="relative mb-6">
@@ -112,7 +112,7 @@ export default function ObjectivesSection() {
             viewport={{ once: true }}
             className="group relative z-20"
           >
-            <div className="relative h-full p-8 rounded-3xl bg-gradient-to-br from-amber-50 via-amber-50/80 to-transparent dark:from-amber-950/20 dark:via-amber-950/10 dark:to-transparent border border-amber-200/50 dark:border-amber-800/30 hover:border-amber-300/70 dark:hover:border-amber-700/50 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-amber-500/10">
+            <div className="relative h-full p-8 rounded-3xl bg-gradient-to-br from-amber-50 via-amber-50/80 to-transparent dark:from-amber-950/20 dark:via-amber-950/10 dark:to-transparent border border-amber-200/50 dark:border-amber-800/30 hover:border-amber-300/70 dark:hover:border-amber-700/50 transition-all duration-500 hover:shadow-2xl hover:shadow-amber-500/10">
               
               {/* Icône avec effet de halo */}
               <div className="relative mb-6">
@@ -144,7 +144,7 @@ export default function ObjectivesSection() {
             <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-pink-500/10 rounded-3xl blur-3xl group-hover:blur-2xl transition-all duration-700"></div>
             
             {/* Conteneur principal */}
-            <div className="relative max-w-4xl mx-auto p-12 rounded-3xl bg-gradient-to-br from-slate-50/80 via-white/60 to-slate-100/40 dark:from-slate-900/80 dark:via-slate-800/60 dark:to-slate-900/40 border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-xl shadow-2xl group-hover:shadow-3xl transition-all duration-500 hover:scale-[1.02]">
+            <div className="relative max-w-4xl mx-auto p-12 rounded-3xl bg-gradient-to-br from-slate-50/80 via-white/60 to-slate-100/40 dark:from-slate-900/80 dark:via-slate-800/60 dark:to-slate-900/40 border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-xl shadow-2xl group-hover:shadow-3xl transition-all duration-500">
               
               {/* Éléments décoratifs */}
               <div className="absolute top-6 right-6 w-20 h-20 bg-gradient-to-br from-indigo-400/20 to-purple-400/20 rounded-full blur-xl"></div>

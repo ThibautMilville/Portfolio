@@ -6,8 +6,8 @@ import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/navigation";
-import { Project } from "@/lib/data";
-import { getProjectSlug } from "@/lib/data";
+import { Project } from "@/types/portfolio";
+import { getProjectSlug } from "@/services/ProjectService";
 import { useLocale } from "next-intl";
 
 interface ProjectCarouselMiniProps {

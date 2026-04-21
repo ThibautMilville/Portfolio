@@ -23,7 +23,7 @@ import {
 import { Badge } from "./badge";
 import { Button } from "./button";
 import { Link } from "@/navigation";
-import { getProjectSlug } from "@/lib/data";
+import { getProjectSlug } from "@/services/ProjectService";
 import { translateDateSimple } from "@/lib/utils";
 
 interface Project {

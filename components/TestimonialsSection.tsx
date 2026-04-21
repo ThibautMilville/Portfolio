@@ -7,6 +7,7 @@ import { Star, Quote } from "lucide-react";
 import LightParticles from "@/components/ui/light-particles";
 import { LocalImage } from "@/components/ui/image";
 import React from "react";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export default function TestimonialsSection() {
   const t = useTranslations('Home.testimonials');
@@ -35,14 +36,13 @@ export default function TestimonialsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent leading-normal pb-1">
-            {t('title')}
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            {t('subtitle')}
-          </p>
+          <SectionHeading
+            title={t("title")}
+            subtitle={t("subtitle")}
+            icon={Quote}
+          />
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8 mb-16">

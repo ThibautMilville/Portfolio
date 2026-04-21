@@ -30,6 +30,7 @@ interface FormationCarouselProps {
 }
 
 const getCardsToShow = (totalFormations: number) => {
+  if (totalFormations <= 0) return 1;
   if (typeof window === 'undefined') return 1;
   const width = window.innerWidth;
   let cards = 1;
@@ -159,6 +160,14 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
     );
   }
 
+  if (formations.length === 0) {
+    return (
+      <div className="relative max-w-4xl mx-auto flex items-center justify-center py-8">
+        <div className="text-muted-foreground">{t("empty")}</div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-6xl mx-auto">
       <div className="relative flex items-center">
@@ -211,7 +220,7 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
                           e.preventDefault();
                           setSelectedFormation(formation);
                         }}
-                        className="relative h-full flex flex-col rounded-2xl shadow-xl border border-border bg-card/80 supports-[backdrop-filter]:backdrop-blur-md ring-1 ring-black/5 transition-all duration-300 group-hover:-translate-y-2 hover:shadow-2xl hover:ring-primary/30 overflow-hidden cursor-pointer"
+                        className="relative h-full flex flex-col rounded-2xl shadow-xl border border-border bg-card/80 supports-[backdrop-filter]:backdrop-blur-md ring-1 ring-black/5 transition-all duration-300 hover:shadow-2xl hover:ring-primary/30 overflow-hidden cursor-pointer"
                       >
                         <div className="p-6 pb-4 flex-1 flex flex-col">
                           <div className="flex items-start justify-between mb-4">
@@ -249,7 +258,7 @@ export default function FormationCarousel({ formations }: FormationCarouselProps
                         </div>
                       </a>
                     ) : (
-                      <Card className="relative h-full flex flex-col rounded-3xl shadow-xl bg-gradient-to-br from-zinc-900/95 via-zinc-800/90 to-zinc-900/95 dark:from-zinc-900/95 dark:via-zinc-800/90 dark:to-zinc-900/95 from-white/95 via-gray-50/90 to-white/95 backdrop-blur-md border-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 hover:border-primary/40 dark:hover:border-primary/40 hover:border-blue-400/50 hover:shadow-lg hover:shadow-primary/10 dark:hover:shadow-primary/20 transition-all duration-300 group-hover:-translate-y-2 overflow-hidden cursor-pointer ring-1 ring-zinc-800/50 dark:ring-zinc-800/50 ring-gray-200/50">
+                      <Card className="relative h-full flex flex-col rounded-3xl shadow-xl bg-gradient-to-br from-zinc-900/95 via-zinc-800/90 to-zinc-900/95 dark:from-zinc-900/95 dark:via-zinc-800/90 dark:to-zinc-900/95 from-white/95 via-gray-50/90 to-white/95 backdrop-blur-md border-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 hover:border-primary/40 dark:hover:border-primary/40 hover:border-blue-400/50 hover:shadow-lg hover:shadow-primary/10 dark:hover:shadow-primary/20 transition-all duration-300 overflow-hidden cursor-pointer ring-1 ring-zinc-800/50 dark:ring-zinc-800/50 ring-gray-200/50">
                         <div className="p-6 pb-4 flex-1 flex flex-col">
                           <div className="flex items-start justify-between mb-4">
                             <div className="flex items-center gap-2">

@@ -1,4 +1,6 @@
-"use client";
+'use client';
+
+import { useEffect, useMemo } from 'react';
 
 export default function StructuredData() {
   const structuredData = {
@@ -71,10 +73,29 @@ export default function StructuredData() {
     ]
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-    />
-  );
+  const serializedData = useMemo(() => JSON.stringify(structuredData), []);
+
+  useEffect(() => {
+    const scriptId = 'person-structured-data';
+    let script = document.getElementById(scriptId) as HTMLScriptElement | null;
+
+    if (!script) {
+      script = document.createElement('script');
+      script.id = scriptId;
+      script.type = 'application/ld+json';
+      document.head.appendChild(script);
+    }
+
+    if (script.textContent !== serializedData) {
+      script.textContent = serializedData;
+    }
+
+    return () => {
+      if (script && script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    };
+  }, [serializedData]);
+
+  return null;
 }

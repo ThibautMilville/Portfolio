@@ -1,10 +1,10 @@
 {
-  "title": "Formations & Certifications",
+  "title": "Formations",
   "subtitle": "Mon parcours académique et mes certifications",
   "viewAll": "Voir toutes les formations",
   "loading": "Chargement des formations...",
   "empty": "Aucune formation disponible",
-  "courseBadges": "Badges de cours",
+  "courseBadges": "Certifications",
   "modals": {
     "courseDescription": "Cours suivi et justificatif",
     "period": "Période :",

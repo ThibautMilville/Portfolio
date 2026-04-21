@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight, GraduationCap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/navigation";
-import { Formation } from "@/lib/data";
+import { Formation } from "@/types/portfolio";
 import { useLocale } from "next-intl";
 
 interface FormationCarouselMiniProps {
@@ -101,7 +101,7 @@ export default function FormationCarouselMini({
                       {formation.description}
                     </p>
                     <div className="flex flex-wrap gap-1">
-                      {formation.skills.slice(0, 2).map((skill) => (
+                      {formation.skills.slice(0, 2).map((skill: string) => (
                         <Badge
                           key={skill}
                           variant="outline"

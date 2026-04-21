@@ -1,6 +1,6 @@
 {
-  "title": "Formations & Certifications",
-  "subtitle": "Mon parcours académique et mes certifications professionnelles",
+  "title": "Formations",
+  "subtitle": "Mon parcours académique et mes badges professionnels",
   "courseBadges": "Badges de cours",
   "diplomas": "Diplômes",
   "certifications": "Certifications",
@@ -15,12 +15,5 @@
     "obtainedDate": "Date d'obtention:",
     "organizationName": "Organisme:",
     "viewDocument": "Consulter le document (PDF)"
-  },
-  "badgeData": {
-    "cisco": {
-      "title": "Cisco – Introduction to Cybersecurity",
-      "organization": "Cisco",
-      "date": "Octobre 2025"
-    }
   }
 }

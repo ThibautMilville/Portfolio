@@ -21,7 +21,7 @@ import Link from "next/link";
 import ProjectGallery from "@/components/ui/project-gallery";
 import LightParticles from "@/components/ui/light-particles";
 import ProjectTimeline from "@/components/ProjectTimeline";
-import type { Project, Experience, Formation } from "@/lib/data";
+import type { Project, Experience, Formation } from "@/types/portfolio";
 import { useTranslations, useLocale } from "next-intl";
 import { useTranslatedData } from "@/hooks/useTranslatedData";
 import { translateDateSimple } from "@/lib/utils";

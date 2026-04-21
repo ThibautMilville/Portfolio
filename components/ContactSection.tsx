@@ -9,6 +9,10 @@ import {
   Send,
   Github,
   Linkedin,
+  MessageSquare,
+  Info,
+  Share2,
+  Clock3,
 } from "lucide-react";
 import {
   Card,
@@ -23,10 +27,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import LightParticles from "@/components/ui/light-particles";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@/components/ui/general/Tooltip";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
-export default function ContactSection() {
-  const t = useTranslations('Home.contact');
+type ContactSectionProps = {
+  namespace?: "Home.contact" | "Pages.contact";
+};
+
+export default function ContactSection({
+  namespace = "Home.contact",
+}: ContactSectionProps) {
+  const t = useTranslations(namespace);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -94,121 +105,128 @@ export default function ContactSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent leading-normal pb-1">
-            {t('title')}
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            {t('subtitle')}
-          </p>
+          <SectionHeading
+            title={t("title")}
+            subtitle={t("subtitle")}
+            icon={Mail}
+          />
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
           {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
+            className="h-full"
           >
-            <Card className="border-2 border-primary/20 bg-gradient-to-br from-card via-card to-card/80 hover:border-primary/40 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-primary/10">
+            <Card className="h-full border-2 border-primary/20 bg-gradient-to-br from-card via-card to-card/80 hover:border-primary/40 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-primary/10 flex flex-col">
               <CardHeader>
-                <CardTitle className="text-xl font-bold">
+                <CardTitle className="text-xl font-bold flex items-center gap-3">
+                  <span className="inline-flex items-center justify-center h-8 w-8 rounded-lg border border-primary/25 bg-background/70 text-primary shadow-sm">
+                    <MessageSquare className="h-4 w-4" />
+                  </span>
                   {t('form.title')}
                 </CardTitle>
                 <CardDescription>
                   {t('form.description')}
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <CardContent className="flex-1 flex flex-col">
+                <form onSubmit={handleSubmit} className="flex flex-1 flex-col w-full">
+                  <div className="space-y-6 flex-1">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="name">{t('form.fields.name')}</Label>
+                        <Input
+                          id="name"
+                          name="name"
+                          placeholder={t('form.placeholders.name')}
+                          value={formData.name}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="email">{t('form.fields.email')}</Label>
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          placeholder={t('form.placeholders.email')}
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+                    </div>
+
                     <div className="space-y-2">
-                      <Label htmlFor="name">{t('form.fields.name')}</Label>
+                      <Label htmlFor="subject">{t('form.fields.subject')}</Label>
                       <Input
-                        id="name"
-                        name="name"
-                        placeholder={t('form.placeholders.name')}
-                        value={formData.name}
+                        id="subject"
+                        name="subject"
+                        placeholder={t('form.placeholders.subject')}
+                        value={formData.subject}
                         onChange={handleChange}
                         required
                       />
                     </div>
+
                     <div className="space-y-2">
-                      <Label htmlFor="email">{t('form.fields.email')}</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder={t('form.placeholders.email')}
-                        value={formData.email}
+                      <Label htmlFor="message">{t('form.fields.message')}</Label>
+                      <Textarea
+                        id="message"
+                        name="message"
+                        placeholder={t('form.placeholders.message')}
+                        rows={4}
+                        value={formData.message}
                         onChange={handleChange}
                         required
                       />
                     </div>
-                  </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="subject">{t('form.fields.subject')}</Label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      placeholder={t('form.placeholders.subject')}
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                    />
+                    <motion.div
+                      initial={false}
+                      animate={error ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      {error && (
+                        <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm">
+                          {error}
+                        </div>
+                      )}
+                    </motion.div>
+                    <motion.div
+                      initial={false}
+                      animate={success ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      {success && (
+                        <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400 text-sm">
+                          {t('form.success')}
+                        </div>
+                      )}
+                    </motion.div>
                   </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message">{t('form.fields.message')}</Label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      placeholder={t('form.placeholders.message')}
-                      rows={4}
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                    />
+                  <div className="pt-6">
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full sweep-light"
+                      disabled={isLoading}
+                    >
+                      <Send className="mr-2 h-4 w-4" />
+                      {isLoading ? t('form.submitting') : t('form.submit')}
+                    </Button>
                   </div>
-
-                  <motion.div
-                    initial={false}
-                    animate={error ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    {error && (
-                      <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm">
-                        {error}
-                      </div>
-                    )}
-                  </motion.div>
-                  <motion.div
-                    initial={false}
-                    animate={success ? { opacity: 1, height: "auto" } : { opacity: 0, height: 0 }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    {success && (
-                      <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400 text-sm">
-                        {t('form.success')}
-                      </div>
-                    )}
-                  </motion.div>
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full sweep-light"
-                    disabled={isLoading}
-                  >
-                    <Send className="mr-2 h-4 w-4" />
-                    {isLoading ? t('form.submitting') : t('form.submit')}
-                  </Button>
                 </form>
               </CardContent>
             </Card>
@@ -223,11 +241,14 @@ export default function ContactSection() {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold mb-6">
+              <h3 className="text-2xl font-bold mb-6 flex items-center gap-3 justify-center lg:justify-start">
+                <span className="inline-flex items-center justify-center h-9 w-9 rounded-lg border border-primary/25 bg-background/70 text-primary shadow-sm">
+                  <Info className="h-4 w-4" />
+                </span>
                 {t('info.title')}
               </h3>
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
+              <div className="grid grid-cols-1 gap-6 text-center md:grid-cols-2 lg:text-left">
+                <div className="flex items-start gap-4 justify-center lg:justify-start">
                   <a
                     href={`mailto:${'tmilville' + '.' + 'pro' + '@' + 'gmail' + '.' + 'com'}`}
                     className="p-3 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors cursor-pointer"
@@ -245,7 +266,7 @@ export default function ContactSection() {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-4 justify-center lg:justify-start">
                   <a
                     href="https://t.me/Thybow"
                     target="_blank"
@@ -267,7 +288,7 @@ export default function ContactSection() {
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4">
+                <div className="flex items-start gap-4 justify-center lg:justify-start">
                   <div className="p-3 rounded-lg bg-primary/10">
                     <MapPin className="h-6 w-6 text-primary" />
                   </div>
@@ -280,8 +301,13 @@ export default function ContactSection() {
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold mb-4">{t('info.socialNetworks')}</h3>
-              <div className="flex gap-4">
+              <h3 className="text-xl font-semibold mb-4 flex items-center gap-3 justify-center lg:justify-start">
+                <span className="inline-flex items-center justify-center h-8 w-8 rounded-lg border border-primary/25 bg-background/70 text-primary shadow-sm">
+                  <Share2 className="h-4 w-4" />
+                </span>
+                {t('info.socialNetworks')}
+              </h3>
+              <div className="flex gap-4 justify-center lg:justify-start">
                 <Tooltip content={t('tooltips.github')}>
                   <Button variant="outline" size="icon" asChild>
                     <a
@@ -320,7 +346,12 @@ export default function ContactSection() {
 
             <Card className="border-2 border-primary/20 bg-gradient-to-br from-card via-card to-primary/5 hover:border-primary/40 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-primary/10">
               <CardHeader>
-                <CardTitle>{t('availability.title')}</CardTitle>
+                <CardTitle className="flex items-center gap-3">
+                  <span className="inline-flex items-center justify-center h-8 w-8 rounded-lg border border-primary/25 bg-background/70 text-primary shadow-sm">
+                    <Clock3 className="h-4 w-4" />
+                  </span>
+                  {t('availability.title')}
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">

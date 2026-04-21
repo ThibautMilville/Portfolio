@@ -9,6 +9,7 @@
     "empty": "Aucune formation disponible"
   },
   "experience": {
-    "loading": "Chargement..."
+    "loading": "Chargement...",
+    "empty": "Aucune expérience disponible"
   }
 }

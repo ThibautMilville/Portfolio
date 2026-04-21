@@ -1,14 +1,70 @@
+"use client";
+
 import Link from 'next/link';
 import { LocalImage } from '@/components/ui/image';
 import { FOOTER_DATA } from '@/lib/footer';
 import { Github, Linkedin, Mail, MessageCircle, ArrowUpRight } from 'lucide-react';
-import { Tooltip } from '@/components/ui/tooltip';
+import { Tooltip } from '@/components/ui/general/Tooltip';
 import { useTranslations } from 'next-intl';
+import { usePortfolioData } from '@/hooks/usePortfolioData';
 
 export default function Footer() {
   const t = useTranslations('Footer');
   const tNav = useTranslations('Navigation');
   const currentYear = new Date().getFullYear();
+  const { formations, projects } = usePortfolioData();
+
+  const getRecencyScore = (date: string) => {
+    const normalized = date
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
+    const isOngoing = normalized.includes("present");
+    const yearMatches = normalized.match(/\b(19|20)\d{2}\b/g);
+    const year = yearMatches?.length ? Number(yearMatches[yearMatches.length - 1]) : 0;
+    const monthMap: Record<string, number> = {
+      jan: 1,
+      feb: 2,
+      fev: 2,
+      mar: 3,
+      apr: 4,
+      avr: 4,
+      may: 5,
+      mai: 5,
+      jun: 6,
+      juin: 6,
+      jul: 7,
+      juil: 7,
+      aug: 8,
+      aout: 8,
+      sep: 9,
+      oct: 10,
+      nov: 11,
+      dec: 12
+    };
+    const monthEntry = Object.entries(monthMap).find(([month]) => normalized.includes(month));
+    const month = monthEntry ? monthEntry[1] : 0;
+    return (isOngoing ? 10_000_000 : 0) + year * 100 + month;
+  };
+
+  const diplomaLinks = (() => {
+    return formations
+      .filter((formation) => formation.type !== "Certification")
+      .sort((a, b) => getRecencyScore(b.date) - getRecencyScore(a.date))
+      .slice(0, 3)
+      .map((formation) => ({
+        title: formation.title,
+        href: `/formations#${formation.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`
+      }));
+  })();
+
+  const featuredProjectLinks = projects
+    .filter((project) => project.isFeatured)
+    .slice(0, 3)
+    .map((project) => ({
+      title: project.title,
+      href: `/projets/${(project.slug ?? project.title.toLowerCase().replace(/\s+/g, '-'))}`
+    }));
 
   return (
     <footer className="mt-16 border-t bg-background/80 pt-12 px-4">
@@ -79,7 +135,7 @@ export default function Footer() {
         <div className="flex flex-col items-center lg:items-start">
           <h3 className="font-semibold mb-3 text-primary">{t('formations')}</h3>
           <ul className="space-y-2">
-            {FOOTER_DATA.diplomes.map((item: { title: string; href: string }) => (
+            {diplomaLinks.map((item: { title: string; href: string }) => (
               <li key={item.title}>
                 <Link
                   href={item.href}
@@ -95,7 +151,7 @@ export default function Footer() {
         <div className="flex flex-col items-center lg:items-start">
           <h3 className="font-semibold mb-3 text-primary">{t('projects')}</h3>
           <ul className="space-y-2">
-            {FOOTER_DATA.projets.map((item: { title: string; href: string }) => (
+            {featuredProjectLinks.map((item: { title: string; href: string }) => (
               <li key={item.title}>
                 <Link
                   href={item.href}
@@ -166,7 +222,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t pt-4 pb-6">
+      <div className="border-t pt-4 pb-4">
         <div className="max-w-6xl mx-auto flex items-center justify-center text-sm text-muted-foreground">
           <p>
             © {currentYear} <Link href="/" className="hover:text-primary font-semibold transition-colors">Thibaut MILVILLE</Link>. {t('copyright')}

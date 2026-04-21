@@ -22,7 +22,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@/components/ui/general/Tooltip";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { LocalImage } from "@/components/ui/image";
@@ -235,8 +235,6 @@ export default function Navigation() {
               <Tooltip
                 content={currentLocale === "fr" ? t('switchToEnglish') : t('switchToFrench')}
                 position="bottom"
-                forcePosition={true}
-                disabled={isLanguageMenuOpenDesktop}
               >
                 <DropdownMenu onOpenChange={setIsLanguageMenuOpenDesktop}>
                   <DropdownMenuTrigger asChild>
@@ -324,8 +322,6 @@ export default function Navigation() {
               <Tooltip
                 content={currentLocale === "fr" ? t('switchToEnglish') : t('switchToFrench')}
                 position="bottom"
-                forcePosition={true}
-                disabled={isLanguageMenuOpenMobile}
               >
                 <DropdownMenu onOpenChange={setIsLanguageMenuOpenMobile}>
                   <DropdownMenuTrigger asChild>
@@ -407,7 +403,6 @@ export default function Navigation() {
             <Tooltip
               content={theme === "dark" ? t('switchToLight') : t('switchToDark')}
               position="bottom"
-              forcePosition={true}
             >
               <Button
                 variant="ghost"
@@ -533,22 +528,7 @@ export default function Navigation() {
 
               {/* Footer du menu mobile */}
               <div className="p-4 border-t border-white/10">
-                <div className="flex items-center justify-between gap-4">
-                  {/* Theme Switcher */}
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                    className="flex-1 h-10 rounded-lg flex items-center gap-2 justify-center"
-                  >
-                    <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                    <Moon className="h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                    <span className="text-sm font-medium">
-                      {theme === "dark" ? t('light') : t('dark')}
-                    </span>
-                  </Button>
-
-                  {/* Réseaux sociaux */}
+                <div className="flex items-center justify-center gap-2">
                   <div className="flex items-center gap-2">
                     <a
                       href={FOOTER_DATA.social.github}

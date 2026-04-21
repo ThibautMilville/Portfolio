@@ -1,23 +1,20 @@
-import { projects, formations } from '@/data';
 import HeroSection from '@/components/HeroSection';
 import FeaturedProjectsSection from '@/components/FeaturedProjectsSection';
 import FormationsSection from '@/components/FormationsSection';
 import ExperiencesSection from '@/components/ExperiencesSection';
 import CompanyLogosSection from '@/components/CompanyLogosSection';
-import ObjectivesSection from '@/components/ObjectivesSection';
 import SkillsSection from '@/components/SkillsSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import ContactSection from '@/components/ContactSection';
-
-// Récupérer tous les projets
-const allProjects = projects;
-
-// Sélectionner tous les projets pour la section
-const projets = allProjects;
-
-const formationsData = formations;
+import { fetchProjects } from '@/lib/api/portfolio';
 
 const companyLogos = [
+  {
+    name: 'Cloak',
+    src: '/images/company/cloak-logo.webp',
+    alt: 'Cloak',
+    linkedinUrl: 'https://www.linkedin.com/company/cloakprotocol/',
+  },
   {
     name: 'Ultra',
     src: '/images/company/logo_ultra.png',
@@ -56,7 +53,8 @@ const companyLogos = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const projets = await fetchProjects();
   return (
     <div className="relative overflow-hidden">
       {/* Hero Section - Présentation principale */}
@@ -69,13 +67,10 @@ export default function Home() {
       <ExperiencesSection />
       
       {/* Section Formations - Compétences académiques */}
-      <FormationsSection formations={formationsData} />
+      <FormationsSection />
       
       {/* Section Compétences - Expertise technique */}
       <SkillsSection />
-      
-      {/* Section Objectifs - Vision et ambitions */}
-      <ObjectivesSection />
       
       {/* Section Partenaires - Entreprises de confiance */}
       <CompanyLogosSection logos={companyLogos} />

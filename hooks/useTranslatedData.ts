@@ -1,42 +1,7 @@
 import { useTranslations } from "next-intl";
-import {
-  getAllProjects,
-  getAllExperiences,
-  getAllFormations,
-} from "@/lib/data";
 import { useLocale } from "next-intl";
 import React from "react";
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  longDescription: string;
-  status: string;
-  category: string;
-  role: string;
-  duration: string;
-  features: string[];
-  challenges: string[];
-  solutions: string[];
-  [key: string]: any;
-}
-
-interface Experience {
-  id: number;
-  title: string;
-  description: string;
-  achievements: string[];
-  [key: string]: any;
-}
-
-interface Formation {
-  id: number;
-  title: string;
-  description: string;
-  skills: string[];
-  [key: string]: any;
-}
+import { Experience, Formation, Project } from "@/types/portfolio";
 
 export function useTranslatedData() {
   const locale = useLocale();

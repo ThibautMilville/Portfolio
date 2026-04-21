@@ -7,11 +7,7 @@ import {
   ExternalLink,
   Calendar,
   Star,
-  ArrowRight,
-  FolderClosed,
-  Rocket,
-  Layers,
-  Hourglass,
+  ArrowRight
 } from "lucide-react";
 import {
   Card,
@@ -24,13 +20,14 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { getAllProjects, getProjectSlug } from "@/lib/data";
+import { getProjectSlug } from "@/services/ProjectService";
 import ProjectFilters, {
   ProjectFilterState,
 } from "@/components/ProjectFilters";
 import { useMemo, useState, useEffect } from "react";
 import LightParticles from "@/components/ui/light-particles";
 import { useTranslatedData } from "@/hooks/useTranslatedData";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 import {
   Pagination,
   PaginationContent,
@@ -40,12 +37,10 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
-// Récupérer les projets depuis le fichier de données partagé
-const projets = getAllProjects();
-
 export default function Projets() {
   const t = useTranslations("Pages.projets");
   const { getTranslatedProject } = useTranslatedData();
+  const { projects: projets, loading } = usePortfolioData();
   const [filters, setFilters] = useState<ProjectFilterState>({
     search: "",
     organization: "all",
@@ -67,7 +62,7 @@ export default function Projets() {
       }
     });
     return Array.from(orgs);
-  }, []);
+  }, [projets]);
 
   const technologies = useMemo(() => {
     const set = new Set<string>();
@@ -75,7 +70,7 @@ export default function Projets() {
       p.technologies.forEach((t: string) => set.add(t))
     );
     return Array.from(set).sort();
-  }, []);
+  }, [projets]);
 
   const years = useMemo(() => {
     const set = new Set<string>();
@@ -84,19 +79,13 @@ export default function Projets() {
       if (match) match.forEach((y: string) => set.add(y));
     });
     return Array.from(set).sort().reverse();
-  }, []);
+  }, [projets]);
 
   const categories = useMemo(() => {
     const set = new Set<string>();
     projets.forEach((p: any) => set.add(p.category));
     return Array.from(set).sort();
-  }, []);
-
-  const totalProjects = projets.length;
-  const web3Count = useMemo(
-    () => projets.filter((p: any) => p.category === "Web3").length,
-    []
-  );
+  }, [projets]);
 
   const filtered = useMemo(() => {
     return projets.filter((p: any) => {
@@ -140,7 +129,7 @@ export default function Projets() {
       }
       return true;
     });
-  }, [filters]);
+  }, [filters, projets]);
 
   // Parse une date de début (commencement) à partir d'une chaîne libre en FR
   const getProjectStartTs = (dateStr: string): number => {
@@ -209,13 +198,21 @@ export default function Projets() {
     return Math.min(...startCandidates);
   };
 
+  const featuredProjects = useMemo(
+    () =>
+      projets
+        .filter((p: any) => p.isFeatured)
+        .sort(
+          (a: any, b: any) => getProjectStartTs(b.date) - getProjectStartTs(a.date)
+        )
+        .slice(0, 3),
+    [projets]
+  );
+
   const sorted = useMemo(() => {
     return [...filtered].sort((a, b) => {
-      // Les projets en cours (status "En cours" ou "In Progress") en premier
-      const aIsInProgress =
-        a.status === "En cours" || a.status === "In Progress";
-      const bIsInProgress =
-        b.status === "En cours" || b.status === "In Progress";
+      const aIsInProgress = a.status === "En cours";
+      const bIsInProgress = b.status === "En cours";
 
       if (aIsInProgress && !bIsInProgress) return -1;
       if (!aIsInProgress && bIsInProgress) return 1;
@@ -273,6 +270,10 @@ export default function Projets() {
   const totalPages = Math.max(1, Math.ceil(sorted.length / PER_PAGE));
   const startIndex = (currentPage - 1) * PER_PAGE;
   const pageItems = sorted.slice(startIndex, startIndex + PER_PAGE);
+
+  if (loading) {
+    return <div className="py-24 text-center text-muted-foreground">{t("loading")}</div>;
+  }
 
   return (
     <div className="py-6 md:py-8 px-6 relative">
@@ -347,14 +348,7 @@ export default function Projets() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {[
-                  "Ashes of Mankind - Empires",
-                  "UT Marketplace",
-                  "Commercial website OZC Signalétique",
-                ].map((projectTitle, index) => {
-                  const project = projets.find(
-                    (p: any) => p.title === projectTitle
-                  );
+                {featuredProjects.map((project, index) => {
                   if (!project) return null;
 
                   const translatedProject = getTranslatedProject(project);
@@ -748,140 +742,6 @@ export default function Projets() {
           </div>
         )}
 
-        {/* Project Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-16"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
-              {/* Dégradé de base avec vraie transition */}
-              <div
-                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2"
-                style={{
-                  clipPath: "polygon(0 0, 100% 0, 0 100%)",
-                  backgroundImage:
-                    "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)",
-                }}
-              >
-                <svg
-                  className="w-7 h-7 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <div className="relative z-10 text-center">
-                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
-                  +25
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  {t("projects")}
-                </div>
-              </div>
-            </div>
-            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
-              {/* Dégradé de base avec vraie transition */}
-              <div
-                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2"
-                style={{
-                  clipPath: "polygon(0 0, 100% 0, 0 100%)",
-                  backgroundImage:
-                    "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)",
-                }}
-              >
-                <svg
-                  className="w-7 h-7 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <div className="relative z-10 text-center">
-                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
-                  {web3Count}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  {t("web3Projects")}
-                </div>
-              </div>
-            </div>
-            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
-              {/* Dégradé de base avec vraie transition */}
-              <div
-                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2"
-                style={{
-                  clipPath: "polygon(0 0, 100% 0, 0 100%)",
-                  backgroundImage:
-                    "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)",
-                }}
-              >
-                <svg
-                  className="w-7 h-7 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <div className="relative z-10 text-center">
-                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
-                  +30
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  {t("masteredTechnologies")}
-                </div>
-              </div>
-            </div>
-            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
-              {/* Dégradé de base avec vraie transition */}
-              <div
-                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2"
-                style={{
-                  clipPath: "polygon(0 0, 100% 0, 0 100%)",
-                  backgroundImage:
-                    "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)",
-                }}
-              >
-                <svg
-                  className="w-7 h-7 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-              <div className="relative z-10 text-center">
-                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
-                  6+
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  {t("yearsExperience")}
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </div>
   );

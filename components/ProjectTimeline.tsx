@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { cn, translateDateSimple } from "@/lib/utils";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@/components/ui/general/Tooltip";
 import { useTranslations, useLocale } from "next-intl";
 
 export interface ProjectPeriodItem {

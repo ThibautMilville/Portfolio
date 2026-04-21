@@ -8,15 +8,14 @@ import {
   Github,
   Linkedin,
   Mail,
-  Code2,
   ArrowRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Typewriter } from "@/components/ui/typewriter";
-import { AnimatedParticles } from "./AnimatedParticles";
 import { LocalImage } from "@/components/ui/image";
-import { Tooltip } from "@/components/ui/tooltip";
+import { Tooltip } from "@/components/ui/general/Tooltip";
+import LightParticles from "@/components/ui/light-particles";
 
 export default function HeroSection() {
   const t = useTranslations('Home.hero');
@@ -29,7 +28,7 @@ export default function HeroSection() {
     <section className="min-h-screen flex items-center justify-center relative px-6 pt-12 md:pt-0" role="banner" aria-label="Présentation de Thibaut MILVILLE">
       <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-background to-background" />
-      <AnimatedParticles />
+      <LightParticles />
 
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-12 mb-12">
@@ -40,7 +39,6 @@ export default function HeroSection() {
             className="flex-shrink-0"
           >
             <div className="relative">
-              {/* Anneaux animés autour de l'image */}
               <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-primary via-secondary to-accent opacity-85 blur-sm transition-all duration-500 animate-pulse"></div>
               <div className="absolute -inset-0.5 rounded-full bg-gradient-to-r from-primary/80 via-secondary/80 to-accent/80 opacity-70 transition-all duration-500">
                 <div className="w-full h-full rounded-full bg-gradient-to-r from-primary/80 via-secondary/80 to-accent/80 animate-spin-slow"></div>
@@ -48,125 +46,13 @@ export default function HeroSection() {
               <div className="absolute -inset-1.5 rounded-full bg-gradient-to-r from-accent via-secondary to-primary opacity-50 transition-all duration-500">
                 <div className="w-full h-full rounded-full bg-gradient-to-r from-accent via-secondary to-primary animate-spin-reverse"></div>
               </div>
-
-              {/* Particules flottantes */}
-              <div className="absolute -inset-3 rounded-full">
-                <motion.div
-                  className="absolute w-1.5 h-1.5 rounded-full bg-gradient-to-r from-white/60 to-primary/60"
-                  style={{ left: "20%", top: "-12%" }}
-                  animate={{
-                    scale: [1, 1.4, 1],
-                    opacity: [0.6, 1, 0.6],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: "easeInOut",
-                    delay: 0,
-                  }}
-                />
-                <motion.div
-                  className="absolute w-1 h-1 rounded-full bg-gradient-to-r from-secondary/50 to-accent/50"
-                  style={{ left: "112%", top: "20%" }}
-                  animate={{
-                    scale: [1, 1.6, 1],
-                    opacity: [0.5, 1, 0.5],
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: "easeInOut",
-                    delay: 1,
-                  }}
-                />
-                <motion.div
-                  className="absolute w-2 h-2 rounded-full bg-gradient-to-r from-primary/45 to-secondary/45"
-                  style={{ left: "80%", top: "112%" }}
-                  animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [0.45, 0.9, 0.45],
-                  }}
-                  transition={{
-                    duration: 3.5,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: "easeInOut",
-                    delay: 2,
-                  }}
-                />
-                <motion.div
-                  className="absolute w-1.5 h-1.5 rounded-full bg-gradient-to-r from-accent/55 to-primary/55"
-                  style={{ left: "-12%", top: "80%" }}
-                  animate={{
-                    scale: [1, 1.5, 1],
-                    opacity: [0.55, 1, 0.55],
-                  }}
-                  transition={{
-                    duration: 4.2,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: "easeInOut",
-                    delay: 0.5,
-                  }}
-                />
-                <motion.div
-                  className="absolute w-1 h-1 rounded-full bg-gradient-to-r from-secondary/60 to-accent/60"
-                  style={{ left: "90%", top: "-10%" }}
-                  animate={{
-                    scale: [1, 1.8, 1],
-                    opacity: [0.6, 1, 0.6],
-                  }}
-                  transition={{
-                    duration: 3.8,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: "easeInOut",
-                    delay: 1.5,
-                  }}
-                />
-                <motion.div
-                  className="absolute w-1.5 h-1.5 rounded-full bg-gradient-to-r from-primary/50 to-secondary/50"
-                  style={{ left: "10%", top: "112%" }}
-                  animate={{
-                    scale: [1, 1.4, 1],
-                    opacity: [0.5, 0.95, 0.5],
-                  }}
-                  transition={{
-                    duration: 3.2,
-                    repeat: Number.POSITIVE_INFINITY,
-                    ease: "easeInOut",
-                    delay: 2.5,
-                  }}
-                />
-              </div>
-
-              {/* Image de profil avec animation fluide */}
               <div className="relative w-48 h-48 lg:w-64 lg:h-64 overflow-hidden border-4 border-white/50 shadow-2xl bg-gradient-to-br from-primary/10 to-secondary/10 backdrop-blur-sm transition-all duration-500 animate-smooth-morph">
                 <LocalImage
                   imageName="photo_profil.jpg"
                   alt="Thibaut Milville"
                   className="w-full h-full object-cover"
                 />
-                {/* Overlay subtil sans effet de hover */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-40"></div>
-
-                {/* Particules internes */}
-                <div className="absolute inset-0 overflow-hidden">
-                  <div className="absolute top-2 left-2 w-1 h-1 bg-white/60 rounded-full animate-float-particle"></div>
-                  <div
-                    className="absolute top-4 right-4 w-0.5 h-0.5 bg-primary/80 rounded-full animate-float-particle"
-                    style={{ animationDelay: "0.5s" }}
-                  ></div>
-                  <div
-                    className="absolute bottom-3 left-4 w-0.5 h-0.5 bg-secondary/80 rounded-full animate-float-particle"
-                    style={{ animationDelay: "1s" }}
-                  ></div>
-                  <div
-                    className="absolute top-1/2 right-2 w-0.5 h-0.5 bg-accent/70 rounded-full animate-float-particle"
-                    style={{ animationDelay: "1.5s" }}
-                  ></div>
-                  <div
-                    className="absolute bottom-2 right-2 w-0.5 h-0.5 bg-primary/70 rounded-full animate-float-particle"
-                    style={{ animationDelay: "2s" }}
-                  ></div>
-                </div>
               </div>
             </div>
           </motion.div>

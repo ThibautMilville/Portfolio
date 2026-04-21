@@ -11,6 +11,7 @@ export interface Project {
   github: string;
   demo: string | null;
   category: string;
+  isFeatured?: boolean;
   features: string[];
   challenges: string[];
   solutions: string[];
@@ -56,4 +57,15 @@ export interface Formation {
   relatedExperienceIds?: number[];
   credentialUrl?: string;
   logoUrl?: string;
+}
+
+export interface Skill {
+  id: number;
+  name: string;
+  logo: string;
+  category: string;
+  level: string;
+  experience: string;
+  isFavorite: boolean;
+  displayOrder: number;
 }

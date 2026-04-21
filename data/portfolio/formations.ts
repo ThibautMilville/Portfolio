@@ -1,6 +1,6 @@
-import { Formation } from './types';
+import { Formation } from "@/types/portfolio";
 
-export const formations: Formation[] = [
+export const formationsData: Formation[] = [
   {
     id: 4,
     title: "Microsoft Certified: Azure Fundamentals",
@@ -13,8 +13,9 @@ export const formations: Formation[] = [
     type: "Certification",
     projectIds: [],
     relatedExperienceIds: [],
-    credentialUrl: "https://learn.microsoft.com/api/credentials/share/en-us/ThibautMILVILLE-1278/C62D8F485B8E1CD7?sharingId=2C3FEDB0EB979CE8",
-    logoUrl: "https://www.freepnglogos.com/uploads/microsoft-windows-logo-images-19.png"
+    credentialUrl:
+      "https://learn.microsoft.com/api/credentials/share/en-us/ThibautMILVILLE-1278/C62D8F485B8E1CD7?sharingId=2C3FEDB0EB979CE8",
+    logoUrl: "/images/education/microsoft.png"
   },
   {
     id: 5,
@@ -28,7 +29,23 @@ export const formations: Formation[] = [
     type: "Certification",
     projectIds: [],
     relatedExperienceIds: [],
-    logoUrl: "https://imgs.search.brave.com/42jM9c61NlZ4K7NgaEas01TcYNBceKlrMmj0ABosGUc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc2Vla2xvZ28u/Y29tL2xvZ28tcG5n/LzEyLzIvc25jZi1s/b2dvLXBuZ19zZWVr/bG9nby0xMjg0ODAu/cG5n"
+    logoUrl: "/images/company/Logo-SNCF-Voyageurs.webp"
+  },
+  {
+    id: 6,
+    title: "Microsoft Certified: Azure AI Fundamentals",
+    institution: "Microsoft",
+    location: "En ligne",
+    date: "Janvier 2026",
+    description: "Certification Microsoft sur les fondamentaux de l'IA Azure.",
+    skills: ["Azure AI", "Machine Learning", "AI Workloads", "Responsible AI"],
+    mention: "E10934D3B1189DDC",
+    type: "Certification",
+    projectIds: [],
+    relatedExperienceIds: [],
+    credentialUrl:
+      "https://www.linkedin.com/safety/go/?url=https%3A%2F%2Flearn.microsoft.com%2Fapi%2Fcredentials%2Fshare%2Fen-us%2FThibautMILVILLE-1278%2FE10934D3B1189DDC%3FsharingId%3D2C3FEDB0EB979CE8&urlhash=P-WV&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BUGv%2FaTwaQ9eTp%2F5sk2e%2Fgw%3D%3D",
+    logoUrl: "/images/education/microsoft.png"
   },
   {
     id: 1,
@@ -50,7 +67,8 @@ export const formations: Formation[] = [
     institution: "CESI Nanterre",
     location: "France",
     date: "Sep 2023 - Sep 2024",
-    description: "Learn advanced web development techniques, with some DevOps concepts (planning, continuous integration, automated tests...)",
+    description:
+      "Learn advanced web development techniques, with some DevOps concepts (planning, continuous integration, automated tests...)",
     skills: ["StarUML", "React.js", "Agile Project Management", "MySQL Workbench"],
     mention: "Honors of the jury",
     type: "Diplôme",
@@ -64,12 +82,28 @@ export const formations: Formation[] = [
     institution: "CFA Émerainville",
     location: "France",
     date: "Sep 2021 - Jul 2023",
-    description: "Basics of computer science, learning essential web languages, discovering databases and PHP, working on web and mobile applications.",
-    skills: ["PHP", "Adaptation", "Communication", "JavaScript", "Tailwind", "Bootstrap", "GitHub", "Python", "HTML", "CSS3", "SASS", "Rigueur", "MySQL", "Autodidacte"],
+    description:
+      "Basics of computer science, learning essential web languages, discovering databases and PHP, working on web and mobile applications.",
+    skills: [
+      "PHP",
+      "Adaptation",
+      "Communication",
+      "JavaScript",
+      "Tailwind",
+      "Bootstrap",
+      "GitHub",
+      "Python",
+      "HTML",
+      "CSS3",
+      "SASS",
+      "Rigueur",
+      "MySQL",
+      "Autodidacte"
+    ],
     mention: "Validated",
     type: "Diplôme",
     projectIds: [],
     relatedExperienceIds: [],
-    logoUrl: "https://www.utec77.fr/themes/custom/generic/medias/logo_utec.png"
+    logoUrl: "/images/education/utec.png"
   }
 ];

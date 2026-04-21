@@ -3,41 +3,13 @@
 import React, { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { motion } from "framer-motion";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Building,
-  Calendar,
-  MapPin,
-  Users,
-  ExternalLink,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Building, Calendar, MapPin, Users, ExternalLink } from "lucide-react";
 import { Card, CardContent } from "./card";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogTrigger,
-} from "./dialog";
-import { getGroupedExperiences } from "@/lib/data";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from "./dialog";
 import { translateDateSimple } from "@/lib/utils";
 import Link from "next/link";
-
-interface Experience {
-  id: number;
-  title: string;
-  company: string;
-  location: string;
-  date: string;
-  description: string;
-  technologies: string[];
-  achievements: string[];
-  projectIds?: number[];
-  relatedFormationIds?: number[];
-  logoUrl?: string;
-}
+import { getGroupedExperiencesFromList } from "@/utils/experience";
+import { Experience } from "@/types/portfolio";
 
 interface GroupedExperience {
   company: string;
@@ -47,10 +19,11 @@ interface GroupedExperience {
 }
 
 interface ExperienceCarouselProps {
-  experiences?: Experience[]; // Gardé pour compatibilité
+  experiences: Experience[];
 }
 
 const getCardsToShow = (totalGroups: number) => {
+  if (totalGroups <= 0) return 1;
   if (typeof window === "undefined") return 1;
   const width = window.innerWidth;
   let cards = 1;
@@ -59,9 +32,7 @@ const getCardsToShow = (totalGroups: number) => {
   return Math.min(cards, totalGroups);
 };
 
-export default function ExperienceCarousel({
-  experiences,
-}: ExperienceCarouselProps) {
+export default function ExperienceCarousel({ experiences }: ExperienceCarouselProps) {
   const t = useTranslations("Components.carousels.experience");
   const tModals = useTranslations("Home.experiences.modals");
   const locale = useLocale();
@@ -73,15 +44,12 @@ export default function ExperienceCarousel({
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
-  // Utiliser les expériences groupées
-  const groupedExperiences = getGroupedExperiences();
+  const groupedExperiences = getGroupedExperiencesFromList(experiences);
 
   React.useEffect(() => {
     setIsClient(true);
     setCardsToShow(getCardsToShow(groupedExperiences.length));
-    setIsMobile(
-      typeof window !== "undefined" ? window.innerWidth < 640 : false
-    );
+    setIsMobile(typeof window !== "undefined" ? window.innerWidth < 640 : false);
   }, [groupedExperiences.length]);
 
   React.useEffect(() => {
@@ -102,9 +70,7 @@ export default function ExperienceCarousel({
     if (shouldUseInfinite) {
       setStartIndex((prev) => (prev + 1) % groupedExperiences.length);
     } else {
-      setStartIndex((prev) =>
-        Math.min(prev + 1, groupedExperiences.length - cardsToShow)
-      );
+      setStartIndex((prev) => Math.min(prev + 1, groupedExperiences.length - cardsToShow));
     }
     setTimeout(() => setIsAnimating(false), 300);
   };
@@ -113,10 +79,7 @@ export default function ExperienceCarousel({
     if (isAnimating) return;
     setIsAnimating(true);
     if (shouldUseInfinite) {
-      setStartIndex(
-        (prev) =>
-          (prev - 1 + groupedExperiences.length) % groupedExperiences.length
-      );
+      setStartIndex((prev) => (prev - 1 + groupedExperiences.length) % groupedExperiences.length);
     } else {
       setStartIndex((prev) => Math.max(prev - 1, 0));
     }
@@ -161,14 +124,20 @@ export default function ExperienceCarousel({
   };
 
   // Calcul de translation mathématiquement correct
-  const translateX = `calc(-${startIndex} * ((100% - ${
-    cardsToShow - 1
-  }rem) / ${cardsToShow} + 1rem))`;
+  const translateX = `calc(-${startIndex} * ((100% - ${cardsToShow - 1}rem) / ${cardsToShow} + 1rem))`;
 
   if (!isClient) {
     return (
       <div className="relative max-w-4xl mx-auto flex items-center justify-center py-8">
         <div className="text-muted-foreground">{t("loading")}</div>
+      </div>
+    );
+  }
+
+  if (groupedExperiences.length === 0) {
+    return (
+      <div className="relative max-w-4xl mx-auto flex items-center justify-center py-8">
+        <div className="text-muted-foreground">{t("empty")}</div>
       </div>
     );
   }
@@ -180,17 +149,11 @@ export default function ExperienceCarousel({
           onClick={prev}
           className="hidden sm:flex items-center justify-center absolute left-[-2.5rem] md:left-[-3.5rem] top-1/2 -translate-y-1/2 z-20 p-2 md:p-3 rounded-full bg-background/90 border shadow-lg hover:bg-primary/10 transition-all duration-200"
           aria-label="Précédent"
-          style={{ boxShadow: "0 2px 16px 0 rgba(0,0,0,0.08)" }}
-        >
+          style={{ boxShadow: "0 2px 16px 0 rgba(0,0,0,0.08)" }}>
           <ChevronLeft className="h-6 w-6" />
         </button>
         <div className="w-full">
-          <div
-            className="overflow-hidden py-2"
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMovePrevent}
-            onTouchEnd={onTouchEnd}
-          >
+          <div className="overflow-hidden py-2" onTouchStart={onTouchStart} onTouchMove={onTouchMovePrevent} onTouchEnd={onTouchEnd}>
             <motion.div
               className="flex gap-4"
               initial={false}
@@ -202,57 +165,37 @@ export default function ExperienceCarousel({
                 stiffness: 300,
                 damping: 30,
                 duration: 0.3,
-              }}
-            >
+              }}>
               {groupedExperiences.map((group, idx) => (
                 <motion.div
                   key={group.company}
                   className="flex-shrink-0 w-full group"
                   style={{
-                    width: `calc((100% - ${
-                      cardsToShow - 1
-                    }rem) / ${cardsToShow})`,
+                    width: `calc((100% - ${cardsToShow - 1}rem) / ${cardsToShow})`,
                   }}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -30 }}
-                  transition={{ duration: 0.3 }}
-                >
+                  transition={{ duration: 0.3 }}>
                   {isMobile ? (
-                    <Link
-                      href={`/experiences#${group.company
-                        .toLowerCase()
-                        .replace(/[^a-z0-9]+/g, "-")}`}
-                    >
-                      <Card className="relative h-full rounded-3xl shadow-xl bg-gradient-to-br from-zinc-900/95 via-zinc-800/90 to-zinc-900/95 dark:from-zinc-900/95 dark:via-zinc-800/90 dark:to-zinc-900/95 from-white/95 via-gray-50/90 to-white/95 backdrop-blur-md border-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 hover:border-primary/40 dark:hover:border-primary/40 hover:border-blue-400/50 hover:shadow-lg hover:shadow-primary/10 dark:hover:shadow-primary/20 transition-all duration-300 group-hover:-translate-y-2 overflow-hidden cursor-pointer ring-1 ring-zinc-800/50 dark:ring-zinc-800/50 ring-gray-200/50">
+                    <Link href={`/experiences#${group.company.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>
+                      <Card className="relative h-full rounded-3xl shadow-xl bg-gradient-to-br from-zinc-900/95 via-zinc-800/90 to-zinc-900/95 dark:from-zinc-900/95 dark:via-zinc-800/90 dark:to-zinc-900/95 from-white/95 via-gray-50/90 to-white/95 backdrop-blur-md border-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 hover:border-primary/40 dark:hover:border-primary/40 hover:border-blue-400/50 hover:shadow-lg hover:shadow-primary/10 dark:hover:shadow-primary/20 transition-all duration-300 overflow-hidden cursor-pointer ring-1 ring-zinc-800/50 dark:ring-zinc-800/50 ring-gray-200/50">
                         <div className="p-6 pb-4">
                           <div className="flex items-start justify-between mb-4">
                             <div className="flex items-center gap-2">
                               {group.logoUrl ? (
-                                <img
-                                  src={group.logoUrl}
-                                  alt={`Logo ${group.company}`}
-                                  className="h-12 w-12 rounded object-contain bg-white p-1"
-                                />
+                                <img src={group.logoUrl} alt={`Logo ${group.company}`} className="h-12 w-12 rounded object-contain bg-white p-1" />
                               ) : (
                                 <div className="p-2 rounded-lg bg-blue-500/90 text-white">
                                   <Building className="h-8 w-8" />
                                 </div>
                               )}
                             </div>
-                            <span className="text-xs font-semibold px-2 py-1 rounded-full bg-primary/10 text-primary">
-                              {group.experiences.length > 1
-                                ? "Multiples postes"
-                                : "Expérience"}
-                            </span>
+                            <span className="text-xs font-semibold px-2 py-1 rounded-full bg-primary/10 text-primary">{group.experiences.length > 1 ? "Multiples postes" : "Expérience"}</span>
                           </div>
 
-                          <h3 className="text-lg font-bold mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                            {group.company}
-                          </h3>
-                          <p className="text-sm text-muted-foreground font-medium mb-3">
-                            {group.experiences[0].title}
-                          </p>
+                          <h3 className="text-lg font-bold mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2">{group.company}</h3>
+                          <p className="text-sm text-muted-foreground font-medium mb-3">{group.experiences[0].title}</p>
 
                           <div className="space-y-2">
                             <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -270,35 +213,23 @@ export default function ExperienceCarousel({
                   ) : (
                     <Dialog>
                       <DialogTrigger asChild>
-                        <Card className="relative h-full rounded-3xl shadow-xl bg-gradient-to-br from-zinc-900/95 via-zinc-800/90 to-zinc-900/95 dark:from-zinc-900/95 dark:via-zinc-800/90 dark:to-zinc-900/95 from-white/95 via-gray-50/90 to-white/95 backdrop-blur-md border-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 hover:border-primary/40 dark:hover:border-primary/40 hover:border-blue-400/50 hover:shadow-lg hover:shadow-primary/10 dark:hover:shadow-primary/20 transition-all duration-300 group-hover:-translate-y-2 overflow-hidden cursor-pointer ring-1 ring-zinc-800/50 dark:ring-zinc-800/50 ring-gray-200/50">
+                        <Card className="relative h-full rounded-3xl shadow-xl bg-gradient-to-br from-zinc-900/95 via-zinc-800/90 to-zinc-900/95 dark:from-zinc-900/95 dark:via-zinc-800/90 dark:to-zinc-900/95 from-white/95 via-gray-50/90 to-white/95 backdrop-blur-md border-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 hover:border-primary/40 dark:hover:border-primary/40 hover:border-blue-400/50 hover:shadow-lg hover:shadow-primary/10 dark:hover:shadow-primary/20 transition-all duration-300 overflow-hidden cursor-pointer ring-1 ring-zinc-800/50 dark:ring-zinc-800/50 ring-gray-200/50">
                           <div className="p-6 pb-4">
                             <div className="flex items-start justify-between mb-4">
                               <div className="flex items-center gap-2">
                                 {group.logoUrl ? (
-                                  <img
-                                    src={group.logoUrl}
-                                    alt={`Logo ${group.company}`}
-                                    className="h-12 w-12 rounded object-contain bg-white p-1"
-                                  />
+                                  <img src={group.logoUrl} alt={`Logo ${group.company}`} className="h-12 w-12 rounded object-contain bg-white p-1" />
                                 ) : (
                                   <div className="p-2 rounded-lg bg-blue-500/90 text-white">
                                     <Building className="h-8 w-8" />
                                   </div>
                                 )}
                               </div>
-                              <span className="text-xs font-semibold px-2 py-1 rounded-full bg-primary/10 text-primary">
-                                {group.experiences.length > 1
-                                  ? "Multiples postes"
-                                  : "Expérience"}
-                              </span>
+                              <span className="text-xs font-semibold px-2 py-1 rounded-full bg-primary/10 text-primary">{group.experiences.length > 1 ? "Multiples postes" : "Expérience"}</span>
                             </div>
 
-                            <h3 className="text-lg font-bold mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                              {group.company}
-                            </h3>
-                            <p className="text-sm text-muted-foreground font-medium mb-3">
-                              {group.experiences[0].title}
-                            </p>
+                            <h3 className="text-lg font-bold mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2">{group.company}</h3>
+                            <p className="text-sm text-muted-foreground font-medium mb-3">{group.experiences[0].title}</p>
 
                             <div className="space-y-2">
                               <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -317,23 +248,15 @@ export default function ExperienceCarousel({
                         <DialogHeader>
                           <div className="flex items-center gap-4 mb-4">
                             {group.logoUrl ? (
-                              <img
-                                src={group.logoUrl}
-                                alt={`Logo ${group.company}`}
-                                className="h-16 w-16 rounded object-contain bg-white p-2"
-                              />
+                              <img src={group.logoUrl} alt={`Logo ${group.company}`} className="h-16 w-16 rounded object-contain bg-white p-2" />
                             ) : (
                               <div className="p-3 rounded-lg bg-blue-500/90 text-white">
                                 <Building className="h-8 w-8" />
                               </div>
                             )}
                             <div>
-                              <DialogTitle className="text-2xl">
-                                {group.company}
-                              </DialogTitle>
-                              <DialogDescription className="text-lg font-medium text-foreground">
-                                {group.experiences[0].title}
-                              </DialogDescription>
+                              <DialogTitle className="text-2xl">{group.company}</DialogTitle>
+                              <DialogDescription className="text-lg font-medium text-foreground">{group.experiences[0].title}</DialogDescription>
                             </div>
                           </div>
                         </DialogHeader>
@@ -344,23 +267,15 @@ export default function ExperienceCarousel({
                             <div className="flex gap-2 text-sm items-start">
                               <Calendar className="h-4 w-4 text-primary mt-0.5" />
                               <div className="grid grid-cols-[auto,1fr] gap-x-2">
-                                <span className="font-medium whitespace-nowrap">
-                                  {tModals("duration")}
-                                </span>
-                                <span className="break-words">
-                                  {translateDateSimple(group.totalDuration, locale)}
-                                </span>
+                                <span className="font-medium whitespace-nowrap">{tModals("duration")}</span>
+                                <span className="break-words">{translateDateSimple(group.totalDuration, locale)}</span>
                               </div>
                             </div>
                             <div className="flex gap-2 text-sm items-start">
                               <MapPin className="h-4 w-4 text-primary mt-0.5" />
                               <div className="grid grid-cols-[auto,1fr] gap-x-2">
-                                <span className="font-medium whitespace-nowrap">
-                                  {tModals("location")}
-                                </span>
-                                <span className="break-words">
-                                  {group.experiences[0].location}
-                                </span>
+                                <span className="font-medium whitespace-nowrap">{tModals("location")}</span>
+                                <span className="break-words">{group.experiences[0].location}</span>
                               </div>
                             </div>
                           </div>
@@ -368,34 +283,19 @@ export default function ExperienceCarousel({
                           {/* Détails des postes */}
                           <div className="space-y-4">
                             {group.experiences.map((exp, i) => (
-                              <div
-                                key={i}
-                                className="p-4 rounded-xl border bg-card/60"
-                              >
+                              <div key={i} className="p-4 rounded-xl border bg-card/60">
                                 <div className="flex items-center justify-between mb-1">
                                   <h4 className="font-semibold">{exp.title}</h4>
-                                  <span className="text-xs text-muted-foreground">
-                                    {translateDateSimple(exp.date, locale)}
-                                  </span>
+                                  <span className="text-xs text-muted-foreground">{translateDateSimple(exp.date, locale)}</span>
                                 </div>
-                                {exp.description ? (
-                                  <p className="text-sm text-muted-foreground mb-2">
-                                    {exp.description}
-                                  </p>
-                                ) : null}
-                                {exp.technologies &&
-                                exp.technologies.length > 0 ? (
+                                {exp.description ? <p className="text-sm text-muted-foreground mb-2">{exp.description}</p> : null}
+                                {exp.technologies && exp.technologies.length > 0 ? (
                                   <div className="flex flex-wrap gap-2 mt-2">
-                                    {exp.technologies.map(
-                                      (tech: string, idx: number) => (
-                                        <span
-                                          key={idx}
-                                          className="px-3 py-1 bg-zinc-800/80 dark:bg-zinc-800/80 bg-gray-100/80 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 text-zinc-100 dark:text-zinc-100 text-gray-700 font-medium rounded-full text-xs"
-                                        >
-                                          {tech}
-                                        </span>
-                                      )
-                                    )}
+                                    {exp.technologies.map((tech: string, idx: number) => (
+                                      <span key={idx} className="px-3 py-1 bg-zinc-800/80 dark:bg-zinc-800/80 bg-gray-100/80 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 text-zinc-100 dark:text-zinc-100 text-gray-700 font-medium rounded-full text-xs">
+                                        {tech}
+                                      </span>
+                                    ))}
                                   </div>
                                 ) : null}
                               </div>
@@ -404,12 +304,7 @@ export default function ExperienceCarousel({
 
                           {/* Lien vers la page expériences */}
                           <div className="pt-4 border-t">
-                            <a
-                              href={`/experiences#${group.company
-                                .toLowerCase()
-                                .replace(/[^a-z0-9]+/g, "-")}`}
-                              className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
-                            >
+                            <a href={`/experiences#${group.company.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`} className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors">
                               <ExternalLink className="h-4 w-4" />
                               {tModals("viewOnPage")}
                             </a>
@@ -427,8 +322,7 @@ export default function ExperienceCarousel({
           onClick={next}
           className="hidden sm:flex items-center justify-center absolute right-[-2.5rem] md:right-[-3.5rem] top-1/2 -translate-y-1/2 z-20 p-2 md:p-3 rounded-full bg-background/90 border shadow-lg hover:bg-primary/10 transition-all duration-200"
           aria-label="Suivant"
-          style={{ boxShadow: "0 2px 16px 0 rgba(0,0,0,0.08)" }}
-        >
+          style={{ boxShadow: "0 2px 16px 0 rgba(0,0,0,0.08)" }}>
           <ChevronRight className="h-6 w-6" />
         </button>
       </div>
@@ -440,19 +334,14 @@ export default function ExperienceCarousel({
             <button
               key={index}
               onClick={() => setStartIndex(index * cardsToShow)}
-              className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                Math.floor(startIndex / cardsToShow) === index
-                  ? "bg-primary scale-125"
-                  : "bg-muted hover:bg-muted-foreground"
-              }`}
+              className={`w-3 h-3 rounded-full transition-all duration-200 ${Math.floor(startIndex / cardsToShow) === index ? "bg-primary scale-125" : "bg-muted hover:bg-muted-foreground"}`}
               aria-label={`Aller à la page ${index + 1}`}
             />
           ))}
         </div>
       )}
       <div className="text-center mt-4 text-sm text-muted-foreground">
-        {Math.floor(startIndex / cardsToShow) + 1} /{" "}
-        {Math.ceil(groupedExperiences.length / cardsToShow)}
+        {Math.floor(startIndex / cardsToShow) + 1} / {Math.ceil(groupedExperiences.length / cardsToShow)}
       </div>
     </div>
   );

@@ -4,6 +4,7 @@
   "featuredProjects": "Projets mis en avant",
   "featuredProjectsDescription": "Découvrez mes projets les plus importants et représentatifs de mon expertise",
   "featured": "Mis en avant",
+  "loading": "Chargement des projets...",
   "displaying": "Affichage de {count} projet{count, plural, one {} other {s}}",
   "noResults": "Aucun projet trouvé",
   "keyFeatures": "Fonctionnalités clés",

@@ -1,10 +1,10 @@
 {
-  "title": "Education & Certifications",
-  "subtitle": "My academic journey and professional certifications",
+  "title": "Education",
+  "subtitle": "My academic journey and certifications",
   "viewAll": "View all education",
   "loading": "Loading education...",
   "empty": "No education available",
-  "courseBadges": "Course Badges",
+  "courseBadges": "Certifications",
   "modals": {
     "courseDescription": "Course taken and proof",
     "period": "Period:",

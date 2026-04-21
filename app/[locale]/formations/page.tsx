@@ -9,6 +9,7 @@ import {
   MapPin,
   Award,
   ExternalLink,
+  BadgeCheck,
 } from "lucide-react";
 import {
   Card,
@@ -20,16 +21,100 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import LightParticles from "@/components/ui/light-particles";
-import { getAllFormations } from "@/lib/data";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogTrigger } from '@/components/ui/dialog';
 import { useTranslatedData } from "@/hooks/useTranslatedData";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 
-const formations = getAllFormations();
+type TranslatedFormation = ReturnType<ReturnType<typeof useTranslatedData>["getTranslatedFormation"]>;
+
+function FormationCard({ formation, locale, t }: { formation: TranslatedFormation; locale: string; t: ReturnType<typeof useTranslations<"Pages.formations">> }) {
+  return (
+    <Card className="sm:ml-16 transition-shadow hover:shadow-lg">
+      <CardHeader>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+          <div className="flex items-start gap-4">
+            {formation.logoUrl ? (
+              <img src={formation.logoUrl} alt={`Logo ${formation.institution}`} className="h-10 w-10 flex-shrink-0 rounded bg-white p-1 object-contain" />
+            ) : (
+              <div className="flex-shrink-0 rounded-lg bg-primary/10 p-2">
+                <GraduationCap className="h-6 w-6 text-primary" />
+              </div>
+            )}
+            <div className="min-w-0 flex-1">
+              <CardTitle className="mb-2 text-xl">{formation.title}</CardTitle>
+              <CardDescription className="text-base">{formation.institution}</CardDescription>
+            </div>
+          </div>
+          <div className="flex justify-start sm:justify-end">
+            <Badge variant="outline" className="rounded-full bg-primary/10 px-2 py-1 text-sm text-primary">
+              {formation.type}
+            </Badge>
+          </div>
+        </div>
+
+        <div className="mt-4 flex flex-wrap gap-4 text-sm text-muted-foreground">
+          <div className="flex items-center gap-1">
+            <Calendar className="h-4 w-4" />
+            {translateDateSimple(formation.date, locale)}
+          </div>
+          <div className="flex items-center gap-1">
+            <MapPin className="h-4 w-4" />
+            {formation.location}
+          </div>
+          {formation.mention && (
+            <div className="flex items-center gap-1">
+              <Award className="h-4 w-4" />
+              {formation.mention}
+            </div>
+          )}
+        </div>
+      </CardHeader>
+
+      <CardContent>
+        <p className="mb-4 text-muted-foreground">{formation.description}</p>
+        <div className="space-y-2">
+          <p className="text-sm font-medium">{t("skillsAcquired")}</p>
+          <div className="flex flex-wrap gap-2">
+            {formation.skills.map((skill) => (
+              <Badge key={`${formation.id}-${skill}`} variant="outline" className="text-xs">
+                {skill}
+              </Badge>
+            ))}
+          </div>
+        </div>
+        {formation.credentialUrl && (
+          <div className="mt-4">
+            <Button variant="outline" size="sm" asChild className="sweep-light">
+              <a href={formation.credentialUrl} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="mr-2 h-4 w-4" />
+                {t("verifyCertification")}
+              </a>
+            </Button>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
 
 export default function Formations() {
-  const t = useTranslations('Pages.formations');
+  const t = useTranslations("Pages.formations");
   const locale = useLocale();
   const { getTranslatedFormation } = useTranslatedData();
+  const { formations } = usePortfolioData();
+  const getStartYear = (date: string) => {
+    const matches = date.match(/\b(19|20)\d{2}\b/g);
+    if (!matches || matches.length === 0) {
+      return Number.MAX_SAFE_INTEGER;
+    }
+    return Number(matches[0]);
+  };
+
+  const diplomas = formations
+    .filter((formation) => formation.type === "Diplôme")
+    .sort((a, b) => getStartYear(a.date) - getStartYear(b.date))
+    .map((formation) => getTranslatedFormation(formation));
+  const badges = formations.filter((formation) => formation.type === "Certification").map((formation) => getTranslatedFormation(formation));
+
   return (
     <div className="py-6 md:py-8 px-6 relative">
       <LightParticles />
@@ -40,11 +125,7 @@ export default function Formations() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            {t('title')}
-          </h1>
-
-          {/* Barre horizontale stylisée moderne et dynamique */}
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{t("title")}</h1>
           <motion.div
             className="flex justify-center mb-6"
             initial={{ opacity: 0, scaleX: 0 }}
@@ -70,11 +151,10 @@ export default function Formations() {
           </motion.div>
 
           <p className="text-lg text-muted-foreground">
-            {t('subtitle')}
+            {t("subtitle")}
           </p>
         </motion.div>
 
-        {/* Section Diplômes avec Timeline */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -82,135 +162,30 @@ export default function Formations() {
           className="mb-16"
         >
           <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-            {t('diplomas')}
+            {t("diplomas")}
           </h2>
 
           <div className="relative">
-            {/* Timeline line */}
             <div className="hidden sm:block absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
 
             <div className="space-y-8">
-              {formations
-                .filter((f: any) => f.type === "Diplôme")
-                .map((formation: any, index: number) => {
-                  const translatedFormation = getTranslatedFormation(formation);
-                  return (
+              {diplomas.map((formation, index) => (
                   <motion.div
                     key={formation.id}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, delay: index * 0.1 }}
-                    id={formation.title
-                      .toLowerCase()
-                      .replace(/[^a-z0-9]+/g, "-")}
+                    id={formation.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
                     className="relative"
                   >
-                    {/* Timeline dot */}
                     <div className="hidden sm:block absolute left-6 top-6 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
-
-                    <Card className="sm:ml-16 hover:shadow-lg transition-shadow">
-                      <CardHeader>
-                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                          <div className="flex items-start gap-4">
-                            {formation.logoUrl ? (
-                              <img
-                                src={formation.logoUrl}
-                                alt={`Logo ${formation.institution}`}
-                                className="h-10 w-10 rounded object-contain bg-white p-1 flex-shrink-0"
-                              />
-                            ) : (
-                              <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
-                                <GraduationCap className="h-6 w-6 text-primary" />
-                              </div>
-                            )}
-                            <div className="flex-1 min-w-0">
-                              <CardTitle className="text-xl mb-2">
-                                {translatedFormation.title}
-                              </CardTitle>
-                              <CardDescription className="text-base">
-                                {translatedFormation.institution}
-                              </CardDescription>
-                            </div>
-                          </div>
-                          <div className="flex justify-start sm:justify-end">
-                            <Badge
-                              variant="outline"
-                              className="px-2 py-1 rounded-full bg-primary/10 text-primary text-sm"
-                            >
-                              {translatedFormation.type}
-                            </Badge>
-                          </div>
-                        </div>
-
-                        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mt-4">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="h-4 w-4" />
-                            {translateDateSimple(translatedFormation.date, locale)}
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <MapPin className="h-4 w-4" />
-                            {translatedFormation.location}
-                          </div>
-                          {translatedFormation.mention && (
-                            <div className="flex items-center gap-1">
-                              <Award className="h-4 w-4" />
-                                {translatedFormation.mention}
-                            </div>
-                          )}
-                        </div>
-                      </CardHeader>
-
-                      <CardContent>
-                        <p className="text-muted-foreground mb-4">
-                          {translatedFormation.description}
-                        </p>
-
-                        <div className="space-y-2">
-                          <p className="text-sm font-medium">
-                            {t('skillsAcquired')}
-                          </p>
-                          <div className="flex flex-wrap gap-2">
-                            {translatedFormation.skills.map((skill: string) => (
-                              <Badge
-                                key={skill}
-                                variant="outline"
-                                className="text-xs"
-                              >
-                                {skill}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-
-                        {translatedFormation.credentialUrl && (
-                          <div className="mt-4">
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              asChild
-                              className="sweep-light"
-                            >
-                              <a
-                                href={translatedFormation.credentialUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <ExternalLink className="h-4 w-4 mr-2" />
-                                {t('verifyCertification')}
-                              </a>
-                            </Button>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
+                    <FormationCard formation={formation} locale={locale} t={t} />
                   </motion.div>
-                  );
-                })}
+                ))}
             </div>
           </div>
         </motion.div>
 
-        {/* Section Certifications avec Timeline */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -218,321 +193,61 @@ export default function Formations() {
           className="mb-16"
         >
           <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-            {t('certifications')}
+            {t("courseBadges")}
           </h2>
-
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="hidden sm:block absolute left-8 top-0 bottom-0 w-0.5 bg-border"></div>
-
-            <div className="space-y-8">
-              {formations
-                .filter((f: any) => f.type === "Certification")
-                .map((formation: any, index: number) => {
-                  const translatedFormation = getTranslatedFormation(formation);
-                  return (
-                  <motion.div
-                    key={formation.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.8, delay: index * 0.1 }}
-                    id={formation.title
-                      .toLowerCase()
-                      .replace(/[^a-z0-9]+/g, "-")}
-                    className="relative"
-                  >
-                    {/* Timeline dot */}
-                    <div className="hidden sm:block absolute left-6 top-6 w-4 h-4 bg-primary rounded-full border-4 border-background"></div>
-
-                    <Card className="sm:ml-16 hover:shadow-lg transition-shadow">
-                      <CardHeader>
-                        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                          <div className="flex items-start gap-4">
-                            {formation.logoUrl ? (
-                              <img
-                                src={formation.logoUrl}
-                                alt={`Logo ${formation.institution}`}
-                                className="h-10 w-10 rounded object-contain bg-white p-1 flex-shrink-0"
-                              />
-                            ) : (
-                              <div className="p-2 rounded-lg bg-primary/10 flex-shrink-0">
-                                <GraduationCap className="h-6 w-6 text-primary" />
-                              </div>
-                            )}
-                            <div className="flex-1 min-w-0">
-                              <CardTitle className="text-xl mb-2">
-                                {translatedFormation.title}
-                              </CardTitle>
-                              <CardDescription className="text-base">
-                                {translatedFormation.institution}
-                              </CardDescription>
-                            </div>
-                          </div>
-                          <div className="flex justify-start sm:justify-end">
-                            <Badge
-                              variant="outline"
-                              className="px-2 py-1 rounded-full bg-primary/10 text-primary text-sm"
-                            >
-                              {translatedFormation.type}
-                            </Badge>
-                          </div>
-                        </div>
-
-                        <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mt-4">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="h-4 w-4" />
-                            {translateDateSimple(translatedFormation.date, locale)}
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <MapPin className="h-4 w-4" />
-                            {translatedFormation.location}
-                          </div>
-                          {translatedFormation.mention && (
-                            <div className="flex items-center gap-1">
-                              <Award className="h-4 w-4" />
-                                {translatedFormation.mention}
-                            </div>
-                          )}
-                        </div>
-                      </CardHeader>
-
-                      <CardContent>
-                        <p className="text-muted-foreground mb-4">
-                          {translatedFormation.description}
-                        </p>
-
-                        <div className="space-y-2">
-                          <p className="text-sm font-medium">
-                            {t('skillsAcquired')}
-                          </p>
-                          <div className="flex flex-wrap gap-2">
-                            {translatedFormation.skills.map((skill: string) => (
-                              <Badge
-                                key={skill}
-                                variant="outline"
-                                className="text-xs"
-                              >
-                                {skill}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-
-                        {translatedFormation.credentialUrl && (
-                          <div className="mt-4">
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              asChild
-                              className="sweep-light"
-                            >
-                              <a
-                                href={translatedFormation.credentialUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                <ExternalLink className="h-4 w-4 mr-2" />
-                                {t('verifyCertification')}
-                              </a>
-                            </Button>
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                  );
-                })}
-            </div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            {badges.map((badge, index) => (
+              <motion.article
+                key={badge.id}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className="rounded-2xl border border-border/60 bg-background/70 p-5 backdrop-blur-sm"
+              >
+                <div className="mb-4 flex items-start gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl border border-border/50 bg-white/90 p-2">
+                    {badge.logoUrl ? (
+                      <img src={badge.logoUrl} alt={`Logo ${badge.institution}`} className="h-8 w-8 object-contain" />
+                    ) : (
+                      <BadgeCheck className="h-5 w-5 text-primary" />
+                    )}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="line-clamp-2 text-base font-semibold text-foreground">{badge.title}</h3>
+                    <p className="text-sm text-muted-foreground">{badge.institution}</p>
+                  </div>
+                </div>
+                <div className="mb-3 flex flex-wrap gap-3 text-xs text-muted-foreground">
+                  <span className="inline-flex items-center gap-1">
+                    <Calendar className="h-3.5 w-3.5" />
+                    {translateDateSimple(badge.date, locale)}
+                  </span>
+                  <span className="inline-flex items-center gap-1">
+                    <MapPin className="h-3.5 w-3.5" />
+                    {badge.location}
+                  </span>
+                </div>
+                <p className="line-clamp-3 text-sm text-muted-foreground">{badge.description}</p>
+                {badge.credentialUrl && (
+                  <Button variant="outline" size="sm" asChild className="mt-4 w-full">
+                    <a href={badge.credentialUrl} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                      {t("verifyCertification")}
+                    </a>
+                  </Button>
+                )}
+              </motion.article>
+            ))}
+            {badges.length === 0 && (
+              <div className="col-span-full rounded-2xl border border-dashed border-border/60 bg-background/40 p-8 text-center text-sm text-muted-foreground">
+                {t("courseBadges")} : 0
+              </div>
+            )}
           </div>
         </motion.div>
 
-        {/* Section Badges de cours */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-16"
-        >
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-            {t('courseBadges')}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            {/* Carte cours: badge Cisco */}
-            <CourseCard 
-              title={t('badgeData.cisco.title')}
-              imageSrc="/images/education/badge-cybersecurity.png"
-              pdfHref="/documents/badge-cisco-certification.pdf"
-              organization={t('badgeData.cisco.organization')}
-              date={t('badgeData.cisco.date')}
-              courseDescription={t('modals.courseDescription')}
-              t={t}
-            />
-          </div>
-        </motion.div>
-
-        {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-16"
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
-              {/* Dégradé de base avec vraie transition */}
-              <div 
-                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
-                style={{ 
-                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
-                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
-                }} 
-              >
-                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div className="relative z-10 text-center">
-                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">5+</div>
-                <div className="text-sm text-muted-foreground">
-                  Années d'études
-                </div>
-              </div>
-            </div>
-            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
-              {/* Dégradé de base avec vraie transition */}
-              <div 
-                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
-                style={{ 
-                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
-                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
-                }} 
-              >
-                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm0 3a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div className="relative z-10 text-center">
-                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
-                  {formations.filter((f: any) => f.type === "Diplôme").length}
-                </div>
-                 <div className="text-sm text-muted-foreground">{t('diplomas')}</div>
-              </div>
-            </div>
-            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
-              {/* Dégradé de base avec vraie transition */}
-              <div 
-                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
-                style={{ 
-                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
-                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
-                }} 
-              >
-                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div className="relative z-10 text-center">
-                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">
-                  {formations.filter((f: any) => f.type === "Certification").length}
-                </div>
-                 <div className="text-sm text-muted-foreground">
-                   {t('certifications')}
-                 </div>
-              </div>
-            </div>
-            <div className="relative overflow-hidden p-6 rounded-2xl border border-primary/30 bg-card hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
-              {/* Dégradé de base avec vraie transition */}
-              <div 
-                className="absolute top-0 left-0 w-20 h-20 shadow-lg flex items-start justify-start pt-2 pl-2" 
-                style={{ 
-                  clipPath: 'polygon(0 0, 100% 0, 0 100%)',
-                  backgroundImage: 'linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.6) 30%, hsl(var(--primary) / 0.3) 60%, #000 100%)'
-                }} 
-              >
-                <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div className="relative z-10 text-center">
-                <div className="text-4xl font-black text-primary mb-1 drop-shadow-lg">1</div>
-                <div className="text-sm text-muted-foreground">Badges</div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </div>
   );
 }
 
-// Carte de cours avec tooltip + modale
-function CourseCard({ title, imageSrc, pdfHref, organization, date, courseDescription, t }: { 
-  title: string; 
-  imageSrc: string; 
-  pdfHref?: string;
-  organization: string;
-  date: string;
-  courseDescription: string;
-  t: any;
-}) {
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Card className="relative h-full rounded-3xl shadow-xl bg-gradient-to-br from-zinc-900/95 via-zinc-800/90 to-zinc-900/95 dark:from-zinc-900/95 dark:via-zinc-800/90 dark:to-zinc-900/95 from-white/95 via-gray-50/90 to-white/95 backdrop-blur-md border-2 border-zinc-600/80 dark:border-zinc-600/80 border-gray-300/80 hover:border-primary/40 dark:hover:border-primary/40 hover:border-blue-400/50 hover:shadow-lg hover:shadow-primary/10 dark:hover:shadow-primary/20 transition-all duration-300 group-hover:-translate-y-2 overflow-hidden cursor-pointer ring-1 ring-zinc-800/50 dark:ring-zinc-800/50 ring-gray-200/50">
-          <div className="p-6">
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-16 h-16 flex items-center justify-center">
-                <img src={imageSrc} alt={title} className="w-full h-full object-contain" />
-              </div>
-            </div>
-            
-            <h3 className="text-lg font-bold mb-2 text-foreground group-hover:text-primary transition-colors line-clamp-2 text-center">
-              {title}
-            </h3>
-            
-            <div className="space-y-2 text-center">
-              <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                <span className="font-medium">{t('courseCard.organization')}</span>
-                <span>{organization}</span>
-              </div>
-              <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-                <span className="font-medium">{t('courseCard.date')}</span>
-                <span>{date}</span>
-              </div>
-            </div>
-          </div>
-        </Card>
-      </DialogTrigger>
-      <DialogContent className="w-[95vw] sm:w-auto max-w-xl max-h-[90vh] overflow-y-auto p-4 sm:p-6 pt-8">
-        <DialogHeader className="pr-10 mb-4">
-          <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{courseDescription}</DialogDescription>
-        </DialogHeader>
-
-        <div className="space-y-6">
-          <div className="rounded-lg overflow-hidden bg-muted flex items-center justify-center p-4">
-            <img src={imageSrc} alt={title} className="max-h-60 object-contain" />
-          </div>
-          <div className="text-sm text-muted-foreground">
-            {t('courseCard.obtainedDate')} {date}
-          </div>
-          <div className="text-sm text-muted-foreground">
-            {t('courseCard.organizationName')} {organization}
-          </div>
-          {pdfHref ? (
-            <div className="text-sm">
-              <a
-                href={pdfHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
-              >
-                {t('courseCard.viewDocument')}
-              </a>
-            </div>
-          ) : null}
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-}

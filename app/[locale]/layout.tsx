@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Inter, JetBrains_Mono, Nunito } from 'next/font/google';
 import '../globals.css';
 import Navigation from '@/components/Navigation';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { IMAGES } from '@/lib/images';
 import Footer from '@/components/Footer';
 import BackToTop from '@/components/BackToTop';
+import Chatbot from '@/components/Chatbot';
 import StructuredData from '@/components/StructuredData';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
@@ -17,6 +18,11 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const jetbrainsMono = JetBrains_Mono({ 
   subsets: ['latin'], 
   variable: '--font-mono' 
+});
+const nunito = Nunito({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  weight: ["600", "700", "800"],
 });
 
 export function generateStaticParams() {
@@ -137,7 +143,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body id="top" className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <body id="top" className={`${inter.variable} ${jetbrainsMono.variable} ${nunito.variable} font-sans antialiased`}>
         <StructuredData />
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
@@ -152,6 +158,7 @@ export default async function LocaleLayout({
             </main>
             <Footer />
             <BackToTop />
+            <Chatbot />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
