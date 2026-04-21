@@ -585,6 +585,34 @@
         "Image and code optimizations"
       ],
       "date": "Oct 2025 - Oct 2025"
+    },
+    {
+      "id": 41,
+      "title": "IXS Valuation Simulator",
+      "description": "Tokenomics simulation tool to model market cap scenarios and protocol-driven value flows.",
+      "longDescription": "Designed and developed a tokenomics simulation tool for IXS using Next.js, focused on modeling market cap scenarios and protocol-driven value flows. Implemented dynamic calculations for MC/TVL ratios, implied token price, and portfolio valuation based on customizable assumptions. Built an interactive system to simulate multiple revenue streams (DEX fees, launchpad, SaaS, yield), including automated buyback and burn mechanics. Structured a flexible architecture allowing real-time parameter adjustments and instant financial projections. Focused on performance and UX to deliver a clear, responsive interface for exploring complex economic models.",
+      "status": "Completed",
+      "category": "Web3",
+      "role": "Frontend Engineer",
+      "duration": "1 month",
+      "features": [
+        "Interactive simulation of market cap scenarios and protocol value flows",
+        "Dynamic MC/TVL, implied token price, and portfolio valuation calculations",
+        "Multi-stream revenue modeling (DEX fees, launchpad, SaaS, yield)",
+        "Automated buyback and burn mechanics",
+        "Real-time parameter tuning with instant projections"
+      ],
+      "challenges": [
+        "Making complex tokenomics models understandable for decision-making",
+        "Keeping projections fast and stable with real-time recalculations",
+        "Building a flexible model that supports multiple revenue assumptions"
+      ],
+      "solutions": [
+        "Scenario-oriented modular simulation architecture",
+        "Optimized calculation engine for instant updates",
+        "Clear, high-performance UX for economic model exploration"
+      ],
+      "date": "Mar 2026 - Mar 2026"
     }
   ]
 }

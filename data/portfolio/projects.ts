@@ -811,5 +811,43 @@ export const projectsData: Project[] = [
     duration: "En cours",
     teamSize: 1,
     role: "Frontend Engineer"
+  },
+  {
+    id: 41,
+    title: "IXS Valuation Simulator",
+    description: "Tokenomics simulation tool to model market cap scenarios and protocol-driven value flows.",
+    longDescription:
+      "Designed and developed a tokenomics simulation tool for IXS using Next.js, focused on modeling market cap scenarios and protocol-driven value flows. Implemented dynamic calculations for MC/TVL ratios, implied token price, and portfolio valuation based on customizable assumptions. Built an interactive system to simulate multiple revenue streams (DEX fees, launchpad, SaaS, yield), including automated buyback and burn mechanics. Structured a flexible architecture allowing real-time parameter adjustments and instant financial projections. Focused on performance and UX to deliver a clear, responsive interface for exploring complex economic models.",
+    image: "/images/projects/ixs-valuation-simulator/ixs-valuation-simulator_1.png",
+    technologies: ["Next.js", "TypeScript", "React", "Tailwind CSS", "Tokenomics", "Data Modeling"],
+    date: "Mar 2026 - Mar 2026",
+    status: "Terminé",
+    github: "https://github.com/ThibautMilville",
+    demo: "https://ixs-valuation-simulator.vercel.app/",
+    category: "Web3",
+    screenshots: [
+      "/images/projects/ixs-valuation-simulator/ixs-valuation-simulator_1.png",
+      "/images/projects/ixs-valuation-simulator/ixs-valuation-simulator_2.png"
+    ],
+    features: [
+      "Simulation interactive de scénarios de market cap et flux de valeur protocole",
+      "Calculs dynamiques MC/TVL, prix implicite du token et valorisation de portefeuille",
+      "Modélisation de revenus multi-sources (DEX fees, launchpad, SaaS, yield)",
+      "Mécaniques automatisées de buyback et burn",
+      "Ajustement temps réel des paramètres avec projections instantanées"
+    ],
+    challenges: [
+      "Rendre lisibles des modèles tokenomics complexes pour la prise de décision",
+      "Maintenir des projections fluides avec recalculs en temps réel",
+      "Structurer un modèle flexible couvrant plusieurs hypothèses de revenus"
+    ],
+    solutions: [
+      "Architecture modulaire de simulation orientée scénarios",
+      "Moteur de calcul optimisé pour mises à jour instantanées",
+      "Interface claire et performante centrée UX pour exploration économique"
+    ],
+    duration: "1 mois",
+    teamSize: 1,
+    role: "Frontend Engineer"
   }
 ];

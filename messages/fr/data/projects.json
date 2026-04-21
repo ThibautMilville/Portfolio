@@ -593,6 +593,34 @@
         "Optimisations images et code"
       ],
       "date": "Oct 2025 - Oct 2025"
+    },
+    {
+      "id": 41,
+      "title": "IXS Valuation Simulator",
+      "description": "Outil de simulation tokenomics pour modéliser des scénarios de market cap et les flux de valeur du protocole.",
+      "longDescription": "Conception et développement d'un outil de simulation tokenomics pour IXS avec Next.js, orienté sur la modélisation de scénarios de capitalisation et des flux de valeur pilotés par le protocole. Implémentation de calculs dynamiques pour les ratios MC/TVL, le prix implicite du token et la valorisation de portefeuille selon des hypothèses personnalisables. Construction d'un système interactif simulant plusieurs sources de revenus (frais DEX, launchpad, SaaS, yield), incluant des mécanismes automatisés de buyback et burn. Mise en place d'une architecture flexible permettant des ajustements de paramètres en temps réel et des projections financières instantanées. Priorité donnée à la performance et à l'UX pour fournir une interface claire et réactive sur des modèles économiques complexes.",
+      "status": "Terminé",
+      "category": "Web3",
+      "role": "Frontend Engineer",
+      "duration": "1 mois",
+      "features": [
+        "Simulation interactive de scénarios de market cap et flux de valeur protocole",
+        "Calculs dynamiques MC/TVL, prix implicite du token et valorisation de portefeuille",
+        "Modélisation de revenus multi-sources (frais DEX, launchpad, SaaS, yield)",
+        "Mécaniques automatisées de buyback et burn",
+        "Ajustement temps réel des paramètres avec projections instantanées"
+      ],
+      "challenges": [
+        "Rendre lisibles des modèles tokenomics complexes pour la prise de décision",
+        "Maintenir des projections fluides avec recalculs en temps réel",
+        "Structurer un modèle flexible couvrant plusieurs hypothèses de revenus"
+      ],
+      "solutions": [
+        "Architecture modulaire de simulation orientée scénarios",
+        "Moteur de calcul optimisé pour mises à jour instantanées",
+        "Interface claire et performante centrée UX pour exploration économique"
+      ],
+      "date": "Mar 2026 - Mar 2026"
     }
   ]
 }
