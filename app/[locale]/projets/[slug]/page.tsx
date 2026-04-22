@@ -1,8 +1,12 @@
 import { getProjectBySlug } from "@/services/ProjectService";
 import { getRelatedExperience, getRelatedFormations } from "@/services/RelationService";
+import { projectsData } from "@/data/portfolio";
+import { getProjectSlug } from "@/services/ProjectService";
 import type { Project, Experience, Formation } from "@/types/portfolio";
 import { notFound } from "next/navigation";
 import ClientProjectPage from "./project-client";
+
+export const dynamicParams = true;
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -20,5 +24,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 }
 
 export function generateStaticParams() {
-  return [];
+  return projectsData.map((project) => ({
+    slug: getProjectSlug(project)
+  }));
 }
