@@ -35,7 +35,7 @@ export const experiencesData: Experience[] = [
   },
   {
     id: 11,
-    title: "Software Engineer",
+    title: "Web3 Software Engineer",
     company: "Ultra Tech Alliance (UTA)",
     location: "Paris, Île-de-France, France · Remote",
     date: "Oct 2024 - Présent",
@@ -64,7 +64,7 @@ export const experiencesData: Experience[] = [
   },
   {
     id: 10,
-    title: "Junior Software Engineer",
+    title: "Web3 Software Engineer",
     company: "Black Ice Studios Inc.",
     location: "Montréal, Québec, Canada · Remote",
     date: "Aug 2025 - Présent",
@@ -154,7 +154,7 @@ export const experiencesData: Experience[] = [
   },
   {
     id: 9,
-    title: "Junior Software Engineer and Community Contributor",
+    title: "Web3 Software Engineer",
     company: "Ultra Times",
     location: "Bangkok, Thailand · Remote",
     date: "Oct 2024 - Présent",
@@ -181,7 +181,7 @@ export const experiencesData: Experience[] = [
   },
   {
     id: 1,
-    title: "Junior Software Engineer",
+    title: "Software Engineer",
     company: "SNCF Voyageurs",
     location: "Paris, Île-de-France, France",
     date: "Sep 2024 - Présent",

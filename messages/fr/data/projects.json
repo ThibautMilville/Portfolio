@@ -562,7 +562,7 @@
         "Processus Agile optimisé",
         "Automatisation des rapports"
       ],
-      "date": "Sep 2025 - Présent"
+      "date": "Sep 2025 - Nov 2025"
     },
     {
       "id": 38,
@@ -621,6 +621,90 @@
         "Interface claire et performante centrée UX pour exploration économique"
       ],
       "date": "Mar 2026 - Mar 2026"
+    },
+    {
+      "id": 42,
+      "title": "Film Solaire 75",
+      "description": "Site vitrine SEO-first pour les services de films solaires à Paris.",
+      "longDescription": "Pilotage du design et du développement frontend du site Film Solaire 75, conçu comme une plateforme de conversion dans un marché local très concurrentiel. Développement d'un site rapide, responsive et orienté SEO avec Next.js, TypeScript et Tailwind. Déploiement d'une stratégie SEO locale complète : structuration sémantique, clustering de mots-clés, métadonnées optimisées, maillage interne avancé, SEO technique (sitemap, robots.txt, canonicals, structured data, Core Web Vitals) et suivi continu via Google Search Console.",
+      "status": "Terminé",
+      "category": "Showcase",
+      "role": "Frontend Engineer",
+      "duration": "1 mois",
+      "features": [
+        "Plateforme locale orientée conversion pour le marché parisien",
+        "Stratégie SEO locale avec clustering sémantique et pages structurées",
+        "Maillage interne entre pages services pour renforcer l'autorité thématique",
+        "Optimisations techniques SEO (sitemap, robots, canonicals, structured data, CWV)",
+        "Parcours utilisateurs conversion-first avec CTA et signaux de confiance"
+      ],
+      "challenges": [
+        "Se positionner sur des requêtes locales à forte intention dans un marché concurrentiel",
+        "Maintenir performance, UX et crawlabilité sur un site riche en contenus SEO",
+        "Transformer le trafic organique local en leads qualifiés"
+      ],
+      "solutions": [
+        "Architecture de contenu orientée intention de recherche et points de douleur utilisateurs",
+        "Système de maillage interne avancé pour profondeur de crawl et diffusion d'autorité",
+        "Pilotage continu via Search Console pour itérer sur indexation et performance"
+      ],
+      "date": "Feb 2026 - Feb 2026"
+    },
+    {
+      "id": 43,
+      "title": "Film Solaire 77",
+      "description": "Site vitrine conversion-first et SEO-optimisé pour la Seine-et-Marne.",
+      "longDescription": "Pilotage du design et du développement frontend du site Film Solaire 77 pour créer une présence web moderne et orientée conversion. Développement d'un site responsive et optimisé SEO avec Next.js, TypeScript et Tailwind. Mise en place d'une stratégie SEO robuste (structure sémantique, recherche de mots-clés, on-page), d'un maillage interne fort, d'optimisations SEO techniques (sitemap, robots, canonicals, Core Web Vitals) et d'un suivi continu dans Google Search Console.",
+      "status": "Terminé",
+      "category": "Showcase",
+      "role": "Frontend Engineer",
+      "duration": "1 mois",
+      "features": [
+        "Site vitrine moderne avec parcours orientés conversion",
+        "SEO on-page complet (structure, mots-clés, métadonnées, headings)",
+        "Maillage interne pour crawlabilité et distribution d'autorité",
+        "SEO technique (sitemap, robots, canonicals, Core Web Vitals)",
+        "Navigation claire avec formulaires de devis et CTA optimisés"
+      ],
+      "challenges": [
+        "Améliorer la visibilité organique sur un périmètre local concurrentiel",
+        "Concilier performance technique et profondeur SEO",
+        "Augmenter la crédibilité et la conversion via UX et contenus"
+      ],
+      "solutions": [
+        "Stratégie SEO robuste pilotée par recherche de mots-clés et suivi GSC",
+        "Architecture de liens internes pour guider crawl et utilisateurs vers pages à forte conversion",
+        "Design aligné identité de marque avec emphase sur professionnalisme et confiance"
+      ],
+      "date": "Feb 2026 - Feb 2026"
+    },
+    {
+      "id": 44,
+      "title": "Film Solaire IDF",
+      "description": "Plateforme SEO scalable ciblant toute l'Île-de-France.",
+      "longDescription": "Pilotage du design et du développement frontend du site Film Solaire IDF, conçu pour couvrir à grande échelle toute la région Île-de-France. Développement d'un site rapide, responsive et SEO-first avec Next.js, TypeScript et Tailwind. Exécution d'une stratégie SEO régionale (pages par zone géographique et clusters services), maillage interne avancé, SEO technique à grande échelle et suivi d'indexation/performance via Google Search Console.",
+      "status": "Terminé",
+      "category": "Showcase",
+      "role": "Frontend Engineer",
+      "duration": "1 mois",
+      "features": [
+        "Plateforme SEO scalable orientée couverture Île-de-France",
+        "Structure par zones géographiques et clusters de services",
+        "Maillage interne avancé entre pages localisées, services et conversion",
+        "SEO technique à grande échelle (sitemap dynamique, robots, canonicals, structured data)",
+        "UX conversion-first avec CTA régionaux et présentation claire des services"
+      ],
+      "challenges": [
+        "Gérer une stratégie SEO multi-zones avec forte volumétrie de pages",
+        "Maintenir la qualité UX/mobile avec un ciblage géographique étendu",
+        "Assurer indexation et performance homogènes à l'échelle régionale"
+      ],
+      "solutions": [
+        "Architecture modulaire combinant segmentation géographique et intention de recherche",
+        "Pilotage continu via Search Console pour détecter gaps d'indexation et optimiser",
+        "Optimisations performance/accessibilité pour maximiser engagement et conversion mobile"
+      ],
+      "date": "Feb 2026 - Feb 2026"
     }
   ]
 }

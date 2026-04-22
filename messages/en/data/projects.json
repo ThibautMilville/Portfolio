@@ -554,7 +554,7 @@
         "Optimized Agile process",
         "Report automation"
       ],
-      "date": "Sep 2025 - Present"
+      "date": "Sep 2025 - Nov 2025"
     },
     {
       "id": 38,
@@ -613,6 +613,90 @@
         "Clear, high-performance UX for economic model exploration"
       ],
       "date": "Mar 2026 - Mar 2026"
+    },
+    {
+      "id": 42,
+      "title": "Film Solaire 75",
+      "description": "SEO-first showcase website for window film services in Paris.",
+      "longDescription": "Led the design and frontend development of the Film Solaire 75 showcase website, creating a high-conversion platform for a competitive local market in Paris. Built a fast, responsive, SEO-driven website using Next.js, TypeScript, and Tailwind. Implemented a comprehensive local SEO strategy with semantic page structures, keyword clustering, optimized metadata, advanced internal linking, technical SEO best practices, and continuous monitoring via Google Search Console.",
+      "status": "Completed",
+      "category": "Showcase",
+      "role": "Frontend Engineer",
+      "duration": "1 month",
+      "features": [
+        "Local conversion-focused platform for the Paris market",
+        "Local SEO strategy with semantic clustering and structured pages",
+        "Strong internal linking between service pages to improve topical authority",
+        "Technical SEO optimization (sitemap, robots, canonicals, structured data, CWV)",
+        "Conversion-first user journeys with strong CTAs and trust signals"
+      ],
+      "challenges": [
+        "Ranking on high-intent local keywords in a competitive market",
+        "Maintaining performance, UX, and crawlability on SEO-rich content",
+        "Turning local organic traffic into qualified leads"
+      ],
+      "solutions": [
+        "Intent-driven content architecture targeting user pain points",
+        "Advanced internal linking system to maximize crawl depth and authority",
+        "Continuous iteration through Search Console indexing/performance insights"
+      ],
+      "date": "Feb 2026 - Feb 2026"
+    },
+    {
+      "id": 43,
+      "title": "Film Solaire 77",
+      "description": "Conversion-focused and SEO-optimized showcase website for Seine-et-Marne.",
+      "longDescription": "Led the design and frontend development of the Film Solaire 77 showcase website, delivering a modern and conversion-focused online presence. Built a responsive, SEO-optimized website using Next.js, TypeScript, and Tailwind. Implemented robust on-page and technical SEO, strong internal linking, and Google Search Console monitoring to improve visibility and conversion performance.",
+      "status": "Completed",
+      "category": "Showcase",
+      "role": "Frontend Engineer",
+      "duration": "1 month",
+      "features": [
+        "Modern showcase website with conversion-oriented user flows",
+        "Complete on-page SEO (semantic structure, keywords, metadata)",
+        "Internal linking architecture for crawlability and authority distribution",
+        "Technical SEO setup (sitemap, robots, canonicals, Core Web Vitals)",
+        "Clear navigation with quote forms and optimized CTAs"
+      ],
+      "challenges": [
+        "Improving organic visibility on a local competitive scope",
+        "Balancing technical performance with SEO depth",
+        "Increasing brand trust and conversion through UX and content"
+      ],
+      "solutions": [
+        "Keyword-driven SEO strategy combined with Search Console iteration",
+        "Internal-linking architecture guiding users toward high-conversion pages",
+        "Brand-aligned UI emphasizing professionalism and service quality"
+      ],
+      "date": "Feb 2026 - Feb 2026"
+    },
+    {
+      "id": 44,
+      "title": "Film Solaire IDF",
+      "description": "Scalable SEO platform targeting the full Île-de-France region.",
+      "longDescription": "Led the design and frontend development of the Film Solaire IDF showcase website, building a scalable platform for Île-de-France. Developed a fast, responsive, SEO-first website using Next.js, TypeScript, and Tailwind. Executed a regional SEO strategy combining location-based pages and service clusters, advanced internal linking, large-scale technical SEO, and continuous indexing/performance monitoring in Google Search Console.",
+      "status": "Completed",
+      "category": "Showcase",
+      "role": "Frontend Engineer",
+      "duration": "1 month",
+      "features": [
+        "Scalable SEO platform for full Île-de-France coverage",
+        "Geographic structure by departments/cities and service clusters",
+        "Advanced internal linking between location, service, and conversion pages",
+        "Large-scale technical SEO (dynamic sitemap, robots, canonicals, structured data)",
+        "Conversion-first UX with regional CTAs and clear service presentation"
+      ],
+      "challenges": [
+        "Managing multi-location SEO strategy with large page volume",
+        "Maintaining UX/mobile quality while scaling geographic targeting",
+        "Ensuring stable indexing and performance across the region"
+      ],
+      "solutions": [
+        "Modular architecture combining geographic segmentation and user intent",
+        "Continuous Search Console monitoring to close indexing/coverage gaps",
+        "Performance and accessibility optimizations to maximize mobile conversion"
+      ],
+      "date": "Feb 2026 - Feb 2026"
     }
   ]
 }

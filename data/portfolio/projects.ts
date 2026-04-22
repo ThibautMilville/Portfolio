@@ -688,7 +688,7 @@ export const projectsData: Project[] = [
       "Contribution au développement de FED V3, une plateforme interne SNCF conçue pour suivre l'avancement des projets d'infrastructure, couvrant à la fois la gestion financière et l'exécution de la construction. Développement et maintenance des fonctionnalités clés en utilisant React (frontend) et NestJS/MySQL (backend), assurant un flux de données fiable et un suivi de projet intuitif. Collaboration avec les équipes de design en Figma pour livrer une interface utilisateur propre et efficace alignée sur les standards internes SNCF. Opération dans un environnement Agile, participation aux sprints, daily stand-ups et reviews pour assurer une livraison continue et la collaboration. Optimisation des workflows et réduction du temps de reporting manuel, économisant aux équipes de projet plusieurs heures par semaine et améliorant la coordination inter-départementale.",
     image: "/images/projects/fed-v3/fed-v3.png",
     technologies: ["React.js", "NestJS", "Node.js", "MySQL", "Figma", "Agile", "Git"],
-    date: "Sep 2025 - Présent",
+    date: "Sep 2025 - Nov 2025",
     status: "En cours",
     github: "https://github.com/ThibautMilville",
     demo: null,
@@ -845,6 +845,114 @@ export const projectsData: Project[] = [
       "Architecture modulaire de simulation orientée scénarios",
       "Moteur de calcul optimisé pour mises à jour instantanées",
       "Interface claire et performante centrée UX pour exploration économique"
+    ],
+    duration: "1 mois",
+    teamSize: 1,
+    role: "Frontend Engineer"
+  },
+  {
+    id: 42,
+    title: "Film Solaire 75",
+    description: "SEO-first showcase website for window film services in Paris.",
+    longDescription:
+      "Led the design and frontend development of the Film Solaire 75 showcase website, creating a high-conversion platform tailored to a competitive local market in Paris. Built a fast, responsive, and SEO-driven website using Next.js, TypeScript, and Tailwind, ensuring strong performance and visibility on high-intent local queries. Designed and deployed a comprehensive SEO strategy focused on local ranking domination, including semantic page structures, keyword clustering (e.g., film solaire Paris, film anti-chaleur 75), and optimized metadata. Engineered a powerful internal linking system connecting service pages to improve crawl depth, topical authority, and conversion pathways. Implemented technical SEO best practices, integrated Google Search Console, and designed conversion-focused user journeys with strong CTAs and localized content.",
+    image: "/images/projects/film-solaire-75/film-solaire-75_1.png",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "SEO", "Technical SEO", "Google Search Console"],
+    date: "Feb 2026 - Feb 2026",
+    status: "Terminé",
+    github: "https://github.com/ThibautMilville",
+    demo: "https://film-solaire-75.fr",
+    category: "Showcase",
+    relatedExperienceId: 4,
+    screenshots: ["/images/projects/film-solaire-75/film-solaire-75_1.png"],
+    features: [
+      "Plateforme locale orientée conversion pour le marché parisien",
+      "Stratégie SEO locale avec clustering sémantique et pages structurées",
+      "Maillage interne entre pages services pour renforcer l'autorité thématique",
+      "Optimisations techniques SEO (sitemap, robots, canonicals, structured data, CWV)",
+      "Parcours utilisateurs conversion-first avec CTA et signaux de confiance"
+    ],
+    challenges: [
+      "Se positionner sur des requêtes locales à forte intention dans un marché concurrentiel",
+      "Maintenir performance, UX et crawlabilité sur un site riche en contenus SEO",
+      "Transformer le trafic organique local en leads qualifiés"
+    ],
+    solutions: [
+      "Architecture de contenu orientée intention de recherche et points de douleur utilisateurs",
+      "Système de maillage interne avancé pour profondeur de crawl et diffusion d'autorité",
+      "Pilotage continu via Search Console pour itérer sur indexation et performance"
+    ],
+    duration: "1 mois",
+    teamSize: 1,
+    role: "Frontend Engineer"
+  },
+  {
+    id: 43,
+    title: "Film Solaire 77",
+    description: "Conversion-focused and SEO-optimized showcase website for Seine-et-Marne.",
+    longDescription:
+      "Led the design and frontend development of the Film Solaire 77 showcase website, creating a modern and conversion-focused online presence for a window tinting business. Built a responsive and SEO-optimized website using Next.js, TypeScript, and Tailwind, ensuring fast load times and strong visibility on search engines. Designed a robust SEO strategy, including semantic structuring, keyword research, and on-page optimization. Implemented a strong internal linking architecture, managed technical SEO aspects such as sitemap, robots.txt, canonical tags, and Core Web Vitals optimization, and integrated Google Search Console for continuous iteration. Designed clear user journeys to highlight services, pricing clarity, and trust elements, with optimized quote-request conversion flows.",
+    image: "/images/projects/film-solaire-77/film-solaire-77_1.png",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "SEO", "Technical SEO", "Google Search Console"],
+    date: "Feb 2026 - Feb 2026",
+    status: "Terminé",
+    github: "https://github.com/ThibautMilville",
+    demo: "https://film-solaire-77.fr",
+    category: "Showcase",
+    relatedExperienceId: 4,
+    screenshots: ["/images/projects/film-solaire-77/film-solaire-77_1.png"],
+    features: [
+      "Site vitrine moderne avec parcours orientés conversion",
+      "SEO on-page complet (structure, mots-clés, métadonnées, headings)",
+      "Maillage interne pour crawlabilité et distribution d'autorité",
+      "SEO technique (sitemap, robots, canonicals, Core Web Vitals)",
+      "Navigation claire avec formulaires de devis et CTA optimisés"
+    ],
+    challenges: [
+      "Améliorer la visibilité organique sur un périmètre local concurrentiel",
+      "Concilier performance technique et profondeur SEO",
+      "Augmenter la crédibilité et la conversion via UX et contenus"
+    ],
+    solutions: [
+      "Stratégie SEO robuste pilotée par recherche de mots-clés et suivi GSC",
+      "Architecture de liens internes pour guider crawl et utilisateurs vers pages à forte conversion",
+      "Design aligné identité de marque avec emphase sur professionnalisme et confiance"
+    ],
+    duration: "1 mois",
+    teamSize: 1,
+    role: "Frontend Engineer"
+  },
+  {
+    id: 44,
+    title: "Film Solaire IDF",
+    description: "Scalable SEO platform targeting the full Île-de-France region.",
+    longDescription:
+      "Led the design and frontend development of the Film Solaire IDF showcase website, building a scalable platform targeting the entire Île-de-France region. Developed a fast, responsive, and SEO-first website using Next.js, TypeScript, and Tailwind, optimized for performance and large-scale geographic targeting. Designed and executed a regional SEO strategy with location-based structures and service keyword clusters. Built an advanced internal linking architecture connecting location pages, service pages, and conversion pages. Implemented technical SEO best practices at scale, integrated Google Search Console for indexing and coverage monitoring, and crafted conversion-focused UX to drive high-quality inbound leads across the region.",
+    image: "/images/projects/film-solaire-idf/film-solaire-idf_1.png",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "SEO", "Technical SEO", "Google Search Console"],
+    date: "Feb 2026 - Feb 2026",
+    status: "Terminé",
+    github: "https://github.com/ThibautMilville",
+    demo: "https://film-solaire-idf.fr",
+    category: "Showcase",
+    relatedExperienceId: 4,
+    screenshots: ["/images/projects/film-solaire-idf/film-solaire-idf_1.png"],
+    features: [
+      "Plateforme SEO scalable orientée couverture Île-de-France",
+      "Structure par zones géographiques et clusters de services",
+      "Maillage interne avancé entre pages localisées, services et conversion",
+      "SEO technique à grande échelle (sitemap dynamique, robots, canonicals, structured data)",
+      "UX conversion-first avec CTA régionaux et présentation claire des services"
+    ],
+    challenges: [
+      "Gérer une stratégie SEO multi-zones avec forte volumétrie de pages",
+      "Maintenir la qualité UX/mobile avec un ciblage géographique étendu",
+      "Assurer indexation et performance homogènes à l'échelle régionale"
+    ],
+    solutions: [
+      "Architecture modulaire combinant segmentation géographique et intention de recherche",
+      "Pilotage continu via Search Console pour détecter gaps d'indexation et optimiser",
+      "Optimisations performance/accessibilité pour maximiser engagement et conversion mobile"
     ],
     duration: "1 mois",
     teamSize: 1,
