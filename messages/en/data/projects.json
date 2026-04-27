@@ -587,6 +587,60 @@
       "date": "Oct 2025 - Oct 2025"
     },
     {
+      "id": 39,
+      "title": "CLOAK Website",
+      "description": "Public website presenting the CLOAK zero-knowledge protocol and ecosystem.",
+      "longDescription": "Led frontend development of cloak.today, the public-facing website introducing the CLOAK zero-knowledge privacy protocol and its ecosystem. Built a high-quality, responsive marketing website using Next.js, TypeScript, and Tailwind, and integrated an AI-powered chatbot to help users explore product capabilities and documentation through natural conversations. Worked closely with product and protocol stakeholders to structure key messaging around privacy, tokenomics, governance, and roadmap while optimizing SEO, performance, and accessibility.",
+      "status": "Completed",
+      "category": "Web3",
+      "role": "Frontend Engineer",
+      "duration": "2 months",
+      "features": [
+        "Responsive, conversion-oriented marketing website",
+        "AI chatbot integration for user onboarding",
+        "Clear content architecture (privacy, tokenomics, governance, roadmap)",
+        "SEO, performance, and accessibility optimization"
+      ],
+      "challenges": [
+        "Making zero-knowledge concepts understandable for mixed audiences",
+        "Maintaining strong product credibility with simple UX",
+        "Improving protocol visibility and discoverability"
+      ],
+      "solutions": [
+        "Structured and progressive product storytelling",
+        "Consistent design system focused on clarity",
+        "Advanced technical optimizations for performance, SEO, and accessibility"
+      ],
+      "date": "Nov 2025 - Dec 2025"
+    },
+    {
+      "id": 40,
+      "title": "CLOAK Web App",
+      "description": "Privacy-first web application to interact with the CLOAK Shielded Protocol.",
+      "longDescription": "Led frontend development for the CLOAK Web App, delivering a privacy-first interface for interacting with the CLOAK Shielded Protocol. Built and maintained complex user interfaces enabling private wallets, shielded transactions, and DeFi features including an integrated DEX. Worked closely with protocol and smart contract teams to accurately represent transaction states, privacy guarantees, and zero-knowledge constraints while optimizing performance and responsiveness for Antelope's low-latency environment.",
+      "status": "In Progress",
+      "category": "Web3",
+      "role": "Frontend Engineer",
+      "duration": "In Progress",
+      "features": [
+        "Private wallet and shielded interaction flows",
+        "Confidential transactions with on-chain state tracking",
+        "DeFi capabilities with integrated DEX",
+        "Simplified user journeys that abstract blockchain complexity"
+      ],
+      "challenges": [
+        "Representing zero-knowledge constraints accurately in UI",
+        "Maintaining trustworthy UX across complex DeFi flows",
+        "Ensuring smooth performance for on-chain interactions"
+      ],
+      "solutions": [
+        "Precise transaction-state modeling and privacy guarantees",
+        "Clarity-first UX design to reduce user friction",
+        "Targeted frontend optimizations for responsiveness and stability"
+      ],
+      "date": "Nov 2025 - Present"
+    },
+    {
       "id": 41,
       "title": "IXS Valuation Simulator",
       "description": "Tokenomics simulation tool to model market cap scenarios and protocol-driven value flows.",

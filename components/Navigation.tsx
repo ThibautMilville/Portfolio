@@ -23,7 +23,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Tooltip } from "@/components/ui/general/Tooltip";
-import { useTheme } from "next-themes";
+import { useTheme } from "@/components/ThemeProvider";
 import { cn } from "@/lib/utils";
 import { LocalImage } from "@/components/ui/image";
 import { FrenchFlagIcon, BritishFlagIcon } from "@/components/ui/flag-icons";

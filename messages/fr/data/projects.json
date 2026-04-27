@@ -595,6 +595,60 @@
       "date": "Oct 2025 - Oct 2025"
     },
     {
+      "id": 39,
+      "title": "CLOAK Website",
+      "description": "Site public de présentation du protocole CLOAK zero-knowledge et de son écosystème.",
+      "longDescription": "Direction du développement frontend de cloak.today, le site public présentant le protocole de confidentialité zero-knowledge CLOAK et son écosystème. Conception d'un site marketing responsive et qualitatif avec Next.js, TypeScript et Tailwind, avec intégration d'un chatbot IA pour aider les utilisateurs a explorer les fonctionnalités et la documentation via des conversations naturelles. Collaboration avec les équipes produit et protocole pour structurer le messaging autour de la privacy, de la tokenomics, de la gouvernance et de la roadmap, tout en optimisant le SEO, les performances et l'accessibilité.",
+      "status": "Terminé",
+      "category": "Web3",
+      "role": "Frontend Engineer",
+      "duration": "2 mois",
+      "features": [
+        "Site marketing responsive et orienté conversion",
+        "Intégration d'un chatbot IA pour l'onboarding utilisateur",
+        "Architecture de contenu claire (privacy, tokenomics, governance, roadmap)",
+        "Optimisations SEO, performance et accessibilité"
+      ],
+      "challenges": [
+        "Rendre des concepts zero-knowledge compréhensibles pour tous les profils",
+        "Conserver une crédibilité produit forte avec une UX simple",
+        "Maximiser la visibilité et la découvrabilité du protocole"
+      ],
+      "solutions": [
+        "Narration produit structurée et progressive",
+        "Design system cohérent orienté clarté",
+        "Optimisations techniques ciblées sur performance, SEO et accessibilité"
+      ],
+      "date": "Nov 2025 - Dec 2025"
+    },
+    {
+      "id": 40,
+      "title": "CLOAK Web App",
+      "description": "Application Web privacy-first pour interagir avec le CLOAK Shielded Protocol.",
+      "longDescription": "Direction du développement frontend de l'application CLOAK pour proposer une interface privacy-first d'interaction avec le CLOAK Shielded Protocol. Conception et maintenance d'interfaces complexes permettant les wallets privés, les transactions shielded et des fonctionnalités DeFi incluant un DEX intégré. Collaboration étroite avec les équipes protocole et smart contracts pour refléter fidèlement les états de transactions, les garanties de confidentialité et les contraintes zero-knowledge, tout en optimisant les performances et la réactivité dans l'environnement Antelope.",
+      "status": "En cours",
+      "category": "Web3",
+      "role": "Frontend Engineer",
+      "duration": "En cours",
+      "features": [
+        "Wallet privé et interactions shielded",
+        "Transactions confidentielles et suivi d'état on-chain",
+        "Fonctionnalités DeFi avec DEX intégré",
+        "Parcours utilisateurs simplifiés pour abstraire la complexité blockchain"
+      ],
+      "challenges": [
+        "Représenter fidèlement les contraintes zero-knowledge côté UI",
+        "Maintenir une UX de confiance sur des flux DeFi complexes",
+        "Garantir performance et fluidité sur interactions on-chain"
+      ],
+      "solutions": [
+        "Modélisation précise des états de transaction et garanties de confidentialité",
+        "Design UX orienté clarté et réduction de friction",
+        "Optimisations frontend ciblées pour réactivité et stabilité"
+      ],
+      "date": "Nov 2025 - Présent"
+    },
+    {
       "id": 41,
       "title": "IXS Valuation Simulator",
       "description": "Outil de simulation tokenomics pour modéliser des scénarios de market cap et les flux de valeur du protocole.",

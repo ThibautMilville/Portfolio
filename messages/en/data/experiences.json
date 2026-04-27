@@ -1,6 +1,34 @@
 {
   "experiences": [
     {
+      "id": 12,
+      "title": "Web3 Software Engineer - Core Team",
+      "company": "Cloak",
+      "location": "Paris, Île-de-France, France · Remote",
+      "date": "Nov 2025 - Present",
+      "description": "Led frontend development for cloak.today and app.cloak.today, delivering a privacy-first user experience for the CLOAK zero-knowledge protocol. Built high-performance interfaces with Next.js, TypeScript, and Tailwind to make complex blockchain concepts clear and accessible. Designed user flows for private wallet interactions, shielded transactions, and DeFi features including the integrated DEX. Worked closely with protocol and smart contract teams to accurately represent zero-knowledge constraints, transaction states, and privacy guarantees.",
+      "technologies": [
+        "TypeScript",
+        "Next.js",
+        "Tailwind CSS",
+        "Web3",
+        "Zero-Knowledge",
+        "DeFi",
+        "DEX",
+        "React",
+        "UX/UI",
+        "Performance Optimization"
+      ],
+      "achievements": [
+        "Led frontend development of cloak.today and app.cloak.today with a privacy-first approach",
+        "Implemented high-performance Next.js, TypeScript, and Tailwind interfaces to simplify complex blockchain concepts",
+        "Designed user journeys for private wallets, shielded transactions, and DeFi functionality (integrated DEX)",
+        "Collaborated closely with protocol and smart contract teams to accurately map zero-knowledge constraints",
+        "Improved responsiveness, performance, and desktop cross-platform compatibility",
+        "Impact: Delivered production-ready website and app experiences that make zero-knowledge privacy and DeFi easier to understand and use on Antelope"
+      ]
+    },
+    {
       "id": 11,
       "title": "Web3 Software Engineer",
       "company": "Ultra Tech Alliance (UTA)",

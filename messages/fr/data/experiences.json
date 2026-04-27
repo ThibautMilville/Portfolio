@@ -1,6 +1,34 @@
 {
   "experiences": [
     {
+      "id": 12,
+      "title": "Web3 Software Engineer - Core Team",
+      "company": "Cloak",
+      "location": "Paris, Île-de-France, France · Remote",
+      "date": "Nov 2025 - Présent",
+      "description": "Direction du développement frontend pour cloak.today et app.cloak.today, avec une interface privacy-first pour le protocole CLOAK zero-knowledge. Conception d'interfaces performantes en Next.js, TypeScript et Tailwind pour rendre accessibles des mécanismes blockchain complexes. Développement de parcours utilisateurs pour wallets privés, transactions shielded et fonctionnalités DeFi comme le DEX intégré. Collaboration rapprochée avec les équipes protocole et smart contracts pour représenter correctement les contraintes zero-knowledge, les états de transaction et les garanties de confidentialité.",
+      "technologies": [
+        "TypeScript",
+        "Next.js",
+        "Tailwind CSS",
+        "Web3",
+        "Zero-Knowledge",
+        "DeFi",
+        "DEX",
+        "React",
+        "UX/UI",
+        "Performance Optimization"
+      ],
+      "achievements": [
+        "Direction du développement frontend de cloak.today et app.cloak.today avec une approche privacy-first",
+        "Implémentation d'interfaces performantes en Next.js, TypeScript et Tailwind pour vulgariser des concepts blockchain complexes",
+        "Conception de parcours utilisateurs pour wallets privés, transactions shielded et fonctionnalités DeFi (DEX intégré)",
+        "Collaboration étroite avec les équipes protocole et smart contracts pour refléter fidèlement les contraintes zero-knowledge",
+        "Optimisation de la réactivité, des performances et de la compatibilité cross-platform desktop",
+        "Impact: Livraison d'un website et d'une application production-ready qui rendent la privacy zero-knowledge et la DeFi plus compréhensibles, utilisables et accessibles sur Antelope"
+      ]
+    },
+    {
       "id": 11,
       "title": "Web3 Software Engineer",
       "company": "Ultra Tech Alliance (UTA)",
