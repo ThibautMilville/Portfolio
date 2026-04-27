@@ -35,7 +35,20 @@ export default function FeaturedProjectsSection({
 
   const flaggedFeaturedProjects = projects.filter((project) => project.isFeatured);
   const fallbackProjects = projects.filter((project) => !project.isFeatured);
-  const selectedFeaturedProjects = [...flaggedFeaturedProjects, ...fallbackProjects].slice(0, 5);
+  const featuredPriorityById: Record<number, number> = {
+    36: 0,
+    40: 1,
+    39: 2,
+  };
+  const orderedFeaturedProjects = [...flaggedFeaturedProjects].sort((a, b) => {
+    const aPriority = featuredPriorityById[a.id] ?? Number.MAX_SAFE_INTEGER;
+    const bPriority = featuredPriorityById[b.id] ?? Number.MAX_SAFE_INTEGER;
+    if (aPriority !== bPriority) {
+      return aPriority - bPriority;
+    }
+    return 0;
+  });
+  const selectedFeaturedProjects = [...orderedFeaturedProjects, ...fallbackProjects].slice(0, 5);
   const featuredProjects = selectedFeaturedProjects.map((project) => ({
     original: project,
     translated: getTranslatedProject(project as any),
@@ -150,6 +163,7 @@ export default function FeaturedProjectsSection({
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 + index * 0.08 }}
                   viewport={{ once: true }}
+                  data-horizontal-card="true"
                   className="shrink-0 w-[86%] sm:w-[72%] lg:w-[56%] xl:w-[50%] snap-center"
                   ref={(el) => {
                     itemRefs.current[index] = el;
@@ -292,6 +306,10 @@ export default function FeaturedProjectsSection({
                 </motion.div>
               );
             })}
+            <div
+              className="shrink-0 w-[7vw] sm:w-[14vw] lg:w-[22vw] xl:w-[25vw]"
+              aria-hidden="true"
+            />
           </div>
         </motion.div>
       </div>

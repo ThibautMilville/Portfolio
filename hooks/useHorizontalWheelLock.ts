@@ -15,6 +15,11 @@ export function useHorizontalWheelLock({
 }: UseHorizontalWheelLockParams) {
   const activeDirectionRef = useRef<1 | -1>(1);
   const horizontalModeRef = useRef(false);
+  const isAnimatingRef = useRef(false);
+  const animationTimeoutRef = useRef<number | null>(null);
+  const lastWheelAtRef = useRef(0);
+  const wheelIntentRef = useRef(0);
+  const wheelIntentResetTimeoutRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!enabled) return;
@@ -77,6 +82,27 @@ export function useHorizontalWheelLock({
       }
     };
 
+    const getSnapPoints = (track: HTMLDivElement) => {
+      const cards = Array.from(
+        track.querySelectorAll<HTMLElement>("[data-horizontal-card='true']")
+      );
+      return cards.map((card) => card.offsetLeft - (track.clientWidth - card.clientWidth) / 2);
+    };
+
+    const getNearestSnapIndex = (snapPoints: number[], scrollLeft: number) => {
+      if (snapPoints.length === 0) return 0;
+      let nearestIndex = 0;
+      let minDistance = Number.POSITIVE_INFINITY;
+      for (let index = 0; index < snapPoints.length; index += 1) {
+        const distance = Math.abs(snapPoints[index] - scrollLeft);
+        if (distance < minDistance) {
+          minDistance = distance;
+          nearestIndex = index;
+        }
+      }
+      return nearestIndex;
+    };
+
     const handleWheel = (event: WheelEvent) => {
       const metrics = getMetrics();
       if (!metrics) {
@@ -120,13 +146,65 @@ export function useHorizontalWheelLock({
       activeDirectionRef.current = direction;
 
       if (canScrollHorizontally) {
+        const now = Date.now();
+        if (isAnimatingRef.current || now - lastWheelAtRef.current < 140) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
+
+        wheelIntentRef.current += dominantDelta;
+        if (wheelIntentResetTimeoutRef.current) {
+          window.clearTimeout(wheelIntentResetTimeoutRef.current);
+        }
+        wheelIntentResetTimeoutRef.current = window.setTimeout(() => {
+          wheelIntentRef.current = 0;
+        }, 180);
+
+        const INTENT_THRESHOLD = 160;
+        if (Math.abs(wheelIntentRef.current) < INTENT_THRESHOLD) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
+
+        const snapPoints = getSnapPoints(track);
+        if (snapPoints.length === 0) {
+          setPageLock(false);
+          horizontalModeRef.current = false;
+          return;
+        }
+
+        const currentIndex = getNearestSnapIndex(snapPoints, track.scrollLeft);
+        const targetIndex = Math.max(
+          0,
+          Math.min(
+            snapPoints.length - 1,
+            currentIndex + (direction > 0 ? 1 : -1)
+          )
+        );
+        if (targetIndex === currentIndex) {
+          horizontalModeRef.current = false;
+          setPageLock(false);
+          return;
+        }
+        const targetScrollLeft = Math.min(
+          maxScroll,
+          Math.max(0, snapPoints[targetIndex])
+        );
+
         event.preventDefault();
         event.stopPropagation();
-        const horizontalDelta = event.deltaY + event.deltaX;
-        track.scrollLeft = Math.min(
-          maxScroll,
-          Math.max(0, track.scrollLeft + horizontalDelta)
-        );
+        isAnimatingRef.current = true;
+        lastWheelAtRef.current = now;
+        wheelIntentRef.current = 0;
+        track.scrollTo({ left: targetScrollLeft, behavior: "smooth" });
+        if (animationTimeoutRef.current) {
+          window.clearTimeout(animationTimeoutRef.current);
+        }
+        animationTimeoutRef.current = window.setTimeout(() => {
+          isAnimatingRef.current = false;
+        }, 220);
         setPageLock(true);
       } else {
         horizontalModeRef.current = false;
@@ -174,6 +252,12 @@ export function useHorizontalWheelLock({
       document.removeEventListener("wheel", handleWheel, true);
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
+      if (animationTimeoutRef.current) {
+        window.clearTimeout(animationTimeoutRef.current);
+      }
+      if (wheelIntentResetTimeoutRef.current) {
+        window.clearTimeout(wheelIntentResetTimeoutRef.current);
+      }
       setPageLock(false);
     };
   }, [enabled, sectionRef, trackRef]);
