@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   Github,
   ExternalLink,
@@ -28,6 +28,7 @@ import { useMemo, useState, useEffect } from "react";
 import LightParticles from "@/components/ui/light-particles";
 import { useTranslatedData } from "@/hooks/useTranslatedData";
 import { usePortfolioData } from "@/hooks/usePortfolioData";
+import { getLocalizedProjectRoute } from "@/lib/localized-routes";
 import {
   Pagination,
   PaginationContent,
@@ -39,6 +40,7 @@ import {
 
 export default function Projets() {
   const t = useTranslations("Pages.projets");
+  const locale = useLocale() as "en" | "fr";
   const { getTranslatedProject } = useTranslatedData();
   const { projects: projets, loading } = usePortfolioData();
   const [filters, setFilters] = useState<ProjectFilterState>({
@@ -359,7 +361,7 @@ export default function Projets() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, delay: 0.6 + index * 0.1 }}
                     >
-                      <Link href={`/projets/${getProjectSlug(project)}`}>
+                      <Link href={getLocalizedProjectRoute(locale, getProjectSlug(project))}>
                         <Card className="h-full hover:shadow-xl transition-all duration-300 group cursor-pointer flex flex-col border-2 border-primary/20 hover:border-primary/40">
                           <div className="relative overflow-hidden rounded-t-lg">
                             <Image
@@ -527,7 +529,7 @@ export default function Projets() {
                 id={projet.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}
               >
                 <Link
-                  href={`/projets/${getProjectSlug(projet)}`}
+                  href={getLocalizedProjectRoute(locale, getProjectSlug(projet))}
                   onClick={() => {
                     if (typeof window !== "undefined") {
                       try {

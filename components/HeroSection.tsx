@@ -16,6 +16,7 @@ import { Typewriter } from "@/components/ui/typewriter";
 import { LocalImage } from "@/components/ui/image";
 import { Tooltip } from "@/components/ui/general/Tooltip";
 import LightParticles from "@/components/ui/light-particles";
+import { getLocalizedProjectRoute } from "@/lib/localized-routes";
 
 export default function HeroSection() {
   const t = useTranslations('Home.hero');
@@ -101,7 +102,7 @@ export default function HeroSection() {
             className="flex flex-wrap gap-4 justify-center mb-16"
           >
             <Button size="lg" asChild className="sweep-light">
-              <Link href="/projets">
+              <Link href={getLocalizedProjectRoute(locale as "en" | "fr")}>
                 {t('buttons.viewProjects')}
                 <ArrowRight className="ml-2 h-4 w-4 text-white" />
               </Link>

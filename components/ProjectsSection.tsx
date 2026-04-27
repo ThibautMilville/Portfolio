@@ -7,6 +7,8 @@ import dynamic from "next/dynamic";
 import LightParticles from "@/components/ui/light-particles";
 import { ArrowRight } from "lucide-react";
 import type { Project } from "@/types/portfolio";
+import { useLocale } from "next-intl";
+import { getLocalizedProjectRoute } from "@/lib/localized-routes";
 
 const ProjectCarousel = dynamic(
   () => import("@/components/ui/project-carousel"),
@@ -18,6 +20,7 @@ interface ProjectsSectionProps {
 }
 
 export default function ProjectsSection({ projects }: ProjectsSectionProps) {
+  const locale = useLocale() as "en" | "fr";
   const featuredProjects = projects.filter((p) => p.isFeatured).slice(0, 5);
 
   // Récupérer les 15 derniers projets réalisés (excluant les projets phares)
@@ -82,7 +85,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
 
         <div className="flex justify-center mt-16">
           <Button size="lg" asChild className="sweep-light">
-            <Link href="/projets">
+            <Link href={getLocalizedProjectRoute(locale)}>
               Voir tous les projets
               <ArrowRight className="ml-2 h-4 w-4 text-white" />
             </Link>

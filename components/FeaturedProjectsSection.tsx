@@ -15,6 +15,8 @@ import { getProjectSlug } from "@/services/ProjectService";
 import type { Project as PortfolioProject } from "@/types/portfolio";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLocale } from "next-intl";
+import { getLocalizedProjectRoute } from "@/lib/localized-routes";
 
 interface FeaturedProjectsSectionProps {
   projects: PortfolioProject[];
@@ -24,6 +26,7 @@ export default function FeaturedProjectsSection({
   projects,
 }: FeaturedProjectsSectionProps) {
   const t = useTranslations("Home.featuredProjects");
+  const locale = useLocale() as "en" | "fr";
   const { getTranslatedProject } = useTranslatedData();
   const sectionRef = useRef<HTMLElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
@@ -154,7 +157,7 @@ export default function FeaturedProjectsSection({
                   style={maxCardHeight > 0 ? { height: `${maxCardHeight}px` } : undefined}
                 >
                   <Link
-                    href={`/projets/${getProjectSlug(original)}`}
+                    href={getLocalizedProjectRoute(locale, getProjectSlug(original))}
                     className="block w-full h-full"
                   >
                     <Card

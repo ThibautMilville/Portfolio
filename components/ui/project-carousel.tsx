@@ -25,6 +25,7 @@ import { Button } from "./button";
 import { Link } from "@/navigation";
 import { getProjectSlug } from "@/services/ProjectService";
 import { translateDateSimple } from "@/lib/utils";
+import { getLocalizedProjectRoute } from "@/lib/localized-routes";
 
 interface Project {
   id: number;
@@ -183,7 +184,7 @@ export default function ProjectCarousel({
               }}
             >
               {isMobile ? (
-                <Link href={`/projets/${getProjectSlug(project as any)}`}>
+                <Link href={getLocalizedProjectRoute(locale as "en" | "fr", getProjectSlug(project as any))}>
                   <Card
                     className={`group cursor-pointer h-full overflow-hidden border-0 bg-gradient-to-br from-card/80 to-background/60 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 ${
                       isFeatured ? "min-h-[600px]" : ""
@@ -793,7 +794,7 @@ export default function ProjectCarousel({
                           </Button>
                         )}
                         <Link
-                          href={`/projets/${getProjectSlug(project as any)}`}
+                          href={getLocalizedProjectRoute(locale as "en" | "fr", getProjectSlug(project as any))}
                           className="ml-auto"
                         >
                           <Button

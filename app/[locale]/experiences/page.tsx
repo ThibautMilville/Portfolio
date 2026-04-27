@@ -13,6 +13,8 @@ import { useState, useEffect } from "react";
 import { useTranslatedData } from "@/hooks/useTranslatedData";
 import { usePortfolioData } from "@/hooks/usePortfolioData";
 import { getGroupedExperiencesFromList } from "@/utils/experience";
+import { getProjectSlug } from "@/services/ProjectService";
+import { getLocalizedProjectRoute } from "@/lib/localized-routes";
 
 export default function Experiences() {
   const t = useTranslations("Pages.experiences");
@@ -335,7 +337,7 @@ export default function Experiences() {
                             {translatedProjects.map((project: any) => (
                               <Link
                                 key={`project-preview-${project.id}`}
-                                href={`/projects/${project.slug}`}
+                                href={getLocalizedProjectRoute(locale as "en" | "fr", getProjectSlug(project))}
                                 className="group block w-64 flex-shrink-0 overflow-hidden rounded-lg border border-border/60 bg-background/70 transition-all duration-300 hover:border-primary/40"
                               >
                                 <img

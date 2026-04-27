@@ -24,6 +24,14 @@ export function getLocalizedRoute(route: RouteKey, locale: Locale): string {
   return localizedRoutes[route][locale];
 }
 
+export function getLocalizedProjectRoute(locale: Locale, slug?: string): string {
+  const baseRoute = getLocalizedRoute("projets", locale);
+  if (!slug) {
+    return baseRoute;
+  }
+  return `${baseRoute}/${slug}`;
+}
+
 export function getRouteFromPathname(pathname: string, locale: Locale): RouteKey | null {
   // Remove locale prefix
   const pathWithoutLocale = pathname.replace(/^\/[a-z]{2}/, '');

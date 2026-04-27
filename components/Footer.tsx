@@ -5,12 +5,15 @@ import { LocalImage } from '@/components/ui/image';
 import { FOOTER_DATA } from '@/lib/footer';
 import { Github, Linkedin, Mail, MessageCircle, ArrowUpRight } from 'lucide-react';
 import { Tooltip } from '@/components/ui/general/Tooltip';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { usePortfolioData } from '@/hooks/usePortfolioData';
+import { getLocalizedProjectRoute } from '@/lib/localized-routes';
+import { getProjectSlug } from '@/services/ProjectService';
 
 export default function Footer() {
   const t = useTranslations('Footer');
   const tNav = useTranslations('Navigation');
+  const locale = useLocale() as "en" | "fr";
   const currentYear = new Date().getFullYear();
   const { formations, projects } = usePortfolioData();
 
@@ -63,7 +66,7 @@ export default function Footer() {
     .slice(0, 3)
     .map((project) => ({
       title: project.title,
-      href: `/projets/${(project.slug ?? project.title.toLowerCase().replace(/\s+/g, '-'))}`
+      href: getLocalizedProjectRoute(locale, getProjectSlug(project))
     }));
 
   return (
@@ -99,7 +102,7 @@ export default function Footer() {
             </li>
             <li>
               <Link
-                href="/projets"
+                href={getLocalizedProjectRoute(locale)}
                 className="hover:underline text-sm text-muted-foreground hover:text-primary transition-colors"
               >
                 {tNav('projects')}

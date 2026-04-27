@@ -25,6 +25,7 @@ import type { Project, Experience, Formation } from "@/types/portfolio";
 import { useTranslations, useLocale } from "next-intl";
 import { useTranslatedData } from "@/hooks/useTranslatedData";
 import { translateDateSimple } from "@/lib/utils";
+import { getLocalizedProjectRoute } from "@/lib/localized-routes";
 
 const getStatusIcon = (status: string) => {
   switch (status) {
@@ -95,7 +96,7 @@ export default function ClientProjectPage({
         <div className="container mx-auto px-6 py-4">
           <Button variant="ghost" asChild className="mb-4">
             <Link
-              href={`/projets${
+              href={`${getLocalizedProjectRoute(locale as "en" | "fr")}${
                 isClient && window.sessionStorage.getItem("projetsPage")
                   ? `?page=${window.sessionStorage.getItem("projetsPage")}`
                   : ""
