@@ -68,11 +68,14 @@ export default function Chatbot(): JSX.Element {
   useEffect(() => {
     if (!isOpen || !isMobile) {
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
       return;
     }
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     };
   }, [isOpen, isMobile]);
 
@@ -159,7 +162,7 @@ export default function Chatbot(): JSX.Element {
 
   return (
     <>
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-4 right-4 z-[130] sm:bottom-6 sm:right-6">
         {!isOpen ? (
           <Button
             ref={buttonRef}
@@ -181,7 +184,7 @@ export default function Chatbot(): JSX.Element {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-[48] bg-black/30"
+                className="fixed inset-0 z-[135] bg-black/40"
                 onClick={handleClose}
               />
             ) : null}
@@ -191,14 +194,16 @@ export default function Chatbot(): JSX.Element {
               animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 16, scale: isVisible ? 1 : 0.96 }}
               exit={{ opacity: 0, y: 16, scale: 0.96 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="fixed z-[49] flex max-h-[calc(100vh-2.5rem)] w-[calc(100vw-1.5rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-2xl sm:w-96 md:max-w-md"
+              className="fixed z-[140] flex w-[calc(100vw-1.5rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-2xl sm:w-96 md:max-w-md"
               style={{
-                bottom: "1.25rem",
+                bottom: isMobile ? "max(0.75rem, env(safe-area-inset-bottom))" : "1.25rem",
                 right: isMobile ? "auto" : "1.5rem",
-                left: isMobile ? "50%" : "auto",
-                transform: isMobile
-                  ? `translateX(-50%) ${isVisible ? "translateY(0)" : "translateY(1rem)"}`
-                  : undefined,
+                left: isMobile ? "0.75rem" : "auto",
+                width: isMobile ? "calc(100vw - 1.5rem)" : undefined,
+                maxWidth: isMobile ? "none" : undefined,
+                maxHeight: isMobile
+                  ? "calc(100dvh - max(1.5rem, env(safe-area-inset-bottom) + 1.5rem))"
+                  : "calc(100vh - 2.5rem)",
                 transformOrigin: isMobile ? "bottom center" : "bottom right"
               }}
               onClick={isMobile ? (event) => event.stopPropagation() : undefined}
