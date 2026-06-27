@@ -1,4 +1,4 @@
-import { Experience } from "@/types/portfolio";
+import type { Experience } from "@/types/portfolio";
 
 export type GroupedExperience = {
   company: string;
@@ -74,9 +74,11 @@ export const getGroupedExperiencesFromList = (experiences: Experience[]): Groupe
       company,
       experiences: sortedExperiences,
       totalDuration,
-      logoUrl: sortedExperiences[0].logoUrl
+      logoUrl: sortedExperiences[0].logoUrl,
     });
   });
 
-  return groups.sort((a, b) => getRecencyScore(b.experiences[0].date) - getRecencyScore(a.experiences[0].date));
+  return groups.sort(
+    (a, b) => getRecencyScore(b.experiences[0].date) - getRecencyScore(a.experiences[0].date),
+  );
 };

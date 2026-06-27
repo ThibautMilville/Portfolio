@@ -125,11 +125,7 @@
       "category": "Frontend",
       "role": "Frontend Developer",
       "duration": "1 month",
-      "features": [
-        "Framer Motion animations",
-        "Shareable results",
-        "Responsive"
-      ],
+      "features": ["Framer Motion animations", "Shareable results", "Responsive"],
       "challenges": ["Smooth transitions"],
       "solutions": ["Optimized animations"],
       "date": "Dec 2024"
@@ -353,11 +349,7 @@
         "Contact form"
       ],
       "challenges": ["Limited budget", "Content migration", "Preserved SEO"],
-      "solutions": [
-        "Optimized theme",
-        "Clean redirects",
-        "Lighthouse optimization"
-      ],
+      "solutions": ["Optimized theme", "Clean redirects", "Lighthouse optimization"],
       "date": "Sep 2021 - Oct 2021 ; May 2025 - Jun 2025"
     },
     {
@@ -375,11 +367,7 @@
         "Admin dashboard per game",
         "Ultra blockchain integration"
       ],
-      "challenges": [
-        "Ultra wallet integration",
-        "Permission management",
-        "Quest model design"
-      ],
+      "challenges": ["Ultra wallet integration", "Permission management", "Quest model design"],
       "solutions": [
         "Ultra SDK/extension integration",
         "RBAC on API and UI side",

@@ -1,65 +1,36 @@
 "use client";
 
-import { LucideIcon } from "lucide-react";
+import { useId } from "react";
 import { cn } from "@/lib/utils";
+import { SectionHeadingGradientDefs, SectionHeadingIcon, type SectionHeadingIconName } from "@/components/ui/SectionHeadingIcon";
 
 interface SectionHeadingProps {
   title: string;
   subtitle?: string;
-  icon: LucideIcon;
+  icon: SectionHeadingIconName;
   align?: "center" | "left";
   id?: string;
   className?: string;
-  uppercaseTitle?: boolean;
 }
 
-export function SectionHeading({
-  title,
-  subtitle,
-  icon: Icon,
-  align = "center",
-  id,
-  className,
-  uppercaseTitle = true,
-}: SectionHeadingProps) {
+export function SectionHeading({ title, subtitle, icon, align = "center", id, className }: SectionHeadingProps) {
   const isCentered = align === "center";
+  const gradientId = useId();
 
   return (
-    <div
-      className={cn(
-        "flex flex-col gap-4",
-        isCentered ? "items-center text-center" : "items-start text-left",
-        className
-      )}
-    >
-      <div className={cn("space-y-3", isCentered ? "max-w-3xl" : "max-w-2xl")}>
-        <div
-          className={cn(
-            "flex items-center gap-3",
-            isCentered ? "justify-center" : "justify-start"
-          )}
-        >
-          <div className="inline-flex items-center justify-center h-10 w-10 rounded-xl border border-primary/25 bg-background/70 text-primary shadow-sm backdrop-blur-sm">
-            <Icon className="h-5 w-5" />
-          </div>
-          <h2
-            id={id}
-            className={cn(
-              "font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent leading-tight",
-              uppercaseTitle ? "uppercase tracking-[0.03em]" : ""
-            )}
-          >
-            {title}
-          </h2>
-        </div>
-        <div
-          className={cn(
-            "h-px w-56 md:w-72 bg-[linear-gradient(90deg,transparent,hsl(var(--primary)/0.45),hsl(var(--primary)/0.95),hsl(var(--primary)/0.45),transparent)]",
-            isCentered ? "mx-auto" : ""
-          )}
-        />
-        {subtitle ? <p className="text-lg text-muted-foreground">{subtitle}</p> : null}
+    <header className={cn("relative flex flex-col gap-4", isCentered ? "items-center text-center" : "items-start text-left", className)} aria-labelledby={id}>
+      <SectionHeadingGradientDefs id={gradientId} />
+
+      <div className={cn("flex w-full", isCentered ? "justify-center" : "justify-start")}>
+        <h2 id={id} className={cn("inline-flex max-w-3xl items-center gap-[0.4em] overflow-visible font-heading text-[clamp(1.875rem,4.5vw,2.875rem)] font-bold leading-normal tracking-[-0.03em]")}>
+          <SectionHeadingIcon name={icon} gradientId={gradientId} />
+          <span className="bg-gradient-to-br from-foreground via-foreground to-foreground/65 bg-clip-text pb-1 text-transparent">{title}</span>
+        </h2>
       </div>
-    </div>
+
+      <div className={cn("h-px w-48 bg-[linear-gradient(90deg,transparent,hsl(var(--primary)/0.45),hsl(var(--primary)/0.95),hsl(var(--primary)/0.45),transparent)] md:w-64", isCentered ? "mx-auto" : "")} aria-hidden="true" />
+
+      {subtitle ? <p className={cn("max-w-2xl text-base leading-relaxed text-muted-foreground md:text-[1.0625rem] md:leading-relaxed", isCentered ? "mx-auto" : "")}>{subtitle}</p> : null}
+    </header>
   );
 }

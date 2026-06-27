@@ -125,11 +125,7 @@
       "category": "Frontend",
       "role": "Développeur Frontend",
       "duration": "1 mois",
-      "features": [
-        "Animations Framer Motion",
-        "Résultats partageables",
-        "Responsive"
-      ],
+      "features": ["Animations Framer Motion", "Résultats partageables", "Responsive"],
       "challenges": ["Transitions fluides"],
       "solutions": ["Animations optimisées"],
       "date": "Déc 2024"
@@ -143,11 +139,7 @@
       "category": "Analytics",
       "role": "Développeur Frontend",
       "duration": "3 mois",
-      "features": [
-        "Cours en direct",
-        "Indicateurs techniques",
-        "Articles liés"
-      ],
+      "features": ["Cours en direct", "Indicateurs techniques", "Articles liés"],
       "challenges": ["Fiabilité des données"],
       "solutions": ["Fallbacks et retries"],
       "date": "Oct 2024 - Déc 2024"
@@ -356,16 +348,8 @@
         "Accessibilité",
         "Formulaire de contact"
       ],
-      "challenges": [
-        "Budget restreint",
-        "Migration de contenu",
-        "SEO conservé"
-      ],
-      "solutions": [
-        "Thème optimisé",
-        "Redirections propres",
-        "Optimisation Lighthouse"
-      ],
+      "challenges": ["Budget restreint", "Migration de contenu", "SEO conservé"],
+      "solutions": ["Thème optimisé", "Redirections propres", "Optimisation Lighthouse"],
       "date": "Sep 2021 - Oct 2021 ; Mai 2025 - Juin 2025"
     },
     {

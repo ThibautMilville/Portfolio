@@ -1,34 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useLocale, useTranslations } from "next-intl";
-import {
-  Github,
-  ExternalLink,
-  Calendar,
-  Star,
-  ArrowRight
-} from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { ArrowRight, Calendar, ExternalLink, Github, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { getProjectSlug } from "@/services/ProjectService";
-import ProjectFilters, {
-  ProjectFilterState,
-} from "@/components/ProjectFilters";
-import { useMemo, useState, useEffect } from "react";
+import { useLocale, useTranslations } from "next-intl";
+import { useEffect, useMemo, useState } from "react";
+import ProjectFilters, { type ProjectFilterState } from "@/components/ProjectFilters";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import LightParticles from "@/components/ui/light-particles";
-import { useTranslatedData } from "@/hooks/useTranslatedData";
-import { usePortfolioData } from "@/hooks/usePortfolioData";
-import { getLocalizedProjectRoute } from "@/lib/localized-routes";
 import {
   Pagination,
   PaginationContent,
@@ -37,6 +19,10 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
+import { useTranslatedData } from "@/hooks/useTranslatedData";
+import { getLocalizedProjectRoute } from "@/lib/localized-routes";
+import { getProjectSlug } from "@/services/ProjectService";
 
 export default function Projets() {
   const t = useTranslations("Pages.projets");
@@ -68,24 +54,32 @@ export default function Projets() {
 
   const technologies = useMemo(() => {
     const set = new Set<string>();
-    projets.forEach((p: any) =>
-      p.technologies.forEach((t: string) => set.add(t))
-    );
+    for (const project of projets) {
+      for (const technology of project.technologies) {
+        set.add(technology);
+      }
+    }
     return Array.from(set).sort();
   }, [projets]);
 
   const years = useMemo(() => {
     const set = new Set<string>();
-    projets.forEach((p: any) => {
-      const match = p.date.match(/\d{4}/g);
-      if (match) match.forEach((y: string) => set.add(y));
-    });
+    for (const project of projets) {
+      const match = project.date.match(/\d{4}/g);
+      if (match) {
+        for (const year of match) {
+          set.add(year);
+        }
+      }
+    }
     return Array.from(set).sort().reverse();
   }, [projets]);
 
   const categories = useMemo(() => {
     const set = new Set<string>();
-    projets.forEach((p: any) => set.add(p.category));
+    for (const project of projets) {
+      set.add(project.category);
+    }
     return Array.from(set).sort();
   }, [projets]);
 
@@ -93,19 +87,13 @@ export default function Projets() {
     return projets.filter((p: any) => {
       if (filters.search) {
         const q = filters.search.toLowerCase();
-        const hay = [
-          p.title,
-          p.description,
-          p.category,
-          ...(p.technologies || []),
-        ]
+        const hay = [p.title, p.description, p.category, ...(p.technologies || [])]
           .filter(Boolean)
           .join(" ")
           .toLowerCase();
         if (!hay.includes(q)) return false;
       }
-      if (filters.category !== "all" && p.category !== filters.category)
-        return false;
+      if (filters.category !== "all" && p.category !== filters.category) return false;
       if (filters.status !== "all" && p.status !== filters.status) return false;
       if (filters.organization !== "all") {
         const orgByExp =
@@ -113,17 +101,14 @@ export default function Projets() {
           ([1, 2].includes(p.relatedExperienceId)
             ? "SNCF Voyageurs"
             : [8].includes(p.relatedExperienceId)
-            ? "Ultra Times"
-            : [3].includes(p.relatedExperienceId)
-            ? "DigitalLabs TM"
-            : undefined);
+              ? "Ultra Times"
+              : [3].includes(p.relatedExperienceId)
+                ? "DigitalLabs TM"
+                : undefined);
         if (orgByExp !== filters.organization) return false;
       }
       // OR logic: projet retenu si AU MOINS une techno sélectionnée est présente
-      if (
-        filters.techs.length &&
-        !filters.techs.some((t) => p.technologies.includes(t))
-      )
+      if (filters.techs.length && !filters.techs.some((t) => p.technologies.includes(t)))
         return false;
       if (filters.years.length) {
         const inYears = filters.years.some((y) => p.date.includes(y));
@@ -178,7 +163,7 @@ export default function Projets() {
       const normalized = normalize(part);
       // Cherche forme "mois année"
       const monthYearMatch = normalized.match(
-        /(janvier|fevrier|fevr|fev|jan|fev|mar|mars|avr|avril|mai|jun|juin|jul|juil|juillet|aou|aout|sep|sept|septembre|oct|octobre|nov|novembre|dec|decembre)\s+(\d{4})/
+        /(janvier|fevrier|fevr|fev|jan|fev|mar|mars|avr|avril|mai|jun|juin|jul|juil|juillet|aou|aout|sep|sept|septembre|oct|octobre|nov|novembre|dec|decembre)\s+(\d{4})/,
       );
       if (monthYearMatch) {
         const mKey = monthYearMatch[1];
@@ -204,11 +189,9 @@ export default function Projets() {
     () =>
       projets
         .filter((p: any) => p.isFeatured)
-        .sort(
-          (a: any, b: any) => getProjectStartTs(b.date) - getProjectStartTs(a.date)
-        )
+        .sort((a: any, b: any) => getProjectStartTs(b.date) - getProjectStartTs(a.date))
         .slice(0, 3),
-    [projets]
+    [projets, getProjectStartTs],
   );
 
   const sorted = useMemo(() => {
@@ -222,7 +205,7 @@ export default function Projets() {
       // Si les deux sont en cours ou terminés, trier par date de début (plus récent en premier)
       return getProjectStartTs(b.date) - getProjectStartTs(a.date);
     });
-  }, [filtered]);
+  }, [filtered, getProjectStartTs]);
 
   const PER_PAGE = 18;
   const [currentPage, setCurrentPage] = useState(1);
@@ -267,7 +250,7 @@ export default function Projets() {
       } catch {}
     }
     scrollToTop();
-  }, [filters]);
+  }, [scrollToTop]);
 
   const totalPages = Math.max(1, Math.ceil(sorted.length / PER_PAGE));
   const startIndex = (currentPage - 1) * PER_PAGE;
@@ -300,11 +283,7 @@ export default function Projets() {
               className="h-1 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full shadow-lg"
               style={{ width: "min(80vw, 300px)" }}
               animate={{
-                width: [
-                  "min(80vw, 300px)",
-                  "min(90vw, 400px)",
-                  "min(80vw, 300px)",
-                ],
+                width: ["min(80vw, 300px)", "min(90vw, 400px)", "min(80vw, 300px)"],
               }}
               transition={{
                 duration: 4,
@@ -341,12 +320,8 @@ export default function Projets() {
               className="mb-16"
             >
               <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold mb-4">
-                  {t("featuredProjects")}
-                </h2>
-                <p className="text-muted-foreground">
-                  {t("featuredProjectsDescription")}
-                </p>
+                <h2 className="text-3xl font-bold mb-4">{t("featuredProjects")}</h2>
+                <p className="text-muted-foreground">{t("featuredProjectsDescription")}</p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -374,7 +349,7 @@ export default function Projets() {
                             <div className="absolute top-4 left-4">
                               <Badge
                                 variant="default"
-                                className="bg-primary text-primary-foreground"
+                                className="bg-primary-solid text-primary-foreground"
                               >
                                 {t("featured")}
                               </Badge>
@@ -411,9 +386,7 @@ export default function Projets() {
 
                           <CardContent className="space-y-4 flex flex-col flex-1">
                             <div className="min-h-[66px] max-h-[66px] overflow-hidden">
-                              <h4 className="font-semibold text-sm mb-2">
-                                {t("keyFeatures")}
-                              </h4>
+                              <h4 className="font-semibold text-sm mb-2">{t("keyFeatures")}</h4>
                               <ul className="space-y-1">
                                 {translatedProject.features
                                   .slice(0, 3)
@@ -430,26 +403,19 @@ export default function Projets() {
                             </div>
 
                             <div className="min-h-[56px] max-h-[56px] overflow-hidden">
-                              <h4 className="font-semibold text-sm mb-2">
-                                {t("technologies")}
-                              </h4>
+                              <h4 className="font-semibold text-sm mb-2">{t("technologies")}</h4>
                               <div className="flex flex-nowrap items-center gap-1 overflow-hidden min-w-0">
-                                {project.technologies
-                                  .slice(0, 4)
-                                  .map((tech: string) => (
-                                    <Badge
-                                      key={tech}
-                                      variant="outline"
-                                      className="text-xs whitespace-nowrap"
-                                    >
-                                      {tech}
-                                    </Badge>
-                                  ))}
-                                {project.technologies.length > 4 && (
+                                {project.technologies.slice(0, 4).map((tech: string) => (
                                   <Badge
+                                    key={tech}
                                     variant="outline"
                                     className="text-xs whitespace-nowrap"
                                   >
+                                    {tech}
+                                  </Badge>
+                                ))}
+                                {project.technologies.length > 4 && (
+                                  <Badge variant="outline" className="text-xs whitespace-nowrap">
                                     +{project.technologies.length - 4}
                                   </Badge>
                                 )}
@@ -482,16 +448,13 @@ export default function Projets() {
                                   }}
                                 >
                                   <ExternalLink className="mr-2 h-4 w-4" />
-                                  {project.title ===
-                                  "Ashes of Mankind - Empires"
+                                  {project.title === "Ashes of Mankind - Empires"
                                     ? t("viewGame")
-                                    : [
-                                        "Showcase",
-                                        "E-commerce",
-                                        "Corporate",
-                                      ].includes(project.category)
-                                    ? t("viewSite")
-                                    : t("viewDemo")}
+                                    : ["Showcase", "E-commerce", "Corporate"].includes(
+                                          project.category,
+                                        )
+                                      ? t("viewSite")
+                                      : t("viewDemo")}
                                 </Button>
                               )}
                             </div>
@@ -533,10 +496,7 @@ export default function Projets() {
                   onClick={() => {
                     if (typeof window !== "undefined") {
                       try {
-                        sessionStorage.setItem(
-                          "projetsPage",
-                          String(currentPage)
-                        );
+                        sessionStorage.setItem("projetsPage", String(currentPage));
                       } catch {}
                     }
                   }}
@@ -552,11 +512,7 @@ export default function Projets() {
                       />
                       <div className="absolute top-4 left-4">
                         <Badge
-                          variant={
-                            translatedProject.status === "Terminé"
-                              ? "default"
-                              : "secondary"
-                          }
+                          variant={translatedProject.status === "Terminé" ? "default" : "secondary"}
                         >
                           {translatedProject.status}
                         </Badge>
@@ -594,9 +550,7 @@ export default function Projets() {
 
                     <CardContent className="space-y-4 flex flex-col flex-1">
                       <div className="min-h-[66px] max-h-[66px] overflow-hidden">
-                        <h4 className="font-semibold text-sm mb-2">
-                          {t("keyFeatures")}
-                        </h4>
+                        <h4 className="font-semibold text-sm mb-2">{t("keyFeatures")}</h4>
                         <ul className="space-y-1">
                           {translatedProject.features
                             .slice(0, 3)
@@ -613,26 +567,19 @@ export default function Projets() {
                       </div>
 
                       <div className="min-h-[56px] max-h-[56px] overflow-hidden">
-                        <h4 className="font-semibold text-sm mb-2">
-                          {t("technologies")}
-                        </h4>
+                        <h4 className="font-semibold text-sm mb-2">{t("technologies")}</h4>
                         <div className="flex flex-nowrap items-center gap-1 overflow-hidden min-w-0">
-                          {projet.technologies
-                            .slice(0, 4)
-                            .map((tech: string) => (
-                              <Badge
-                                key={tech}
-                                variant="outline"
-                                className="text-xs whitespace-nowrap"
-                              >
-                                {tech}
-                              </Badge>
-                            ))}
-                          {projet.technologies.length > 4 && (
+                          {projet.technologies.slice(0, 4).map((tech: string) => (
                             <Badge
+                              key={tech}
                               variant="outline"
                               className="text-xs whitespace-nowrap"
                             >
+                              {tech}
+                            </Badge>
+                          ))}
+                          {projet.technologies.length > 4 && (
+                            <Badge variant="outline" className="text-xs whitespace-nowrap">
                               +{projet.technologies.length - 4}
                             </Badge>
                           )}
@@ -667,13 +614,9 @@ export default function Projets() {
                             <ExternalLink className="mr-2 h-4 w-4" />
                             {projet.title === "Ashes of Mankind - Empires"
                               ? t("viewGame")
-                              : [
-                                  "Showcase",
-                                  "E-commerce",
-                                  "Corporate",
-                                ].includes(projet.category)
-                              ? t("viewSite")
-                              : t("viewDemo")}
+                              : ["Showcase", "E-commerce", "Corporate"].includes(projet.category)
+                                ? t("viewSite")
+                                : t("viewDemo")}
                           </Button>
                         )}
                       </div>
@@ -700,9 +643,7 @@ export default function Projets() {
                         return next;
                       });
                     }}
-                    className={
-                      currentPage === 1 ? "pointer-events-none opacity-50" : ""
-                    }
+                    className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
                   />
                 </PaginationItem>
 
@@ -732,18 +673,13 @@ export default function Projets() {
                         return next;
                       });
                     }}
-                    className={
-                      currentPage === totalPages
-                        ? "pointer-events-none opacity-50"
-                        : ""
-                    }
+                    className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
                   />
                 </PaginationItem>
               </PaginationContent>
             </Pagination>
           </div>
         )}
-
       </div>
     </div>
   );

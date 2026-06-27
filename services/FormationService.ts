@@ -1,5 +1,5 @@
 import { formationsData } from "@/data/portfolio";
-import { Formation } from "@/types/portfolio";
+import type { Formation } from "@/types/portfolio";
 
 export const getAllFormations = async (): Promise<Formation[]> => formationsData;
 

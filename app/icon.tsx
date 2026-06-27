@@ -1,42 +1,20 @@
-import { ImageResponse } from 'next/og'
- 
-// Route segment config
-export const runtime = 'edge'
- 
-// Image metadata
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+
 export const size = {
   width: 32,
   height: 32,
-}
-export const contentType = 'image/png'
- 
-// Image generation
+};
+
+export const contentType = "image/png";
+
 export default async function Icon() {
-  return new ImageResponse(
-    (
-      // ImageResponse JSX element
-      <div
-        style={{
-          fontSize: 20,
-          background: 'linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: 'white',
-          borderRadius: '50%',
-          border: '2px solid rgba(255, 255, 255, 0.2)',
-        }}
-      >
-        TM
-      </div>
-    ),
-    // ImageResponse options
-    {
-      // For convenience, we can re-use the exported icons size metadata
-      // config to also set the ImageResponse's width and height.
-      ...size,
-    }
-  )
-} 
+  const icon = await readFile(join(process.cwd(), "public/images/favicon-32.png"));
+
+  return new Response(icon, {
+    headers: {
+      "Content-Type": "image/png",
+      "Cache-Control": "public, max-age=31536000, immutable",
+    },
+  });
+}

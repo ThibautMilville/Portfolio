@@ -1,1 +1,1 @@
-export { default } from '../formations/page';
+export { default } from "../formations/page";

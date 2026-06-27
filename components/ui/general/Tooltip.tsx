@@ -1,14 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 type TooltipPosition = "top" | "bottom" | "left" | "right";
@@ -39,7 +32,7 @@ export function Tooltip({
   position = "top",
   distance = 8,
   hasUpwardAnimation = false,
-}: TooltipProps): JSX.Element {
+}: TooltipProps) {
   const triggerRef = useRef<HTMLSpanElement | null>(null);
   const tooltipRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -80,12 +73,12 @@ export function Tooltip({
     if (position === "top" || position === "bottom") {
       left = Math.max(
         minPadding + tooltipRect.width / 2,
-        Math.min(window.innerWidth - minPadding - tooltipRect.width / 2, left)
+        Math.min(window.innerWidth - minPadding - tooltipRect.width / 2, left),
       );
     } else {
       top = Math.max(
         minPadding + tooltipRect.height / 2,
-        Math.min(window.innerHeight - minPadding - tooltipRect.height / 2, top)
+        Math.min(window.innerHeight - minPadding - tooltipRect.height / 2, top),
       );
     }
 
@@ -164,7 +157,7 @@ export function Tooltip({
             >
               {content}
             </div>,
-            document.body
+            document.body,
           )
         : null}
     </span>

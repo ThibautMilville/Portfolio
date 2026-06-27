@@ -1,20 +1,23 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Link, usePathname, useRouter } from "@/navigation";
-import { useLocale, useTranslations } from "next-intl";
-import { getLocalizedRoute, getRouteFromPathname } from "@/lib/localized-routes";
+import { AnimatePresence, motion } from "framer-motion";
 import {
-  Menu,
-  X,
-  Home,
-  GraduationCap,
   Briefcase,
   Code2,
+  Github,
+  GraduationCap,
+  Home,
+  Linkedin,
+  Mail,
+  Menu,
+  MessageCircle,
   Moon,
   Sun,
+  X,
 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+import { useTheme } from "@/components/ThemeProvider";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -22,52 +25,55 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { BritishFlagIcon, FrenchFlagIcon } from "@/components/ui/flag-icons";
 import { Tooltip } from "@/components/ui/general/Tooltip";
-import { useTheme } from "@/components/ThemeProvider";
-import { cn } from "@/lib/utils";
 import { LocalImage } from "@/components/ui/image";
-import { FrenchFlagIcon, BritishFlagIcon } from "@/components/ui/flag-icons";
 import { FOOTER_DATA } from "@/lib/footer";
-import { Github, Linkedin, Mail, MessageCircle } from "lucide-react";
+import { getLocalizedRoute } from "@/lib/localized-routes";
+import { cn } from "@/lib/utils";
+import { Link, usePathname, useRouter } from "@/navigation";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
-  const [isLanguageMenuOpenDesktop, setIsLanguageMenuOpenDesktop] = useState(false);
-  const [isLanguageMenuOpenMobile, setIsLanguageMenuOpenMobile] = useState(false);
+  const [_isLanguageMenuOpenDesktop, setIsLanguageMenuOpenDesktop] = useState(false);
+  const [_isLanguageMenuOpenMobile, setIsLanguageMenuOpenMobile] = useState(false);
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
-  
+
   // Fallback: detect locale from URL if useLocale() fails
-  const currentLocale = typeof window !== 'undefined' 
-    ? (window.location.pathname.startsWith('/fr') ? 'fr' : 'en')
-    : locale;
-  
+  const currentLocale =
+    typeof window !== "undefined"
+      ? window.location.pathname.startsWith("/fr")
+        ? "fr"
+        : "en"
+      : locale;
+
   const { theme, setTheme } = useTheme();
-  const t = useTranslations('Navigation');
-  
+  const t = useTranslations("Navigation");
+
   // Fallback translations based on detected locale
   const translations = {
     fr: {
-      home: 'Accueil',
-      formations: 'Formations',
-      experiences: 'Expériences',
-      projects: 'Projets',
-      contact: 'Contact'
+      home: "Accueil",
+      formations: "Formations",
+      experiences: "Expériences",
+      projects: "Projets",
+      contact: "Contact",
     },
     en: {
-      home: 'Home',
-      formations: 'Education',
-      experiences: 'Experience',
-      projects: 'Projects',
-      contact: 'Contact'
-    }
+      home: "Home",
+      formations: "Education",
+      experiences: "Experience",
+      projects: "Projects",
+      contact: "Contact",
+    },
   };
-  
-  const currentTranslations = translations[currentLocale as keyof typeof translations] || translations.en;
-  
+
+  const currentTranslations =
+    translations[currentLocale as keyof typeof translations] || translations.en;
 
   // Hydration effect
   useEffect(() => {
@@ -124,7 +130,6 @@ export default function Navigation() {
     };
   }, [isOpen]);
 
-
   const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
@@ -135,7 +140,7 @@ export default function Navigation() {
         transition={{ duration: 0.5, delay: 0.2 }}
         className={cn(
           "transition-all duration-500 ease-out",
-          scrolled ? "nav-glass-scrolled" : "nav-glass"
+          scrolled ? "nav-glass-scrolled" : "nav-glass",
         )}
       >
         <div className="nav-glass__inner flex items-center justify-between gap-4">
@@ -148,7 +153,7 @@ export default function Navigation() {
             <Link href="/" className="flex items-center">
               <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20 shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105">
                 <LocalImage
-                  imageName="photo_profil.jpg"
+                  imageName="photo-profil.png"
                   alt="Thibaut Milville"
                   className="w-full h-full object-cover"
                 />
@@ -167,22 +172,22 @@ export default function Navigation() {
             {[
               { href: "/", label: currentTranslations.home, icon: Home },
               {
-                href: getLocalizedRoute('formations', currentLocale as 'fr' | 'en'),
+                href: getLocalizedRoute("formations", currentLocale as "fr" | "en"),
                 label: currentTranslations.formations,
                 icon: GraduationCap,
               },
               {
-                href: getLocalizedRoute('experiences', currentLocale as 'fr' | 'en'),
+                href: getLocalizedRoute("experiences", currentLocale as "fr" | "en"),
                 label: currentTranslations.experiences,
                 icon: Briefcase,
               },
               {
-                href: getLocalizedRoute('projets', currentLocale as 'fr' | 'en'),
+                href: getLocalizedRoute("projets", currentLocale as "fr" | "en"),
                 label: currentTranslations.projects,
                 icon: Code2,
               },
               {
-                href: getLocalizedRoute('contact', currentLocale as 'fr' | 'en'),
+                href: getLocalizedRoute("contact", currentLocale as "fr" | "en"),
                 label: currentTranslations.contact,
                 icon: Mail,
               },
@@ -204,9 +209,7 @@ export default function Navigation() {
                     href={item.href}
                     className={cn(
                       "nav-link-glass flex items-center gap-2 text-sm font-medium relative py-2",
-                      isActive
-                        ? "text-primary"
-                        : "text-muted-foreground hover:text-foreground"
+                      isActive ? "text-primary" : "text-muted-foreground hover:text-foreground",
                     )}
                   >
                     <Icon className="h-4 w-4" />
@@ -214,7 +217,7 @@ export default function Navigation() {
                     {isActive && (
                       <motion.div
                         layoutId="activeTab"
-                        className="absolute -bottom-2 left-0 right-0 h-0.5 bg-primary rounded-full"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"
                       />
                     )}
                   </Link>
@@ -233,7 +236,7 @@ export default function Navigation() {
             {/* Language Switcher (desktop) */}
             <div className="hidden md:block">
               <Tooltip
-                content={currentLocale === "fr" ? t('switchToEnglish') : t('switchToFrench')}
+                content={currentLocale === "fr" ? t("switchToEnglish") : t("switchToFrench")}
                 position="bottom"
               >
                 <DropdownMenu onOpenChange={setIsLanguageMenuOpenDesktop}>
@@ -252,75 +255,75 @@ export default function Navigation() {
                         )}
                       </span>
                       <span className="text-xs font-medium">
-                        {!isHydrated ? '--' : currentLocale.toUpperCase()}
+                        {!isHydrated ? "--" : currentLocale.toUpperCase()}
                       </span>
                     </Button>
                   </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="center"
-                  sideOffset={6}
-                  className="w-fit min-w-[120px] text-center bg-background/95 backdrop-blur-md border-white/20 z-[99999] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
-                >
-                  <DropdownMenuItem
-                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 cursor-pointer"
-                    onClick={() => {
-                      if (currentLocale === 'fr') return; // Déjà en français, ne rien faire
-                      
-                      // Transformer l'URL selon la langue
-                      const cleanPath = pathname.replace(/^\/(fr|en)/, '') || '/';
-                      
-                      // Mapping des routes pour le français
-                      let newPath = cleanPath;
-                      if (cleanPath === '/projects') newPath = '/projets';
-                      else if (cleanPath === '/education') newPath = '/formations';
-                      else if (cleanPath === '/experience') newPath = '/experiences';
-                      
-                      router.push(newPath === '/' ? '' : newPath, { locale: 'fr' });
-                      
-                      try {
-                        (document.activeElement as HTMLElement)?.blur?.();
-                      } catch {}
-                    }}
+                  <DropdownMenuContent
+                    align="center"
+                    sideOffset={6}
+                    className="w-fit min-w-[120px] text-center bg-background/95 backdrop-blur-md border-white/20 z-[99999] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
                   >
-                    <span className="mr-2">
-                      <FrenchFlagIcon className="w-4 h-4" />
-                    </span>
-                    <span>Français</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 cursor-pointer"
-                    onClick={() => {
-                      if (currentLocale === 'en') return; // Déjà en anglais, ne rien faire
-                      
-                      // Transformer l'URL selon la langue
-                      const cleanPath = pathname.replace(/^\/(fr|en)/, '') || '/';
-                      
-                      // Mapping des routes pour l'anglais
-                      let newPath = cleanPath;
-                      if (cleanPath === '/projets') newPath = '/projects';
-                      else if (cleanPath === '/formations') newPath = '/education';
-                      else if (cleanPath === '/experiences') newPath = '/experience';
-                      
-                      router.push(newPath === '/' ? '' : newPath, { locale: 'en' });
-                      try {
-                        (document.activeElement as HTMLElement)?.blur?.();
-                      } catch {}
-                    }}
-                  >
-                    <span className="mr-2">
-                      <BritishFlagIcon className="w-4 h-4" />
-                    </span>
-                    <span>English</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+                    <DropdownMenuItem
+                      className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 cursor-pointer"
+                      onClick={() => {
+                        if (currentLocale === "fr") return; // Déjà en français, ne rien faire
+
+                        // Transformer l'URL selon la langue
+                        const cleanPath = pathname.replace(/^\/(fr|en)/, "") || "/";
+
+                        // Mapping des routes pour le français
+                        let newPath = cleanPath;
+                        if (cleanPath === "/projects") newPath = "/projets";
+                        else if (cleanPath === "/education") newPath = "/formations";
+                        else if (cleanPath === "/experience") newPath = "/experiences";
+
+                        router.push(newPath === "/" ? "" : newPath, { locale: "fr" });
+
+                        try {
+                          (document.activeElement as HTMLElement)?.blur?.();
+                        } catch {}
+                      }}
+                    >
+                      <span className="mr-2">
+                        <FrenchFlagIcon className="w-4 h-4" />
+                      </span>
+                      <span>Français</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 cursor-pointer"
+                      onClick={() => {
+                        if (currentLocale === "en") return; // Déjà en anglais, ne rien faire
+
+                        // Transformer l'URL selon la langue
+                        const cleanPath = pathname.replace(/^\/(fr|en)/, "") || "/";
+
+                        // Mapping des routes pour l'anglais
+                        let newPath = cleanPath;
+                        if (cleanPath === "/projets") newPath = "/projects";
+                        else if (cleanPath === "/formations") newPath = "/education";
+                        else if (cleanPath === "/experiences") newPath = "/experience";
+
+                        router.push(newPath === "/" ? "" : newPath, { locale: "en" });
+                        try {
+                          (document.activeElement as HTMLElement)?.blur?.();
+                        } catch {}
+                      }}
+                    >
+                      <span className="mr-2">
+                        <BritishFlagIcon className="w-4 h-4" />
+                      </span>
+                      <span>English</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </Tooltip>
             </div>
 
             {/* Language Switcher (mobile) - Compact version */}
             <div className="md:hidden">
               <Tooltip
-                content={currentLocale === "fr" ? t('switchToEnglish') : t('switchToFrench')}
+                content={currentLocale === "fr" ? t("switchToEnglish") : t("switchToFrench")}
                 position="bottom"
               >
                 <DropdownMenu onOpenChange={setIsLanguageMenuOpenMobile}>
@@ -339,69 +342,69 @@ export default function Navigation() {
                       )}
                     </Button>
                   </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  align="end"
-                  sideOffset={6}
-                  className="w-fit min-w-[120px] text-center bg-background/95 backdrop-blur-md border-white/20 z-[99999] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
-                >
-                  <DropdownMenuItem
-                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 cursor-pointer"
-                    onClick={() => {
-                      if (currentLocale === 'fr') return; // Déjà en français, ne rien faire
-                      
-                      // Transformer l'URL selon la langue
-                      const cleanPath = pathname.replace(/^\/(fr|en)/, '') || '/';
-                      
-                      // Mapping des routes pour le français
-                      let newPath = cleanPath;
-                      if (cleanPath === '/projects') newPath = '/projets';
-                      else if (cleanPath === '/education') newPath = '/formations';
-                      else if (cleanPath === '/experience') newPath = '/experiences';
-                      
-                      router.push(newPath === '/' ? '' : newPath, { locale: 'fr' });
-                      
-                      try {
-                        (document.activeElement as HTMLElement)?.blur?.();
-                      } catch {}
-                    }}
+                  <DropdownMenuContent
+                    align="end"
+                    sideOffset={6}
+                    className="w-fit min-w-[120px] text-center bg-background/95 backdrop-blur-md border-white/20 z-[99999] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95"
                   >
-                    <span className="mr-2">
-                      <FrenchFlagIcon className="w-4 h-4" />
-                    </span>
-                    <span>Français</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 cursor-pointer"
-                    onClick={() => {
-                      if (currentLocale === 'en') return; // Déjà en anglais, ne rien faire
-                      
-                      // Transformer l'URL selon la langue
-                      const cleanPath = pathname.replace(/^\/(fr|en)/, '') || '/';
-                      
-                      // Mapping des routes pour l'anglais
-                      let newPath = cleanPath;
-                      if (cleanPath === '/projets') newPath = '/projects';
-                      else if (cleanPath === '/formations') newPath = '/education';
-                      else if (cleanPath === '/experiences') newPath = '/experience';
-                      
-                      router.push(newPath === '/' ? '' : newPath, { locale: 'en' });
-                      try {
-                        (document.activeElement as HTMLElement)?.blur?.();
-                      } catch {}
-                    }}
-                  >
-                    <span className="mr-2">
-                      <BritishFlagIcon className="w-4 h-4" />
-                    </span>
-                    <span>English</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+                    <DropdownMenuItem
+                      className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 cursor-pointer"
+                      onClick={() => {
+                        if (currentLocale === "fr") return; // Déjà en français, ne rien faire
+
+                        // Transformer l'URL selon la langue
+                        const cleanPath = pathname.replace(/^\/(fr|en)/, "") || "/";
+
+                        // Mapping des routes pour le français
+                        let newPath = cleanPath;
+                        if (cleanPath === "/projects") newPath = "/projets";
+                        else if (cleanPath === "/education") newPath = "/formations";
+                        else if (cleanPath === "/experience") newPath = "/experiences";
+
+                        router.push(newPath === "/" ? "" : newPath, { locale: "fr" });
+
+                        try {
+                          (document.activeElement as HTMLElement)?.blur?.();
+                        } catch {}
+                      }}
+                    >
+                      <span className="mr-2">
+                        <FrenchFlagIcon className="w-4 h-4" />
+                      </span>
+                      <span>Français</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="justify-center hover:bg-primary/10 transition-colors focus:outline-none focus:ring-0 cursor-pointer"
+                      onClick={() => {
+                        if (currentLocale === "en") return; // Déjà en anglais, ne rien faire
+
+                        // Transformer l'URL selon la langue
+                        const cleanPath = pathname.replace(/^\/(fr|en)/, "") || "/";
+
+                        // Mapping des routes pour l'anglais
+                        let newPath = cleanPath;
+                        if (cleanPath === "/projets") newPath = "/projects";
+                        else if (cleanPath === "/formations") newPath = "/education";
+                        else if (cleanPath === "/experiences") newPath = "/experience";
+
+                        router.push(newPath === "/" ? "" : newPath, { locale: "en" });
+                        try {
+                          (document.activeElement as HTMLElement)?.blur?.();
+                        } catch {}
+                      }}
+                    >
+                      <span className="mr-2">
+                        <BritishFlagIcon className="w-4 h-4" />
+                      </span>
+                      <span>English</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </Tooltip>
             </div>
 
             <Tooltip
-              content={theme === "dark" ? t('switchToLight') : t('switchToDark')}
+              content={theme === "dark" ? t("switchToLight") : t("switchToDark")}
               position="bottom"
             >
               <Button
@@ -425,11 +428,7 @@ export default function Navigation() {
               aria-label="Ouvrir le menu"
               aria-expanded={isOpen}
             >
-              {isOpen ? (
-                <X className="h-4 w-4" />
-              ) : (
-                <Menu className="h-4 w-4" />
-              )}
+              {isOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </Button>
           </motion.div>
         </div>
@@ -466,9 +465,7 @@ export default function Navigation() {
             >
               {/* Header du menu mobile */}
               <div className="flex items-center justify-between p-4 border-b border-white/10">
-                <h2 className="text-lg font-semibold text-foreground">
-                  Menu
-                </h2>
+                <h2 className="text-lg font-semibold text-foreground">Menu</h2>
                 <Button
                   variant="ghost"
                   size="icon"
@@ -485,22 +482,22 @@ export default function Navigation() {
                 {[
                   { href: "/", label: currentTranslations.home, icon: Home },
                   {
-                    href: getLocalizedRoute('formations', currentLocale as 'fr' | 'en'),
+                    href: getLocalizedRoute("formations", currentLocale as "fr" | "en"),
                     label: currentTranslations.formations,
                     icon: GraduationCap,
                   },
                   {
-                    href: getLocalizedRoute('experiences', currentLocale as 'fr' | 'en'),
+                    href: getLocalizedRoute("experiences", currentLocale as "fr" | "en"),
                     label: currentTranslations.experiences,
                     icon: Briefcase,
                   },
                   {
-                    href: getLocalizedRoute('projets', currentLocale as 'fr' | 'en'),
+                    href: getLocalizedRoute("projets", currentLocale as "fr" | "en"),
                     label: currentTranslations.projects,
                     icon: Code2,
                   },
                   {
-                    href: getLocalizedRoute('contact', currentLocale as 'fr' | 'en'),
+                    href: getLocalizedRoute("contact", currentLocale as "fr" | "en"),
                     label: currentTranslations.contact,
                     icon: Mail,
                   },
@@ -516,7 +513,7 @@ export default function Navigation() {
                         "flex items-center justify-center gap-3 px-4 py-3 rounded-lg text-base font-medium transition-all duration-200",
                         isActive
                           ? "bg-primary/20 text-primary border border-primary/30"
-                          : "text-muted-foreground hover:text-foreground hover:bg-white/10"
+                          : "text-muted-foreground hover:text-foreground hover:bg-white/10",
                       )}
                     >
                       <Icon className="h-5 w-5" />

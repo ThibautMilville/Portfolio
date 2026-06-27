@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { cn, translateDateSimple } from "@/lib/utils";
+import { useLocale } from "next-intl";
 import { Tooltip } from "@/components/ui/general/Tooltip";
-import { useTranslations, useLocale } from "next-intl";
+import { cn, translateDateSimple } from "@/lib/utils";
 
 export interface ProjectPeriodItem {
   title?: string;
@@ -43,8 +43,8 @@ export default function ProjectTimeline({
                 key={idx}
                 content={`${p.title || "Période"} - ${translateDateSimple(
                   p.date,
-                  locale
-                )}${p.description ? "\n\n" + p.description : ""}`}
+                  locale,
+                )}${p.description ? `\n\n${p.description}` : ""}`}
               >
                 <button
                   type="button"
@@ -83,9 +83,7 @@ export default function ProjectTimeline({
               </div>
               {p.title ? <div className="font-semibold">{p.title}</div> : null}
               {p.description ? (
-                <p className="text-sm text-muted-foreground mt-1">
-                  {p.description}
-                </p>
+                <p className="text-sm text-muted-foreground mt-1">{p.description}</p>
               ) : null}
             </div>
           </motion.div>

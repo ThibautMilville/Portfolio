@@ -1,4 +1,4 @@
-import { Experience } from "@/types/portfolio";
+import type { Experience } from "@/types/portfolio";
 
 export const experiencesData: Experience[] = [
   {
@@ -19,7 +19,7 @@ export const experiencesData: Experience[] = [
       "DEX",
       "React",
       "UX/UI",
-      "Performance Optimization"
+      "Performance Optimization",
     ],
     achievements: [
       "Direction du développement frontend de cloak.today et app.cloak.today avec une approche privacy-first",
@@ -27,11 +27,11 @@ export const experiencesData: Experience[] = [
       "Conception de parcours utilisateurs pour wallets privés, transactions shielded et fonctionnalités DeFi (DEX intégré)",
       "Collaboration étroite avec les équipes protocole et smart contracts pour refléter fidèlement les contraintes zero-knowledge",
       "Optimisation de la réactivité, des performances et de la compatibilité cross-platform desktop",
-      "Impact: Livraison d'un website et d'une application production-ready qui rendent la privacy zero-knowledge et la DeFi plus compréhensibles, utilisables et accessibles sur Antelope"
+      "Impact: Livraison d'un website et d'une application production-ready qui rendent la privacy zero-knowledge et la DeFi plus compréhensibles, utilisables et accessibles sur Antelope",
     ],
     projectIds: [39, 40],
     logoUrl: "/images/company/cloak-logo.webp",
-    employmentType: "freelance"
+    employmentType: "freelance",
   },
   {
     id: 11,
@@ -48,7 +48,7 @@ export const experiencesData: Experience[] = [
       "C++",
       "Git",
       "Artificial Intelligence (AI)",
-      "Agile Project Management"
+      "Agile Project Management",
     ],
     achievements: [
       "Contribution au développement d'outils et bibliothèques open-source pour l'écosystème blockchain Ultra",
@@ -56,11 +56,11 @@ export const experiencesData: Experience[] = [
       "Participation à des ateliers techniques et meetups développeurs pour soutenir la croissance communautaire",
       "Collaboration avec des ingénieurs et contributeurs pour créer des ressources et documentations pour la communauté développeurs Ultra",
       "Soutien actif à l'adoption de la technologie Ultra par le développement pratique et le partage de connaissances",
-      "Impact: Amélioration de l'écosystème développeurs Ultra en fournissant des outils fiables centrés sur les développeurs et en améliorant les ressources d'intégration, permettant aux constructeurs et accélérant l'adoption sur la plateforme"
+      "Impact: Amélioration de l'écosystème développeurs Ultra en fournissant des outils fiables centrés sur les développeurs et en améliorant les ressources d'intégration, permettant aux constructeurs et accélérant l'adoption sur la plateforme",
     ],
     projectIds: [],
     logoUrl: "/images/company/logo_uta.png",
-    employmentType: "freelance"
+    employmentType: "freelance",
   },
   {
     id: 10,
@@ -80,18 +80,18 @@ export const experiencesData: Experience[] = [
       "Agile",
       "Git",
       "GitLab",
-      "Tailwind"
+      "Tailwind",
     ],
     achievements: [
       "Développement de la couche d'intégration Web3 du jeu Ashes of Mankind (Empires)",
       "Implémentation complète du frontend Web3 et interaction avec les smart contracts",
       "Participation aux réunions quotidiennes et discussions techniques en anglais",
       "Collaboration en environnement Agile avec équipes internationales",
-      "Coordination avec les équipes globales pour l'alignement technique"
+      "Coordination avec les équipes globales pour l'alignement technique",
     ],
     projectIds: [36],
     logoUrl: "/images/company/black_ice_studios_logo.jpeg",
-    employmentType: "freelance"
+    employmentType: "freelance",
   },
   {
     id: 7,
@@ -107,18 +107,18 @@ export const experiencesData: Experience[] = [
       "Social Media Moderation",
       "International Communities",
       "Gaming Industry",
-      "Online Community Moderation"
+      "Online Community Moderation",
     ],
     achievements: [
       "Modération de communautés internationales",
       "Organisation d'événements",
       "Aide aux utilisateurs",
       "Participation à la modération des réseaux sociaux du jeu Black Ice Studios (Ashes of Mankind)",
-      "Modération de communauté en ligne"
+      "Modération de communauté en ligne",
     ],
     projectIds: [],
     logoUrl: "/images/company/logo_ultra.png",
-    employmentType: "freelance"
+    employmentType: "freelance",
   },
   {
     id: 8,
@@ -140,17 +140,17 @@ export const experiencesData: Experience[] = [
       "Community Management",
       "Leadership",
       "Strategic Decision Making",
-      "Git"
+      "Git",
     ],
     achievements: [
       "Direction de la conception technique, du développement et du déploiement de 7 applications décentralisées sur la blockchain Ultra, supervision de l'architecture fullstack et garantie de la scalabilité et de la sécurité",
       "Participation aux décisions stratégiques en tant que membre de l'équipe de direction, alignement des initiatives techniques avec les objectifs commerciaux et de levée de fonds",
       "Rédaction de contenu technique et engagement avec la communauté en anglais et français, incluant des interviews avec des développeurs blockchain et de jeux, améliorant la visibilité et le leadership d'opinion de la plateforme",
-      "Gestion de sprints Agile, coordination des workflows de développement et garantie de la livraison dans les délais des MVPs sur des projets basés sur la blockchain Ultra"
+      "Gestion de sprints Agile, coordination des workflows de développement et garantie de la livraison dans les délais des MVPs sur des projets basés sur la blockchain Ultra",
     ],
     projectIds: [],
     logoUrl: "/images/company/logo_UT.png",
-    employmentType: "freelance"
+    employmentType: "freelance",
   },
   {
     id: 9,
@@ -167,17 +167,17 @@ export const experiencesData: Experience[] = [
       "Community Management",
       "English",
       "French",
-      "Blockchain Development"
+      "Blockchain Development",
     ],
     achievements: [
       "Développement utilisant la blockchain Ultra et ses APIs",
       "Rédaction d'articles techniques sur la blockchain Ultra",
       "Participation aux activités communautaires en anglais et français",
-      "Engagement communautaire et interviews"
+      "Engagement communautaire et interviews",
     ],
     projectIds: [],
     logoUrl: "/images/company/logo_UT.png",
-    employmentType: "freelance"
+    employmentType: "freelance",
   },
   {
     id: 1,
@@ -190,12 +190,12 @@ export const experiencesData: Experience[] = [
     achievements: [
       "Conception de solutions applicatives pour optimiser le travail des agents",
       "Développement d'applications internes",
-      "Collaboration avec les équipes métier"
+      "Collaboration avec les équipes métier",
     ],
     projectIds: [],
     relatedFormationIds: [1, 2],
     logoUrl: "/images/company/Logo-SNCF-Voyageurs.webp",
-    employmentType: "fullTime"
+    employmentType: "fullTime",
   },
   {
     id: 3,
@@ -208,16 +208,16 @@ export const experiencesData: Experience[] = [
       "Business Management",
       "Software Development",
       "IT Services",
-      "Project Management"
+      "Project Management",
     ],
     achievements: [
       "Création et direction d'une entreprise de services informatiques",
       "Développement de logiciels sur mesure",
-      "Gestion des relations clients et des projets"
+      "Gestion des relations clients et des projets",
     ],
     projectIds: [],
     logoUrl: "/images/company/logo-digitallabs.png",
-    employmentType: "entrepreneur"
+    employmentType: "entrepreneur",
   },
   {
     id: 2,
@@ -239,18 +239,18 @@ export const experiencesData: Experience[] = [
       "MySQL Workbench",
       "HTML",
       "CSS3",
-      "Bootstrap"
+      "Bootstrap",
     ],
     achievements: [
       "Production et maintenance d'applications internes",
       "Développement avec NestJS et React.js",
       "Gestion de projet Agile",
-      "Utilisation de CodeIgniter et PHP"
+      "Utilisation de CodeIgniter et PHP",
     ],
     projectIds: [],
     relatedFormationIds: [2],
     logoUrl: "/images/company/Logo-SNCF-Voyageurs.webp",
-    employmentType: "fullTime"
+    employmentType: "fullTime",
   },
   {
     id: 4,
@@ -275,18 +275,18 @@ export const experiencesData: Experience[] = [
       "WordPress",
       "Microsoft Office",
       "HTML",
-      "Content Management Systems (CMS)"
+      "Content Management Systems (CMS)",
     ],
     achievements: [
       "Développement d'un ensemble complet de sites web",
       "Gestion des réseaux sociaux",
       "Acquisition de compétences en communication client",
-      "Gestion de projets et développement de la confiance"
+      "Gestion de projets et développement de la confiance",
     ],
     projectIds: [],
     relatedFormationIds: [3],
     logoUrl: "/images/company/osmoz_com_logo.jpeg",
-    employmentType: "fullTime"
+    employmentType: "fullTime",
   },
   {
     id: 5,
@@ -304,7 +304,7 @@ export const experiencesData: Experience[] = [
       "Adaptation",
       "Communication",
       "Microsoft Office",
-      "Client Relationship Management"
+      "Client Relationship Management",
     ],
     achievements: [
       "Accompagnement de plus de 300 clients avec 100% d'avis positifs et de recommandations",
@@ -313,11 +313,11 @@ export const experiencesData: Experience[] = [
       "Gestion du temps et du stress",
       "Développement de compétences en publicité vidéo et image",
       "Rédaction SEO et développement de sites web",
-      "Excellence en relations clients et satisfaction client"
+      "Excellence en relations clients et satisfaction client",
     ],
     projectIds: [],
     relatedFormationIds: [3],
     logoUrl: "/images/company/comeup_logo.jpeg",
-    employmentType: "freelance"
-  }
+    employmentType: "freelance",
+  },
 ];

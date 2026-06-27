@@ -1,6 +1,6 @@
-import React from 'react';
-import { cn } from '@/lib/utils';
-import { getImagePath } from '@/lib/images';
+import type React from "react";
+import { getImagePath } from "@/lib/images";
+import { cn } from "@/lib/utils";
 
 interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src: string;
@@ -9,39 +9,24 @@ interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   useAlias?: boolean;
 }
 
-export const Image: React.FC<ImageProps> = ({ 
-  src, 
-  alt, 
-  className, 
+export const Image: React.FC<ImageProps> = ({
+  src,
+  alt,
+  className,
   useAlias = false,
-  ...props 
+  ...props
 }) => {
   const imageSrc = useAlias ? getImagePath(src) : src;
-  
-  return (
-    <img
-      src={imageSrc}
-      alt={alt}
-      className={cn(className)}
-      {...props}
-    />
-  );
+
+  return <img src={imageSrc} alt={alt} className={cn(className)} {...props} />;
 };
 
 // Composant spécialisé pour les images du dossier @images/
-export const LocalImage: React.FC<Omit<ImageProps, 'useAlias' | 'src'> & { imageName: string }> = ({ 
-  imageName, 
-  alt, 
+export const LocalImage: React.FC<Omit<ImageProps, "useAlias" | "src"> & { imageName: string }> = ({
+  imageName,
+  alt,
   className,
-  ...props 
+  ...props
 }) => {
-  return (
-    <Image
-      src={imageName}
-      alt={alt}
-      className={className}
-      useAlias={true}
-      {...props}
-    />
-  );
-}; 
+  return <Image src={imageName} alt={alt} className={className} useAlias={true} {...props} />;
+};

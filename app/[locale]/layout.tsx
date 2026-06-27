@@ -1,28 +1,29 @@
-import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono, Nunito } from 'next/font/google';
-import '../globals.css';
-import Navigation from '@/components/Navigation';
-import { ThemeProvider } from '@/components/ThemeProvider';
-import { IMAGES } from '@/lib/images';
-import Footer from '@/components/Footer';
-import BackToTop from '@/components/BackToTop';
-import Chatbot from '@/components/Chatbot';
-import StructuredData from '@/components/StructuredData';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
-import { notFound } from 'next/navigation';
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import "../globals.css";
+import { Inter, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import BackToTop from "@/components/BackToTop";
+import Chatbot from "@/components/Chatbot";
+import Footer from "@/components/Footer";
+import Navigation from "@/components/Navigation";
+import StructuredData from "@/components/StructuredData";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { IMAGES } from "@/lib/images";
+import { getSiteMetadata } from "@/lib/seo";
 
-const locales = ['en', 'fr'];
+const locales = ["en", "fr"];
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const jetbrainsMono = JetBrains_Mono({ 
-  subsets: ['latin'], 
-  variable: '--font-mono' 
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
 });
-const nunito = Nunito({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-heading",
-  weight: ["600", "700", "800"],
+  weight: ["500", "600", "700", "800"],
 });
 
 export function generateStaticParams() {
@@ -30,121 +31,40 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({
-  params
+  params,
 }: {
-  params: Promise<{ locale: string }>
+  params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const isFrench = locale === 'fr';
-  
+
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
-    title: isFrench 
-      ? 'Thibaut MILVILLE - Développeur Fullstack React & Next.js | Portfolio'
-      : 'Thibaut MILVILLE - Fullstack React & Next.js Developer | Portfolio',
-    description: isFrench
-      ? 'Développeur Fullstack spécialisé en React, Next.js et NestJS. Créateur d\'applications web modernes et performantes. Découvrez mes projets, compétences et expériences professionnelles.'
-      : 'Fullstack developer specialized in React, Next.js and NestJS. Creator of modern and performant web applications. Discover my projects, skills and professional experiences.',
-    keywords: isFrench
-      ? [
-          'développeur fullstack',
-          'react developer',
-          'next.js',
-          'nestjs',
-          'javascript',
-          'typescript',
-          'portfolio',
-          'développement web',
-          'frontend',
-          'backend',
-          'thibaut milville'
-        ]
-      : [
-          'fullstack developer',
-          'react developer',
-          'next.js',
-          'nestjs',
-          'javascript',
-          'typescript',
-          'portfolio',
-          'web development',
-          'frontend',
-          'backend',
-          'thibaut milville'
-        ],
-    authors: [{ name: 'Thibaut MILVILLE' }],
-    creator: 'Thibaut MILVILLE',
-    publisher: 'Thibaut MILVILLE',
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
-      },
-    },
-    openGraph: {
-      type: 'website',
-      locale: isFrench ? 'fr_FR' : 'en_US',
-      url: 'https://thibaut-milville.dev',
-      title: isFrench
-        ? 'Thibaut MILVILLE - Développeur Fullstack React & Next.js'
-        : 'Thibaut MILVILLE - Fullstack React & Next.js Developer',
-      description: isFrench
-        ? 'Développeur Fullstack spécialisé en React, Next.js et NestJS. Créateur d\'applications web modernes et performantes.'
-        : 'Fullstack developer specialized in React, Next.js and NestJS. Creator of modern and performant web applications.',
-      siteName: isFrench ? 'Portfolio Thibaut MILVILLE' : 'Thibaut MILVILLE Portfolio',
-      images: [
-        {
-          url: '/images/photo_profil.jpg',
-          width: 1200,
-          height: 630,
-          alt: isFrench ? 'Thibaut MILVILLE - Développeur Fullstack' : 'Thibaut MILVILLE - Fullstack Developer',
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: isFrench
-        ? 'Thibaut MILVILLE - Développeur Fullstack React & Next.js'
-        : 'Thibaut MILVILLE - Fullstack React & Next.js Developer',
-      description: isFrench
-        ? 'Développeur Fullstack spécialisé en React, Next.js et NestJS. Créateur d\'applications web modernes et performantes.'
-        : 'Fullstack developer specialized in React, Next.js and NestJS. Creator of modern and performant web applications.',
-      images: ['/images/photo_profil.jpg'],
-    },
+    ...getSiteMetadata(locale),
     icons: {
       icon: IMAGES.favicon,
-      apple: IMAGES.favicon,
-    },
-    alternates: {
-      canonical: 'https://thibaut-milville.dev',
+      apple: IMAGES.appleTouchIcon,
     },
   };
 }
 
 export default async function LocaleLayout({
   children,
-  params
+  params,
 }: {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  // Validate that the incoming `locale` parameter is valid
-  if (!locales.includes(locale as any)) notFound();
+  if (!locales.includes(locale as (typeof locales)[number])) notFound();
 
-  // Providing all messages to the client
-  // side is the easiest way to get started
   const messages = await getMessages();
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body id="top" className={`${inter.variable} ${jetbrainsMono.variable} ${nunito.variable} font-sans antialiased`}>
-        <StructuredData />
+      <body
+        id="top"
+        className={`${inter.variable} ${jetbrainsMono.variable} ${plusJakartaSans.variable} font-sans antialiased`}
+      >
+        <StructuredData locale={locale} />
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute="class"
@@ -153,9 +73,7 @@ export default async function LocaleLayout({
             disableTransitionOnChange={false}
           >
             <Navigation />
-            <main className="min-h-screen">
-              {children}
-            </main>
+            <main className="min-h-screen">{children}</main>
             <Footer />
             <BackToTop />
             <Chatbot />

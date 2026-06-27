@@ -1,16 +1,24 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTranslations, useLocale } from "next-intl";
-import { translateDateSimple } from "@/lib/utils";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Calendar,
+  ExternalLink,
+  GraduationCap,
+  MapPin,
+  School,
+} from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Link } from "@/navigation";
 import LightParticles from "@/components/ui/light-particles";
-import { ArrowRight, GraduationCap, Calendar, School, BadgeCheck, ExternalLink, MapPin } from "lucide-react";
-import { usePortfolioData } from "@/hooks/usePortfolioData";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
 import { useTranslatedData } from "@/hooks/useTranslatedData";
+import { translateDateSimple } from "@/lib/utils";
+import { Link } from "@/navigation";
 
 const monthValueMap: Record<string, number> = {
   jan: 1,
@@ -48,15 +56,21 @@ function getRecencyScore(date: string): number {
 }
 
 export default function FormationsSection() {
-  const t = useTranslations('Home.formations');
+  const t = useTranslations("Home.formations");
   const locale = useLocale();
   const { getTranslatedFormation } = useTranslatedData();
   const { formations, loading } = usePortfolioData();
   const maxTimelineItems = 5;
-  const sortedFormations = [...formations].sort((a, b) => getRecencyScore(b.date) - getRecencyScore(a.date));
+  const sortedFormations = [...formations].sort(
+    (a, b) => getRecencyScore(b.date) - getRecencyScore(a.date),
+  );
   const diplomaFormations = sortedFormations.filter((formation) => formation.type === "Diplôme");
-  const certificationBadges = sortedFormations.filter((formation) => formation.type === "Certification");
-  const timelineFormations = diplomaFormations.slice(0, maxTimelineItems).map((formation) => getTranslatedFormation(formation));
+  const certificationBadges = sortedFormations.filter(
+    (formation) => formation.type === "Certification",
+  );
+  const timelineFormations = diplomaFormations
+    .slice(0, maxTimelineItems)
+    .map((formation) => getTranslatedFormation(formation));
   const remainingFormationsCount = Math.max(0, diplomaFormations.length - maxTimelineItems);
   const [isDesktop, setIsDesktop] = React.useState(false);
 
@@ -81,11 +95,7 @@ export default function FormationsSection() {
           viewport={{ once: true }}
           className="mb-16"
         >
-          <SectionHeading
-            title={t("title")}
-            subtitle={t("subtitle")}
-            icon={GraduationCap}
-          />
+          <SectionHeading title={t("title")} subtitle={t("subtitle")} icon="formations" />
         </motion.div>
 
         <motion.div
@@ -112,18 +122,32 @@ export default function FormationsSection() {
                       >
                         <div className="hidden md:flex absolute -left-[3.5rem] top-4 h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-border/60 bg-background ring-4 ring-background">
                           {formation.logoUrl ? (
-                            <img src={formation.logoUrl} alt={`Logo ${formation.institution}`} className="h-6 w-6 object-contain" />
+                            <img
+                              src={formation.logoUrl}
+                              alt={`Logo ${formation.institution}`}
+                              className="h-6 w-6 object-contain"
+                            />
                           ) : (
                             <GraduationCap className="h-4 w-4 text-primary" />
                           )}
                         </div>
-                        <h3 className="text-base font-semibold text-foreground">{formation.title}</h3>
+                        <h3 className="text-base font-semibold text-foreground">
+                          {formation.title}
+                        </h3>
                         <p className="text-sm text-primary/90">{formation.institution}</p>
                         <div className="mt-2 flex flex-wrap gap-4 text-xs text-muted-foreground">
-                          <span className="inline-flex items-center gap-1"><Calendar className="h-3.5 w-3.5" />{translateDateSimple(formation.date, locale)}</span>
-                          <span className="inline-flex items-center gap-1"><School className="h-3.5 w-3.5" />{formation.type}</span>
+                          <span className="inline-flex items-center gap-1">
+                            <Calendar className="h-3.5 w-3.5" />
+                            {translateDateSimple(formation.date, locale)}
+                          </span>
+                          <span className="inline-flex items-center gap-1">
+                            <School className="h-3.5 w-3.5" />
+                            {formation.type}
+                          </span>
                         </div>
-                        <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{formation.description}</p>
+                        <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">
+                          {formation.description}
+                        </p>
                       </motion.article>
                     ))}
                   </div>
@@ -136,7 +160,8 @@ export default function FormationsSection() {
                       className="mt-4 flex justify-center"
                     >
                       <span className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                        +{remainingFormationsCount} {locale === "fr" ? "formations" : "formations"}...
+                        +{remainingFormationsCount} {locale === "fr" ? "formations" : "formations"}
+                        ...
                       </span>
                     </motion.div>
                   )}
@@ -184,22 +209,41 @@ export default function FormationsSection() {
                         <div className="mb-3 flex items-start gap-3">
                           <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg border border-border/50 bg-white p-1">
                             {translatedBadge.logoUrl ? (
-                              <img src={translatedBadge.logoUrl} alt={`Logo ${translatedBadge.institution}`} className="h-7 w-7 object-contain" />
+                              <img
+                                src={translatedBadge.logoUrl}
+                                alt={`Logo ${translatedBadge.institution}`}
+                                className="h-7 w-7 object-contain"
+                              />
                             ) : (
                               <BadgeCheck className="h-4 w-4 text-primary" />
                             )}
                           </div>
                           <div className="min-w-0">
-                            <h4 className="line-clamp-2 text-sm font-semibold text-foreground">{translatedBadge.title}</h4>
-                            <p className="text-xs text-muted-foreground">{translatedBadge.institution}</p>
+                            <h4 className="line-clamp-2 text-sm font-semibold text-foreground">
+                              {translatedBadge.title}
+                            </h4>
+                            <p className="text-xs text-muted-foreground">
+                              {translatedBadge.institution}
+                            </p>
                           </div>
                         </div>
                         <div className="mb-2 flex flex-wrap gap-3 text-xs text-muted-foreground">
-                          <span className="inline-flex items-center gap-1"><Calendar className="h-3.5 w-3.5" />{translateDateSimple(translatedBadge.date, locale)}</span>
-                          <span className="inline-flex items-center gap-1"><MapPin className="h-3.5 w-3.5" />{translatedBadge.location}</span>
+                          <span className="inline-flex items-center gap-1">
+                            <Calendar className="h-3.5 w-3.5" />
+                            {translateDateSimple(translatedBadge.date, locale)}
+                          </span>
+                          <span className="inline-flex items-center gap-1">
+                            <MapPin className="h-3.5 w-3.5" />
+                            {translatedBadge.location}
+                          </span>
                         </div>
                         {translatedBadge.credentialUrl && (
-                          <a href={translatedBadge.credentialUrl} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center text-xs font-medium text-primary hover:underline">
+                          <a
+                            href={translatedBadge.credentialUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-2 inline-flex items-center text-xs font-medium text-primary hover:underline"
+                          >
                             <ExternalLink className="mr-1.5 h-3.5 w-3.5" />
                             {t("modals.viewCertificate")}
                           </a>
@@ -218,7 +262,7 @@ export default function FormationsSection() {
         <div className="flex justify-center mt-12">
           <Button size="lg" asChild className="sweep-light">
             <Link href="/formations">
-              {t('viewAll')}
+              {t("viewAll")}
               <ArrowRight className="ml-2 h-4 w-4 text-white" />
             </Link>
           </Button>

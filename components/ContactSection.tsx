@@ -1,42 +1,34 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
 import {
-  Mail,
-  MessageCircle,
-  MapPin,
-  Send,
-  Github,
-  Linkedin,
-  MessageSquare,
-  Info,
-  Share2,
   Clock3,
+  Github,
+  Info,
+  Linkedin,
+  Mail,
+  MapPin,
+  MessageCircle,
+  MessageSquare,
+  Send,
+  Share2,
 } from "lucide-react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
-import LightParticles from "@/components/ui/light-particles";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tooltip } from "@/components/ui/general/Tooltip";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import LightParticles from "@/components/ui/light-particles";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Textarea } from "@/components/ui/textarea";
 
 type ContactSectionProps = {
   namespace?: "Home.contact" | "Pages.contact";
 };
 
-export default function ContactSection({
-  namespace = "Home.contact",
-}: ContactSectionProps) {
+export default function ContactSection({ namespace = "Home.contact" }: ContactSectionProps) {
   const t = useTranslations(namespace);
   const [formData, setFormData] = useState({
     name: "",
@@ -55,10 +47,10 @@ export default function ContactSection({
     setSuccess(false);
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
+      const response = await fetch("/api/contact", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
@@ -66,7 +58,7 @@ export default function ContactSection({
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Une erreur est survenue');
+        throw new Error(data.error || "Une erreur est survenue");
       }
 
       setSuccess(true);
@@ -81,15 +73,13 @@ export default function ContactSection({
         setSuccess(false);
       }, 5000);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Une erreur est survenue');
+      setError(err instanceof Error ? err.message : "Une erreur est survenue");
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -107,11 +97,7 @@ export default function ContactSection({
           viewport={{ once: true }}
           className="mb-16"
         >
-          <SectionHeading
-            title={t("title")}
-            subtitle={t("subtitle")}
-            icon={Mail}
-          />
+          <SectionHeading title={t("title")} subtitle={t("subtitle")} icon="contact" />
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
@@ -129,34 +115,32 @@ export default function ContactSection({
                   <span className="inline-flex items-center justify-center h-8 w-8 rounded-lg border border-primary/25 bg-background/70 text-primary shadow-sm">
                     <MessageSquare className="h-4 w-4" />
                   </span>
-                  {t('form.title')}
+                  {t("form.title")}
                 </CardTitle>
-                <CardDescription>
-                  {t('form.description')}
-                </CardDescription>
+                <CardDescription>{t("form.description")}</CardDescription>
               </CardHeader>
               <CardContent className="flex-1 flex flex-col">
                 <form onSubmit={handleSubmit} className="flex flex-1 flex-col w-full">
                   <div className="space-y-6 flex-1">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="name">{t('form.fields.name')}</Label>
+                        <Label htmlFor="name">{t("form.fields.name")}</Label>
                         <Input
                           id="name"
                           name="name"
-                          placeholder={t('form.placeholders.name')}
+                          placeholder={t("form.placeholders.name")}
                           value={formData.name}
                           onChange={handleChange}
                           required
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="email">{t('form.fields.email')}</Label>
+                        <Label htmlFor="email">{t("form.fields.email")}</Label>
                         <Input
                           id="email"
                           name="email"
                           type="email"
-                          placeholder={t('form.placeholders.email')}
+                          placeholder={t("form.placeholders.email")}
                           value={formData.email}
                           onChange={handleChange}
                           required
@@ -165,11 +149,11 @@ export default function ContactSection({
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="subject">{t('form.fields.subject')}</Label>
+                      <Label htmlFor="subject">{t("form.fields.subject")}</Label>
                       <Input
                         id="subject"
                         name="subject"
-                        placeholder={t('form.placeholders.subject')}
+                        placeholder={t("form.placeholders.subject")}
                         value={formData.subject}
                         onChange={handleChange}
                         required
@@ -177,11 +161,11 @@ export default function ContactSection({
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="message">{t('form.fields.message')}</Label>
+                      <Label htmlFor="message">{t("form.fields.message")}</Label>
                       <Textarea
                         id="message"
                         name="message"
-                        placeholder={t('form.placeholders.message')}
+                        placeholder={t("form.placeholders.message")}
                         rows={4}
                         value={formData.message}
                         onChange={handleChange}
@@ -211,7 +195,7 @@ export default function ContactSection({
                     >
                       {success && (
                         <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400 text-sm">
-                          {t('form.success')}
+                          {t("form.success")}
                         </div>
                       )}
                     </motion.div>
@@ -224,7 +208,7 @@ export default function ContactSection({
                       disabled={isLoading}
                     >
                       <Send className="mr-2 h-4 w-4" />
-                      {isLoading ? t('form.submitting') : t('form.submit')}
+                      {isLoading ? t("form.submitting") : t("form.submit")}
                     </Button>
                   </div>
                 </form>
@@ -245,23 +229,23 @@ export default function ContactSection({
                 <span className="inline-flex items-center justify-center h-9 w-9 rounded-lg border border-primary/25 bg-background/70 text-primary shadow-sm">
                   <Info className="h-4 w-4" />
                 </span>
-                {t('info.title')}
+                {t("info.title")}
               </h3>
               <div className="grid grid-cols-1 gap-6 text-center md:grid-cols-2 lg:text-left">
                 <div className="flex items-start gap-4 justify-center lg:justify-start">
                   <a
-                    href={`mailto:${'tmilville' + '.' + 'pro' + '@' + 'gmail' + '.' + 'com'}`}
+                    href={`mailto:${"tmilville" + "." + "pro" + "@" + "gmail" + "." + "com"}`}
                     className="p-3 rounded-lg bg-primary/10 hover:bg-primary/20 transition-colors cursor-pointer"
                   >
                     <Mail className="h-6 w-6 text-primary" />
                   </a>
                   <div>
-                    <h4 className="font-semibold mb-1">{t('info.email')}</h4>
+                    <h4 className="font-semibold mb-1">{t("info.email")}</h4>
                     <a
-                      href={`mailto:${'tmilville' + '.' + 'pro' + '@' + 'gmail' + '.' + 'com'}`}
+                      href={`mailto:${"tmilville" + "." + "pro" + "@" + "gmail" + "." + "com"}`}
                       className="text-muted-foreground hover:text-primary transition-colors"
                     >
-                      {('tmilville' + '.' + 'pro' + '@' + 'gmail' + '.' + 'com')}
+                      {"tmilville" + "." + "pro" + "@" + "gmail" + "." + "com"}
                     </a>
                   </div>
                 </div>
@@ -276,7 +260,7 @@ export default function ContactSection({
                     <MessageCircle className="h-6 w-6 text-primary" />
                   </a>
                   <div>
-                    <h4 className="font-semibold mb-1">{t('info.telegram')}</h4>
+                    <h4 className="font-semibold mb-1">{t("info.telegram")}</h4>
                     <a
                       href="https://t.me/Thybow"
                       target="_blank"
@@ -293,7 +277,7 @@ export default function ContactSection({
                     <MapPin className="h-6 w-6 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-1">{t('info.location')}</h4>
+                    <h4 className="font-semibold mb-1">{t("info.location")}</h4>
                     <p className="text-muted-foreground">Paris, France</p>
                   </div>
                 </div>
@@ -305,10 +289,10 @@ export default function ContactSection({
                 <span className="inline-flex items-center justify-center h-8 w-8 rounded-lg border border-primary/25 bg-background/70 text-primary shadow-sm">
                   <Share2 className="h-4 w-4" />
                 </span>
-                {t('info.socialNetworks')}
+                {t("info.socialNetworks")}
               </h3>
               <div className="flex gap-4 justify-center lg:justify-start">
-                <Tooltip content={t('tooltips.github')}>
+                <Tooltip content={t("tooltips.github")}>
                   <Button variant="outline" size="icon" asChild>
                     <a
                       href="https://github.com/ThibautMilville"
@@ -319,7 +303,7 @@ export default function ContactSection({
                     </a>
                   </Button>
                 </Tooltip>
-                <Tooltip content={t('tooltips.linkedin')}>
+                <Tooltip content={t("tooltips.linkedin")}>
                   <Button variant="outline" size="icon" asChild>
                     <a
                       href="https://fr.linkedin.com/in/thibaut-milville"
@@ -330,13 +314,9 @@ export default function ContactSection({
                     </a>
                   </Button>
                 </Tooltip>
-                <Tooltip content={t('tooltips.telegram')}>
+                <Tooltip content={t("tooltips.telegram")}>
                   <Button variant="outline" size="icon" asChild>
-                    <a
-                      href="https://t.me/Thybow"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <a href="https://t.me/Thybow" target="_blank" rel="noopener noreferrer">
                       <MessageCircle className="h-5 w-5" />
                     </a>
                   </Button>
@@ -350,39 +330,35 @@ export default function ContactSection({
                   <span className="inline-flex items-center justify-center h-8 w-8 rounded-lg border border-primary/25 bg-background/70 text-primary shadow-sm">
                     <Clock3 className="h-4 w-4" />
                   </span>
-                  {t('availability.title')}
+                  {t("availability.title")}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm">{t('availability.freelance')}</span>
+                    <span className="text-sm">{t("availability.freelance")}</span>
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span className="text-sm text-green-600">{t('availability.available')}</span>
+                      <span className="text-sm text-green-600">{t("availability.available")}</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm">{t('availability.consulting')}</span>
+                    <span className="text-sm">{t("availability.consulting")}</span>
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                      <span className="text-sm text-green-600">{t('availability.available')}</span>
+                      <span className="text-sm text-green-600">{t("availability.available")}</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm">{t('availability.longMissions')}</span>
+                    <span className="text-sm">{t("availability.longMissions")}</span>
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                      <span className="text-sm text-orange-600">
-                        {t('availability.onRequest')}
-                      </span>
+                      <span className="text-sm text-orange-600">{t("availability.onRequest")}</span>
                     </div>
                   </div>
                 </div>
                 <div className="mt-4 p-3 bg-muted rounded-lg">
-                  <p className="text-sm text-muted-foreground">
-                    {t('availability.guarantee')}
-                  </p>
+                  <p className="text-sm text-muted-foreground">{t("availability.guarantee")}</p>
                 </div>
               </CardContent>
             </Card>

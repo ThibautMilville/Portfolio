@@ -1,6 +1,6 @@
-import { Experience, Formation, Project } from "@/types/portfolio";
 import { getAllExperiences, getExperienceById } from "@/services/ExperienceService";
 import { getAllFormations } from "@/services/FormationService";
+import type { Experience, Formation, Project } from "@/types/portfolio";
 
 export const getRelatedExperience = async (project: Project): Promise<Experience | undefined> => {
   if (!project.relatedExperienceId) return undefined;
@@ -22,5 +22,7 @@ export const getFormationsByExperience = async (experience: Experience): Promise
 export const getRelatedExperiences = async (formation: Formation): Promise<Experience[]> => {
   if (!formation.relatedExperienceIds?.length) return [];
   const experiences = await getAllExperiences();
-  return experiences.filter((experience) => formation.relatedExperienceIds?.includes(experience.id));
+  return experiences.filter((experience) =>
+    formation.relatedExperienceIds?.includes(experience.id),
+  );
 };

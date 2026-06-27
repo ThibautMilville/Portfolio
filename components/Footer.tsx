@@ -1,18 +1,18 @@
 "use client";
 
-import Link from 'next/link';
-import { LocalImage } from '@/components/ui/image';
-import { FOOTER_DATA } from '@/lib/footer';
-import { Github, Linkedin, Mail, MessageCircle, ArrowUpRight } from 'lucide-react';
-import { Tooltip } from '@/components/ui/general/Tooltip';
-import { useLocale, useTranslations } from 'next-intl';
-import { usePortfolioData } from '@/hooks/usePortfolioData';
-import { getLocalizedProjectRoute } from '@/lib/localized-routes';
-import { getProjectSlug } from '@/services/ProjectService';
+import { ArrowUpRight, Github, Linkedin, Mail, MessageCircle } from "lucide-react";
+import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
+import { Tooltip } from "@/components/ui/general/Tooltip";
+import { LocalImage } from "@/components/ui/image";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
+import { FOOTER_DATA } from "@/lib/footer";
+import { getLocalizedProjectRoute } from "@/lib/localized-routes";
+import { getProjectSlug } from "@/services/ProjectService";
 
 export default function Footer() {
-  const t = useTranslations('Footer');
-  const tNav = useTranslations('Navigation');
+  const t = useTranslations("Footer");
+  const tNav = useTranslations("Navigation");
   const locale = useLocale() as "en" | "fr";
   const currentYear = new Date().getFullYear();
   const { formations, projects } = usePortfolioData();
@@ -43,7 +43,7 @@ export default function Footer() {
       sep: 9,
       oct: 10,
       nov: 11,
-      dec: 12
+      dec: 12,
     };
     const monthEntry = Object.entries(monthMap).find(([month]) => normalized.includes(month));
     const month = monthEntry ? monthEntry[1] : 0;
@@ -57,7 +57,7 @@ export default function Footer() {
       .slice(0, 3)
       .map((formation) => ({
         title: formation.title,
-        href: `/formations#${formation.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`
+        href: `/formations#${formation.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
       }));
   })();
 
@@ -66,7 +66,7 @@ export default function Footer() {
     .slice(0, 3)
     .map((project) => ({
       title: project.title,
-      href: getLocalizedProjectRoute(locale, getProjectSlug(project))
+      href: getLocalizedProjectRoute(locale, getProjectSlug(project)),
     }));
 
   return (
@@ -76,7 +76,7 @@ export default function Footer() {
         <div className="flex flex-col items-center lg:items-start gap-4">
           <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-primary/20 shadow-lg">
             <LocalImage
-              imageName="photo_profil.jpg"
+              imageName="photo-profil.png"
               alt="Thibaut Milville"
               className="w-full h-full object-cover"
             />
@@ -85,19 +85,19 @@ export default function Footer() {
             Thibaut MILVILLE
           </Link>
           <p className="text-sm text-muted-foreground text-center lg:text-left">
-            {t('description')}
+            {t("description")}
           </p>
         </div>
 
         <div className="flex flex-col items-center lg:items-start">
-          <h3 className="font-semibold mb-3 text-primary">{t('navigation')}</h3>
+          <h3 className="font-semibold mb-3 text-primary">{t("navigation")}</h3>
           <ul className="space-y-2">
             <li>
               <Link
                 href="/"
                 className="hover:underline text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                {tNav('home')}
+                {tNav("home")}
               </Link>
             </li>
             <li>
@@ -105,7 +105,7 @@ export default function Footer() {
                 href={getLocalizedProjectRoute(locale)}
                 className="hover:underline text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                {tNav('projects')}
+                {tNav("projects")}
               </Link>
             </li>
             <li>
@@ -113,7 +113,7 @@ export default function Footer() {
                 href="/formations"
                 className="hover:underline text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                {tNav('formations')}
+                {tNav("formations")}
               </Link>
             </li>
             <li>
@@ -121,7 +121,7 @@ export default function Footer() {
                 href="/experiences"
                 className="hover:underline text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                {tNav('experiences')}
+                {tNav("experiences")}
               </Link>
             </li>
             <li>
@@ -129,14 +129,14 @@ export default function Footer() {
                 href="/contact"
                 className="hover:underline text-sm text-muted-foreground hover:text-primary transition-colors"
               >
-                {tNav('contact')}
+                {tNav("contact")}
               </Link>
             </li>
           </ul>
         </div>
 
         <div className="flex flex-col items-center lg:items-start">
-          <h3 className="font-semibold mb-3 text-primary">{t('formations')}</h3>
+          <h3 className="font-semibold mb-3 text-primary">{t("formations")}</h3>
           <ul className="space-y-2">
             {diplomaLinks.map((item: { title: string; href: string }) => (
               <li key={item.title}>
@@ -152,7 +152,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col items-center lg:items-start">
-          <h3 className="font-semibold mb-3 text-primary">{t('projects')}</h3>
+          <h3 className="font-semibold mb-3 text-primary">{t("projects")}</h3>
           <ul className="space-y-2">
             {featuredProjectLinks.map((item: { title: string; href: string }) => (
               <li key={item.title}>
@@ -173,7 +173,10 @@ export default function Footer() {
         <div className="max-w-6xl mx-auto py-5 flex flex-col md:flex-row items-center gap-4 md:gap-6 justify-between">
           <div className="flex flex-wrap items-center gap-2">
             {FOOTER_DATA.skills.map((skill: string) => (
-              <span key={skill} className="text-xs rounded-full px-2 py-1 bg-muted text-muted-foreground">
+              <span
+                key={skill}
+                className="text-xs rounded-full px-2 py-1 bg-muted text-muted-foreground"
+              >
                 {skill}
               </span>
             ))}
@@ -228,12 +231,14 @@ export default function Footer() {
       <div className="border-t pt-4 pb-4">
         <div className="max-w-6xl mx-auto flex items-center justify-center text-sm text-muted-foreground">
           <p>
-            © {currentYear} <Link href="/" className="hover:text-primary font-semibold transition-colors">Thibaut MILVILLE</Link>. {t('copyright')}
+            © {currentYear}{" "}
+            <Link href="/" className="hover:text-primary font-semibold transition-colors">
+              Thibaut MILVILLE
+            </Link>
+            . {t("copyright")}
           </p>
         </div>
       </div>
     </footer>
   );
 }
-
-

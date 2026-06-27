@@ -1,27 +1,12 @@
-'use client';
+import type { Locale } from "@/lib/localized-routes";
+import { getAbsoluteUrl } from "@/lib/seo";
 
-import { useEffect, useMemo } from 'react';
-
-export default function StructuredData() {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Thibaut MILVILLE",
-    "jobTitle": "Développeur Fullstack",
-    "description": "Développeur Fullstack spécialisé en React, Next.js et NestJS. Créateur d'applications web modernes et performantes.",
-    "url": "https://thibaut-milville.dev",
-    "image": "https://thibaut-milville.dev/images/photo_profil.jpg",
-    "sameAs": [
-      "https://github.com/ThibautMilville",
-      "https://fr.linkedin.com/in/thibaut-milville",
-      "https://t.me/Thybow"
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Paris",
-      "addressCountry": "France"
-    },
-    "knowsAbout": [
+const STRUCTURED_DATA = {
+  fr: {
+    jobTitle: "Développeur Fullstack",
+    description:
+      "Développeur Fullstack spécialisé en React, Next.js et NestJS. Créateur d'applications web modernes et performantes.",
+    knowsAbout: [
       "React",
       "Next.js",
       "NestJS",
@@ -31,13 +16,59 @@ export default function StructuredData() {
       "Développement Web",
       "Frontend",
       "Backend",
-      "Full Stack Development"
+      "Full Stack Development",
     ],
-    "hasOccupation": {
+    occupationDescription:
+      "Développement d'applications web modernes avec React, Next.js et NestJS",
+  },
+  en: {
+    jobTitle: "Fullstack Developer",
+    description:
+      "Fullstack developer specialized in React, Next.js and NestJS. Creator of modern and performant web applications.",
+    knowsAbout: [
+      "React",
+      "Next.js",
+      "NestJS",
+      "JavaScript",
+      "TypeScript",
+      "Node.js",
+      "Web Development",
+      "Frontend",
+      "Backend",
+      "Full Stack Development",
+    ],
+    occupationDescription: "Building modern web applications with React, Next.js and NestJS",
+  },
+} as const;
+
+export default function StructuredData({ locale }: { locale: string }) {
+  const lang = (locale === "fr" ? "fr" : "en") as Locale;
+  const content = STRUCTURED_DATA[lang];
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Thibaut MILVILLE",
+    jobTitle: content.jobTitle,
+    description: content.description,
+    url: getAbsoluteUrl(`/${lang}`),
+    image: getAbsoluteUrl("/images/photo-profil.png"),
+    sameAs: [
+      "https://github.com/ThibautMilville",
+      "https://fr.linkedin.com/in/thibaut-milville",
+      "https://t.me/Thybow",
+    ],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Paris",
+      addressCountry: "France",
+    },
+    knowsAbout: content.knowsAbout,
+    hasOccupation: {
       "@type": "Occupation",
-      "name": "Développeur Fullstack",
-      "description": "Développement d'applications web modernes avec React, Next.js et NestJS",
-      "skills": [
+      name: content.jobTitle,
+      description: content.occupationDescription,
+      skills: [
         "React",
         "Next.js",
         "NestJS",
@@ -48,54 +79,36 @@ export default function StructuredData() {
         "CSS3",
         "Tailwind CSS",
         "Git",
-        "Docker"
-      ]
+        "Docker",
+      ],
     },
-    "alumniOf": [
+    alumniOf: [
       {
         "@type": "EducationalOrganization",
-        "name": "CESI École d'Ingénieurs"
-      }
+        name: "CESI École d'Ingénieurs",
+      },
     ],
-    "worksFor": [
+    worksFor: [
       {
         "@type": "Organization",
-        "name": "Ultra"
-      },
-      {
-        "@type": "Organization", 
-        "name": "SNCF Voyageurs"
+        name: "Ultra",
       },
       {
         "@type": "Organization",
-        "name": "Osmoz Communication"
-      }
-    ]
+        name: "SNCF Voyageurs",
+      },
+      {
+        "@type": "Organization",
+        name: "Osmoz Communication",
+      },
+    ],
   };
 
-  const serializedData = useMemo(() => JSON.stringify(structuredData), []);
-
-  useEffect(() => {
-    const scriptId = 'person-structured-data';
-    let script = document.getElementById(scriptId) as HTMLScriptElement | null;
-
-    if (!script) {
-      script = document.createElement('script');
-      script.id = scriptId;
-      script.type = 'application/ld+json';
-      document.head.appendChild(script);
-    }
-
-    if (script.textContent !== serializedData) {
-      script.textContent = serializedData;
-    }
-
-    return () => {
-      if (script && script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    };
-  }, [serializedData]);
-
-  return null;
+  return (
+    <script
+      type="application/ld+json"
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD statique contrôlé, sans entrée utilisateur
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+    />
+  );
 }

@@ -51,7 +51,22 @@
       "location": "France",
       "date": "Sep 2021 - Jul 2023",
       "description": "Basics of computer science, learning essential web languages, discovering databases and PHP, working on web and mobile applications.",
-      "skills": ["PHP", "Adaptation", "Communication", "JavaScript", "Tailwind", "Bootstrap", "GitHub", "Python", "HTML", "CSS3", "SASS", "Rigor", "MySQL", "Self-taught"],
+      "skills": [
+        "PHP",
+        "Adaptation",
+        "Communication",
+        "JavaScript",
+        "Tailwind",
+        "Bootstrap",
+        "GitHub",
+        "Python",
+        "HTML",
+        "CSS3",
+        "SASS",
+        "Rigor",
+        "MySQL",
+        "Self-taught"
+      ],
       "mention": "Validated",
       "type": "Degree"
     }

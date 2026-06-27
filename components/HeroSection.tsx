@@ -1,35 +1,37 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTranslations, useLocale } from "next-intl";
-import {
-  ArrowDown,
-  Download,
-  Github,
-  Linkedin,
-  Mail,
-  ArrowRight,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowDown, ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
-import { Typewriter } from "@/components/ui/typewriter";
-import { LocalImage } from "@/components/ui/image";
+import { useLocale, useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
 import { Tooltip } from "@/components/ui/general/Tooltip";
+import { LocalImage } from "@/components/ui/image";
+import SideGradientAccents from "@/components/SideGradientAccents";
 import LightParticles from "@/components/ui/light-particles";
+import { Typewriter } from "@/components/ui/typewriter";
 import { getLocalizedProjectRoute } from "@/lib/localized-routes";
 
 export default function HeroSection() {
-  const t = useTranslations('Home.hero');
+  const t = useTranslations("Home.hero");
   const locale = useLocale();
-  
-  const cvPath = locale === 'fr' 
-    ? '/documents/CV  Thibaut MILVILLE FR.pdf'
-    : '/documents/CV Thibaut MILVILLE EN.pdf';
+
+  const cvPath =
+    locale === "fr"
+      ? "/documents/CV  Thibaut MILVILLE FR.pdf"
+      : "/documents/CV Thibaut MILVILLE EN.pdf";
   return (
-    <section className="min-h-screen flex items-center justify-center relative px-6 pt-12 md:pt-0" role="banner" aria-label="Présentation de Thibaut MILVILLE">
+    <section
+      className="min-h-screen flex items-center justify-center relative overflow-hidden px-6 pt-12 md:pt-0"
+      role="banner"
+      aria-label="Présentation de Thibaut MILVILLE"
+    >
       <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-secondary/20 to-accent/20" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-background to-background" />
       <LightParticles />
+      <SideGradientAccents />
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-[3] h-28 bg-gradient-to-b from-background via-background/80 to-transparent" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-36 bg-gradient-to-t from-background via-background/90 to-transparent" />
 
       <div className="relative z-10 max-w-6xl mx-auto">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-12 mb-12">
@@ -49,7 +51,7 @@ export default function HeroSection() {
               </div>
               <div className="relative w-48 h-48 lg:w-64 lg:h-64 overflow-hidden border-4 border-white/50 shadow-2xl bg-gradient-to-br from-primary/10 to-secondary/10 backdrop-blur-sm transition-all duration-500 animate-smooth-morph">
                 <LocalImage
-                  imageName="photo_profil.jpg"
+                  imageName="photo-profil.png"
                   alt="Thibaut Milville"
                   className="w-full h-full object-cover"
                 />
@@ -70,9 +72,9 @@ export default function HeroSection() {
               <div className="text-xl md:text-2xl text-muted-foreground mb-4 md:mb-8 font-mono flex flex-col items-center lg:items-start gap-2">
                 <Typewriter
                   words={[
-                    t('typewriter.softwareEngineer').replace(/&lt;/g, '<').replace(/&gt;/g, '>'),
-                    t('typewriter.expertReact').replace(/&lt;/g, '<').replace(/&gt;/g, '>'),
-                    t('typewriter.passionate').replace(/&lt;/g, '<').replace(/&gt;/g, '>'),
+                    t("typewriter.softwareEngineer").replace(/&lt;/g, "<").replace(/&gt;/g, ">"),
+                    t("typewriter.expertReact").replace(/&lt;/g, "<").replace(/&gt;/g, ">"),
+                    t("typewriter.passionate").replace(/&lt;/g, "<").replace(/&gt;/g, ">"),
                   ]}
                   typingSpeed={70}
                   deletingSpeed={40}
@@ -91,7 +93,7 @@ export default function HeroSection() {
             transition={{ duration: 0.8 }}
           >
             <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed">
-              {t('descriptionText')}
+              {t("descriptionText")}
             </p>
           </motion.div>
 
@@ -103,14 +105,14 @@ export default function HeroSection() {
           >
             <Button size="lg" asChild className="sweep-light">
               <Link href={getLocalizedProjectRoute(locale as "en" | "fr")}>
-                {t('buttons.viewProjects')}
+                {t("buttons.viewProjects")}
                 <ArrowRight className="ml-2 h-4 w-4 text-white" />
               </Link>
             </Button>
             <Button variant="outline" size="lg" className="sweep-light" asChild>
               <a href={cvPath} download target="_blank" rel="noopener noreferrer">
                 <Download className="mr-2 h-4 w-4" />
-                {t('buttons.downloadCV')}
+                {t("buttons.downloadCV")}
               </a>
             </Button>
           </motion.div>
@@ -121,7 +123,7 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex gap-6 justify-center"
           >
-            <Tooltip content={t('tooltips.github')}>
+            <Tooltip content={t("tooltips.github")}>
               <Button
                 variant="ghost"
                 size="icon"
@@ -137,7 +139,7 @@ export default function HeroSection() {
                 </a>
               </Button>
             </Tooltip>
-            <Tooltip content={t('tooltips.linkedin')}>
+            <Tooltip content={t("tooltips.linkedin")}>
               <Button
                 variant="ghost"
                 size="icon"
@@ -153,7 +155,7 @@ export default function HeroSection() {
                 </a>
               </Button>
             </Tooltip>
-            <Tooltip content={t('tooltips.contact')}>
+            <Tooltip content={t("tooltips.contact")}>
               <Button
                 variant="ghost"
                 size="icon"
@@ -175,36 +177,13 @@ export default function HeroSection() {
           >
             <button
               onClick={() => {
-                // Chercher la section avec le titre "Projets phares"
-                const sections = document.querySelectorAll('section');
-                let projectsSection = null;
-                
-                for (let i = 0; i < sections.length; i++) {
-                  const section = sections[i];
-                  const h2 = section.querySelector('h2');
-                  if (h2 && h2.textContent?.includes('Projets phares')) {
-                    projectsSection = section;
-                    break;
-                  }
-                }
-                
-                // Fallback vers la deuxième section si pas trouvé
-                if (!projectsSection) {
-                  projectsSection = document.querySelector('section:nth-of-type(2)');
-                }
-                
-                if (projectsSection) {
-                  // Ajuster pour voir le titre de la section
-                  const rect = projectsSection.getBoundingClientRect();
-                  const offset = 100; // Ajuster selon vos besoins
-                  window.scrollTo({
-                    top: window.pageYOffset + rect.top - offset,
-                    behavior: 'smooth'
-                  });
-                }
+                const projectsSection = document.querySelector(
+                  '[aria-labelledby="featured-projects-heading"]',
+                );
+                projectsSection?.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
               className="cursor-pointer hover:scale-110 transition-transform duration-200"
-              aria-label="Aller à la section Projets phares"
+              aria-label={t("scrollToProjects")}
             >
               <ArrowDown className="h-6 w-6 text-muted-foreground animate-bounce mx-auto" />
             </button>

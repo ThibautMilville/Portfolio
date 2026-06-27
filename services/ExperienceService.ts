@@ -1,5 +1,5 @@
 import { experiencesData } from "@/data/portfolio";
-import { Experience } from "@/types/portfolio";
+import type { Experience } from "@/types/portfolio";
 
 export const getAllExperiences = async (): Promise<Experience[]> => experiencesData;
 

@@ -1,4 +1,4 @@
-import { Formation } from "@/types/portfolio";
+import type { Formation } from "@/types/portfolio";
 
 export const formationsData: Formation[] = [
   {
@@ -7,7 +7,8 @@ export const formationsData: Formation[] = [
     institution: "Microsoft",
     location: "En ligne",
     date: "Avril 2025",
-    description: "Certification officielle Microsoft pour les fondamentaux Azure et le cloud computing.",
+    description:
+      "Certification officielle Microsoft pour les fondamentaux Azure et le cloud computing.",
     skills: ["Cloud Computing", "Azure", "Microsoft Cloud"],
     mention: "C62D8F485B8E1CD7",
     type: "Certification",
@@ -15,7 +16,7 @@ export const formationsData: Formation[] = [
     relatedExperienceIds: [],
     credentialUrl:
       "https://learn.microsoft.com/api/credentials/share/en-us/ThibautMILVILLE-1278/C62D8F485B8E1CD7?sharingId=2C3FEDB0EB979CE8",
-    logoUrl: "/images/education/microsoft.png"
+    logoUrl: "/images/education/microsoft.png",
   },
   {
     id: 5,
@@ -29,7 +30,7 @@ export const formationsData: Formation[] = [
     type: "Certification",
     projectIds: [],
     relatedExperienceIds: [],
-    logoUrl: "/images/company/Logo-SNCF-Voyageurs.webp"
+    logoUrl: "/images/company/Logo-SNCF-Voyageurs.webp",
   },
   {
     id: 6,
@@ -45,7 +46,7 @@ export const formationsData: Formation[] = [
     relatedExperienceIds: [],
     credentialUrl:
       "https://www.linkedin.com/safety/go/?url=https%3A%2F%2Flearn.microsoft.com%2Fapi%2Fcredentials%2Fshare%2Fen-us%2FThibautMILVILLE-1278%2FE10934D3B1189DDC%3FsharingId%3D2C3FEDB0EB979CE8&urlhash=P-WV&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BUGv%2FaTwaQ9eTp%2F5sk2e%2Fgw%3D%3D",
-    logoUrl: "/images/education/microsoft.png"
+    logoUrl: "/images/education/microsoft.png",
   },
   {
     id: 1,
@@ -59,7 +60,7 @@ export const formationsData: Formation[] = [
     type: "Diplôme",
     projectIds: [],
     relatedExperienceIds: [],
-    logoUrl: "/images/education/cesi.webp"
+    logoUrl: "/images/education/cesi.webp",
   },
   {
     id: 2,
@@ -74,7 +75,7 @@ export const formationsData: Formation[] = [
     type: "Diplôme",
     projectIds: [],
     relatedExperienceIds: [],
-    logoUrl: "/images/education/cesi.webp"
+    logoUrl: "/images/education/cesi.webp",
   },
   {
     id: 3,
@@ -98,12 +99,12 @@ export const formationsData: Formation[] = [
       "SASS",
       "Rigueur",
       "MySQL",
-      "Autodidacte"
+      "Autodidacte",
     ],
     mention: "Validated",
     type: "Diplôme",
     projectIds: [],
     relatedExperienceIds: [],
-    logoUrl: "/images/education/utec.png"
-  }
+    logoUrl: "/images/education/utec.png",
+  },
 ];

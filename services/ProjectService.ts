@@ -1,6 +1,6 @@
-import { slugify } from "@/lib/utils";
 import { projectsData } from "@/data/portfolio";
-import { Project } from "@/types/portfolio";
+import { slugify } from "@/lib/utils";
+import type { Project } from "@/types/portfolio";
 
 export const getProjectSlug = (project: Project): string => project.slug ?? slugify(project.title);
 

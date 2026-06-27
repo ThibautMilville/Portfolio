@@ -1,29 +1,51 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
+import { projectsData } from "@/data/portfolio/projects";
+import { getLocalizedRoute, type Locale } from "@/lib/localized-routes";
+import { SITE_URL } from "@/lib/seo";
+import { getProjectSlug } from "@/services/ProjectService";
+
+const LOCALES: Locale[] = ["en", "fr"];
+const STATIC_ROUTES = ["projets", "experiences", "formations", "contact"] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://thibaut-milville.dev'
-  const locales = ['en', 'fr']
-  
-  const routes = [
-    '',
-    '/projets',
-    '/experiences', 
-    '/formations',
-    '/contact'
-  ]
-  
-  const sitemap: MetadataRoute.Sitemap = []
-  
-  locales.forEach(locale => {
-    routes.forEach(route => {
-      sitemap.push({
-        url: `${baseUrl}/${locale}${route}`,
+  const entries: MetadataRoute.Sitemap = [];
+
+  for (const locale of LOCALES) {
+    entries.push({
+      url: `${SITE_URL}/${locale}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 1,
+    });
+
+    for (const routeKey of STATIC_ROUTES) {
+      const route = getLocalizedRoute(routeKey, locale);
+      entries.push({
+        url: `${SITE_URL}/${locale}${route}`,
         lastModified: new Date(),
-        changeFrequency: route === '' ? 'monthly' : route === '/projets' ? 'weekly' : 'monthly',
-        priority: route === '' ? 1 : route === '/projets' ? 0.8 : route === '/experiences' ? 0.7 : route === '/formations' ? 0.6 : 0.5,
-      })
-    })
-  })
-  
-  return sitemap
+        changeFrequency: routeKey === "projets" ? "weekly" : "monthly",
+        priority:
+          routeKey === "projets"
+            ? 0.8
+            : routeKey === "experiences"
+              ? 0.7
+              : routeKey === "formations"
+                ? 0.6
+                : 0.5,
+      });
+    }
+
+    for (const project of projectsData) {
+      const slug = getProjectSlug(project);
+      const route = getLocalizedRoute("projets", locale);
+      entries.push({
+        url: `${SITE_URL}/${locale}${route}/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly",
+        priority: 0.7,
+      });
+    }
+  }
+
+  return entries;
 }

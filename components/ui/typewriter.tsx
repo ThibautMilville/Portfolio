@@ -1,5 +1,6 @@
-'use client';
-import React, { useEffect, useState } from 'react';
+"use client";
+import type React from "react";
+import { useEffect, useState } from "react";
 
 interface TypewriterProps {
   words: string[];
@@ -16,9 +17,9 @@ export const Typewriter: React.FC<TypewriterProps> = ({
   typingSpeed = 80,
   deletingSpeed = 40,
   pause = 1500,
-  className = '',
+  className = "",
 }) => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [wordIndex, setWordIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
@@ -55,7 +56,7 @@ export const Typewriter: React.FC<TypewriterProps> = ({
       }
     }
     return () => clearTimeout(timeout);
-  }, [charIndex, isDeleting, wordIndex, words, typing, typingSpeed, deletingSpeed, pause, loop]);
+  }, [charIndex, isDeleting, wordIndex, words, typingSpeed, deletingSpeed, pause, loop]);
 
   useEffect(() => {
     if (typing) return;
@@ -68,4 +69,4 @@ export const Typewriter: React.FC<TypewriterProps> = ({
       <span className="animate-pulse">|</span>
     </span>
   );
-}; 
+};

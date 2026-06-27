@@ -7,7 +7,7 @@
     "expertReact": "&lt;Expert React & Next.js /&gt;",
     "passionate": "&lt;Passionate about innovation /&gt;"
   },
-  "descriptionText": "Passionate about creating modern web experiences with React, Next.js and NestJS. I transform your ideas into performant and scalable applications.",
+  "descriptionText": "Passionate about creating modern web experiences with React, Next.js and NodeJS. I transform your ideas into performant and scalable applications.",
   "buttons": {
     "viewProjects": "View my projects",
     "downloadCV": "Download CV"
@@ -16,5 +16,6 @@
     "github": "GitHub",
     "linkedin": "LinkedIn",
     "contact": "Contact"
-  }
+  },
+  "scrollToProjects": "Go to Featured Projects section"
 }

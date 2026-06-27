@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type CSSProperties } from "react";
+import { type CSSProperties, useEffect, useRef } from "react";
 
 interface NodeParticle {
   x: number;
@@ -26,7 +26,7 @@ function createNodes(width: number, height: number, count: number): NodeParticle
       x: Math.random() * width,
       y: Math.random() * height,
       vx: (Math.random() - 0.5) * 18,
-      vy: (Math.random() - 0.5) * 18
+      vy: (Math.random() - 0.5) * 18,
     });
   }
   return nodes;
@@ -36,7 +36,7 @@ export function FallingAsh({
   className = "",
   style,
   connectDistance = DEFAULT_CONNECT,
-  nodeCount
+  nodeCount,
 }: FallingAshProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const nodesRef = useRef<NodeParticle[]>([]);

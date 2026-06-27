@@ -1,4 +1,4 @@
-import { Project } from "@/types/portfolio";
+import type { Project } from "@/types/portfolio";
 
 export const projectsData: Project[] = [
   {
@@ -8,7 +8,15 @@ export const projectsData: Project[] = [
     longDescription:
       "UT Marketplace est une marketplace Web3 dédiée à la vente d'UNIQs (NFTs) sur la blockchain Ultra. Elle propose une section marketplace avancée ainsi que des espaces dédiés aux collections, aux transactions et aux statistiques pour suivre les performances des ventes. L'application est connectée à la blockchain Ultra avec intégration du portefeuille et traitement des transactions. Un système multilingue est inclus. MVP développé dans le cadre d'une levée de fonds en collaboration avec Ultra Times.",
     image: "/images/projects/ut-marketplace/ut-marketplace_1.png",
-    technologies: ["TypeScript", "React", "Next.js", "Tailwind CSS", "Web3", "Ultra Blockchain", "Agile"],
+    technologies: [
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Tailwind CSS",
+      "Web3",
+      "Ultra Blockchain",
+      "Agile",
+    ],
     date: "Mai 2025 - Juin 2025",
     status: "Terminé",
     github: "https://github.com/ThibautMilville",
@@ -23,36 +31,38 @@ export const projectsData: Project[] = [
       "/images/projects/ut-marketplace/ut-marketplace_4.png",
       "/images/projects/ut-marketplace/ut-marketplace_5.png",
       "/images/projects/ut-marketplace/ut-marketplace_6.png",
-      "/images/projects/ut-marketplace/ut-marketplace_7.png"
+      "/images/projects/ut-marketplace/ut-marketplace_7.png",
     ],
     features: [
       "Marketplace avancée (listes, détails, offres)",
       "Sections Collections, Transactions et Statistiques",
       "Intégration portefeuille Ultra (connexion, signature)",
       "Traitement des transactions on-chain",
-      "Système multilingue"
+      "Système multilingue",
     ],
     challenges: [
       "Intégration wallet Ultra et fiabilité des transactions",
       "Modélisation des collections et activités",
-      "Suivi des métriques de vente"
+      "Suivi des métriques de vente",
     ],
     solutions: [
       "Utilisation du SDK/extension Ultra Wallet et gestion des états d'erreur",
       "Schéma de données clair et composants réutilisables",
-      "Pipelines d'agrégation et vues statistiques"
+      "Pipelines d'agrégation et vues statistiques",
     ],
     duration: "2 mois",
     teamSize: 1,
-    role: "Full Stack Web3 Developer"
+    role: "Full Stack Web3 Developer",
   },
   {
     id: 11,
     title: "Demande RH V2",
-    description: "Nouvelle application RH pour automatiser et moderniser les processus d'onboarding.",
+    description:
+      "Nouvelle application RH pour automatiser et moderniser les processus d'onboarding.",
     longDescription:
       "Refonte complète de l'application RH pour simplifier et automatiser les tâches liées à l'arrivée d'un collaborateur (quel que soit son statut). Gains significatifs en productivité et efficacité pour l'équipe RH.",
-    image: "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image:
+      "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=800",
     technologies: ["React", "NestJS", "Git", "GitLab", "Agile"],
     date: "Nov 2024 - Août 2025",
     status: "Terminé",
@@ -68,12 +78,20 @@ export const projectsData: Project[] = [
       "Suivi amélioré des contrats (période d'essai, etc.)",
       "Suivi des demandes RH des employés",
       "RBAC et sécurité",
-      "Stack modernisée pour la performance"
+      "Stack modernisée pour la performance",
     ],
-    challenges: ["Orchestration des workflows RH", "Intégration GLPI fiable", "Modèle d'autorisations robuste"],
-    solutions: ["Pipelines d'automatisation orchestrés", "Connecteurs GLPI et validations", "RBAC granulaire côté API et UI"],
+    challenges: [
+      "Orchestration des workflows RH",
+      "Intégration GLPI fiable",
+      "Modèle d'autorisations robuste",
+    ],
+    solutions: [
+      "Pipelines d'automatisation orchestrés",
+      "Connecteurs GLPI et validations",
+      "RBAC granulaire côté API et UI",
+    ],
     duration: "10 mois",
-    role: "Full Stack Developer"
+    role: "Full Stack Developer",
   },
   {
     id: 12,
@@ -81,7 +99,8 @@ export const projectsData: Project[] = [
     description: "Migration vers NestJS pour accélérer et moderniser l'appli GPCM.",
     longDescription:
       "Migration backend de PHP (CodeIgniter) vers Node (NestJS) pour booster la rapidité et la réactivité. Nouvelles fonctionnalités, design amélioré et nouvelle architecture de données adaptée aux besoins métiers (maintenance des PCs et tickets). Accès via QR code.",
-    image: "https://images.pexels.com/photos/1181673/pexels-photo-1181673.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image:
+      "https://images.pexels.com/photos/1181673/pexels-photo-1181673.jpeg?auto=compress&cs=tinysrgb&w=800",
     technologies: ["Node.js", "NestJS", "React", "GLPI"],
     date: "Fév 2025 - Avr 2025",
     status: "Terminé",
@@ -89,17 +108,31 @@ export const projectsData: Project[] = [
     demo: null,
     category: "Business",
     relatedExperienceId: 1,
-    features: ["Backend NestJS performant", "Nouvelles fonctionnalités métiers", "Architecture données repensée", "QR code pour accès rapide"],
-    challenges: ["Migration de stack progressive", "Interop GLPI et données existantes", "Performance sous charge"],
-    solutions: ["Stratégie de migration par domaines", "Adapters GLPI", "Optimisations SQL et caching"],
+    features: [
+      "Backend NestJS performant",
+      "Nouvelles fonctionnalités métiers",
+      "Architecture données repensée",
+      "QR code pour accès rapide",
+    ],
+    challenges: [
+      "Migration de stack progressive",
+      "Interop GLPI et données existantes",
+      "Performance sous charge",
+    ],
+    solutions: [
+      "Stratégie de migration par domaines",
+      "Adapters GLPI",
+      "Optimisations SQL et caching",
+    ],
     duration: "3 mois",
-    role: "Full Stack Developer"
+    role: "Full Stack Developer",
   },
   {
     id: 13,
     title: "Ultra Meetup",
     description: "Site listant les évènements de la communauté Ultra / Ultra Times.",
-    longDescription: "Site vitrine pour référencer les meetups et évènements de la communauté Ultra et Ultra Times.",
+    longDescription:
+      "Site vitrine pour référencer les meetups et évènements de la communauté Ultra et Ultra Times.",
     image: "/images/projects/ultra-meetup/ultra-meetup_1.png",
     technologies: ["React", "JavaScript"],
     date: "Fév 2025",
@@ -112,7 +145,7 @@ export const projectsData: Project[] = [
     challenges: ["Mise à jour simple du contenu"],
     solutions: ["Structure de contenu flexible"],
     duration: "1 mois",
-    role: "Frontend Developer"
+    role: "Frontend Developer",
   },
   {
     id: 14,
@@ -120,7 +153,8 @@ export const projectsData: Project[] = [
     description: "Application mobile de suivi des scores de ping-pong avec annonces vocales.",
     longDescription:
       "Application mobile de suivi des scores pour matchs de ping-pong, avec système de suivi et annonces vocales. Projet réalisé pour un Secret Santa et pour améliorer la gestion des scores.",
-    image: "https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image:
+      "https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=800",
     technologies: ["Android", "JavaScript", "Git", "GitHub"],
     date: "Déc 2024 - Jan 2025",
     status: "Terminé",
@@ -131,7 +165,7 @@ export const projectsData: Project[] = [
     challenges: ["Synthèse vocale multi-plateforme"],
     solutions: ["Abstraction TTS"],
     duration: "2 mois",
-    role: "Mobile Developer"
+    role: "Mobile Developer",
   },
   {
     id: 15,
@@ -139,7 +173,8 @@ export const projectsData: Project[] = [
     description: "Jeu web fun pour mesurer son affinité avec des expressions FR/CA.",
     longDescription:
       "Jeu web en 10 manches avec animations Framer Motion, design responsive et résultats partageables. Créé comme cadeau Secret Santa.",
-    image: "https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image:
+      "https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg?auto=compress&cs=tinysrgb&w=800",
     technologies: ["TypeScript", "React", "Tailwind", "Vercel"],
     date: "Déc 2024",
     status: "Terminé",
@@ -150,7 +185,7 @@ export const projectsData: Project[] = [
     challenges: ["Transitions fluides"],
     solutions: ["Animations optimisées"],
     duration: "1 mois",
-    role: "Frontend Developer"
+    role: "Frontend Developer",
   },
   {
     id: 16,
@@ -171,7 +206,7 @@ export const projectsData: Project[] = [
     challenges: ["Fiabilité des données"],
     solutions: ["Fallbacks et retries"],
     duration: "3 mois",
-    role: "Frontend Developer"
+    role: "Frontend Developer",
   },
   {
     id: 17,
@@ -179,7 +214,8 @@ export const projectsData: Project[] = [
     description: "Gestion des PCs de maintenance avec synchro GLPI et suivi des tickets.",
     longDescription:
       "Projet principal en Bachelor au CESI. Gestion à distance des ordinateurs (mises à jour ghosts/logiciels, dépannage), synchro bidirectionnelle GLPI, amélioration du suivi des tickets.",
-    image: "https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image:
+      "https://images.pexels.com/photos/3861964/pexels-photo-3861964.jpeg?auto=compress&cs=tinysrgb&w=800",
     technologies: ["TypeScript", "React", "CodeIgniter", "MySQL", "Git"],
     date: "Mai 2024 - Nov 2024",
     status: "Terminé",
@@ -187,11 +223,16 @@ export const projectsData: Project[] = [
     demo: null,
     category: "Business",
     relatedExperienceId: 2,
-    features: ["UI simple pour agents", "Synchro GLPI", "Mises à jour à distance", "Suivi amélioré des tickets"],
+    features: [
+      "UI simple pour agents",
+      "Synchro GLPI",
+      "Mises à jour à distance",
+      "Suivi amélioré des tickets",
+    ],
     challenges: ["Synchro fiable", "Expérience utilisateur terrain"],
     solutions: ["Stratégies de reprise", "Design orienté usage"],
     duration: "6 mois",
-    role: "Full Stack Developer"
+    role: "Full Stack Developer",
   },
   {
     id: 18,
@@ -211,7 +252,7 @@ export const projectsData: Project[] = [
     challenges: ["Taux de rafraîchissement"],
     solutions: ["Polling contrôlé"],
     duration: "1 mois",
-    role: "Frontend Developer"
+    role: "Frontend Developer",
   },
   {
     id: 19,
@@ -219,7 +260,8 @@ export const projectsData: Project[] = [
     description: "Suivi digital des fiches d'émergence (accessibilité, optimisation, maintenance).",
     longDescription:
       "Outil de suivi des fiches d'émergence digitalisées, avec module d'accessibilité, optimisations et maintenance.",
-    image: "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image:
+      "https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg?auto=compress&cs=tinysrgb&w=800",
     technologies: ["TypeScript", "React", "CodeIgniter", "MySQL"],
     date: "Fév 2024 - Mai 2024",
     status: "Terminé",
@@ -231,7 +273,7 @@ export const projectsData: Project[] = [
     challenges: ["Compatibilité large"],
     solutions: ["Tests et audits"],
     duration: "3 mois",
-    role: "Frontend Developer"
+    role: "Frontend Developer",
   },
   {
     id: 20,
@@ -239,7 +281,8 @@ export const projectsData: Project[] = [
     description: "Application QR code pour enlèvement de bennes et e-mails automatisés.",
     longDescription:
       "Application pour les agents responsables de l'enlèvement des bennes avec QR code et e-mails automatiques.",
-    image: "https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image:
+      "https://images.pexels.com/photos/4483610/pexels-photo-4483610.jpeg?auto=compress&cs=tinysrgb&w=800",
     technologies: ["React", "PHP", "CSS3", "JavaScript", "Git"],
     date: "Déc 2023 - Fév 2024",
     status: "Terminé",
@@ -251,7 +294,7 @@ export const projectsData: Project[] = [
     challenges: ["Simplicité d'usage terrain"],
     solutions: ["UX concise"],
     duration: "3 mois",
-    role: "Frontend Developer"
+    role: "Frontend Developer",
   },
   {
     id: 21,
@@ -270,20 +313,21 @@ export const projectsData: Project[] = [
     screenshots: [
       "/images/projects/gacha-game/gacha-game_1.jpeg",
       "/images/projects/gacha-game/gacha-game_2.jpeg",
-      "/images/projects/gacha-game/gacha-game_3.jpeg"
+      "/images/projects/gacha-game/gacha-game_3.jpeg",
     ],
     features: ["Système de combat", "Récompenses", "Assets IA"],
     challenges: ["Boucle de jeu fun"],
     solutions: ["Playtests rapides"],
     duration: "1 semaine",
-    role: "Frontend Developer"
+    role: "Frontend Developer",
   },
   {
     id: 22,
     title: "Permis Feu - Business application",
     description: "Demandes de permis feu pour agents, sécurité améliorée.",
     longDescription: "Application de demandes de permis feu avec optimisations, maintenance et V2.",
-    image: "https://images.pexels.com/photos/3609389/pexels-photo-3609389.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image:
+      "https://images.pexels.com/photos/3609389/pexels-photo-3609389.jpeg?auto=compress&cs=tinysrgb&w=800",
     technologies: ["PHP", "CSS3", "JavaScript", "Git"],
     date: "Nov 2023 - Jan 2024",
     status: "Terminé",
@@ -295,14 +339,15 @@ export const projectsData: Project[] = [
     challenges: ["Simplicité et sécurité"],
     solutions: ["Durcissement et UX"],
     duration: "3 mois",
-    role: "Frontend Developer"
+    role: "Frontend Developer",
   },
   {
     id: 23,
     title: "Demandes RH - Business application",
     description: "Gestion des demandes RH et e-mails automatiques.",
     longDescription: "Appli RH pour gérer diverses demandes avec envoi d'e-mails automatiques.",
-    image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image:
+      "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800",
     technologies: ["PHP", "CSS3", "JavaScript", "Git"],
     date: "Nov 2023 - Déc 2023",
     status: "Terminé",
@@ -314,13 +359,14 @@ export const projectsData: Project[] = [
     challenges: ["Flux RH clairs"],
     solutions: ["Interfaces simples"],
     duration: "2 mois",
-    role: "Frontend Developer"
+    role: "Frontend Developer",
   },
   {
     id: 24,
     title: "Secret Santa",
     description: "Application d'appariement Secret Santa avec blacklist et e-mails auto.",
-    longDescription: "Projet Python/Flask avec HTML5, SCSS et JavaScript. Gestion blacklist et e-mails automatiques.",
+    longDescription:
+      "Projet Python/Flask avec HTML5, SCSS et JavaScript. Gestion blacklist et e-mails automatiques.",
     image: "/images/projects/secret-santa/secret-santa_1.png",
     technologies: ["Flask", "Python", "CSS3", "JavaScript", "SASS", "HTML"],
     date: "Nov 2023 - Déc 2023",
@@ -333,14 +379,15 @@ export const projectsData: Project[] = [
     challenges: ["Règles d'appariement"],
     solutions: ["Algorithme de tirage"],
     duration: "1 mois",
-    role: "Backend Developer"
+    role: "Backend Developer",
   },
   {
     id: 25,
     title: "Denrées - Business application",
     description: "Gestion des commandes et stocks de l'entrepôt interne.",
     longDescription: "App interne pour commandes et stocks, avec pagination, tri et maintenance.",
-    image: "https://images.pexels.com/photos/4484076/pexels-photo-4484076.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image:
+      "https://images.pexels.com/photos/4484076/pexels-photo-4484076.jpeg?auto=compress&cs=tinysrgb&w=800",
     technologies: ["PHP", "CSS3", "Bootstrap", "JavaScript", "Git"],
     date: "Oct 2023 - Nov 2023",
     status: "Terminé",
@@ -352,7 +399,7 @@ export const projectsData: Project[] = [
     challenges: ["Performance avec listes"],
     solutions: ["Optimisations requêtes"],
     duration: "2 mois",
-    role: "Frontend Developer"
+    role: "Frontend Developer",
   },
   {
     id: 26,
@@ -373,7 +420,7 @@ export const projectsData: Project[] = [
     challenges: ["Référencement"],
     solutions: ["SEO on-site"],
     duration: "20 mois",
-    role: "Webmaster"
+    role: "Webmaster",
   },
   {
     id: 27,
@@ -392,7 +439,7 @@ export const projectsData: Project[] = [
     challenges: ["Catalogue images"],
     solutions: ["Optimisation médias"],
     duration: "3 mois",
-    role: "Webmaster"
+    role: "Webmaster",
   },
   {
     id: 28,
@@ -412,7 +459,7 @@ export const projectsData: Project[] = [
     challenges: ["Clarté des contenus"],
     solutions: ["Arborescence UX"],
     duration: "2 mois",
-    role: "Webmaster"
+    role: "Webmaster",
   },
   {
     id: 29,
@@ -432,16 +479,26 @@ export const projectsData: Project[] = [
     challenges: ["Mise en valeur images"],
     solutions: ["Optimisation responsive"],
     duration: "2 mois",
-    role: "Webmaster"
+    role: "Webmaster",
   },
   {
     id: 30,
     title: "Showcase website Manage Transport",
-    description: "Site vitrine présentant les services d'un transporteur. Refonte complète Next.js en 2025.",
+    description:
+      "Site vitrine présentant les services d'un transporteur. Refonte complète Next.js en 2025.",
     longDescription:
       "Site simple pour présenter services et prises de contact. Deuxième période de travail en 2025 : refonte complète avec ma stack Next.js (App Router, TypeScript, Tailwind), optimisations performance/SEO, accessibilité et UX (mai-juin 2025).",
     image: "/images/projects/managetransport/managetransport_1.png",
-    technologies: ["WordPress", "PHP", "JavaScript", "CSS3", "Next.js", "React", "TypeScript", "Tailwind CSS"],
+    technologies: [
+      "WordPress",
+      "PHP",
+      "JavaScript",
+      "CSS3",
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+    ],
     date: "Sep 2021 - Oct 2021 ; Mai 2025 - Juin 2025",
     status: "Terminé",
     github: "https://github.com/ThibautMilville",
@@ -452,22 +509,38 @@ export const projectsData: Project[] = [
       "/images/projects/managetransport/managetransport_2.png",
       "/images/projects/managetransport/managetransport_3.png",
       "/images/projects/managetransport/managetransport_4.png",
-      "/images/projects/managetransport/managetransport_5.png"
+      "/images/projects/managetransport/managetransport_5.png",
     ],
-    features: ["Présentation", "Contact", "Refonte Next.js", "Performance/SEO", "Accessibilité", "Formulaire de contact"],
+    features: [
+      "Présentation",
+      "Contact",
+      "Refonte Next.js",
+      "Performance/SEO",
+      "Accessibilité",
+      "Formulaire de contact",
+    ],
     challenges: ["Budget restreint", "Migration de contenu", "SEO conservé"],
     solutions: ["Thème optimisé", "Redirections propres", "Optimisation Lighthouse"],
     duration: "1 mois + 2 mois",
     role: "Développeur web",
     periods: [
-      { date: "Sep 2021 - Oct 2021", title: "Version initiale", description: "Création du site vitrine sous WordPress (présentation, contact)." },
-      { date: "Mai 2025 - Juin 2025", title: "Refonte Next.js", description: "Migration Next.js + optimisations performance/SEO et accessibilité." }
-    ]
+      {
+        date: "Sep 2021 - Oct 2021",
+        title: "Version initiale",
+        description: "Création du site vitrine sous WordPress (présentation, contact).",
+      },
+      {
+        date: "Mai 2025 - Juin 2025",
+        title: "Refonte Next.js",
+        description: "Migration Next.js + optimisations performance/SEO et accessibilité.",
+      },
+    ],
   },
   {
     id: 31,
     title: "UT Quest",
-    description: "MVP Web3 de quêtes pour dynamiser l'écosystème Ultra (engagement social et in‑game).",
+    description:
+      "MVP Web3 de quêtes pour dynamiser l'écosystème Ultra (engagement social et in‑game).",
     longDescription:
       "UT Quest est un projet de quêtes Web3 visant à dynamiser l'écosystème Ultra et sa blockchain en engageant les joueurs via des activités sociales, in‑game et plus encore. La version développée ici est un MVP fonctionnel, connecté à la blockchain pour différentes actions, notamment la connexion au portefeuille Ultra via l'extension Ultra Wallet et la création de quêtes pour différents jeux. Toute personne autorisée peut gérer ses jeux et ses propres quêtes depuis un tableau de bord admin. Projet réalisé dans le cadre d'une levée de fonds.",
     image: "/images/projects/ut-quest/ut-quest_1.png",
@@ -484,13 +557,26 @@ export const projectsData: Project[] = [
       "/images/projects/ut-quest/ut-quest_3.png",
       "/images/projects/ut-quest/ut-quest_4.png",
       "/images/projects/ut-quest/ut-quest_5.png",
-      "/images/projects/ut-quest/ut-quest_6.png"
+      "/images/projects/ut-quest/ut-quest_6.png",
     ],
-    features: ["Connexion Ultra Wallet", "Création et gestion de quêtes", "Dashboard admin par jeu", "Intégration blockchain Ultra"],
-    challenges: ["Intégration wallet Ultra", "Gestion des autorisations", "Conception du modèle de quêtes"],
-    solutions: ["Intégration SDK Ultra / extension", "RBAC côté API et UI", "Schéma de données modulaire"],
+    features: [
+      "Connexion Ultra Wallet",
+      "Création et gestion de quêtes",
+      "Dashboard admin par jeu",
+      "Intégration blockchain Ultra",
+    ],
+    challenges: [
+      "Intégration wallet Ultra",
+      "Gestion des autorisations",
+      "Conception du modèle de quêtes",
+    ],
+    solutions: [
+      "Intégration SDK Ultra / extension",
+      "RBAC côté API et UI",
+      "Schéma de données modulaire",
+    ],
     duration: "2 mois",
-    role: "Full Stack Web3 Developer"
+    role: "Full Stack Web3 Developer",
   },
   {
     id: 32,
@@ -511,18 +597,22 @@ export const projectsData: Project[] = [
       "Présentation des services web/digitaux",
       "Portfolio / mises en avant",
       "Formulaire de contact",
-      "Design responsive et performant"
+      "Design responsive et performant",
     ],
-    challenges: ["Positionnement clair de l'offre", "SEO de base et performances", "Mise en valeur des services"],
+    challenges: [
+      "Positionnement clair de l'offre",
+      "SEO de base et performances",
+      "Mise en valeur des services",
+    ],
     solutions: [
       "Arborescence et contenus structurés",
       "Optimisations performance/SEO (Next.js, images, métas)",
-      "UI sobre et efficace alignée sur l'identité"
+      "UI sobre et efficace alignée sur l'identité",
     ],
     duration: "1 mois",
     teamSize: 1,
     screenshots: ["/images/projects/ozc-web/ozc-web_1.png"],
-    role: "Frontend Developer"
+    role: "Frontend Developer",
   },
   {
     id: 33,
@@ -544,33 +634,34 @@ export const projectsData: Project[] = [
       "/images/projects/ut-launchpad/ut-launchpad_3.png",
       "/images/projects/ut-launchpad/ut-launchpad_4.png",
       "/images/projects/ut-launchpad/ut-launchpad_5.png",
-      "/images/projects/ut-launchpad/ut-launchpad_6.png"
+      "/images/projects/ut-launchpad/ut-launchpad_6.png",
     ],
     features: [
       "Lancement de collections UNIQ (NFT)",
       "Connexion et participation via Ultra Wallet",
       "Concept Phygital (burn → œuvre physique)",
       "Phases/rounds de campagne",
-      "Dashboard admin et indicateurs"
+      "Dashboard admin et indicateurs",
     ],
     challenges: [
       "Intégration blockchain Ultra et fiabilité des transactions",
       "Modélisation des campagnes et rôles",
-      "Sécurité et contrôles côté API"
+      "Sécurité et contrôles côté API",
     ],
     solutions: [
       "SDK/extension Ultra Wallet avec gestion des états d'erreur",
       "Schéma de données modulaire et validations",
-      "RBAC et garde-fous API"
+      "RBAC et garde-fous API",
     ],
     duration: "3 mois",
     teamSize: 3,
-    role: "Full Stack Web3 Developer"
+    role: "Full Stack Web3 Developer",
   },
   {
     id: 34,
     title: "UT Snapshot",
-    description: "Outil de snapshot pour identifier les détenteurs d'UNIQs sur la blockchain Ultra.",
+    description:
+      "Outil de snapshot pour identifier les détenteurs d'UNIQs sur la blockchain Ultra.",
     longDescription:
       "UT Snapshot permet de prendre des instantanés du réseau Ultra afin d'identifier les détenteurs d'UNIQs spécifiques. L'outil offre une vue claire et à jour de la distribution des actifs, facilitant l'analyse des schémas de possession et le suivi de l'engagement dans l'écosystème Ultra. MVP développé dans le cadre de la levée de fonds d'Ultra Times.",
     image: "/images/projects/ut-snapshot/ut-snapshot_1.png",
@@ -587,19 +678,27 @@ export const projectsData: Project[] = [
       "/images/projects/ut-snapshot/ut-snapshot_3.png",
       "/images/projects/ut-snapshot/ut-snapshot_4.png",
       "/images/projects/ut-snapshot/ut-snapshot_5.png",
-      "/images/projects/ut-snapshot/ut-snapshot_6.png"
+      "/images/projects/ut-snapshot/ut-snapshot_6.png",
     ],
     features: [
       "Snapshots de la blockchain Ultra",
       "Identification des détenteurs d'UNIQs",
       "Vue de distribution des actifs",
-      "Filtres et recherche par collection/UNIQ"
+      "Filtres et recherche par collection/UNIQ",
     ],
-    challenges: ["Fiabilité et cohérence des données on-chain", "Pagination et limites d'API", "Performance sur grands volumes"],
-    solutions: ["Requêtes batchées et retries", "Mise en cache et stratégie d'agrégation", "Composants UI performants et réutilisables"],
+    challenges: [
+      "Fiabilité et cohérence des données on-chain",
+      "Pagination et limites d'API",
+      "Performance sur grands volumes",
+    ],
+    solutions: [
+      "Requêtes batchées et retries",
+      "Mise en cache et stratégie d'agrégation",
+      "Composants UI performants et réutilisables",
+    ],
     duration: "2 mois",
     teamSize: 2,
-    role: "Full Stack Web3 Developer"
+    role: "Full Stack Web3 Developer",
   },
   {
     id: 35,
@@ -620,27 +719,27 @@ export const projectsData: Project[] = [
       "/images/projects/weneedu/weneedu_2.png",
       "/images/projects/weneedu/weneedu_3.png",
       "/images/projects/weneedu/weneedu_4.png",
-      "/images/projects/weneedu/weneedu_5.png"
+      "/images/projects/weneedu/weneedu_5.png",
     ],
     features: [
       "Market de missions/services (offres, profils, évaluations)",
       "Paiements crypto et intégration Ultra",
       "Matching talents ↔ opportunités",
-      "Tableau de bord freelances et clients"
+      "Tableau de bord freelances et clients",
     ],
     challenges: [
       "Sécurité des transactions et gestion des états",
       "Modélisation des offres, profils et flux de commande",
-      "Expérience utilisateur fluide sur des parcours complexes"
+      "Expérience utilisateur fluide sur des parcours complexes",
     ],
     solutions: [
       "Gestion robuste des statuts et erreurs côté Web3",
       "Schéma de données structuré et composants réutilisables",
-      "Parcours guidés et validations côté UI"
+      "Parcours guidés et validations côté UI",
     ],
     duration: "2 mois",
     teamSize: 3,
-    role: "Full Stack Web3 Developer"
+    role: "Full Stack Web3 Developer",
   },
   {
     id: 36,
@@ -649,7 +748,17 @@ export const projectsData: Project[] = [
     longDescription:
       "Développement de la couche d'intégration Web3 d'Ashes of Mankind (Empires), connectant le jeu aux smart contracts de la blockchain Ultra (fork EOS) via une logique frontend personnalisée. Construction du frontend React et du backend NestJS, assurant une interaction fluide entre l'interface joueur et les composants blockchain. Collaboration en environnement Agile avec participation aux réunions techniques internationales.",
     image: "/images/projects/empires/Capture.PNG",
-    technologies: ["React.js", "Node.js", "NestJS", "Blockchain", "Web3", "Smart Contracts", "Agile", "Git", "GitLab"],
+    technologies: [
+      "React.js",
+      "Node.js",
+      "NestJS",
+      "Blockchain",
+      "Web3",
+      "Smart Contracts",
+      "Agile",
+      "Git",
+      "GitLab",
+    ],
     date: "Août 2025 - Présent",
     status: "En cours",
     github: "https://github.com/ThibautMilville",
@@ -664,7 +773,7 @@ export const projectsData: Project[] = [
       "/images/projects/empires/Capture_4.PNG",
       "/images/projects/empires/Capture_5.PNG",
       "/images/projects/empires/Capture_6.PNG",
-      "/images/projects/empires/Capture_7.PNG"
+      "/images/projects/empires/Capture_7.PNG",
     ],
     features: [
       "Couche d'intégration Web3 personnalisée",
@@ -672,13 +781,21 @@ export const projectsData: Project[] = [
       "Connexion aux smart contracts Ultra blockchain",
       "Collaboration Agile internationale",
       "Coordination avec équipes globales",
-      "Discussions game design et UX"
+      "Discussions game design et UX",
     ],
-    challenges: ["Intégration blockchain Ultra fiable", "Coordination d'équipes internationales", "Bridge entre UX et fonctionnalités blockchain"],
-    solutions: ["Logique frontend personnalisée robuste", "Communication efficace via réunions techniques", "Approche collaborative pour l'UX"],
+    challenges: [
+      "Intégration blockchain Ultra fiable",
+      "Coordination d'équipes internationales",
+      "Bridge entre UX et fonctionnalités blockchain",
+    ],
+    solutions: [
+      "Logique frontend personnalisée robuste",
+      "Communication efficace via réunions techniques",
+      "Approche collaborative pour l'UX",
+    ],
     duration: "En cours",
     teamSize: 1,
-    role: "Full Stack Web3 Developer"
+    role: "Full Stack Web3 Developer",
   },
   {
     id: 37,
@@ -701,13 +818,23 @@ export const projectsData: Project[] = [
       "Interface utilisateur intuitive",
       "Flux de données fiable",
       "Collaboration avec équipes design",
-      "Environnement Agile"
+      "Environnement Agile",
     ],
-    challenges: ["Intégration de données complexes", "Alignement avec standards SNCF", "Optimisation des workflows", "Coordination inter-départementale"],
-    solutions: ["Architecture React/NestJS robuste", "Collaboration étroite avec design", "Processus Agile optimisé", "Automatisation des rapports"],
+    challenges: [
+      "Intégration de données complexes",
+      "Alignement avec standards SNCF",
+      "Optimisation des workflows",
+      "Coordination inter-départementale",
+    ],
+    solutions: [
+      "Architecture React/NestJS robuste",
+      "Collaboration étroite avec design",
+      "Processus Agile optimisé",
+      "Automatisation des rapports",
+    ],
     duration: "En cours",
     teamSize: 1,
-    role: "Full Stack Developer"
+    role: "Full Stack Developer",
   },
   {
     id: 38,
@@ -728,22 +855,41 @@ export const projectsData: Project[] = [
       "Présentation claire des services d'automatisation IA",
       "Design UI épuré et professionnel",
       "Optimisations performance et accessibilité",
-      "Expérience utilisateur optimisée"
+      "Expérience utilisateur optimisée",
     ],
-    challenges: ["Présentation claire des services techniques", "Optimisation des performances", "Accessibilité web", "Design professionnel et moderne"],
-    solutions: ["Architecture Next.js optimisée", "Design system cohérent", "Tests d'accessibilité", "Optimisations images et code"],
+    challenges: [
+      "Présentation claire des services techniques",
+      "Optimisation des performances",
+      "Accessibilité web",
+      "Design professionnel et moderne",
+    ],
+    solutions: [
+      "Architecture Next.js optimisée",
+      "Design system cohérent",
+      "Tests d'accessibilité",
+      "Optimisations images et code",
+    ],
     duration: "1 mois",
     teamSize: 1,
-    role: "Frontend Developer"
+    role: "Frontend Developer",
   },
   {
     id: 39,
     title: "CLOAK Website",
-    description: "Website public de présentation du protocole CLOAK zero-knowledge et de son écosystème.",
+    description:
+      "Website public de présentation du protocole CLOAK zero-knowledge et de son écosystème.",
     longDescription:
       "Led frontend development of cloak.today, the public-facing website introducing the CLOAK zero-knowledge privacy protocol and its ecosystem. Built a high-quality, responsive marketing website using Next.js, TypeScript, and Tailwind, and integrated an AI-powered chatbot to help users explore features and documentation through natural conversations. Collaborated with product and protocol stakeholders to structure key messaging around privacy, tokenomics, governance, and roadmap while optimizing SEO, performance, and accessibility.",
     image: "/images/projects/cloak/image1.png",
-    technologies: ["TypeScript", "Next.js", "Tailwind CSS", "React", "SEO", "Accessibility", "AI Chatbot"],
+    technologies: [
+      "TypeScript",
+      "Next.js",
+      "Tailwind CSS",
+      "React",
+      "SEO",
+      "Accessibility",
+      "AI Chatbot",
+    ],
     date: "Nov 2025 - Dec 2025",
     status: "Terminé",
     github: "https://github.com/ThibautMilville",
@@ -751,26 +897,30 @@ export const projectsData: Project[] = [
     category: "Web3",
     isFeatured: true,
     relatedExperienceId: 12,
-    screenshots: ["/images/projects/cloak/image1.png", "/images/projects/cloak/image2.png", "/images/projects/cloak/image3.png"],
+    screenshots: [
+      "/images/projects/cloak/image1.png",
+      "/images/projects/cloak/image2.png",
+      "/images/projects/cloak/image3.png",
+    ],
     features: [
       "Site marketing responsive et orienté conversion",
       "Intégration chatbot IA pour onboarding protocol",
       "Architecture de contenu claire (privacy, tokenomics, governance, roadmap)",
-      "Optimisations SEO, performance et accessibilité"
+      "Optimisations SEO, performance et accessibilité",
     ],
     challenges: [
       "Rendre des concepts zero-knowledge compréhensibles à tous les publics",
       "Conserver une forte crédibilité produit avec une UX simple",
-      "Optimiser la visibilité et la découvrabilité du protocole"
+      "Optimiser la visibilité et la découvrabilité du protocole",
     ],
     solutions: [
       "Narration produit structurée et progressive",
       "Design system cohérent et orienté clarté",
-      "Optimisations techniques avancées sur performance/SEO/accessibilité"
+      "Optimisations techniques avancées sur performance/SEO/accessibilité",
     ],
     duration: "2 mois",
     teamSize: 1,
-    role: "Frontend Engineer"
+    role: "Frontend Engineer",
   },
   {
     id: 40,
@@ -779,7 +929,16 @@ export const projectsData: Project[] = [
     longDescription:
       "Led frontend development for the CLOAK Web App, delivering a privacy-first interface for interacting with the CLOAK Shielded Protocol. Built and maintained complex user interfaces enabling private wallets, shielded transactions, and DeFi features including an integrated DEX. Worked closely with protocol and smart contract teams to accurately represent transaction states, privacy guarantees, and zero-knowledge constraints while optimizing performance and responsiveness for Antelope's low-latency environment.",
     image: "/images/projects/cloak-dapp/image1.png",
-    technologies: ["TypeScript", "Next.js", "Tailwind CSS", "Web3", "DeFi", "DEX", "Zero-Knowledge", "Smart Contracts"],
+    technologies: [
+      "TypeScript",
+      "Next.js",
+      "Tailwind CSS",
+      "Web3",
+      "DeFi",
+      "DEX",
+      "Zero-Knowledge",
+      "Smart Contracts",
+    ],
     date: "Nov 2025 - Present",
     status: "En cours",
     github: "https://github.com/ThibautMilville",
@@ -790,32 +949,33 @@ export const projectsData: Project[] = [
     screenshots: [
       "/images/projects/cloak-dapp/image1.png",
       "/images/projects/cloak-dapp/image2.png",
-      "/images/projects/cloak-dapp/image3.png"
+      "/images/projects/cloak-dapp/image3.png",
     ],
     features: [
       "Wallet privé et interactions shielded",
       "Transactions confidentielles et suivi d'état on-chain",
       "Fonctionnalités DeFi avec DEX intégré",
-      "Parcours utilisateurs simplifiés pour abstraire la complexité blockchain"
+      "Parcours utilisateurs simplifiés pour abstraire la complexité blockchain",
     ],
     challenges: [
       "Représenter fidèlement les contraintes zero-knowledge côté UI",
       "Maintenir une UX de confiance sur des flux DeFi complexes",
-      "Garantir performance et fluidité sur interactions on-chain"
+      "Garantir performance et fluidité sur interactions on-chain",
     ],
     solutions: [
       "Modélisation précise des états de transaction et garanties de confidentialité",
       "Design UX orienté clarté et réduction de friction",
-      "Optimisations frontend ciblées pour réactivité et stabilité"
+      "Optimisations frontend ciblées pour réactivité et stabilité",
     ],
     duration: "En cours",
     teamSize: 1,
-    role: "Frontend Engineer"
+    role: "Frontend Engineer",
   },
   {
     id: 41,
     title: "IXS Valuation Simulator",
-    description: "Tokenomics simulation tool to model market cap scenarios and protocol-driven value flows.",
+    description:
+      "Tokenomics simulation tool to model market cap scenarios and protocol-driven value flows.",
     longDescription:
       "Designed and developed a tokenomics simulation tool for IXS using Next.js, focused on modeling market cap scenarios and protocol-driven value flows. Implemented dynamic calculations for MC/TVL ratios, implied token price, and portfolio valuation based on customizable assumptions. Built an interactive system to simulate multiple revenue streams (DEX fees, launchpad, SaaS, yield), including automated buyback and burn mechanics. Structured a flexible architecture allowing real-time parameter adjustments and instant financial projections. Focused on performance and UX to deliver a clear, responsive interface for exploring complex economic models.",
     image: "/images/projects/ixs-valuation-simulator/ixs-valuation-simulator_1.png",
@@ -827,28 +987,28 @@ export const projectsData: Project[] = [
     category: "Web3",
     screenshots: [
       "/images/projects/ixs-valuation-simulator/ixs-valuation-simulator_1.png",
-      "/images/projects/ixs-valuation-simulator/ixs-valuation-simulator_2.png"
+      "/images/projects/ixs-valuation-simulator/ixs-valuation-simulator_2.png",
     ],
     features: [
       "Simulation interactive de scénarios de market cap et flux de valeur protocole",
       "Calculs dynamiques MC/TVL, prix implicite du token et valorisation de portefeuille",
       "Modélisation de revenus multi-sources (DEX fees, launchpad, SaaS, yield)",
       "Mécaniques automatisées de buyback et burn",
-      "Ajustement temps réel des paramètres avec projections instantanées"
+      "Ajustement temps réel des paramètres avec projections instantanées",
     ],
     challenges: [
       "Rendre lisibles des modèles tokenomics complexes pour la prise de décision",
       "Maintenir des projections fluides avec recalculs en temps réel",
-      "Structurer un modèle flexible couvrant plusieurs hypothèses de revenus"
+      "Structurer un modèle flexible couvrant plusieurs hypothèses de revenus",
     ],
     solutions: [
       "Architecture modulaire de simulation orientée scénarios",
       "Moteur de calcul optimisé pour mises à jour instantanées",
-      "Interface claire et performante centrée UX pour exploration économique"
+      "Interface claire et performante centrée UX pour exploration économique",
     ],
     duration: "1 mois",
     teamSize: 1,
-    role: "Frontend Engineer"
+    role: "Frontend Engineer",
   },
   {
     id: 42,
@@ -857,7 +1017,14 @@ export const projectsData: Project[] = [
     longDescription:
       "Led the design and frontend development of the Film Solaire 75 showcase website, creating a high-conversion platform tailored to a competitive local market in Paris. Built a fast, responsive, and SEO-driven website using Next.js, TypeScript, and Tailwind, ensuring strong performance and visibility on high-intent local queries. Designed and deployed a comprehensive SEO strategy focused on local ranking domination, including semantic page structures, keyword clustering (e.g., film solaire Paris, film anti-chaleur 75), and optimized metadata. Engineered a powerful internal linking system connecting service pages to improve crawl depth, topical authority, and conversion pathways. Implemented technical SEO best practices, integrated Google Search Console, and designed conversion-focused user journeys with strong CTAs and localized content.",
     image: "/images/projects/film-solaire-75/film-solaire-75_1.png",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "SEO", "Technical SEO", "Google Search Console"],
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "SEO",
+      "Technical SEO",
+      "Google Search Console",
+    ],
     date: "Feb 2026 - Feb 2026",
     status: "Terminé",
     github: "https://github.com/ThibautMilville",
@@ -870,21 +1037,21 @@ export const projectsData: Project[] = [
       "Stratégie SEO locale avec clustering sémantique et pages structurées",
       "Maillage interne entre pages services pour renforcer l'autorité thématique",
       "Optimisations techniques SEO (sitemap, robots, canonicals, structured data, CWV)",
-      "Parcours utilisateurs conversion-first avec CTA et signaux de confiance"
+      "Parcours utilisateurs conversion-first avec CTA et signaux de confiance",
     ],
     challenges: [
       "Se positionner sur des requêtes locales à forte intention dans un marché concurrentiel",
       "Maintenir performance, UX et crawlabilité sur un site riche en contenus SEO",
-      "Transformer le trafic organique local en leads qualifiés"
+      "Transformer le trafic organique local en leads qualifiés",
     ],
     solutions: [
       "Architecture de contenu orientée intention de recherche et points de douleur utilisateurs",
       "Système de maillage interne avancé pour profondeur de crawl et diffusion d'autorité",
-      "Pilotage continu via Search Console pour itérer sur indexation et performance"
+      "Pilotage continu via Search Console pour itérer sur indexation et performance",
     ],
     duration: "1 mois",
     teamSize: 1,
-    role: "Frontend Engineer"
+    role: "Frontend Engineer",
   },
   {
     id: 43,
@@ -893,7 +1060,14 @@ export const projectsData: Project[] = [
     longDescription:
       "Led the design and frontend development of the Film Solaire 77 showcase website, creating a modern and conversion-focused online presence for a window tinting business. Built a responsive and SEO-optimized website using Next.js, TypeScript, and Tailwind, ensuring fast load times and strong visibility on search engines. Designed a robust SEO strategy, including semantic structuring, keyword research, and on-page optimization. Implemented a strong internal linking architecture, managed technical SEO aspects such as sitemap, robots.txt, canonical tags, and Core Web Vitals optimization, and integrated Google Search Console for continuous iteration. Designed clear user journeys to highlight services, pricing clarity, and trust elements, with optimized quote-request conversion flows.",
     image: "/images/projects/film-solaire-77/film-solaire-77_1.png",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "SEO", "Technical SEO", "Google Search Console"],
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "SEO",
+      "Technical SEO",
+      "Google Search Console",
+    ],
     date: "Feb 2026 - Feb 2026",
     status: "Terminé",
     github: "https://github.com/ThibautMilville",
@@ -906,21 +1080,21 @@ export const projectsData: Project[] = [
       "SEO on-page complet (structure, mots-clés, métadonnées, headings)",
       "Maillage interne pour crawlabilité et distribution d'autorité",
       "SEO technique (sitemap, robots, canonicals, Core Web Vitals)",
-      "Navigation claire avec formulaires de devis et CTA optimisés"
+      "Navigation claire avec formulaires de devis et CTA optimisés",
     ],
     challenges: [
       "Améliorer la visibilité organique sur un périmètre local concurrentiel",
       "Concilier performance technique et profondeur SEO",
-      "Augmenter la crédibilité et la conversion via UX et contenus"
+      "Augmenter la crédibilité et la conversion via UX et contenus",
     ],
     solutions: [
       "Stratégie SEO robuste pilotée par recherche de mots-clés et suivi GSC",
       "Architecture de liens internes pour guider crawl et utilisateurs vers pages à forte conversion",
-      "Design aligné identité de marque avec emphase sur professionnalisme et confiance"
+      "Design aligné identité de marque avec emphase sur professionnalisme et confiance",
     ],
     duration: "1 mois",
     teamSize: 1,
-    role: "Frontend Engineer"
+    role: "Frontend Engineer",
   },
   {
     id: 44,
@@ -929,7 +1103,14 @@ export const projectsData: Project[] = [
     longDescription:
       "Led the design and frontend development of the Film Solaire IDF showcase website, building a scalable platform targeting the entire Île-de-France region. Developed a fast, responsive, and SEO-first website using Next.js, TypeScript, and Tailwind, optimized for performance and large-scale geographic targeting. Designed and executed a regional SEO strategy with location-based structures and service keyword clusters. Built an advanced internal linking architecture connecting location pages, service pages, and conversion pages. Implemented technical SEO best practices at scale, integrated Google Search Console for indexing and coverage monitoring, and crafted conversion-focused UX to drive high-quality inbound leads across the region.",
     image: "/images/projects/film-solaire-idf/film-solaire-idf_1.png",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "SEO", "Technical SEO", "Google Search Console"],
+    technologies: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "SEO",
+      "Technical SEO",
+      "Google Search Console",
+    ],
     date: "Feb 2026 - Feb 2026",
     status: "Terminé",
     github: "https://github.com/ThibautMilville",
@@ -942,20 +1123,20 @@ export const projectsData: Project[] = [
       "Structure par zones géographiques et clusters de services",
       "Maillage interne avancé entre pages localisées, services et conversion",
       "SEO technique à grande échelle (sitemap dynamique, robots, canonicals, structured data)",
-      "UX conversion-first avec CTA régionaux et présentation claire des services"
+      "UX conversion-first avec CTA régionaux et présentation claire des services",
     ],
     challenges: [
       "Gérer une stratégie SEO multi-zones avec forte volumétrie de pages",
       "Maintenir la qualité UX/mobile avec un ciblage géographique étendu",
-      "Assurer indexation et performance homogènes à l'échelle régionale"
+      "Assurer indexation et performance homogènes à l'échelle régionale",
     ],
     solutions: [
       "Architecture modulaire combinant segmentation géographique et intention de recherche",
       "Pilotage continu via Search Console pour détecter gaps d'indexation et optimiser",
-      "Optimisations performance/accessibilité pour maximiser engagement et conversion mobile"
+      "Optimisations performance/accessibilité pour maximiser engagement et conversion mobile",
     ],
     duration: "1 mois",
     teamSize: 1,
-    role: "Frontend Engineer"
-  }
+    role: "Frontend Engineer",
+  },
 ];

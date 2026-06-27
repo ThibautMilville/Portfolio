@@ -1,18 +1,18 @@
-import 'server-only';
-import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import "server-only";
+import { type NextRequest, NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
 function getEnvVar(key: string): string | undefined {
-  if (typeof process === 'undefined' || typeof process.env === 'undefined') {
-    throw new Error('Environment variables are not available');
+  if (typeof process === "undefined" || typeof process.env === "undefined") {
+    throw new Error("Environment variables are not available");
   }
   const envKey = key;
   const envObj = process.env;
-  if (!envObj || typeof envObj !== 'object') {
+  if (!envObj || typeof envObj !== "object") {
     return undefined;
   }
   const rawValue = envObj[envKey];
-  if (rawValue === undefined || rawValue === null || rawValue === '') {
+  if (rawValue === undefined || rawValue === null || rawValue === "") {
     return undefined;
   }
   const result = String(rawValue);
@@ -25,30 +25,24 @@ export async function POST(request: NextRequest) {
     const { name, email, subject, message } = body;
 
     if (!name || !email || !subject || !message) {
-      return NextResponse.json(
-        { error: 'Tous les champs sont requis' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Tous les champs sont requis" }, { status: 400 });
     }
 
-    const smtpUser = getEnvVar('SMTP_USER');
-    const smtpPassword = getEnvVar('SMTP_PASSWORD');
-    
+    const smtpUser = getEnvVar("SMTP_USER");
+    const smtpPassword = getEnvVar("SMTP_PASSWORD");
+
     if (!smtpUser || !smtpPassword) {
-      console.error('Configuration SMTP manquante');
-      return NextResponse.json(
-        { error: 'Erreur de configuration serveur' },
-        { status: 500 }
-      );
+      console.error("Configuration SMTP manquante");
+      return NextResponse.json({ error: "Erreur de configuration serveur" }, { status: 500 });
     }
 
-    const contactEmail = getEnvVar('CONTACT_EMAIL') || smtpUser;
+    const contactEmail = getEnvVar("CONTACT_EMAIL") || smtpUser;
 
-    const smtpHostDefault = 'smtp' + '.' + 'gmail' + '.' + 'com';
+    const smtpHostDefault = "smtp" + "." + "gmail" + "." + "com";
     const transporter = nodemailer.createTransport({
-      host: getEnvVar('SMTP_HOST') || smtpHostDefault,
-      port: parseInt(getEnvVar('SMTP_PORT') || '587'),
-      secure: getEnvVar('SMTP_SECURE') === 'true',
+      host: getEnvVar("SMTP_HOST") || smtpHostDefault,
+      port: parseInt(getEnvVar("SMTP_PORT") || "587", 10),
+      secure: getEnvVar("SMTP_SECURE") === "true",
       auth: {
         user: smtpUser,
         pass: smtpPassword,
@@ -90,17 +84,13 @@ ${message}
 
     await transporter.sendMail(mailOptions);
 
-    return NextResponse.json(
-      { message: 'Email envoyé avec succès' },
-      { status: 200 }
-    );
+    return NextResponse.json({ message: "Email envoyé avec succès" }, { status: 200 });
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Erreur inconnue';
-    console.error('Erreur lors de l\'envoi de l\'email:', errorMessage);
+    const errorMessage = error instanceof Error ? error.message : "Erreur inconnue";
+    console.error("Erreur lors de l'envoi de l'email:", errorMessage);
     return NextResponse.json(
-      { error: 'Erreur lors de l\'envoi de l\'email. Veuillez réessayer plus tard.' },
-      { status: 500 }
+      { error: "Erreur lors de l'envoi de l'email. Veuillez réessayer plus tard." },
+      { status: 500 },
     );
   }
 }
-

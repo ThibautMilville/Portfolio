@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUp } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 export default function BackToTop() {
@@ -14,11 +14,11 @@ export default function BackToTop() {
     const toggleVisibility = () => {
       if (window.pageYOffset > 300) {
         setIsVisible(true);
-        
+
         if (timeoutRef.current) {
           clearTimeout(timeoutRef.current);
         }
-        
+
         timeoutRef.current = setTimeout(() => {
           setIsVisible(false);
         }, 2000);
@@ -51,7 +51,7 @@ export default function BackToTop() {
     const observer = new MutationObserver(updateState);
     observer.observe(body, {
       attributes: true,
-      attributeFilter: ["data-chatbot-open"]
+      attributeFilter: ["data-chatbot-open"],
     });
 
     return () => observer.disconnect();
@@ -77,7 +77,7 @@ export default function BackToTop() {
           <Button
             onClick={scrollToTop}
             size="icon"
-            className="h-12 w-12 rounded-full bg-primary/90 hover:bg-primary text-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 backdrop-blur-sm border border-white/20"
+            className="h-12 w-12 rounded-full bg-primary-solid/90 hover:bg-primary-solid text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 backdrop-blur-sm border border-white/20"
             aria-label="Retour en haut de page"
           >
             <ArrowUp className="h-5 w-5" />

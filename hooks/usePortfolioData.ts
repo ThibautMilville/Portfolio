@@ -1,8 +1,8 @@
 "use client";
 
-import { Experience, Formation, Project, Skill } from "@/types/portfolio";
-import { fetchExperiences, fetchFormations, fetchProjects, fetchSkills } from "@/lib/api/portfolio";
 import React from "react";
+import { fetchExperiences, fetchFormations, fetchProjects, fetchSkills } from "@/lib/api/portfolio";
+import type { Experience, Formation, Project, Skill } from "@/types/portfolio";
 
 type PortfolioDataState = {
   experiences: Experience[];
@@ -17,7 +17,7 @@ const initialState: PortfolioDataState = {
   formations: [],
   projects: [],
   skills: [],
-  loading: true
+  loading: true,
 };
 
 export const usePortfolioData = () => {
@@ -25,19 +25,20 @@ export const usePortfolioData = () => {
 
   React.useEffect(() => {
     const run = async () => {
-      const [experiencesResult, formationsResult, projectsResult, skillsResult] = await Promise.allSettled([
-        fetchExperiences(),
-        fetchFormations(),
-        fetchProjects(),
-        fetchSkills()
-      ]);
+      const [experiencesResult, formationsResult, projectsResult, skillsResult] =
+        await Promise.allSettled([
+          fetchExperiences(),
+          fetchFormations(),
+          fetchProjects(),
+          fetchSkills(),
+        ]);
 
       setState({
         experiences: experiencesResult.status === "fulfilled" ? experiencesResult.value : [],
         formations: formationsResult.status === "fulfilled" ? formationsResult.value : [],
         projects: projectsResult.status === "fulfilled" ? projectsResult.value : [],
         skills: skillsResult.status === "fulfilled" ? skillsResult.value : [],
-        loading: false
+        loading: false,
       });
     };
 

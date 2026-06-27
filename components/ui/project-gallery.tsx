@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Button } from "./button";
 
 interface ProjectGalleryProps {
@@ -48,7 +48,7 @@ export default function ProjectGallery({ images, title }: ProjectGalleryProps) {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isModalOpen, next, prev]);
+  }, [isModalOpen, next, prev, closeModal]);
 
   if (!images || images.length === 0) return null;
 

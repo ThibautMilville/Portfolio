@@ -1,5 +1,5 @@
-import { Experience, Formation, Project, Skill } from "@/types/portfolio";
 import { experiencesData, formationsData, projectsData, skillsData } from "@/data/portfolio";
+import type { Experience, Formation, Project, Skill } from "@/types/portfolio";
 
 export const fetchExperiences = async (): Promise<Experience[]> => experiencesData;
 

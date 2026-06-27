@@ -1,8 +1,8 @@
 const levelKeyMap: Record<string, string> = {
   Expert: "expert",
-  "Avancé": "advanced",
-  "Intermédiaire": "intermediate",
-  "Débutant": "beginner"
+  Avancé: "advanced",
+  Intermédiaire: "intermediate",
+  Débutant: "beginner",
 };
 
 const skillTranslationKeyMap: Record<string, string> = {
@@ -44,10 +44,11 @@ const skillTranslationKeyMap: Record<string, string> = {
   Joomla: "joomla",
   "Cursor AI": "cursor",
   Cursor: "cursor",
-  Claude: "cursor"
+  Claude: "cursor",
 };
 
-export const getLevelTranslationKey = (level: string): string => levelKeyMap[level] || "intermediate";
+export const getLevelTranslationKey = (level: string): string =>
+  levelKeyMap[level] || "intermediate";
 
 export const getSkillDescriptionKey = (name: string): string =>
   skillTranslationKeyMap[name] || name.toLowerCase().replace(/\s+/g, "");

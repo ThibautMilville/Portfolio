@@ -1,5 +1,5 @@
-import { useLocale } from 'next-intl';
-import React from 'react';
+import { useLocale } from "next-intl";
+import React from "react";
 
 export function useTranslatedData() {
   const locale = useLocale();
@@ -19,7 +19,7 @@ export function useTranslatedData() {
         setTranslatedExperiences(experiencesData.default.experiences || []);
         setTranslatedFormations(formationsData.default.formations || []);
       } catch (error) {
-        console.warn('Could not load translated data:', error);
+        console.warn("Could not load translated data:", error);
       }
     };
     loadTranslatedData();
@@ -42,7 +42,7 @@ export function useTranslatedData() {
         challenges: projectData.challenges || project.challenges,
         solutions: projectData.solutions || project.solutions,
       };
-    } catch (error) {
+    } catch (_error) {
       return project;
     }
   };
@@ -57,7 +57,7 @@ export function useTranslatedData() {
         description: experienceData.description || experience.description,
         achievements: experienceData.achievements || experience.achievements,
       };
-    } catch (error) {
+    } catch (_error) {
       return experience;
     }
   };
@@ -77,7 +77,7 @@ export function useTranslatedData() {
         mention: formationData.mention || formation.mention,
         type: formationData.type || formation.type,
       };
-    } catch (error) {
+    } catch (_error) {
       return formation;
     }
   };
@@ -85,6 +85,6 @@ export function useTranslatedData() {
   return {
     getTranslatedProject,
     getTranslatedExperience,
-    getTranslatedFormation
+    getTranslatedFormation,
   };
 }

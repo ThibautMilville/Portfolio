@@ -1,15 +1,11 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, MessageCircle, X } from "lucide-react";
+import type React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Tooltip } from "@/components/ui/general/Tooltip";
-
-type ChatbotOption = {
-  value: string;
-  label: string;
-};
 
 type ChatbotFormData = {
   name: string;
@@ -29,13 +25,13 @@ const initialFormData: ChatbotFormData = {
   name: "",
   email: "",
   phone: "",
-  message: ""
+  message: "",
 };
 
 const inputClassName =
   "w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-primary focus:ring-2 focus:ring-primary/30";
 
-export default function Chatbot(): JSX.Element {
+export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -44,6 +40,14 @@ export default function Chatbot(): JSX.Element {
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>({ type: null, message: "" });
   const panelRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const handleClose = useCallback(() => {
+    setIsVisible(false);
+    setTimeout(() => {
+      setIsOpen(false);
+      setSubmitStatus({ type: null, message: "" });
+    }, 250);
+  }, []);
 
   useEffect(() => {
     const checkViewport = () => {
@@ -109,19 +113,11 @@ export default function Chatbot(): JSX.Element {
       clearTimeout(timer);
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [isOpen]);
+  }, [isOpen, handleClose]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = event.target;
     setFormData((previous) => ({ ...previous, [name]: value }));
-  };
-
-  const handleClose = () => {
-    setIsVisible(false);
-    setTimeout(() => {
-      setIsOpen(false);
-      setSubmitStatus({ type: null, message: "" });
-    }, 250);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -139,21 +135,21 @@ export default function Chatbot(): JSX.Element {
           name: formData.name,
           email: formData.email,
           subject,
-          message: fullMessage
-        })
+          message: fullMessage,
+        }),
       });
       if (!response.ok) {
         throw new Error("request_failed");
       }
       setSubmitStatus({
         type: "success",
-        message: "Votre message a été envoyé avec succès. Nous revenons vers vous rapidement."
+        message: "Votre message a été envoyé avec succès. Nous revenons vers vous rapidement.",
       });
       setFormData(initialFormData);
     } catch {
       setSubmitStatus({
         type: "error",
-        message: "Une erreur est survenue lors de l'envoi. Merci de réessayer."
+        message: "Une erreur est survenue lors de l'envoi. Merci de réessayer.",
       });
     } finally {
       setIsSubmitting(false);
@@ -168,7 +164,7 @@ export default function Chatbot(): JSX.Element {
             ref={buttonRef}
             onClick={() => setIsOpen(true)}
             size="icon"
-            className="sweep-light h-12 w-12 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-primary/40"
+            className="sweep-light h-12 w-12 rounded-full bg-primary-solid hover:bg-primary-solid/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border border-primary/40"
             aria-label="Ouvrir le chatbot"
           >
             <MessageCircle className="h-5 w-5" />
@@ -191,7 +187,11 @@ export default function Chatbot(): JSX.Element {
             <motion.div
               ref={panelRef}
               initial={{ opacity: 0, y: 16, scale: 0.96 }}
-              animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 16, scale: isVisible ? 1 : 0.96 }}
+              animate={{
+                opacity: isVisible ? 1 : 0,
+                y: isVisible ? 0 : 16,
+                scale: isVisible ? 1 : 0.96,
+              }}
               exit={{ opacity: 0, y: 16, scale: 0.96 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
               className="fixed z-[140] flex w-[calc(100vw-1.5rem)] max-w-sm flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-2xl sm:w-96 md:max-w-md"
@@ -204,18 +204,20 @@ export default function Chatbot(): JSX.Element {
                 maxHeight: isMobile
                   ? "calc(100dvh - max(1.5rem, env(safe-area-inset-bottom) + 1.5rem))"
                   : "calc(100vh - 2.5rem)",
-                transformOrigin: isMobile ? "bottom center" : "bottom right"
+                transformOrigin: isMobile ? "bottom center" : "bottom right",
               }}
               onClick={isMobile ? (event) => event.stopPropagation() : undefined}
             >
-              <div className="flex items-center justify-between rounded-t-2xl bg-primary px-3 py-2 text-primary-foreground sm:px-5 sm:py-4">
+              <div className="flex items-center justify-between rounded-t-2xl bg-primary-solid px-3 py-2 text-primary-foreground sm:px-5 sm:py-4">
                 <div className="flex items-center gap-3">
                   <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white sm:h-10 sm:w-10">
                     <MessageCircle className="text-base text-primary sm:text-lg" />
                   </div>
                   <div>
                     <h3 className="text-base font-bold sm:text-lg">Demander un devis</h3>
-                    <p className="text-xs text-primary-foreground/90 sm:text-sm">Nous répondons sous 24h</p>
+                    <p className="text-xs text-primary-foreground/90 sm:text-sm">
+                      Nous répondons sous 24h
+                    </p>
                   </div>
                 </div>
                 <Tooltip content="Fermer" position="left">
@@ -232,10 +234,16 @@ export default function Chatbot(): JSX.Element {
                 </Tooltip>
               </div>
 
-              <form onSubmit={handleSubmit} className="flex min-h-0 flex-1 flex-col overflow-hidden">
+              <form
+                onSubmit={handleSubmit}
+                className="flex min-h-0 flex-1 flex-col overflow-hidden"
+              >
                 <div className="flex-1 space-y-2 overflow-y-auto p-3 sm:p-4">
                   <div>
-                    <label htmlFor="chatbot-name" className="mb-1 block text-sm font-medium text-foreground">
+                    <label
+                      htmlFor="chatbot-name"
+                      className="mb-1 block text-sm font-medium text-foreground"
+                    >
                       Nom complet
                     </label>
                     <input
@@ -250,7 +258,10 @@ export default function Chatbot(): JSX.Element {
                   </div>
 
                   <div>
-                    <label htmlFor="chatbot-email" className="mb-1 block text-sm font-medium text-foreground">
+                    <label
+                      htmlFor="chatbot-email"
+                      className="mb-1 block text-sm font-medium text-foreground"
+                    >
                       Email
                     </label>
                     <input
@@ -266,7 +277,10 @@ export default function Chatbot(): JSX.Element {
                   </div>
 
                   <div>
-                    <label htmlFor="chatbot-phone" className="mb-1 block text-sm font-medium text-foreground">
+                    <label
+                      htmlFor="chatbot-phone"
+                      className="mb-1 block text-sm font-medium text-foreground"
+                    >
                       Téléphone
                     </label>
                     <input
@@ -280,7 +294,10 @@ export default function Chatbot(): JSX.Element {
                   </div>
 
                   <div>
-                    <label htmlFor="chatbot-message" className="mb-1 block text-sm font-medium text-foreground">
+                    <label
+                      htmlFor="chatbot-message"
+                      className="mb-1 block text-sm font-medium text-foreground"
+                    >
                       Message
                     </label>
                     <textarea
@@ -311,7 +328,7 @@ export default function Chatbot(): JSX.Element {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="sweep-light w-full bg-primary text-primary-foreground hover:bg-primary/90"
+                    className="sweep-light w-full bg-primary-solid text-primary-foreground hover:bg-primary-solid/90"
                   >
                     {isSubmitting ? "Envoi en cours..." : "Envoyer ma demande"}
                     {isSubmitting ? null : <ArrowRight className="ml-2 h-4 w-4" />}

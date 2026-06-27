@@ -1,29 +1,23 @@
-import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
 import React from "react";
-import { Experience, Formation, Project } from "@/types/portfolio";
+import type { Experience, Formation, Project } from "@/types/portfolio";
 
 export function useTranslatedData() {
   const locale = useLocale();
 
   // Charger les données traduites directement depuis les fichiers JSON
   const [translatedProjects, setTranslatedProjects] = React.useState<any[]>([]);
-  const [translatedExperiences, setTranslatedExperiences] = React.useState<
-    any[]
-  >([]);
-  const [translatedFormations, setTranslatedFormations] = React.useState<any[]>(
-    []
-  );
+  const [translatedExperiences, setTranslatedExperiences] = React.useState<any[]>([]);
+  const [translatedFormations, setTranslatedFormations] = React.useState<any[]>([]);
 
   React.useEffect(() => {
     const loadTranslatedData = async () => {
       try {
-        const [projectsData, experiencesData, formationsData] =
-          await Promise.all([
-            import(`@/messages/${locale}/data/projects.json`),
-            import(`@/messages/${locale}/data/experiences.json`),
-            import(`@/messages/${locale}/data/formations.json`),
-          ]);
+        const [projectsData, experiencesData, formationsData] = await Promise.all([
+          import(`@/messages/${locale}/data/projects.json`),
+          import(`@/messages/${locale}/data/experiences.json`),
+          import(`@/messages/${locale}/data/formations.json`),
+        ]);
 
         setTranslatedProjects(projectsData.default.projects || []);
         setTranslatedExperiences(experiencesData.default.experiences || []);
@@ -38,9 +32,7 @@ export function useTranslatedData() {
 
   const getTranslatedProject = (project: Project): Project => {
     try {
-      const projectData = translatedProjects.find(
-        (p: any) => p.id === project.id
-      );
+      const projectData = translatedProjects.find((p: any) => p.id === project.id);
       if (!projectData) {
         return project;
       }
@@ -49,8 +41,7 @@ export function useTranslatedData() {
         ...project,
         title: projectData?.title || project.title,
         description: projectData?.description || project.description,
-        longDescription:
-          projectData?.longDescription || project.longDescription,
+        longDescription: projectData?.longDescription || project.longDescription,
         status: projectData?.status || project.status,
         category: projectData?.category || project.category,
         role: projectData?.role || project.role,
@@ -64,16 +55,14 @@ export function useTranslatedData() {
         github: project.github,
         demo: project.demo,
       };
-    } catch (error) {
+    } catch (_error) {
       return project;
     }
   };
 
   const getTranslatedExperience = (experience: Experience): Experience => {
     try {
-      const experienceData = translatedExperiences.find(
-        (e: any) => e.id === experience.id
-      );
+      const experienceData = translatedExperiences.find((e: any) => e.id === experience.id);
       if (!experienceData) {
         return experience;
       }
@@ -82,19 +71,16 @@ export function useTranslatedData() {
         ...experience,
         title: experienceData?.title || experience.title,
         description: experienceData?.description || experience.description,
-        achievements: (experienceData?.achievements ||
-          experience.achievements) as string[],
+        achievements: (experienceData?.achievements || experience.achievements) as string[],
       };
-    } catch (error) {
+    } catch (_error) {
       return experience;
     }
   };
 
   const getTranslatedFormation = (formation: Formation): Formation => {
     try {
-      const formationData = translatedFormations.find(
-        (f: any) => f.id === formation.id
-      );
+      const formationData = translatedFormations.find((f: any) => f.id === formation.id);
       if (!formationData) {
         return formation;
       }
@@ -114,7 +100,7 @@ export function useTranslatedData() {
         credentialUrl: formation.credentialUrl,
         logoUrl: formation.logoUrl,
       };
-    } catch (error) {
+    } catch (_error) {
       return formation;
     }
   };
