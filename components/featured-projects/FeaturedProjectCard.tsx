@@ -166,7 +166,7 @@ export function FeaturedProjectCard({
   const locale = useLocale() as "en" | "fr";
   const { original, translated } = project;
   const href = getLocalizedProjectRoute(locale, getProjectSlug(original));
-  const imageSrc = translated.image || "/images/placeholder.jpg";
+  const imageSrc = translated.image || "/images/og-image.webp";
   const isSpotlight = variant === "spotlight";
 
   const demoLabel =

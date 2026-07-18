@@ -28,19 +28,19 @@ const companyLogos = [
   },
   {
     name: "Ultra",
-    src: "/images/company/logo_ultra.png",
+    src: "/images/company/logo_ultra.webp",
     alt: "Ultra",
     linkedinUrl: "https://www.linkedin.com/company/ultracorp",
   },
   {
     name: "Ultra Times",
-    src: "/images/company/logo_UT.png",
+    src: "/images/company/logo_UT.webp",
     alt: "Ultra Times",
     linkedinUrl: "https://www.linkedin.com/company/ultra-times",
   },
   {
     name: "Black Ice Studios",
-    src: "/images/company/black_ice_studios_logo.jpeg",
+    src: "/images/company/black_ice_studios_logo.webp",
     alt: "Black Ice Studios",
     linkedinUrl: "https://www.linkedin.com/company/black-ice-studios",
   },
@@ -52,13 +52,13 @@ const companyLogos = [
   },
   {
     name: "Osmoz Communication",
-    src: "/images/company/osmoz_com_logo.jpeg",
+    src: "/images/company/osmoz_com_logo.webp",
     alt: "Osmoz Communication",
     linkedinUrl: "https://www.linkedin.com/company/osmoz-com",
   },
   {
     name: "ComeUp",
-    src: "/images/company/comeup_logo.jpeg",
+    src: "/images/company/comeup_logo.webp",
     alt: "ComeUp",
     linkedinUrl: "https://www.linkedin.com/company/bycomeup/",
   },

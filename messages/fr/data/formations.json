@@ -1,13 +1,46 @@
 {
   "formations": [
     {
+      "id": 7,
+      "title": "AWS Certified AI Practitioner",
+      "institution": "Amazon Web Services (AWS)",
+      "location": "En ligne",
+      "date": "Juillet 2026 · Expire juillet 2029",
+      "description": "Certification AWS sur les fondamentaux de l'intelligence artificielle dans le cloud, les cas d'usage IA générative et les services AWS associés.",
+      "skills": ["Intelligence Artificielle (IA)", "Amazon Web Services (AWS)", "IA générative", "Cloud AI"],
+      "mention": "",
+      "type": "Certification"
+    },
+    {
+      "id": 8,
+      "title": "Linux Essentials Certification",
+      "institution": "Linux Professional Institute (LPI)",
+      "location": "En ligne",
+      "date": "Mai 2026",
+      "description": "Certification LPI sur les fondamentaux Linux : ligne de commande, administration système de base et écosystème open source.",
+      "skills": ["Administration système", "Linux"],
+      "mention": "",
+      "type": "Certification"
+    },
+    {
+      "id": 9,
+      "title": "AWS Certified Cloud Practitioner",
+      "institution": "Amazon Web Services (AWS)",
+      "location": "En ligne",
+      "date": "Mai 2026 · Expire mai 2029",
+      "description": "Certification AWS fondation cloud : concepts cloud, sécurité, tarification et services principaux d'Amazon Web Services.",
+      "skills": ["Informatique en nuage", "Amazon Web Services (AWS)"],
+      "mention": "",
+      "type": "Certification"
+    },
+    {
       "id": 4,
       "title": "Microsoft Certified: Azure Fundamentals",
       "institution": "Microsoft",
       "location": "En ligne",
       "date": "Avril 2025",
       "description": "Certification officielle Microsoft pour les fondamentaux Azure et le cloud computing.",
-      "skills": ["Informatique en Nuage", "Azure", "Microsoft Cloud"],
+      "skills": ["Informatique en nuage", "Azure", "Microsoft Cloud"],
       "mention": "C62D8F485B8E1CD7",
       "type": "Certification"
     },
@@ -20,11 +53,22 @@
       "description": "Formation sur l'analyse et la visualisation de données avec Microsoft Power BI.",
       "skills": [
         "Power BI",
-        "Analyse de Données",
-        "Visualisation de Données",
-        "Intelligence d'Affaires"
+        "Analyse de données",
+        "Visualisation de données",
+        "Business Intelligence"
       ],
       "mention": "",
+      "type": "Certification"
+    },
+    {
+      "id": 6,
+      "title": "Microsoft Certified: Azure AI Fundamentals",
+      "institution": "Microsoft",
+      "location": "En ligne",
+      "date": "Janvier 2026",
+      "description": "Certification Microsoft sur les fondamentaux de l'IA Azure.",
+      "skills": ["Intelligence Artificielle (IA)", "Azure AI", "Machine Learning", "IA responsable"],
+      "mention": "E10934D3B1189DDC",
       "type": "Certification"
     },
     {
@@ -34,7 +78,7 @@
       "location": "France",
       "date": "Sept 2024 - Sept 2026",
       "description": "Master en informatique spécialisé en développement et architectures logicielles.",
-      "skills": ["Informatique", "Architecture Logicielle", "Développement Avancé"],
+      "skills": ["Informatique", "Architecture logicielle", "Développement avancé"],
       "mention": "",
       "type": "Diplôme"
     },
@@ -45,7 +89,7 @@
       "location": "France",
       "date": "Sept 2023 - Sept 2024",
       "description": "Apprentissage des techniques avancées de développement web, avec des concepts DevOps (planification, intégration continue, tests automatisés...).",
-      "skills": ["StarUML", "React.js", "Gestion de Projet Agile", "MySQL Workbench"],
+      "skills": ["StarUML", "React.js", "Gestion de projet Agile", "MySQL Workbench"],
       "mention": "Félicitations du jury",
       "type": "Diplôme"
     },

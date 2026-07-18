@@ -1,6 +1,39 @@
 {
   "formations": [
     {
+      "id": 7,
+      "title": "AWS Certified AI Practitioner",
+      "institution": "Amazon Web Services (AWS)",
+      "location": "Online",
+      "date": "July 2026 · Expires July 2029",
+      "description": "AWS certification covering cloud AI fundamentals, generative AI use cases, and related AWS services.",
+      "skills": ["Artificial Intelligence (AI)", "Amazon Web Services (AWS)", "Generative AI", "Cloud AI"],
+      "mention": "",
+      "type": "Certification"
+    },
+    {
+      "id": 8,
+      "title": "Linux Essentials Certification",
+      "institution": "Linux Professional Institute (LPI)",
+      "location": "Online",
+      "date": "May 2026",
+      "description": "LPI certification covering Linux fundamentals: command line, basic system administration, and the open-source ecosystem.",
+      "skills": ["System Administration", "Linux"],
+      "mention": "",
+      "type": "Certification"
+    },
+    {
+      "id": 9,
+      "title": "AWS Certified Cloud Practitioner",
+      "institution": "Amazon Web Services (AWS)",
+      "location": "Online",
+      "date": "May 2026 · Expires May 2029",
+      "description": "AWS foundational cloud certification: cloud concepts, security, pricing, and core Amazon Web Services.",
+      "skills": ["Cloud Computing", "Amazon Web Services (AWS)"],
+      "mention": "",
+      "type": "Certification"
+    },
+    {
       "id": 4,
       "title": "Microsoft Certified: Azure Fundamentals",
       "institution": "Microsoft",
@@ -20,6 +53,17 @@
       "description": "Training on data analysis and visualization with Microsoft Power BI.",
       "skills": ["Power BI", "Data Analysis", "Data Visualization", "Business Intelligence"],
       "mention": "",
+      "type": "Certification"
+    },
+    {
+      "id": 6,
+      "title": "Microsoft Certified: Azure AI Fundamentals",
+      "institution": "Microsoft",
+      "location": "Online",
+      "date": "January 2026",
+      "description": "Microsoft certification on Azure AI fundamentals.",
+      "skills": ["Artificial Intelligence (AI)", "Azure AI", "Machine Learning", "Responsible AI"],
+      "mention": "E10934D3B1189DDC",
       "type": "Certification"
     },
     {

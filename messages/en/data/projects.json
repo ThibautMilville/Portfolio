@@ -278,16 +278,31 @@
     {
       "id": 26,
       "title": "OZC Signage Commercial Website",
-      "description": "Signage merchant site for individuals and professionals.",
-      "longDescription": "E-commerce site for signage sales across France.",
-      "date": "May 2025 - Jun 2025",
-      "status": "Completed",
+      "description": "B2B/B2C signage e-commerce — preprod version currently being finalized.",
+      "longDescription": "OZC Signalétique e-commerce redesign (preprod): professional catalog, industry universes, safety signage, configurable product pages, and quote flows. Built for pros and public institutions, with ISO/NF categories, best-sellers, new arrivals, and a full purchase experience. Demo available on the preprod environment.",
+      "date": "2025 - Present",
+      "status": "In Progress",
       "category": "E-commerce",
-      "role": "Webmaster",
-      "duration": "20 months",
-      "features": ["Product catalog", "Online payment"],
-      "challenges": ["SEO"],
-      "solutions": ["On-site SEO"]
+      "role": "Full Stack Engineer",
+      "duration": "In Progress",
+      "features": [
+        "E-commerce homepage with hero, trust signals, and catalog CTAs",
+        "Universes & use cases (industry, ERP, offices, hospitality, public spaces)",
+        "ISO 7010 / NF safety categories with subcategories and product counts",
+        "Best-sellers and new products carousels",
+        "Product pages (ex-VAT/incl. VAT pricing, sizes, materials, quotes)",
+        "Public preprod environment for validation before production"
+      ],
+      "challenges": [
+        "Structure a large B2B catalog while keeping UX clear",
+        "Align normative compliance (ISO/NF) with the purchase journey",
+        "Ship a credible preprod for client validation"
+      ],
+      "solutions": [
+        "Information architecture by industry universes and safety categories",
+        "Rich product sheets (refs, options, quotes) for professionals",
+        "Dedicated preprod deployment to iterate before production"
+      ]
     },
     {
       "id": 27,
@@ -739,6 +754,35 @@
         "Performance and accessibility optimizations to maximize mobile conversion"
       ],
       "date": "Feb 2026 - Feb 2026"
+    },
+    {
+      "id": 45,
+      "title": "Empires Provisions",
+      "description": "Premium marketplace and commerce admin for Empires: provisions, registry, founders sales, and Stripe back-office.",
+      "longDescription": "Designed and built Empires Provisions & Holder Exchange, the commerce platform for Ashes of Mankind. Delivered the public storefront (sealed provisions, auctions, unit registry, founders private sale) and the admin back-office (sales, purchasers, Stripe payments, promo codes, referrals). Dark prestige UI with catalog performance tracking, order history, and marketing campaign management.",
+      "status": "In Progress",
+      "category": "E-commerce",
+      "role": "Full Stack Engineer",
+      "duration": "In Progress",
+      "features": [
+        "Provisions storefront with limited packs, founder discounts, and promo codes",
+        "Collectible unit registry (rarity, stats, series)",
+        "Founders Private Sale landing with verification form",
+        "Commerce admin: sales, buyers, Stripe payments, promo codes",
+        "Real-time KPIs (revenue, orders, buyers, pack units)",
+        "Order / buyer drill-down with history and referral codes"
+      ],
+      "challenges": [
+        "Unify a premium storefront and an operational back-office under one visual identity",
+        "Track revenue, promos, and referrals accurately across a multi-listing catalog",
+        "Deliver an exclusive dark prestige UX without sacrificing admin clarity"
+      ],
+      "solutions": [
+        "Coherent dark/gold design system across public and admin surfaces",
+        "Orders/buyers/promos data model aligned with Stripe",
+        "Drill-down views (listing → orders → payment) for commerce operations"
+      ],
+      "date": "2025 - Present"
     }
   ]
 }

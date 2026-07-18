@@ -2,6 +2,61 @@ import type { Formation } from "@/types/portfolio";
 
 export const formationsData: Formation[] = [
   {
+    id: 7,
+    title: "AWS Certified AI Practitioner",
+    institution: "Amazon Web Services (AWS)",
+    location: "En ligne",
+    date: "Juillet 2026 · Expire juillet 2029",
+    description:
+      "Certification AWS sur les fondamentaux de l'intelligence artificielle dans le cloud, les cas d'usage IA générative et les services AWS associés.",
+    skills: [
+      "Artificial Intelligence (AI)",
+      "Amazon Web Services (AWS)",
+      "Generative AI",
+      "Cloud AI",
+    ],
+    mention: "",
+    type: "Certification",
+    projectIds: [],
+    relatedExperienceIds: [],
+    credentialUrl:
+      "https://www.credly.com/badges/cdecec3b-b012-4647-b862-56df54f0fcf3/public_url",
+    logoUrl: "/images/education/aws.webp",
+  },
+  {
+    id: 8,
+    title: "Linux Essentials Certification",
+    institution: "Linux Professional Institute (LPI)",
+    location: "En ligne",
+    date: "Mai 2026",
+    description:
+      "Certification LPI sur les fondamentaux Linux : ligne de commande, administration système de base et écosystème open source.",
+    skills: ["System Administration", "Linux"],
+    mention: "",
+    type: "Certification",
+    projectIds: [],
+    relatedExperienceIds: [],
+    credentialUrl: "https://lpi.org/v/LPI000691621/x5z8pt3kqg",
+    logoUrl: "/images/education/lpi.webp",
+  },
+  {
+    id: 9,
+    title: "AWS Certified Cloud Practitioner",
+    institution: "Amazon Web Services (AWS)",
+    location: "En ligne",
+    date: "Mai 2026 · Expire mai 2029",
+    description:
+      "Certification AWS fondation cloud : concepts cloud, sécurité, tarification et services principaux d'Amazon Web Services.",
+    skills: ["Cloud Computing", "Amazon Web Services (AWS)"],
+    mention: "",
+    type: "Certification",
+    projectIds: [],
+    relatedExperienceIds: [],
+    credentialUrl:
+      "https://www.credly.com/badges/0279a02e-9396-4b3a-87b9-7f562544aed4/public_url",
+    logoUrl: "/images/education/aws.webp",
+  },
+  {
     id: 4,
     title: "Microsoft Certified: Azure Fundamentals",
     institution: "Microsoft",
@@ -16,7 +71,7 @@ export const formationsData: Formation[] = [
     relatedExperienceIds: [],
     credentialUrl:
       "https://learn.microsoft.com/api/credentials/share/en-us/ThibautMILVILLE-1278/C62D8F485B8E1CD7?sharingId=2C3FEDB0EB979CE8",
-    logoUrl: "/images/education/microsoft.png",
+    logoUrl: "/images/education/microsoft.webp",
   },
   {
     id: 5,
@@ -39,14 +94,14 @@ export const formationsData: Formation[] = [
     location: "En ligne",
     date: "Janvier 2026",
     description: "Certification Microsoft sur les fondamentaux de l'IA Azure.",
-    skills: ["Azure AI", "Machine Learning", "AI Workloads", "Responsible AI"],
+    skills: ["Artificial Intelligence (AI)", "Azure AI", "Machine Learning", "Responsible AI"],
     mention: "E10934D3B1189DDC",
     type: "Certification",
     projectIds: [],
     relatedExperienceIds: [],
     credentialUrl:
-      "https://www.linkedin.com/safety/go/?url=https%3A%2F%2Flearn.microsoft.com%2Fapi%2Fcredentials%2Fshare%2Fen-us%2FThibautMILVILLE-1278%2FE10934D3B1189DDC%3FsharingId%3D2C3FEDB0EB979CE8&urlhash=P-WV&isSdui=true&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BUGv%2FaTwaQ9eTp%2F5sk2e%2Fgw%3D%3D",
-    logoUrl: "/images/education/microsoft.png",
+      "https://learn.microsoft.com/api/credentials/share/en-us/ThibautMILVILLE-1278/E10934D3B1189DDC?sharingId=2C3FEDB0EB979CE8",
+    logoUrl: "/images/education/microsoft.webp",
   },
   {
     id: 1,
@@ -105,6 +160,6 @@ export const formationsData: Formation[] = [
     type: "Diplôme",
     projectIds: [],
     relatedExperienceIds: [],
-    logoUrl: "/images/education/utec.png",
+    logoUrl: "/images/education/utec.webp",
   },
 ];

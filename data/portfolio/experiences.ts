@@ -59,7 +59,7 @@ export const experiencesData: Experience[] = [
       "Impact: Amélioration de l'écosystème développeurs Ultra en fournissant des outils fiables centrés sur les développeurs et en améliorant les ressources d'intégration, permettant aux constructeurs et accélérant l'adoption sur la plateforme",
     ],
     projectIds: [],
-    logoUrl: "/images/company/logo_uta.png",
+    logoUrl: "/images/company/logo_uta.webp",
     employmentType: "freelance",
   },
   {
@@ -89,8 +89,8 @@ export const experiencesData: Experience[] = [
       "Collaboration en environnement Agile avec équipes internationales",
       "Coordination avec les équipes globales pour l'alignement technique",
     ],
-    projectIds: [36],
-    logoUrl: "/images/company/black_ice_studios_logo.jpeg",
+    projectIds: [36, 45],
+    logoUrl: "/images/company/black_ice_studios_logo.webp",
     employmentType: "freelance",
   },
   {
@@ -117,7 +117,7 @@ export const experiencesData: Experience[] = [
       "Modération de communauté en ligne",
     ],
     projectIds: [],
-    logoUrl: "/images/company/logo_ultra.png",
+    logoUrl: "/images/company/logo_ultra.webp",
     employmentType: "freelance",
   },
   {
@@ -149,7 +149,7 @@ export const experiencesData: Experience[] = [
       "Gestion de sprints Agile, coordination des workflows de développement et garantie de la livraison dans les délais des MVPs sur des projets basés sur la blockchain Ultra",
     ],
     projectIds: [],
-    logoUrl: "/images/company/logo_UT.png",
+    logoUrl: "/images/company/logo_UT.webp",
     employmentType: "freelance",
   },
   {
@@ -176,7 +176,7 @@ export const experiencesData: Experience[] = [
       "Engagement communautaire et interviews",
     ],
     projectIds: [],
-    logoUrl: "/images/company/logo_UT.png",
+    logoUrl: "/images/company/logo_UT.webp",
     employmentType: "freelance",
   },
   {
@@ -215,8 +215,8 @@ export const experiencesData: Experience[] = [
       "Développement de logiciels sur mesure",
       "Gestion des relations clients et des projets",
     ],
-    projectIds: [],
-    logoUrl: "/images/company/logo-digitallabs.png",
+    projectIds: [26, 28, 32],
+    logoUrl: "/images/company/logo-digitallabs.webp",
     employmentType: "entrepreneur",
   },
   {
@@ -285,7 +285,7 @@ export const experiencesData: Experience[] = [
     ],
     projectIds: [],
     relatedFormationIds: [3],
-    logoUrl: "/images/company/osmoz_com_logo.jpeg",
+    logoUrl: "/images/company/osmoz_com_logo.webp",
     employmentType: "fullTime",
   },
   {
@@ -317,7 +317,7 @@ export const experiencesData: Experience[] = [
     ],
     projectIds: [],
     relatedFormationIds: [3],
-    logoUrl: "/images/company/comeup_logo.jpeg",
+    logoUrl: "/images/company/comeup_logo.webp",
     employmentType: "freelance",
   },
 ];

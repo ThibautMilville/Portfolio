@@ -278,16 +278,31 @@
     {
       "id": 26,
       "title": "Site Commercial OZC Signalétique",
-      "description": "Site marchand de signalétique pour particuliers et pros.",
-      "longDescription": "Site e-commerce pour la vente de signalétique sur toute la France.",
-      "status": "Terminé",
+      "description": "E-commerce signalétique B2B/B2C — version preprod en cours de finalisation.",
+      "longDescription": "Refonte e-commerce d'OZC Signalétique (preprod) : catalogue professionnel, univers métiers, signalisation de sécurité, fiches produits configurables et parcours devis. Plateforme orientée pros et collectivités, avec catégories ISO/NF, best-sellers, nouveautés et expérience d'achat complète. Démo disponible sur l'environnement preprod.",
+      "status": "En cours",
       "category": "E-commerce",
-      "role": "Webmaster",
-      "duration": "20 mois",
-      "features": ["Catalogue produits", "Paiement en ligne"],
-      "challenges": ["Référencement"],
-      "solutions": ["SEO on-site"],
-      "date": "Déc 2021 - Aoû 2023"
+      "role": "Full Stack Engineer",
+      "duration": "En cours",
+      "features": [
+        "Homepage e-commerce avec hero, trust signals et CTA catalogues",
+        "Univers & cas d'usage (industrie, ERP, tertiaire, hôtellerie, grand public)",
+        "Catégories sécurité ISO 7010 / NF avec sous-catégories et compteurs produits",
+        "Carrousels best-sellers et nouveaux produits",
+        "Fiches produit (prix HT/TTC, dimensions, matières, devis)",
+        "Environnement preprod public pour validation avant mise en prod"
+      ],
+      "challenges": [
+        "Structurer un large catalogue B2B tout en gardant une UX claire",
+        "Aligner conformité normative (ISO/NF) et parcours d'achat",
+        "Livrer une preprod crédible pour validation client"
+      ],
+      "solutions": [
+        "Arborescence par univers métiers et catégories sécurité",
+        "Fiches produit riches (réf, options, devis) orientées pros",
+        "Déploiement preprod dédié pour itérer avant production"
+      ],
+      "date": "2025 - Présent"
     },
     {
       "id": 27,
@@ -743,6 +758,35 @@
         "Optimisations performance/accessibilité pour maximiser engagement et conversion mobile"
       ],
       "date": "Feb 2026 - Feb 2026"
+    },
+    {
+      "id": 45,
+      "title": "Empires Provisions",
+      "description": "Marketplace premium et back-office commerce pour Empires : provisions, registry, ventes fondateurs et admin Stripe.",
+      "longDescription": "Conception et développement de Empires Provisions & Holder Exchange, la plateforme commerce d'Ashes of Mankind. Livraison du storefront public (provisions scellées, auctions, registry d'unités, vente privée fondateurs) et du back-office admin (ventes, acheteurs, paiements Stripe, codes promo, referrals). Interface dark prestige avec tracking des performances catalogue, historique des commandes, et gestion des campagnes marketing.",
+      "status": "En cours",
+      "category": "E-commerce",
+      "role": "Full Stack Engineer",
+      "duration": "En cours",
+      "features": [
+        "Storefront Provisions avec packs limités, discounts fondateurs et promo codes",
+        "Registry d'unités collectibles (rareté, stats, séries)",
+        "Landing Founders Private Sale avec formulaire de vérification",
+        "Admin commerce : ventes, acheteurs, paiements Stripe, codes promo",
+        "KPIs temps réel (revenue, orders, buyers, pack units)",
+        "Détail commande / acheteur avec historique et codes referral"
+      ],
+      "challenges": [
+        "Unifier storefront premium et back-office opérationnel dans une même identité visuelle",
+        "Suivre précisément revenue, promos et referrals sur un catalogue multi-listings",
+        "Offrir une UX exclusive (dark prestige) sans sacrifier la clarté admin"
+      ],
+      "solutions": [
+        "Design system dark/gold cohérent entre public et admin",
+        "Modèle de données orders/buyers/promos aligné sur Stripe",
+        "Vues drill-down (listing → orders → payment) pour le pilotage commerce"
+      ],
+      "date": "2025 - Présent"
     }
   ]
 }

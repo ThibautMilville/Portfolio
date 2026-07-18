@@ -195,7 +195,7 @@ export default function FormationsSection() {
               </div>
               {certificationBadges.length > 0 ? (
                 <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-                  {certificationBadges.slice(0, maxTimelineItems).map((badge, index) => {
+                  {certificationBadges.map((badge, index) => {
                     const translatedBadge = getTranslatedFormation(badge);
                     return (
                       <motion.article

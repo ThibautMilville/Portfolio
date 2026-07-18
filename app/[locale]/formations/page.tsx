@@ -190,7 +190,7 @@ export default function Formations() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-16"
         >
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">{t("courseBadges")}</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">{t("certifications")}</h2>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {badges.map((badge, index) => (
               <motion.article
@@ -242,7 +242,7 @@ export default function Formations() {
             ))}
             {badges.length === 0 && (
               <div className="col-span-full rounded-2xl border border-dashed border-border/60 bg-background/40 p-8 text-center text-sm text-muted-foreground">
-                {t("courseBadges")} : 0
+                {t("certifications")} : 0
               </div>
             )}
           </div>

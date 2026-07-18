@@ -1,7 +1,8 @@
 export const FEATURED_PROJECT_PRIORITY: Record<number, number> = {
-  36: 0,
-  40: 1,
-  39: 2,
+  45: 0, // Empires Provisions (Sales)
+  40: 1, // CLOAK Web App
+  26: 2, // OZC Signalétique
+  36: 3, // Ashes of Mankind - Empires
 };
 
 export const MAX_FEATURED_PROJECTS = 4;

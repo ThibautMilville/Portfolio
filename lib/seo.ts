@@ -5,7 +5,7 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://thibaut-mil
 export const LOCALES: Locale[] = ["en", "fr"];
 
 export const OG_IMAGE = {
-  url: "/images/og-image.png",
+  url: "/images/og-image.webp",
   width: 1200,
   height: 630,
   alt: {
@@ -84,12 +84,12 @@ const PAGE_SEO = {
     fr: {
       title: "Formations | Thibaut MILVILLE - Portfolio",
       description:
-        "Mon parcours académique et certifications : diplômes, badges et compétences acquises en développement web.",
+        "Mon parcours académique et certifications : diplômes et certifications en développement web, cloud et IA.",
     },
     en: {
       title: "Education | Thibaut MILVILLE - Portfolio",
       description:
-        "My academic background and certifications: degrees, badges and web development skills acquired.",
+        "My academic background and certifications: degrees and certifications in web development, cloud and AI.",
     },
   },
   contact: {

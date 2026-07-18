@@ -1,13 +1,13 @@
 {
   "title": "Formations",
-  "subtitle": "Mon parcours académique et mes badges professionnels",
-  "courseBadges": "Badges de cours",
+  "subtitle": "Mon parcours académique et mes certifications",
+  "courseBadges": "Certifications",
   "diplomas": "Diplômes",
   "certifications": "Certifications",
   "skillsAcquired": "Compétences acquises :",
   "verifyCertification": "Vérifier la certification",
   "modals": {
-    "courseDescription": "Cours suivi et justificatif"
+    "courseDescription": "Certification et justificatif"
   },
   "courseCard": {
     "organization": "Organisme:",

@@ -1,13 +1,13 @@
 {
   "title": "Education",
-  "subtitle": "My academic journey and professional badges",
-  "courseBadges": "Course Badges",
+  "subtitle": "My academic journey and certifications",
+  "courseBadges": "Certifications",
   "diplomas": "Diplomas",
   "certifications": "Certifications",
   "skillsAcquired": "Skills acquired:",
   "verifyCertification": "Verify certification",
   "modals": {
-    "courseDescription": "Course taken and proof"
+    "courseDescription": "Certification and proof"
   },
   "courseCard": {
     "organization": "Organization:",

@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/pagination";
 import { usePortfolioData } from "@/hooks/usePortfolioData";
 import { useTranslatedData } from "@/hooks/useTranslatedData";
+import { FEATURED_PROJECT_PRIORITY } from "@/hooks/featured-projects/constants";
 import { getLocalizedProjectRoute } from "@/lib/localized-routes";
 import { getProjectSlug } from "@/services/ProjectService";
 
@@ -189,9 +190,13 @@ export default function Projets() {
     () =>
       projets
         .filter((p: any) => p.isFeatured)
-        .sort((a: any, b: any) => getProjectStartTs(b.date) - getProjectStartTs(a.date))
+        .sort(
+          (a: any, b: any) =>
+            (FEATURED_PROJECT_PRIORITY[a.id] ?? Number.MAX_SAFE_INTEGER) -
+            (FEATURED_PROJECT_PRIORITY[b.id] ?? Number.MAX_SAFE_INTEGER),
+        )
         .slice(0, 3),
-    [projets, getProjectStartTs],
+    [projets],
   );
 
   const sorted = useMemo(() => {

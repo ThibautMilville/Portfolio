@@ -324,7 +324,7 @@ export const skillsData: Skill[] = [
   {
     id: 33,
     name: "Microsoft Office",
-    logo: "/images/education/microsoft.png",
+    logo: "/images/education/microsoft.webp",
     category: "Tools and software",
     level: "Expert",
     experience: "6+ ans",

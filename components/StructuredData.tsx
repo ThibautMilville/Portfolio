@@ -52,7 +52,7 @@ export default function StructuredData({ locale }: { locale: string }) {
     jobTitle: content.jobTitle,
     description: content.description,
     url: getAbsoluteUrl(`/${lang}`),
-    image: getAbsoluteUrl("/images/photo-profil.png"),
+    image: getAbsoluteUrl("/images/photo-profil.webp"),
     sameAs: [
       "https://github.com/ThibautMilville",
       "https://fr.linkedin.com/in/thibaut-milville",

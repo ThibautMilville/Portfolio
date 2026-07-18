@@ -1,9 +1,3 @@
-export const featuredProjectTitles = [
-  "UT Marketplace",
-  "Institutional website OZC",
-  "Commercial website OZC Signalétique",
-];
-
 export const FOOTER_DATA = {
   navigation: [
     { title: "Accueil", href: "/" },
