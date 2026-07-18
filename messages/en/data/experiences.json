@@ -59,11 +59,12 @@
       "company": "Black Ice Studios Inc.",
       "location": "Montréal, Québec, Canada · Remote",
       "date": "Aug 2025 - Present",
-      "description": "Development of the Web3 (blockchain) component of the game Ashes of Mankind (Empires). Implementation of the entire Web3 frontend and interaction with smart contracts. Participation in daily meetings and technical discussions in English.",
+      "description": "Development of the Web3 (Telos blockchain) component of the game Ashes of Mankind (Empires). Implementation of the entire Web3 frontend and interaction with smart contracts. Migration from Ultra to Telos. Participation in daily meetings and technical discussions in English.",
       "technologies": [
         "React.js",
         "Node.js",
         "NestJS",
+        "Telos",
         "Blockchain",
         "Web3",
         "Smart Contracts",
@@ -73,7 +74,8 @@
         "Tailwind"
       ],
       "achievements": [
-        "Development of the Web3 integration layer of Ashes of Mankind (Empires) game",
+        "Development of the Web3 integration layer of Ashes of Mankind (Empires) game on Telos",
+        "Migration of the blockchain integration from Ultra to Telos",
         "Complete implementation of Web3 frontend and smart contract interaction",
         "Participation in daily meetings and technical discussions in English",
         "Agile environment collaboration with international teams",

@@ -502,8 +502,8 @@
     {
       "id": 36,
       "title": "Ashes of Mankind - Empires",
-      "description": "Web3 game with Ultra blockchain integration for the gaming ecosystem.",
-      "longDescription": "Development of the Web3 integration layer of Ashes of Mankind (Empires), connecting the game to Ultra blockchain smart contracts (EOS fork) through custom frontend logic. Built the React frontend and NestJS backend, ensuring smooth interaction between the player interface and blockchain components. Collaborated in an Agile environment, participating in sprint planning, technical reviews, and iterative feature development to ensure continuous delivery and quality. Participated in international technical meetings (Canada, Colombia, Japan, etc.), coordinating with global teams to align on technical direction and game design goals. Engaged in game design discussions, helping bridge user experience and blockchain features to create a cohesive gameplay flow.",
+      "description": "Web3 game with Telos blockchain integration for the gaming ecosystem.",
+      "longDescription": "Development of the Web3 integration layer of Ashes of Mankind (Empires), connecting the game to Telos blockchain smart contracts through custom frontend logic. Built the React frontend and NestJS backend, ensuring smooth interaction between the player interface and blockchain components. Migrated the integration from Ultra to Telos. Collaborated in an Agile environment, participating in sprint planning, technical reviews, and iterative feature development to ensure continuous delivery and quality. Participated in international technical meetings (Canada, Colombia, Japan, etc.), coordinating with global teams to align on technical direction and game design goals. Engaged in game design discussions, helping bridge user experience and blockchain features to create a cohesive gameplay flow.",
       "date": "Aug 2025 - Present",
       "status": "In Progress",
       "category": "Web3",
@@ -512,18 +512,20 @@
       "features": [
         "Custom Web3 integration layer",
         "React frontend and NestJS backend",
-        "Ultra blockchain smart contracts connection",
+        "Telos smart contracts connection",
+        "Blockchain migration from Ultra to Telos",
         "International Agile collaboration",
         "Global team coordination",
         "Game design and UX discussions"
       ],
       "challenges": [
-        "Reliable Ultra blockchain integration",
+        "Reliable Telos blockchain integration",
+        "Migration from Ultra without breaking the player experience",
         "International team coordination",
         "Bridge between UX and blockchain features"
       ],
       "solutions": [
-        "Robust custom frontend logic",
+        "Robust custom frontend logic on Telos",
         "Effective communication via technical meetings",
         "Collaborative approach for UX"
       ]

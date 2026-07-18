@@ -506,8 +506,8 @@
     {
       "id": 36,
       "title": "Ashes of Mankind - Empires",
-      "description": "Jeu Web3 avec intégration blockchain Ultra pour l'écosystème gaming.",
-      "longDescription": "Développement de la couche d'intégration Web3 d'Ashes of Mankind (Empires), connectant le jeu aux smart contracts de la blockchain Ultra (fork EOS) via une logique frontend personnalisée. Construction du frontend React et du backend NestJS, assurant une interaction fluide entre l'interface joueur et les composants blockchain. Collaboration en environnement Agile avec participation aux réunions techniques internationales.",
+      "description": "Jeu Web3 avec intégration blockchain Telos pour l'écosystème gaming.",
+      "longDescription": "Développement de la couche d'intégration Web3 d'Ashes of Mankind (Empires), connectant le jeu aux smart contracts de la blockchain Telos via une logique frontend personnalisée. Construction du frontend React et du backend NestJS, assurant une interaction fluide entre l'interface joueur et les composants blockchain. Migration de l'intégration depuis Ultra vers Telos. Collaboration en environnement Agile avec participation aux réunions techniques internationales.",
       "status": "En cours",
       "category": "Web3",
       "role": "Développeur Full Stack Web3",
@@ -515,18 +515,20 @@
       "features": [
         "Couche d'intégration Web3 personnalisée",
         "Frontend React et backend NestJS",
-        "Connexion aux smart contracts Ultra blockchain",
+        "Connexion aux smart contracts Telos",
+        "Migration blockchain Ultra → Telos",
         "Collaboration Agile internationale",
         "Coordination avec équipes globales",
         "Discussions game design et UX"
       ],
       "challenges": [
-        "Intégration blockchain Ultra fiable",
+        "Intégration blockchain Telos fiable",
+        "Migration depuis Ultra sans rupture d'expérience",
         "Coordination d'équipes internationales",
         "Bridge entre UX et fonctionnalités blockchain"
       ],
       "solutions": [
-        "Logique frontend personnalisée robuste",
+        "Logique frontend personnalisée robuste sur Telos",
         "Communication efficace via réunions techniques",
         "Approche collaborative pour l'UX"
       ],

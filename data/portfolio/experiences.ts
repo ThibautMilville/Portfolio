@@ -69,11 +69,12 @@ export const experiencesData: Experience[] = [
     location: "Montréal, Québec, Canada · Remote",
     date: "Aug 2025 - Présent",
     description:
-      "Development of the Web3 (blockchain) component of the game Ashes of Mankind (Empires). Implementation of the entire Web3 frontend and interaction with smart contracts. Participation in daily meetings and technical discussions in English.",
+      "Development of the Web3 (blockchain) component of the game Ashes of Mankind (Empires) on Telos. Implementation of the entire Web3 frontend and interaction with smart contracts. Participation in daily meetings and technical discussions in English.",
     technologies: [
       "React.js",
       "Node.js",
       "NestJS",
+      "Telos",
       "Blockchain",
       "Web3",
       "Smart Contracts",
@@ -83,7 +84,8 @@ export const experiencesData: Experience[] = [
       "Tailwind",
     ],
     achievements: [
-      "Développement de la couche d'intégration Web3 du jeu Ashes of Mankind (Empires)",
+      "Développement de la couche d'intégration Web3 du jeu Ashes of Mankind (Empires) sur Telos",
+      "Migration de l'intégration blockchain depuis Ultra vers Telos",
       "Implémentation complète du frontend Web3 et interaction avec les smart contracts",
       "Participation aux réunions quotidiennes et discussions techniques en anglais",
       "Collaboration en environnement Agile avec équipes internationales",
