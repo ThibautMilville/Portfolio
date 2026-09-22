@@ -33,7 +33,7 @@
       "title": "Web3 Software Engineer",
       "company": "Ultra Tech Alliance (UTA)",
       "location": "Paris, Île-de-France, France · Remote",
-      "date": "Oct 2024 - Présent",
+      "date": "Oct 2024 - Nov 2025",
       "description": "Contribution au développement d'outils et bibliothèques open-source pour l'écosystème blockchain Ultra. Implémentation de fonctionnalités et amélioration des SDK, scripts et outils d'automatisation pour développeurs. Participation à des ateliers techniques et meetups développeurs pour soutenir la croissance communautaire. Collaboration avec des ingénieurs et contributeurs pour créer des ressources et documentations pour la communauté développeurs Ultra. Soutien actif à l'adoption de la technologie Ultra par le développement pratique et le partage de connaissances.",
       "technologies": [
         "React.js",
@@ -58,7 +58,7 @@
       "title": "Web3 Software Engineer",
       "company": "Black Ice Studios Inc.",
       "location": "Montréal, Québec, Canada · Remote",
-      "date": "Août 2025 - Présent",
+      "date": "Août 2025 - Septembre 2026",
       "description": "Développement de la composante Web3 (blockchain Telos) du jeu Ashes of Mankind (Empires). Implémentation complète du frontend Web3 et interaction avec les smart contracts. Migration depuis Ultra vers Telos. Participation aux réunions quotidiennes et discussions techniques en anglais.",
       "technologies": [
         "React.js",
@@ -107,10 +107,10 @@
     },
     {
       "id": 8,
-      "title": "Lead Developer & MVP",
+      "title": "Web3 Lead Developer - Core Team",
       "company": "Ultra Times",
       "location": "Bangkok, Thaïlande · Remote",
-      "date": "Jan 2025 - Présent",
+      "date": "Jan 2025 - Nov 2025",
       "description": "Direction de la conception technique, du développement et du déploiement de 7 applications décentralisées sur la blockchain Ultra, supervision de l'architecture fullstack et garantie de la scalabilité et de la sécurité. Participation aux décisions stratégiques en tant que membre de l'équipe de direction, alignement des initiatives techniques avec les objectifs commerciaux et de levée de fonds. Rédaction de contenu technique et engagement avec la communauté en anglais et français, incluant des interviews avec des développeurs blockchain et de jeux, améliorant la visibilité et le leadership d'opinion de la plateforme. Gestion de sprints Agile, coordination des workflows de développement et garantie de la livraison dans les délais des MVPs sur des projets basés sur la blockchain Ultra.",
       "technologies": [
         "React.js",
@@ -135,10 +135,10 @@
     },
     {
       "id": 9,
-      "title": "Web3 Software Engineer",
+      "title": "Web3 Software Engineer and Community Contributor",
       "company": "Ultra Times",
       "location": "Bangkok, Thaïlande · Remote",
-      "date": "Oct 2024 - Présent",
+      "date": "Oct 2024 - Jan 2025",
       "description": "Développement utilisant la blockchain Ultra et ses APIs, rédaction d'articles techniques à ce sujet, et participation aux activités communautaires en anglais et français (engagement communautaire, interviews, etc...).",
       "technologies": [
         "Blockchain Ultra",
@@ -161,7 +161,7 @@
       "title": "Software Engineer",
       "company": "SNCF Voyageurs",
       "location": "Paris, Île-de-France, France",
-      "date": "Sep 2024 - Présent",
+      "date": "Sep 2024 - Septembre 2026",
       "description": "Conception de solutions applicatives pour optimiser le travail des agents.",
       "technologies": [
         "Conception d'Applications",

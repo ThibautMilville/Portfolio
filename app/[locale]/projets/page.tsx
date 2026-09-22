@@ -5,7 +5,7 @@ import { ArrowRight, Calendar, ExternalLink, Github, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ProjectFilters, { type ProjectFilterState } from "@/components/ProjectFilters";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -21,8 +21,13 @@ import {
 } from "@/components/ui/pagination";
 import { usePortfolioData } from "@/hooks/usePortfolioData";
 import { useTranslatedData } from "@/hooks/useTranslatedData";
-import { FEATURED_PROJECT_PRIORITY } from "@/hooks/featured-projects/constants";
+import {
+  FEATURED_PROJECT_PRIORITY,
+  MAX_FEATURED_PROJECTS_PROJETS,
+} from "@/hooks/featured-projects/constants";
 import { getLocalizedProjectRoute } from "@/lib/localized-routes";
+import { getProjectDemoCtaKey } from "@/lib/project-cta";
+import { getProjectEndTs } from "@/lib/project-date";
 import { getProjectSlug } from "@/services/ProjectService";
 
 export default function Projets() {
@@ -79,22 +84,28 @@ export default function Projets() {
   const categories = useMemo(() => {
     const set = new Set<string>();
     for (const project of projets) {
-      set.add(project.category);
+      set.add(getTranslatedProject(project).category);
     }
     return Array.from(set).sort();
-  }, [projets]);
+  }, [projets, getTranslatedProject]);
 
   const filtered = useMemo(() => {
     return projets.filter((p: any) => {
+      const translated = getTranslatedProject(p);
       if (filters.search) {
         const q = filters.search.toLowerCase();
-        const hay = [p.title, p.description, p.category, ...(p.technologies || [])]
+        const hay = [
+          translated.title,
+          translated.description,
+          translated.category,
+          ...(p.technologies || []),
+        ]
           .filter(Boolean)
           .join(" ")
           .toLowerCase();
         if (!hay.includes(q)) return false;
       }
-      if (filters.category !== "all" && p.category !== filters.category) return false;
+      if (filters.category !== "all" && translated.category !== filters.category) return false;
       if (filters.status !== "all" && p.status !== filters.status) return false;
       if (filters.organization !== "all") {
         const orgByExp =
@@ -117,74 +128,15 @@ export default function Projets() {
       }
       return true;
     });
-  }, [filters, projets]);
+  }, [filters, projets, getTranslatedProject]);
 
-  // Parse une date de début (commencement) à partir d'une chaîne libre en FR
-  const getProjectStartTs = (dateStr: string): number => {
-    const normalize = (s: string) =>
-      s
-        .toLowerCase()
-        .normalize("NFD")
-        // Retire les diacritiques sans utiliser les classes Unicode (compat ES5)
-        .replace(/[\u0300-\u036f]/g, "");
-
-    const monthMap: Record<string, number> = {
-      jan: 1,
-      janvier: 1,
-      fev: 2,
-      fevr: 2,
-      fevrier: 2,
-      mar: 3,
-      mars: 3,
-      avr: 4,
-      avril: 4,
-      mai: 5,
-      jun: 6,
-      juin: 6,
-      jul: 7,
-      juil: 7,
-      juillet: 7,
-      aou: 8,
-      aout: 8,
-      sep: 9,
-      sept: 9,
-      septembre: 9,
-      oct: 10,
-      octobre: 10,
-      nov: 11,
-      novembre: 11,
-      dec: 12,
-      decembre: 12,
-    };
-
-    const parts = dateStr.split(";").map((s) => s.trim());
-    const startCandidates: number[] = [];
-
-    for (const part of parts) {
-      const normalized = normalize(part);
-      // Cherche forme "mois année"
-      const monthYearMatch = normalized.match(
-        /(janvier|fevrier|fevr|fev|jan|fev|mar|mars|avr|avril|mai|jun|juin|jul|juil|juillet|aou|aout|sep|sept|septembre|oct|octobre|nov|novembre|dec|decembre)\s+(\d{4})/,
-      );
-      if (monthYearMatch) {
-        const mKey = monthYearMatch[1];
-        const y = parseInt(monthYearMatch[2], 10);
-        const m = monthMap[mKey] || 1;
-        startCandidates.push(new Date(y, m - 1, 1).getTime());
-        continue;
-      }
-      // Sinon, prend juste l'année
-      const yearMatch = normalized.match(/(\d{4})/);
-      if (yearMatch) {
-        const y = parseInt(yearMatch[1], 10);
-        startCandidates.push(new Date(y, 0, 1).getTime());
-      }
-    }
-
-    if (!startCandidates.length) return 0;
-    // Positionnement basé sur la PREMIÈRE période (la plus ancienne)
-    return Math.min(...startCandidates);
-  };
+  const hasActiveFilters =
+    Boolean(filters.search) ||
+    filters.organization !== "all" ||
+    filters.category !== "all" ||
+    filters.status !== "all" ||
+    filters.techs.length > 0 ||
+    filters.years.length > 0;
 
   const featuredProjects = useMemo(
     () =>
@@ -195,22 +147,26 @@ export default function Projets() {
             (FEATURED_PROJECT_PRIORITY[a.id] ?? Number.MAX_SAFE_INTEGER) -
             (FEATURED_PROJECT_PRIORITY[b.id] ?? Number.MAX_SAFE_INTEGER),
         )
-        .slice(0, 3),
+        .slice(0, MAX_FEATURED_PROJECTS_PROJETS),
     [projets],
   );
 
+  const featuredIds = useMemo(
+    () => new Set(featuredProjects.map((p: any) => p.id)),
+    [featuredProjects],
+  );
+
   const sorted = useMemo(() => {
-    return [...filtered].sort((a, b) => {
-      const aIsInProgress = a.status === "En cours";
-      const bIsInProgress = b.status === "En cours";
+    // Sans filtre actif, les featured restent uniquement dans la section du haut
+    const source = hasActiveFilters
+      ? filtered
+      : filtered.filter((p: any) => !featuredIds.has(p.id));
 
-      if (aIsInProgress && !bIsInProgress) return -1;
-      if (!aIsInProgress && bIsInProgress) return 1;
-
-      // Si les deux sont en cours ou terminés, trier par date de début (plus récent en premier)
-      return getProjectStartTs(b.date) - getProjectStartTs(a.date);
-    });
-  }, [filtered, getProjectStartTs]);
+    // Grille "tous les projets" : date de fin décroissante (plus récemment terminé en premier)
+    return [...source].sort(
+      (a, b) => getProjectEndTs(b.date, b.status) - getProjectEndTs(a.date, a.status),
+    );
+  }, [filtered, featuredIds, hasActiveFilters]);
 
   const PER_PAGE = 18;
   const [currentPage, setCurrentPage] = useState(1);
@@ -247,7 +203,14 @@ export default function Projets() {
     }
   }, [currentPage]);
 
+  // Remettre à la page 1 uniquement quand les filtres changent (pas au mount,
+  // pour ne pas écraser la restauration sessionStorage).
+  const isFirstFiltersEffect = useRef(true);
   useEffect(() => {
+    if (isFirstFiltersEffect.current) {
+      isFirstFiltersEffect.current = false;
+      return;
+    }
     setCurrentPage(1);
     if (typeof window !== "undefined") {
       try {
@@ -255,11 +218,18 @@ export default function Projets() {
       } catch {}
     }
     scrollToTop();
-  }, [scrollToTop]);
+  }, [filters]);
 
   const totalPages = Math.max(1, Math.ceil(sorted.length / PER_PAGE));
-  const startIndex = (currentPage - 1) * PER_PAGE;
+  const safePage = Math.min(currentPage, totalPages);
+  const startIndex = (safePage - 1) * PER_PAGE;
   const pageItems = sorted.slice(startIndex, startIndex + PER_PAGE);
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [currentPage, totalPages]);
 
   if (loading) {
     return <div className="py-24 text-center text-muted-foreground">{t("loading")}</div>;
@@ -312,12 +282,7 @@ export default function Projets() {
         />
 
         {/* Section des projets mis en avant - seulement si aucun filtre actif */}
-        {!filters.search &&
-          filters.organization === "all" &&
-          filters.category === "all" &&
-          filters.status === "all" &&
-          filters.techs.length === 0 &&
-          filters.years.length === 0 && (
+        {!hasActiveFilters && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -453,13 +418,7 @@ export default function Projets() {
                                   }}
                                 >
                                   <ExternalLink className="mr-2 h-4 w-4" />
-                                  {project.title === "Ashes of Mankind - Empires"
-                                    ? t("viewGame")
-                                    : ["Showcase", "E-commerce", "Corporate"].includes(
-                                          project.category,
-                                        )
-                                      ? t("viewSite")
-                                      : t("viewDemo")}
+                                  {t(getProjectDemoCtaKey(project))}
                                 </Button>
                               )}
                             </div>
@@ -617,11 +576,7 @@ export default function Projets() {
                             }}
                           >
                             <ExternalLink className="mr-2 h-4 w-4" />
-                            {projet.title === "Ashes of Mankind - Empires"
-                              ? t("viewGame")
-                              : ["Showcase", "E-commerce", "Corporate"].includes(projet.category)
-                                ? t("viewSite")
-                                : t("viewDemo")}
+                            {t(getProjectDemoCtaKey(projet))}
                           </Button>
                         )}
                       </div>
@@ -648,7 +603,7 @@ export default function Projets() {
                         return next;
                       });
                     }}
-                    className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+                    className={safePage === 1 ? "pointer-events-none opacity-50" : ""}
                   />
                 </PaginationItem>
 
@@ -656,7 +611,7 @@ export default function Projets() {
                   <PaginationItem key={i}>
                     <PaginationLink
                       href="#"
-                      isActive={currentPage === i + 1}
+                      isActive={safePage === i + 1}
                       onClick={(e) => {
                         e.preventDefault();
                         handlePageChange(i + 1);
@@ -678,7 +633,7 @@ export default function Projets() {
                         return next;
                       });
                     }}
-                    className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+                    className={safePage === totalPages ? "pointer-events-none opacity-50" : ""}
                   />
                 </PaginationItem>
               </PaginationContent>

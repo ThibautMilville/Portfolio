@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3000",
+    "dev:safe": "bash scripts/dev-portfolio.sh",
+    "dev:daemon": "bash scripts/dev-portfolio-daemon.sh start",
+    "dev:stop": "bash scripts/dev-portfolio-daemon.sh stop",
+    "dev:status": "bash scripts/dev-portfolio-daemon.sh status",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3000",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "format": "biome format --write ."

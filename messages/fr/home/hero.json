@@ -1,13 +1,13 @@
 {
-  "title": "Développeur Full-Stack & Expert Blockchain",
-  "subtitle": "Passionné par l'innovation technologique et les solutions décentralisées",
-  "description": "Je crée des applications web modernes et des solutions blockchain robustes pour transformer vos idées en réalité numérique.",
+  "title": "AI Product Engineer",
+  "subtitle": "Passionné par l'innovation produit et les solutions IA",
+  "description": "Je conçois des produits IA et des applications web modernes pour transformer vos idées en réalité numérique.",
   "typewriter": {
-    "softwareEngineer": "&lt;Software Engineer /&gt;",
+    "softwareEngineer": "&lt;AI Product Engineer /&gt;",
     "expertReact": "&lt;Expert React & Next.js /&gt;",
     "passionate": "&lt;Passionné par l'innovation /&gt;"
   },
-  "descriptionText": "Passionné par la création d'expériences web modernes avec React, Next.js et NodeJS. Je transforme vos idées en applications performantes et scalables.",
+  "descriptionText": "Passionné par la conception de produits IA et d'expériences web modernes avec React, Next.js et NodeJS. Je transforme vos idées en applications performantes et scalables.",
   "buttons": {
     "viewProjects": "Voir mes projets",
     "downloadCV": "Télécharger CV"

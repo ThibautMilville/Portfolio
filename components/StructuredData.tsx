@@ -3,41 +3,42 @@ import { getAbsoluteUrl } from "@/lib/seo";
 
 const STRUCTURED_DATA = {
   fr: {
-    jobTitle: "Développeur Fullstack",
+    jobTitle: "AI Product Engineer",
     description:
-      "Développeur Fullstack spécialisé en React, Next.js et NestJS. Créateur d'applications web modernes et performantes.",
+      "AI Product Engineer spécialisé en React, Next.js et NestJS. Conception de produits IA et d'applications web modernes.",
     knowsAbout: [
+      "AI Product Engineering",
       "React",
       "Next.js",
       "NestJS",
       "JavaScript",
       "TypeScript",
       "Node.js",
+      "Product Design",
       "Développement Web",
-      "Frontend",
-      "Backend",
-      "Full Stack Development",
+      "Artificial Intelligence",
     ],
     occupationDescription:
-      "Développement d'applications web modernes avec React, Next.js et NestJS",
+      "Conception de produits IA et d'applications web modernes avec React, Next.js et NestJS",
   },
   en: {
-    jobTitle: "Fullstack Developer",
+    jobTitle: "AI Product Engineer",
     description:
-      "Fullstack developer specialized in React, Next.js and NestJS. Creator of modern and performant web applications.",
+      "AI Product Engineer specialized in React, Next.js and NestJS. Designing AI products and modern web applications.",
     knowsAbout: [
+      "AI Product Engineering",
       "React",
       "Next.js",
       "NestJS",
       "JavaScript",
       "TypeScript",
       "Node.js",
+      "Product Design",
       "Web Development",
-      "Frontend",
-      "Backend",
-      "Full Stack Development",
+      "Artificial Intelligence",
     ],
-    occupationDescription: "Building modern web applications with React, Next.js and NestJS",
+    occupationDescription:
+      "Designing AI products and modern web applications with React, Next.js and NestJS",
   },
 } as const;
 

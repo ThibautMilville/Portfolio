@@ -7,9 +7,9 @@ import { useLocale, useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tooltip } from "@/components/ui/general/Tooltip";
-import { ASHES_OF_MANKIND_TITLE } from "@/hooks/featured-projects/constants";
 import type { FeaturedProjectItem } from "@/hooks/featured-projects/types";
 import { getLocalizedProjectRoute } from "@/lib/localized-routes";
+import { getProjectDemoCtaKey } from "@/lib/project-cta";
 import { cn } from "@/lib/utils";
 import { Link } from "@/navigation";
 import { getProjectSlug } from "@/services/ProjectService";
@@ -169,8 +169,7 @@ export function FeaturedProjectCard({
   const imageSrc = translated.image || "/images/og-image.webp";
   const isSpotlight = variant === "spotlight";
 
-  const demoLabel =
-    translated.title === ASHES_OF_MANKIND_TITLE ? t("viewGame") : t("viewDemo");
+  const demoLabel = t(getProjectDemoCtaKey(original));
 
   const image = (
     <ProjectCardImage

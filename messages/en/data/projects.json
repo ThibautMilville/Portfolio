@@ -278,8 +278,8 @@
     {
       "id": 26,
       "title": "OZC Signage Commercial Website",
-      "description": "B2B/B2C signage e-commerce — preprod version currently being finalized.",
-      "longDescription": "OZC Signalétique e-commerce redesign (preprod): professional catalog, industry universes, safety signage, configurable product pages, and quote flows. Built for pros and public institutions, with ISO/NF categories, best-sellers, new arrivals, and a full purchase experience. Demo available on the preprod environment.",
+      "description": "B2B/B2C signage e-commerce - professional catalog, quotes, and purchase flows.",
+      "longDescription": "OZC Signalétique e-commerce redesign: professional catalog, industry universes, safety signage, configurable product pages, and quote flows. Built for pros and public institutions, with ISO/NF categories, best-sellers, new arrivals, and a full purchase experience. Live at ozc-signaletique.fr.",
       "date": "2025 - Present",
       "status": "In Progress",
       "category": "E-commerce",
@@ -291,17 +291,17 @@
         "ISO 7010 / NF safety categories with subcategories and product counts",
         "Best-sellers and new products carousels",
         "Product pages (ex-VAT/incl. VAT pricing, sizes, materials, quotes)",
-        "Public preprod environment for validation before production"
+        "Public production site for professionals and institutions"
       ],
       "challenges": [
         "Structure a large B2B catalog while keeping UX clear",
         "Align normative compliance (ISO/NF) with the purchase journey",
-        "Ship a credible preprod for client validation"
+        "Ship a credible, high-performing e-commerce experience"
       ],
       "solutions": [
         "Information architecture by industry universes and safety categories",
         "Rich product sheets (refs, options, quotes) for professionals",
-        "Dedicated preprod deployment to iterate before production"
+        "Production deployment at ozc-signaletique.fr"
       ]
     },
     {
@@ -321,16 +321,22 @@
     {
       "id": 28,
       "title": "OZC Institutional Website",
-      "description": "Institutional website highlighting services and activities.",
-      "longDescription": "Company showcase website with contact conversion focus.",
-      "date": "May 2025 - Jun 2025",
+      "description": "Osmozcom commercial website (ozc.fr), migrated from WordPress to Next.js with an administration backend.",
+      "longDescription": "Institutional and commercial website for Osmoz Communication (ozc.fr). Full migration from WordPress to a Next.js stack with an administration backend (admin) to manage content, blog and pages. Highlights services (signage, signs, printing, solar film), business sectors, portfolio and contact/quote flows.",
+      "date": "Feb 2023 - Mar 2023 ; Jun 2025",
       "status": "Completed",
       "category": "Corporate",
-      "role": "Webmaster",
-      "duration": "2 months",
-      "features": ["Service pages", "Contact form"],
-      "challenges": ["Content clarity"],
-      "solutions": ["UX architecture"]
+      "role": "Web Developer",
+      "duration": "2 months + redesign",
+      "features": [
+        "WordPress to Next.js migration",
+        "Administration backend (admin)",
+        "Service and sector pages",
+        "Blog and portfolio",
+        "Contact / quote form"
+      ],
+      "challenges": ["Content migration", "Custom admin CMS", "SEO preserved"],
+      "solutions": ["Next.js + NestJS stack", "TipTap admin", "Clean redirects"]
     },
     {
       "id": 29,
@@ -504,11 +510,11 @@
       "title": "Ashes of Mankind - Empires",
       "description": "Web3 game with Telos blockchain integration for the gaming ecosystem.",
       "longDescription": "Development of the Web3 integration layer of Ashes of Mankind (Empires), connecting the game to Telos blockchain smart contracts through custom frontend logic. Built the React frontend and NestJS backend, ensuring smooth interaction between the player interface and blockchain components. Migrated the integration from Ultra to Telos. Collaborated in an Agile environment, participating in sprint planning, technical reviews, and iterative feature development to ensure continuous delivery and quality. Participated in international technical meetings (Canada, Colombia, Japan, etc.), coordinating with global teams to align on technical direction and game design goals. Engaged in game design discussions, helping bridge user experience and blockchain features to create a cohesive gameplay flow.",
-      "date": "Aug 2025 - Present",
-      "status": "In Progress",
+      "date": "September 2026",
+      "status": "Completed",
       "category": "Web3",
       "role": "Full Stack Web3 Developer",
-      "duration": "In Progress",
+      "duration": "13 months",
       "features": [
         "Custom Web3 integration layer",
         "React frontend and NestJS backend",
@@ -762,10 +768,10 @@
       "title": "Empires Provisions",
       "description": "Premium marketplace and commerce admin for Empires: provisions, registry, founders sales, and Stripe back-office.",
       "longDescription": "Designed and built Empires Provisions & Holder Exchange, the commerce platform for Ashes of Mankind. Delivered the public storefront (sealed provisions, auctions, unit registry, founders private sale) and the admin back-office (sales, purchasers, Stripe payments, promo codes, referrals). Dark prestige UI with catalog performance tracking, order history, and marketing campaign management.",
-      "status": "In Progress",
+      "status": "Completed",
       "category": "E-commerce",
       "role": "Full Stack Engineer",
-      "duration": "In Progress",
+      "duration": "1 year",
       "features": [
         "Provisions storefront with limited packs, founder discounts, and promo codes",
         "Collectible unit registry (rarity, stats, series)",
@@ -784,7 +790,204 @@
         "Orders/buyers/promos data model aligned with Stripe",
         "Drill-down views (listing → orders → payment) for commerce operations"
       ],
-      "date": "2025 - Present"
+      "date": "June 2026"
+    },
+    {
+      "id": 46,
+      "title": "Signaplan",
+      "description": "Commercial showcase site for Signaplan - NF X 08-070 fire safety plans, signage, and technical films.",
+      "longDescription": "Designed and built the Signaplan commercial website (signaplan.fr): an SEO-first showcase for NF X 08-070-compliant fire safety plans, fire signage, technical window films, and graphic work. Next.js, TypeScript, and Tailwind stack, deployed on Cloudflare (OpenNext). Conversion journeys (quotes), service pages, blog, standards content, internal linking, and technical SEO covering Île-de-France and Grand Est.",
+      "status": "Completed",
+      "category": "Showcase",
+      "role": "Full Stack Engineer",
+      "duration": "1 month",
+      "features": [
+        "Conversion-focused commercial showcase (quotes, CTAs, trust signals)",
+        "Service pages: safety plans, fire signage, technical films, graphics",
+        "Technical and content SEO (sitemap, robots, structured data, blog, standards)",
+        "Interactive map and geographic coverage for Île-de-France / Grand Est",
+        "Production deployment on Cloudflare via OpenNext"
+      ],
+      "challenges": [
+        "Present a regulated B2B offering (NF X 08-070) clearly and credibly",
+        "Structure rich SEO content without hurting performance or mobile UX",
+        "Turn local organic traffic into qualified quote requests"
+      ],
+      "solutions": [
+        "Intent-based page architecture (services, standards, areas, contact)",
+        "Conversion-first journeys with quote forms and visible CTAs",
+        "Next.js + Cloudflare stack for performance, caching, and technical SEO"
+      ],
+      "date": "June 2026"
+    },
+    {
+      "id": 47,
+      "title": "Isoburo",
+      "description": "Showcase and booking site for the Isoburo business center in Coulommiers: coworking, private offices, and meeting room.",
+      "longDescription": "Designed and built the Isoburo website (isoburo.fr): an SEO-first showcase for a business center in Coulommiers (77120). Covers spaces (coworking, private offices, 35 m² meeting room), pricing, gallery, FAQ, and online booking. Next.js, TypeScript, and Tailwind stack with local SEO, internal linking, and conversion CTAs (book, call, contact).",
+      "status": "Completed",
+      "category": "Showcase",
+      "role": "Frontend Engineer",
+      "duration": "1 month",
+      "features": [
+        "Business-center showcase with clear space and pricing presentation",
+        "Booking journey and conversion CTAs (book, call, contact)",
+        "Local SEO pages (areas around Coulommiers) and internal linking",
+        "Gallery, FAQ, and trust signals (fiber, 24/7 access, parking)",
+        "Responsive site focused on performance and technical SEO"
+      ],
+      "challenges": [
+        "Make a multi-space offer (coworking, offices, room) clear without UX clutter",
+        "Rank on local queries around Coulommiers",
+        "Turn organic traffic into bookings and calls"
+      ],
+      "solutions": [
+        "Intent-based page architecture (spaces, pricing, booking, areas)",
+        "Local SEO with geographic pages and optimized metadata",
+        "Conversion-first journeys with CTAs visible from the hero"
+      ],
+      "date": "Aug 2026"
+    },
+    {
+      "id": 48,
+      "title": "SION ELEC",
+      "description": "Showcase site for SION ELEC, electrician in Coulommiers: installation, renovation, 24/7 emergency service, and compliance upgrades.",
+      "longDescription": "Designed and built the SION ELEC website (sionelec.fr): an SEO-first showcase for an electrician based in Coulommiers, covering Seine-et-Marne and Île-de-France. Highlights services (installation, renovation, emergency repair, NF C 15-100 compliance), 35+ years of experience, service area, and quote / emergency journeys. Next.js, TypeScript, and Tailwind with local SEO and conversion CTAs.",
+      "status": "Completed",
+      "category": "Showcase",
+      "role": "Frontend Engineer",
+      "duration": "1 month",
+      "features": [
+        "Artisan showcase with conversion hero and 24/7 emergency contact",
+        "Service pages (installation, renovation, emergency, compliance)",
+        "Guarantees section, service area, and trust signals",
+        "Local SEO for Seine-et-Marne / Île-de-France and internal linking",
+        "Free quote journey and visible phone CTAs"
+      ],
+      "challenges": [
+        "Separate emergencies from planned projects in the same user journey",
+        "Build artisan credibility (experience, NF standards) through UX and content",
+        "Cover a wide local area without diluting the message"
+      ],
+      "solutions": [
+        "Dual CTAs (quote / emergency) and need-based navigation from the hero",
+        "Content focused on NF C 15-100 compliance and social proof",
+        "Local SEO and service pages aligned with search intent"
+      ],
+      "date": "Aug 2026"
+    },
+    {
+      "id": 49,
+      "title": "Film Solaire 51",
+      "description": "SEO-first showcase website for window film installation in Marne (Reims, Épernay, Châlons).",
+      "longDescription": "Led the design and frontend development of the Film Solaire 51 showcase website, built as a conversion platform for the Marne department. Delivered a fast, responsive, SEO-driven site with Next.js, TypeScript, and Tailwind. Local SEO strategy (film solaire Marne, anti-heat 51), residential / commercial pages, case studies, blog, technical SEO, and Google Search Console monitoring.",
+      "status": "Completed",
+      "category": "Showcase",
+      "role": "Frontend Engineer",
+      "duration": "1 month",
+      "features": [
+        "Local conversion-focused platform for Marne (51)",
+        "Residential / commercial journeys with free quotes within 24h",
+        "Local SEO with semantic clustering and structured pages",
+        "Internal linking across services / areas / case studies",
+        "Technical SEO (sitemap, robots, canonicals, structured data, CWV)"
+      ],
+      "challenges": [
+        "Ranking on high-intent local keywords in Marne",
+        "Keeping performance and crawlability on SEO-rich content",
+        "Turning local organic traffic into qualified leads"
+      ],
+      "solutions": [
+        "Intent-driven local content architecture",
+        "Internal linking system for crawl depth and topical authority",
+        "Continuous Search Console iteration on indexing and performance"
+      ],
+      "date": "Aug 2026"
+    },
+    {
+      "id": 50,
+      "title": "Film Solaire 10",
+      "description": "SEO-first showcase website for window film installation in Aube (Troyes, Romilly-sur-Seine).",
+      "longDescription": "Led the design and frontend development of the Film Solaire 10 showcase website for the Aube market. Built a fast, responsive, SEO-first site with Next.js, TypeScript, and Tailwind. Local SEO strategy (film solaire Aube, anti-heat 10), 24h quote conversion journeys, service and area pages, technical SEO, and Google Search Console monitoring.",
+      "status": "Completed",
+      "category": "Showcase",
+      "role": "Frontend Engineer",
+      "duration": "1 month",
+      "features": [
+        "Local conversion-focused platform for Aube (10)",
+        "Residential / commercial journeys with free quotes within 24h",
+        "Local SEO with semantic clustering and structured pages",
+        "Internal linking across services / areas / case studies",
+        "Technical SEO (sitemap, robots, canonicals, structured data, CWV)"
+      ],
+      "challenges": [
+        "Ranking on high-intent local keywords in Aube",
+        "Keeping performance and crawlability on SEO-rich content",
+        "Turning local organic traffic into qualified leads"
+      ],
+      "solutions": [
+        "Intent-driven local content architecture",
+        "Internal linking system for crawl depth and topical authority",
+        "Continuous Search Console iteration on indexing and performance"
+      ],
+      "date": "Aug 2026"
+    },
+    {
+      "id": 51,
+      "title": "Film Solaire 02",
+      "description": "SEO-first showcase website for window film installation in Aisne (Laon, Soissons, Saint-Quentin).",
+      "longDescription": "Led the design and frontend development of the Film Solaire 02 showcase website for the Aisne market. Built a fast, responsive, SEO-first site with Next.js, TypeScript, and Tailwind. Local SEO strategy (film solaire Aisne, anti-heat 02), 24h quote conversion journeys, service and area pages, technical SEO, and Google Search Console monitoring.",
+      "status": "Completed",
+      "category": "Showcase",
+      "role": "Frontend Engineer",
+      "duration": "1 month",
+      "features": [
+        "Local conversion-focused platform for Aisne (02)",
+        "Residential / commercial journeys with free quotes within 24h",
+        "Local SEO with semantic clustering and structured pages",
+        "Internal linking across services / areas / case studies",
+        "Technical SEO (sitemap, robots, canonicals, structured data, CWV)"
+      ],
+      "challenges": [
+        "Ranking on high-intent local keywords in Aisne",
+        "Keeping performance and crawlability on SEO-rich content",
+        "Turning local organic traffic into qualified leads"
+      ],
+      "solutions": [
+        "Intent-driven local content architecture",
+        "Internal linking system for crawl depth and topical authority",
+        "Continuous Search Console iteration on indexing and performance"
+      ],
+      "date": "Aug 2026"
+    },
+    {
+      "id": 52,
+      "title": "Film Intelligent Pro",
+      "description": "B2B showcase for smart PDLC film installation: offices, clinics, shops, and hotels across France.",
+      "longDescription": "Designed and built Film Intelligent Pro (filmintelligent-pro.fr): an SEO-first B2B showcase for smart PDLC film on existing glazing. Targets businesses (offices, clinics, hotels, shops) with technology, pricing, sectors, CSR, and blog pages. Next.js, TypeScript, and Tailwind stack, quoted proposals within 48h, national coverage, and technical SEO.",
+      "status": "Completed",
+      "category": "Showcase",
+      "role": "Frontend Engineer",
+      "duration": "1 month",
+      "features": [
+        "B2B PDLC showcase with conversion hero and quotes within 48h",
+        "Technology, pricing, industry sectors, and CSR pages",
+        "Nationwide positioning with installer network",
+        "Technical SEO and B2B intent-driven content",
+        "Conversion-first journeys (quote, phone, contact CTAs)"
+      ],
+      "challenges": [
+        "Explain PDLC clearly to a non-technical B2B audience",
+        "Support national coverage without losing credibility",
+        "Turn organic traffic into quoted proposal requests"
+      ],
+      "solutions": [
+        "Intent-based page architecture (technology, sectors, pricing, quotes)",
+        "Educational content and proof points (warranty, support, 48h turnaround)",
+        "Next.js + technical SEO for performance and indexing"
+      ],
+      "date": "Aug 2026"
     }
   ]
 }
+

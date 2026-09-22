@@ -38,7 +38,7 @@ export const experiencesData: Experience[] = [
     title: "Web3 Software Engineer",
     company: "Ultra Tech Alliance (UTA)",
     location: "Paris, Île-de-France, France · Remote",
-    date: "Oct 2024 - Présent",
+    date: "Oct 2024 - Nov 2025",
     description:
       "Contributing to the development of open-source tools and libraries for the Ultra blockchain ecosystem. Implementing features and improving SDKs, scripts, and automation tools for developers. Participating in technical workshops and developer meetups to support community growth. Collaborating with engineers and contributors to build resources and documentation for the Ultra developer community. Actively supporting the adoption of Ultra's technology through hands-on development and knowledge sharing.",
     technologies: [
@@ -67,7 +67,7 @@ export const experiencesData: Experience[] = [
     title: "Web3 Software Engineer",
     company: "Black Ice Studios Inc.",
     location: "Montréal, Québec, Canada · Remote",
-    date: "Aug 2025 - Présent",
+    date: "Aug 2025 - Sep 2026",
     description:
       "Development of the Web3 (blockchain) component of the game Ashes of Mankind (Empires) on Telos. Implementation of the entire Web3 frontend and interaction with smart contracts. Participation in daily meetings and technical discussions in English.",
     technologies: [
@@ -124,10 +124,10 @@ export const experiencesData: Experience[] = [
   },
   {
     id: 8,
-    title: "Lead Developer & MVP",
+    title: "Web3 Lead Developer - Core Team",
     company: "Ultra Times",
     location: "Bangkok, Thailand · Remote",
-    date: "Jan 2025 - Présent",
+    date: "Jan 2025 - Nov 2025",
     description:
       "Leading the technical design, development, and deployment of 7 decentralized applications on the Ultra blockchain, overseeing fullstack architecture and ensuring scalability and security. Participating in strategic decision-making as part of the management team, aligning technical initiatives with business goals and fundraising objectives. Authoring technical content and engaging with the community in English and French, including interviews with blockchain and game developers, enhancing the platform's visibility and thought leadership. Managing Agile sprints, coordinating development workflows, and ensuring timely delivery of MVPs on Ultra blockchain-based projects.",
     technologies: [
@@ -156,10 +156,10 @@ export const experiencesData: Experience[] = [
   },
   {
     id: 9,
-    title: "Web3 Software Engineer",
+    title: "Web3 Software Engineer and Community Contributor",
     company: "Ultra Times",
     location: "Bangkok, Thailand · Remote",
-    date: "Oct 2024 - Présent",
+    date: "Oct 2024 - Jan 2025",
     description:
       "Development using the Ultra blockchain and its APIs, writing technical articles about it, and participating in community activities in both English and French (community engagement, interviews, etc...).",
     technologies: [
@@ -186,7 +186,7 @@ export const experiencesData: Experience[] = [
     title: "Software Engineer",
     company: "SNCF Voyageurs",
     location: "Paris, Île-de-France, France",
-    date: "Sep 2024 - Présent",
+    date: "Sep 2024 - Sep 2026",
     description: "Designing application solutions to optimise agents' work.",
     technologies: ["Application Design", "Software Engineering", "Agent Optimization"],
     achievements: [

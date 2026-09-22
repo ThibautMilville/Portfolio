@@ -9,36 +9,36 @@ export const OG_IMAGE = {
   width: 1200,
   height: 630,
   alt: {
-    fr: "Thibaut MILVILLE - Développeur Fullstack",
-    en: "Thibaut MILVILLE - Fullstack Developer",
+    fr: "Thibaut MILVILLE - AI Product Engineer",
+    en: "Thibaut MILVILLE - AI Product Engineer",
   },
 } as const;
 
 const SITE_KEYWORDS = {
   fr: [
-    "développeur fullstack",
-    "react developer",
+    "ai product engineer",
+    "ingénieur produit ia",
+    "react",
     "next.js",
     "nestjs",
     "javascript",
     "typescript",
     "portfolio",
+    "produit ia",
     "développement web",
-    "frontend",
-    "backend",
     "thibaut milville",
   ],
   en: [
-    "fullstack developer",
-    "react developer",
+    "ai product engineer",
+    "product engineer",
+    "react",
     "next.js",
     "nestjs",
     "javascript",
     "typescript",
     "portfolio",
+    "ai products",
     "web development",
-    "frontend",
-    "backend",
     "thibaut milville",
   ],
 } as const;
@@ -46,38 +46,38 @@ const SITE_KEYWORDS = {
 const PAGE_SEO = {
   home: {
     fr: {
-      title: "Thibaut MILVILLE - Développeur Fullstack React & Next.js | Portfolio",
+      title: "Thibaut MILVILLE - AI Product Engineer | Portfolio",
       description:
-        "Développeur Fullstack spécialisé en React, Next.js et NestJS. Créateur d'applications web modernes et performantes. Découvrez mes projets, compétences et expériences professionnelles.",
+        "AI Product Engineer spécialisé en React, Next.js et NestJS. Conception de produits IA et d'applications web modernes. Découvrez mes projets, compétences et expériences professionnelles.",
     },
     en: {
-      title: "Thibaut MILVILLE - Fullstack React & Next.js Developer | Portfolio",
+      title: "Thibaut MILVILLE - AI Product Engineer | Portfolio",
       description:
-        "Fullstack developer specialized in React, Next.js and NestJS. Creator of modern and performant web applications. Discover my projects, skills and professional experiences.",
+        "AI Product Engineer specialized in React, Next.js and NestJS. Designing AI products and modern web applications. Discover my projects, skills and professional experiences.",
     },
   },
   projets: {
     fr: {
       title: "Projets | Thibaut MILVILLE - Portfolio",
       description:
-        "Découvrez mes réalisations en développement web : applications React, Next.js, Web3 et projets fullstack.",
+        "Découvrez mes réalisations : produits IA, applications React et Next.js, Web3 et expériences digitales.",
     },
     en: {
       title: "Projects | Thibaut MILVILLE - Portfolio",
       description:
-        "Explore my web development projects: React, Next.js, Web3 and fullstack applications.",
+        "Explore my work: AI products, React and Next.js apps, Web3 and digital experiences.",
     },
   },
   experiences: {
     fr: {
       title: "Expériences | Thibaut MILVILLE - Portfolio",
       description:
-        "Mon parcours professionnel : développeur fullstack chez Ultra, SNCF Voyageurs, Osmoz Communication et plus.",
+        "Mon parcours d'AI Product Engineer : Ultra, SNCF Voyageurs, Osmoz Communication et plus.",
     },
     en: {
       title: "Experience | Thibaut MILVILLE - Portfolio",
       description:
-        "My professional journey: fullstack developer at Ultra, SNCF Voyageurs, Osmoz Communication and more.",
+        "My journey as an AI Product Engineer: Ultra, SNCF Voyageurs, Osmoz Communication and more.",
     },
   },
   formations: {

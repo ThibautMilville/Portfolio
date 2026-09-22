@@ -278,8 +278,8 @@
     {
       "id": 26,
       "title": "Site Commercial OZC Signalétique",
-      "description": "E-commerce signalétique B2B/B2C — version preprod en cours de finalisation.",
-      "longDescription": "Refonte e-commerce d'OZC Signalétique (preprod) : catalogue professionnel, univers métiers, signalisation de sécurité, fiches produits configurables et parcours devis. Plateforme orientée pros et collectivités, avec catégories ISO/NF, best-sellers, nouveautés et expérience d'achat complète. Démo disponible sur l'environnement preprod.",
+      "description": "E-commerce signalétique B2B/B2C - catalogue pro, devis et parcours d'achat.",
+      "longDescription": "Refonte e-commerce d'OZC Signalétique : catalogue professionnel, univers métiers, signalisation de sécurité, fiches produits configurables et parcours devis. Plateforme orientée pros et collectivités, avec catégories ISO/NF, best-sellers, nouveautés et expérience d'achat complète. Site en ligne sur ozc-signaletique.fr.",
       "status": "En cours",
       "category": "E-commerce",
       "role": "Full Stack Engineer",
@@ -290,17 +290,17 @@
         "Catégories sécurité ISO 7010 / NF avec sous-catégories et compteurs produits",
         "Carrousels best-sellers et nouveaux produits",
         "Fiches produit (prix HT/TTC, dimensions, matières, devis)",
-        "Environnement preprod public pour validation avant mise en prod"
+        "Site public en production pour pros et collectivités"
       ],
       "challenges": [
         "Structurer un large catalogue B2B tout en gardant une UX claire",
         "Aligner conformité normative (ISO/NF) et parcours d'achat",
-        "Livrer une preprod crédible pour validation client"
+        "Livrer une expérience e-commerce crédible et performante"
       ],
       "solutions": [
         "Arborescence par univers métiers et catégories sécurité",
         "Fiches produit riches (réf, options, devis) orientées pros",
-        "Déploiement preprod dédié pour itérer avant production"
+        "Déploiement production sur ozc-signaletique.fr"
       ],
       "date": "2025 - Présent"
     },
@@ -321,16 +321,22 @@
     {
       "id": 28,
       "title": "Site Institutionnel OZC",
-      "description": "Site institutionnel mettant en avant services et activités.",
-      "longDescription": "Site vitrine de l'entreprise avec orientation conversion contact.",
+      "description": "Site commercial Osmozcom (ozc.fr), migré de WordPress vers Next.js avec backend d'administration.",
+      "longDescription": "Site institutionnel et commercial d'Osmoz Communication (ozc.fr). Migration complète depuis WordPress vers une stack Next.js avec backend d'administration (admin) pour gérer contenus, blog et pages. Mise en avant des services (signalétique, enseignes, impression, film solaire), secteurs d'activité, portfolio et parcours contact/devis.",
       "status": "Terminé",
       "category": "Corporate",
-      "role": "Webmaster",
-      "duration": "2 mois",
-      "features": ["Pages services", "Formulaire de contact"],
-      "challenges": ["Clarté des contenus"],
-      "solutions": ["Arborescence UX"],
-      "date": "Fév 2023 - Mar 2023"
+      "role": "Développeur web",
+      "duration": "2 mois + refonte",
+      "features": [
+        "Migration WordPress vers Next.js",
+        "Backend d'administration (admin)",
+        "Pages services et secteurs",
+        "Blog et portfolio",
+        "Formulaire de contact / devis"
+      ],
+      "challenges": ["Migration de contenu", "CMS admin sur mesure", "SEO conservé"],
+      "solutions": ["Stack Next.js + NestJS", "Admin TipTap", "Redirections propres"],
+      "date": "Fév 2023 - Mar 2023 ; Juin 2025"
     },
     {
       "id": 29,
@@ -338,7 +344,7 @@
       "description": "Site vitrine pour l'activité d'agencement et construction.",
       "longDescription": "Présentation des services d'agencement et réalisations.",
       "status": "Terminé",
-      "category": "Showcase",
+      "category": "Vitrine",
       "role": "Webmaster",
       "duration": "2 mois",
       "features": ["Portfolio", "Contact"],
@@ -352,7 +358,7 @@
       "description": "Site vitrine présentant les services d'un transporteur. Refonte complète Next.js en 2025.",
       "longDescription": "Site simple pour présenter services et prises de contact. Deuxième période de travail en 2025 : refonte complète avec ma stack Next.js (App Router, TypeScript, Tailwind), optimisations performance/SEO, accessibilité et UX (mai-juin 2025).",
       "status": "Terminé",
-      "category": "Showcase",
+      "category": "Vitrine",
       "role": "Développeur web",
       "duration": "1 mois + 2 mois",
       "features": [
@@ -400,7 +406,7 @@
       "description": "Site vitrine pour les services web/digitaux de l'agence Osmoz Communication.",
       "longDescription": "Site vitrine présentant l'offre web et digitale de l'agence de communication Osmoz Communication. Accent mis sur la clarté de l'offre, la mise en valeur des services et un parcours de contact simple. Projet associé à DigitalLabs TM.",
       "status": "Terminé",
-      "category": "Showcase",
+      "category": "Vitrine",
       "role": "Développeur Frontend",
       "duration": "1 mois",
       "features": [
@@ -508,10 +514,10 @@
       "title": "Ashes of Mankind - Empires",
       "description": "Jeu Web3 avec intégration blockchain Telos pour l'écosystème gaming.",
       "longDescription": "Développement de la couche d'intégration Web3 d'Ashes of Mankind (Empires), connectant le jeu aux smart contracts de la blockchain Telos via une logique frontend personnalisée. Construction du frontend React et du backend NestJS, assurant une interaction fluide entre l'interface joueur et les composants blockchain. Migration de l'intégration depuis Ultra vers Telos. Collaboration en environnement Agile avec participation aux réunions techniques internationales.",
-      "status": "En cours",
+      "status": "Terminé",
       "category": "Web3",
       "role": "Développeur Full Stack Web3",
-      "duration": "En cours",
+      "duration": "13 mois",
       "features": [
         "Couche d'intégration Web3 personnalisée",
         "Frontend React et backend NestJS",
@@ -532,7 +538,7 @@
         "Communication efficace via réunions techniques",
         "Approche collaborative pour l'UX"
       ],
-      "date": "Août 2025 - Présent"
+      "date": "Septembre 2026"
     },
     {
       "id": 37,
@@ -571,7 +577,7 @@
       "description": "Site vitrine pour une entreprise de services d'automatisation IA.",
       "longDescription": "Développement du site vitrine pour Valentin Automatisation, une entreprise proposant des services d'agents d'automatisation IA. Construction d'un frontend moderne et responsive pour présenter clairement les offres de l'entreprise et améliorer sa visibilité en ligne. Focus sur un design UI épuré, les performances et l'accessibilité pour une expérience utilisateur optimale.",
       "status": "Terminé",
-      "category": "Showcase",
+      "category": "Vitrine",
       "role": "Développeur Frontend",
       "duration": "1 mois",
       "features": [
@@ -683,7 +689,7 @@
       "description": "Site vitrine SEO-first pour les services de films solaires à Paris.",
       "longDescription": "Pilotage du design et du développement frontend du site Film Solaire 75, conçu comme une plateforme de conversion dans un marché local très concurrentiel. Développement d'un site rapide, responsive et orienté SEO avec Next.js, TypeScript et Tailwind. Déploiement d'une stratégie SEO locale complète : structuration sémantique, clustering de mots-clés, métadonnées optimisées, maillage interne avancé, SEO technique (sitemap, robots.txt, canonicals, structured data, Core Web Vitals) et suivi continu via Google Search Console.",
       "status": "Terminé",
-      "category": "Showcase",
+      "category": "Vitrine",
       "role": "Frontend Engineer",
       "duration": "1 mois",
       "features": [
@@ -711,7 +717,7 @@
       "description": "Site vitrine conversion-first et SEO-optimisé pour la Seine-et-Marne.",
       "longDescription": "Pilotage du design et du développement frontend du site Film Solaire 77 pour créer une présence web moderne et orientée conversion. Développement d'un site responsive et optimisé SEO avec Next.js, TypeScript et Tailwind. Mise en place d'une stratégie SEO robuste (structure sémantique, recherche de mots-clés, on-page), d'un maillage interne fort, d'optimisations SEO techniques (sitemap, robots, canonicals, Core Web Vitals) et d'un suivi continu dans Google Search Console.",
       "status": "Terminé",
-      "category": "Showcase",
+      "category": "Vitrine",
       "role": "Frontend Engineer",
       "duration": "1 mois",
       "features": [
@@ -739,7 +745,7 @@
       "description": "Plateforme SEO scalable ciblant toute l'Île-de-France.",
       "longDescription": "Pilotage du design et du développement frontend du site Film Solaire IDF, conçu pour couvrir à grande échelle toute la région Île-de-France. Développement d'un site rapide, responsive et SEO-first avec Next.js, TypeScript et Tailwind. Exécution d'une stratégie SEO régionale (pages par zone géographique et clusters services), maillage interne avancé, SEO technique à grande échelle et suivi d'indexation/performance via Google Search Console.",
       "status": "Terminé",
-      "category": "Showcase",
+      "category": "Vitrine",
       "role": "Frontend Engineer",
       "duration": "1 mois",
       "features": [
@@ -766,10 +772,10 @@
       "title": "Empires Provisions",
       "description": "Marketplace premium et back-office commerce pour Empires : provisions, registry, ventes fondateurs et admin Stripe.",
       "longDescription": "Conception et développement de Empires Provisions & Holder Exchange, la plateforme commerce d'Ashes of Mankind. Livraison du storefront public (provisions scellées, auctions, registry d'unités, vente privée fondateurs) et du back-office admin (ventes, acheteurs, paiements Stripe, codes promo, referrals). Interface dark prestige avec tracking des performances catalogue, historique des commandes, et gestion des campagnes marketing.",
-      "status": "En cours",
+      "status": "Terminé",
       "category": "E-commerce",
       "role": "Full Stack Engineer",
-      "duration": "En cours",
+      "duration": "1 an",
       "features": [
         "Storefront Provisions avec packs limités, discounts fondateurs et promo codes",
         "Registry d'unités collectibles (rareté, stats, séries)",
@@ -788,7 +794,204 @@
         "Modèle de données orders/buyers/promos aligné sur Stripe",
         "Vues drill-down (listing → orders → payment) pour le pilotage commerce"
       ],
-      "date": "2025 - Présent"
+      "date": "Juin 2026"
+    },
+    {
+      "id": 46,
+      "title": "Signaplan",
+      "description": "Site vitrine commercial pour Signaplan - plans de sécurité incendie NF X 08-070, signalétique et films techniques.",
+      "longDescription": "Conception et développement du site commercial Signaplan (signaplan.fr) : vitrine SEO-first pour les plans de sécurité incendie conformes NF X 08-070, la signalétique incendie, les films techniques et les travaux graphiques. Stack Next.js, TypeScript et Tailwind, déploiement Cloudflare (OpenNext). Parcours conversion (devis), pages services, blog, normes, maillage interne et SEO technique pour couvrir l'Île-de-France et le Grand Est.",
+      "status": "Terminé",
+      "category": "Vitrine",
+      "role": "Full Stack Engineer",
+      "duration": "1 mois",
+      "features": [
+        "Site vitrine commercial orienté conversion (devis, CTA, signaux de confiance)",
+        "Pages services : plans de sécurité, signalétique incendie, films techniques, graphisme",
+        "SEO technique et contenu (sitemap, robots, structured data, blog, normes)",
+        "Carte interactive et couverture géographique Île-de-France / Grand Est",
+        "Déploiement production sur Cloudflare via OpenNext"
+      ],
+      "challenges": [
+        "Positionner une offre B2B réglementaire (NF X 08-070) de façon claire et crédible",
+        "Structurer un contenu SEO riche sans dégrader performance et UX mobile",
+        "Transformer le trafic organique local en demandes de devis qualifiées"
+      ],
+      "solutions": [
+        "Architecture de pages par intention (services, normes, zones, contact)",
+        "Parcours conversion-first avec formulaires de devis et CTAs visibles",
+        "Stack Next.js + Cloudflare pour performance, cache et SEO technique"
+      ],
+      "date": "Juin 2026"
+    },
+    {
+      "id": 47,
+      "title": "Isoburo",
+      "description": "Site vitrine et réservation pour le centre d'affaires Isoburo à Coulommiers : coworking, bureaux privés et salle de réunion.",
+      "longDescription": "Conception et développement du site Isoburo (isoburo.fr) : vitrine SEO-first pour un centre d'affaires à Coulommiers (77120). Présentation des espaces (coworking, bureaux privés, salle 35 m²), tarifs, galerie, FAQ et parcours de réservation en ligne. Stack Next.js, TypeScript et Tailwind, avec SEO local, maillage interne et CTA conversion (réserver, appeler, contact).",
+      "status": "Terminé",
+      "category": "Vitrine",
+      "role": "Frontend Engineer",
+      "duration": "1 mois",
+      "features": [
+        "Vitrine centre d'affaires avec présentation claire des espaces et tarifs",
+        "Parcours de réservation et CTA conversion (réserver, appeler, contact)",
+        "Pages SEO locales (zones autour de Coulommiers) et maillage interne",
+        "Galerie, FAQ et signaux de confiance (fibre THD, accès 24/7, parking)",
+        "Site responsive orienté performance et SEO technique"
+      ],
+      "challenges": [
+        "Rendre lisible une offre multi-espaces (coworking, bureaux, salle) sans surcharger l'UX",
+        "Positionner le site sur des requêtes locales autour de Coulommiers",
+        "Transformer le trafic organique en réservations et appels"
+      ],
+      "solutions": [
+        "Architecture de pages par intention (espaces, tarifs, réservation, zones)",
+        "SEO local avec pages géographiques et métadonnées optimisées",
+        "Parcours conversion-first avec CTA visibles dès le hero"
+      ],
+      "date": "Août 2026"
+    },
+    {
+      "id": 48,
+      "title": "SION ELEC",
+      "description": "Site vitrine pour SION ELEC, artisan électricien à Coulommiers : installation, rénovation, dépannage 24h/7j et mise aux normes.",
+      "longDescription": "Conception et développement du site SION ELEC (sionelec.fr) : vitrine SEO-first pour un artisan électricien basé à Coulommiers, actif en Seine-et-Marne et Île-de-France. Mise en avant des services (installation, rénovation, dépannage, mise aux normes NF C 15-100), de l'expérience (35+ ans), de la zone d'intervention et des parcours devis / urgence. Stack Next.js, TypeScript et Tailwind, avec SEO local et CTA conversion.",
+      "status": "Terminé",
+      "category": "Vitrine",
+      "role": "Frontend Engineer",
+      "duration": "1 mois",
+      "features": [
+        "Site vitrine artisan avec hero conversion et contact urgence 24h/7j",
+        "Pages services (installation, rénovation, dépannage, mise aux normes)",
+        "Section garanties, zone d'intervention et signaux de confiance",
+        "SEO local Seine-et-Marne / Île-de-France et maillage interne",
+        "Parcours devis gratuit et CTA téléphone visibles"
+      ],
+      "challenges": [
+        "Distinguer urgences (dépannage) et projets planifiés dans le même parcours",
+        "Renforcer la crédibilité artisan (expérience, normes NF) via UX et contenus",
+        "Couvrir un périmètre local large sans diluer le message"
+      ],
+      "solutions": [
+        "CTA dual (devis / urgence) et navigation par besoin dès le hero",
+        "Contenus centrés conformité NF C 15-100 et preuves sociales",
+        "SEO local et pages services pour intention de recherche claire"
+      ],
+      "date": "Août 2026"
+    },
+    {
+      "id": 49,
+      "title": "Film Solaire 51",
+      "description": "Site vitrine SEO-first pour la pose de film solaire en Marne (Reims, Épernay, Châlons).",
+      "longDescription": "Pilotage du design et du développement frontend du site Film Solaire 51, conçu comme une plateforme de conversion pour le département de la Marne. Développement d'un site rapide, responsive et orienté SEO avec Next.js, TypeScript et Tailwind. Stratégie SEO locale (film solaire Marne, anti-chaleur 51), pages particuliers / professionnels, réalisations, blog, SEO technique et suivi via Google Search Console.",
+      "status": "Terminé",
+      "category": "Vitrine",
+      "role": "Frontend Engineer",
+      "duration": "1 mois",
+      "features": [
+        "Plateforme locale orientée conversion pour la Marne (51)",
+        "Parcours particuliers / professionnels avec devis gratuit sous 24h",
+        "SEO local avec clustering sémantique et pages structurées",
+        "Maillage interne services / zones / réalisations",
+        "SEO technique (sitemap, robots, canonicals, structured data, CWV)"
+      ],
+      "challenges": [
+        "Se positionner sur des requêtes locales à forte intention en Marne",
+        "Maintenir performance et crawlabilité sur un site riche en contenus SEO",
+        "Transformer le trafic organique local en leads qualifiés"
+      ],
+      "solutions": [
+        "Architecture de contenu orientée intention de recherche locale",
+        "Système de maillage interne pour profondeur de crawl et autorité thématique",
+        "Pilotage continu via Search Console pour indexation et performance"
+      ],
+      "date": "Août 2026"
+    },
+    {
+      "id": 50,
+      "title": "Film Solaire 10",
+      "description": "Site vitrine SEO-first pour la pose de film solaire dans l'Aube (Troyes, Romilly-sur-Seine).",
+      "longDescription": "Pilotage du design et du développement frontend du site Film Solaire 10, conçu pour le marché local de l'Aube. Développement d'un site rapide, responsive et SEO-first avec Next.js, TypeScript et Tailwind. Stratégie SEO locale (film solaire Aube, anti-chaleur 10), parcours conversion devis sous 24h, pages services et zones, SEO technique et suivi Google Search Console.",
+      "status": "Terminé",
+      "category": "Vitrine",
+      "role": "Frontend Engineer",
+      "duration": "1 mois",
+      "features": [
+        "Plateforme locale orientée conversion pour l'Aube (10)",
+        "Parcours particuliers / professionnels avec devis gratuit sous 24h",
+        "SEO local avec clustering sémantique et pages structurées",
+        "Maillage interne services / zones / réalisations",
+        "SEO technique (sitemap, robots, canonicals, structured data, CWV)"
+      ],
+      "challenges": [
+        "Se positionner sur des requêtes locales à forte intention dans l'Aube",
+        "Maintenir performance et crawlabilité sur un site riche en contenus SEO",
+        "Transformer le trafic organique local en leads qualifiés"
+      ],
+      "solutions": [
+        "Architecture de contenu orientée intention de recherche locale",
+        "Système de maillage interne pour profondeur de crawl et autorité thématique",
+        "Pilotage continu via Search Console pour indexation et performance"
+      ],
+      "date": "Août 2026"
+    },
+    {
+      "id": 51,
+      "title": "Film Solaire 02",
+      "description": "Site vitrine SEO-first pour la pose de film solaire dans l'Aisne (Laon, Soissons, Saint-Quentin).",
+      "longDescription": "Pilotage du design et du développement frontend du site Film Solaire 02, conçu pour le marché local de l'Aisne. Développement d'un site rapide, responsive et SEO-first avec Next.js, TypeScript et Tailwind. Stratégie SEO locale (film solaire Aisne, anti-chaleur 02), parcours conversion devis sous 24h, pages services et zones, SEO technique et suivi Google Search Console.",
+      "status": "Terminé",
+      "category": "Vitrine",
+      "role": "Frontend Engineer",
+      "duration": "1 mois",
+      "features": [
+        "Plateforme locale orientée conversion pour l'Aisne (02)",
+        "Parcours particuliers / professionnels avec devis gratuit sous 24h",
+        "SEO local avec clustering sémantique et pages structurées",
+        "Maillage interne services / zones / réalisations",
+        "SEO technique (sitemap, robots, canonicals, structured data, CWV)"
+      ],
+      "challenges": [
+        "Se positionner sur des requêtes locales à forte intention dans l'Aisne",
+        "Maintenir performance et crawlabilité sur un site riche en contenus SEO",
+        "Transformer le trafic organique local en leads qualifiés"
+      ],
+      "solutions": [
+        "Architecture de contenu orientée intention de recherche locale",
+        "Système de maillage interne pour profondeur de crawl et autorité thématique",
+        "Pilotage continu via Search Console pour indexation et performance"
+      ],
+      "date": "Août 2026"
+    },
+    {
+      "id": 52,
+      "title": "Film Intelligent Pro",
+      "description": "Site vitrine B2B pour la pose de film intelligent PDLC : bureaux, cliniques, commerces et hôtels, France entière.",
+      "longDescription": "Conception et développement du site Film Intelligent Pro (filmintelligent-pro.fr) : vitrine SEO-first B2B pour la pose de film intelligent (PDLC) sur vitrages existants. Ciblage entreprises (bureaux, cliniques, hôtels, commerces), pages technologie, tarifs, secteurs, RSE et blog. Stack Next.js, TypeScript et Tailwind, devis chiffré sous 48h, couverture nationale et SEO technique.",
+      "status": "Terminé",
+      "category": "Vitrine",
+      "role": "Frontend Engineer",
+      "duration": "1 mois",
+      "features": [
+        "Vitrine B2B PDLC avec hero conversion et devis chiffré sous 48h",
+        "Pages technologie, tarifs, secteurs d'activité et RSE",
+        "Positionnement France entière avec réseau d'installateurs",
+        "SEO technique et contenu orienté intention B2B",
+        "Parcours conversion-first (CTA devis, téléphone, contact)"
+      ],
+      "challenges": [
+        "Expliquer clairement la technologie PDLC à une audience B2B non technique",
+        "Couvrir un positionnement national sans perdre en crédibilité locale",
+        "Transformer le trafic organique en demandes de devis chiffrés"
+      ],
+      "solutions": [
+        "Architecture de pages par intention (technologie, secteurs, tarifs, devis)",
+        "Contenus pédagogiques et preuves (garantie, SAV, délais 48h)",
+        "Stack Next.js + SEO technique pour performance et indexation"
+      ],
+      "date": "Août 2026"
     }
   ]
 }
+

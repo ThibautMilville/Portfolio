@@ -23,6 +23,7 @@ import LightParticles from "@/components/ui/light-particles";
 import ProjectGallery from "@/components/ui/project-gallery";
 import { useTranslatedData } from "@/hooks/useTranslatedData";
 import { translateDateSimple } from "@/lib/utils";
+import { getProjectDemoCtaKey } from "@/lib/project-cta";
 import { usePathname } from "@/navigation";
 import type { Experience, Formation, Project } from "@/types/portfolio";
 
@@ -131,13 +132,7 @@ export default function ClientProjectPage({
                     <Button variant="outline" asChild className="flex-1 sweep-light">
                       <a href={translatedProject.demo} target="_blank" rel="noopener noreferrer">
                         <ExternalLink className="mr-2 h-4 w-4" />
-                        {translatedProject.title === "Ashes of Mankind - Empires"
-                          ? t("viewGame")
-                          : ["Showcase", "E-commerce", "Corporate"].includes(
-                                translatedProject.category,
-                              )
-                            ? t("viewSite")
-                            : t("viewDemo")}
+                        {t(getProjectDemoCtaKey(project))}
                       </a>
                     </Button>
                   )}

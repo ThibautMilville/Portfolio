@@ -27,6 +27,18 @@ const companyLogos = [
     linkedinUrl: "https://www.linkedin.com/company/cloakprotocol/",
   },
   {
+    name: "Signaplan",
+    src: "/images/company/logo-signaplan.webp",
+    alt: "Signaplan",
+    linkedinUrl: "https://www.linkedin.com/company/signaplan/",
+  },
+  {
+    name: "Isoburo",
+    src: "/images/company/logo-isoburo.webp",
+    alt: "Isoburo",
+    linkedinUrl: "https://isoburo.fr/",
+  },
+  {
     name: "Ultra",
     src: "/images/company/logo_ultra.webp",
     alt: "Ultra",

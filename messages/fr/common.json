@@ -13,7 +13,7 @@
     "switchToEnglish": "Passer en anglais"
   },
   "Footer": {
-    "description": "Développeur Fullstack · React, Next.js, NestJS",
+    "description": "AI Product Engineer · React, Next.js, NestJS",
     "navigation": "Navigation",
     "formations": "Formations",
     "projects": "Projets",
@@ -22,5 +22,12 @@
   "Dates": {
     "present": "Présent",
     "presentShort": "Présent"
+  },
+  "NotFound": {
+    "code": "404",
+    "title": "Page introuvable",
+    "description": "Cette page n'existe pas ou a été déplacée. Revenez à l'accueil ou explorez mes projets.",
+    "backHome": "Retour à l'accueil",
+    "viewProjects": "Voir les projets"
   }
 }
